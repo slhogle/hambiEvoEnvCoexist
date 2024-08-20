@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shane Hogle &amp; Milla Similä">
+<meta name="dcterms.date" content="2024-08-20">
+
+<title>hambiBottomUp data analysis - Data anlalysis for the project hambiBottomUp</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      hambiBottomUp data analysis
+      </li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">hambiBottomUp data analysis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Experiment design - 96 Well plate layout</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/experiment_design/01_pairs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Species pairs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/experiment_design/02_trios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Species trios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/experiment_design/03_quartets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Species quartets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Community composition amplicon</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/amplicon/01_format_rbec_tab_20240711_BTK_illumina_v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Data wrangling and QC - 20240711</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#manuscript" id="toc-manuscript" class="nav-link active" data-scroll-target="#manuscript"><span class="header-section-number">1</span> Manuscript:</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">2</span> Introduction</a></li>
+  <li><a href="#experiment-overview" id="toc-experiment-overview" class="nav-link" data-scroll-target="#experiment-overview"><span class="header-section-number">3</span> Experiment overview</a>
+  <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">3.1</span> Background:</a></li>
+  <li><a href="#traits-and-physiology-of-species" id="toc-traits-and-physiology-of-species" class="nav-link" data-scroll-target="#traits-and-physiology-of-species"><span class="header-section-number">3.2</span> Traits and physiology of species:</a></li>
+  <li><a href="#species-interactions" id="toc-species-interactions" class="nav-link" data-scroll-target="#species-interactions"><span class="header-section-number">3.3</span> Species interactions:</a></li>
+  <li><a href="#competitioncoexistence-outcomes-species-proportions-from-communities" id="toc-competitioncoexistence-outcomes-species-proportions-from-communities" class="nav-link" data-scroll-target="#competitioncoexistence-outcomes-species-proportions-from-communities"><span class="header-section-number">3.4</span> Competition/coexistence outcomes (species proportions from communities):</a></li>
+  </ul></li>
+  <li><a href="#measurements-and-data-types" id="toc-measurements-and-data-types" class="nav-link" data-scroll-target="#measurements-and-data-types"><span class="header-section-number">4</span> Measurements and data types</a>
+  <ul class="collapse">
+  <li><a href="#traits-and-physiology-of-species-1" id="toc-traits-and-physiology-of-species-1" class="nav-link" data-scroll-target="#traits-and-physiology-of-species-1"><span class="header-section-number">4.1</span> Traits and physiology of species:</a></li>
+  <li><a href="#species-interactions-1" id="toc-species-interactions-1" class="nav-link" data-scroll-target="#species-interactions-1"><span class="header-section-number">4.2</span> Species interactions:</a></li>
+  <li><a href="#competitioncoexistence-outcomes-species-proportions-from-communities-1" id="toc-competitioncoexistence-outcomes-species-proportions-from-communities-1" class="nav-link" data-scroll-target="#competitioncoexistence-outcomes-species-proportions-from-communities-1"><span class="header-section-number">4.3</span> Competition/coexistence outcomes (species proportions from communities):</a></li>
+  </ul></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">5</span> Code</a>
+  <ul class="collapse">
+  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure"><span class="header-section-number">5.1</span> Project structure</a></li>
+  </ul></li>
+  <li><a href="#availability" id="toc-availability" class="nav-link" data-scroll-target="#availability"><span class="header-section-number">6</span> Availability</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">7</span> Reproducibility</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data anlalysis for the project hambiBottomUp</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shane Hogle &amp; Milla Similä </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 20, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This project contains data and analysis from the hambiBottomUp project.</p>
+<section id="manuscript" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="manuscript"><span class="header-section-number">1</span> Manuscript:</h2>
+<p>“TBD”</p>
+<p><a href="">Preprint available from bioRxiv</a></p>
+</section>
+<section id="introduction" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2</span> Introduction</h2>
+<p>Past work has shown that the composition of small bacterial communities can be predicted remarkably well from outcomes of competitions between small sets of species <span class="citation" data-cites="friedman2017">(<a href="#ref-friedman2017" role="doc-biblioref">Friedman, Higgins, and Gore 2017</a>)</span>. Other work has questioned whether such simple qualitative assembly rules hold in more complex situations such as when the species pool shares an evolutionary history <span class="citation" data-cites="chang2023">(<a href="#ref-chang2023" role="doc-biblioref">Chang et al. 2023</a>)</span> (also see <a href="https://sanchezlaboratory.weebly.com/blog/with-a-little-help-of-bacterial-friends-solo-no-puedes-con-amigos-si">this blog post</a>). If community assembly dynamics can truly be characterized by additive pairwise processes this would be a great advantage for modelers. It would mean that communities could be described sufficiently using paired species interactions (as in traditional Lotka Volterra). However, if higher-order interactions <span class="citation" data-cites="levine2017">(<a href="#ref-levine2017" role="doc-biblioref">Levine et al. 2017</a>)</span> are common and important (e.g., species C mediates the interaction between species A and B in a density independent way) then the number of parameters necessary to sufficiently model the system quickly blows up quickly making the entire problem intractable.</p>
+<p>Understanding the fundamental processes in community assembly will be key to designing microbial communities with desirable properties for human use and to anticipate the response of communities in nature to change. Two theoretical camps have emerged in contemporary theory; one arguing for pairwise assembly rules and another arguing for the importance of networks of chained pairwise interactions and/or higher order interactions. Evidence exists for both processes occurring in nature. Thus, the question of when/how/why community assembly can be sufficiently described/predicted from additive pairwise processes is relevant and important for gaining a predictive understanding of microbiome dynamics. For example, when will the assembly process emerge as a property of the community, rather than being a straightforward additive process? In particular, do the previous evolutionary history and patterns of coexistence in the species pool determine emergent coexistence? What is the role for different growth conditions (substrate availability, antibacterial compounds, pH, predator presence)? Or does prior adaptive evolution to the environment change the outcomes? Do the “simple” rules governing community assembly fundamentally change as you add more layers of complexity?</p>
+<p>The goal here is to shed some additional light on the question of the importance of pairwise competition/emergent coexistence in microbiomes. Our experiment assembles all possible 2, 3, and 4 species sub communities from a 4-species pool under a gradient of antibiotic concentrations and with different evolutionary histories of the four species. We assess the predictability of community assembly outcomes based on subsets of the reduced species assemblies and attempt to understand whether assembly operates in a predominantly pairwise way.</p>
+</section>
+<section id="experiment-overview" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="experiment-overview"><span class="header-section-number">3</span> Experiment overview</h2>
+<section id="background" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="background"><span class="header-section-number">3.1</span> Background:</h3>
+<p>In prior work from our lab we experimentally evolved all species from the HAMBI synthetic community to increasing concentrations of the aminoglycoside antibiotic streptomycin. Briefly, we would grow each species at the highest streptomycin concentration it could tolerate for a number of growth cycles, then we would transfer into a higher streptomycin. We did this until we reached a streptomycin concentration where we could no longer detect growth. Then these cultures were plated and a single clone was isolated.</p>
+<p>These clones are the source “evolved” starting materials for this experiment, where their clonal ancestor is the “ancestral” starting material.</p>
+</section>
+<section id="traits-and-physiology-of-species" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="traits-and-physiology-of-species"><span class="header-section-number">3.2</span> Traits and physiology of species:</h3>
+<p>The ancestral and evolved form of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="citation" data-cites="reasoner1985a">(<a href="#ref-reasoner1985a" role="doc-biblioref">Reasoner and Geldreich 1985</a>)</span> at concentrations of 0, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, and 4096 μg/ml streptomycin. Growth was followed using optical density at 600 nm in a Bioscreen plate reader. Growth rates and carrying capacities were determined from the high resolution growth curves using AMiGA.</p>
+</section>
+<section id="species-interactions" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="species-interactions"><span class="header-section-number">3.3</span> Species interactions:</h3>
+<p>The ancestral and evolved forms of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="citation" data-cites="reasoner1985a">(<a href="#ref-reasoner1985a" role="doc-biblioref">Reasoner and Geldreich 1985</a>)</span>. Cultures were filtered to remove bacterial biomass and the spent media was stored at 4℃ until use. Next the evolved and ancestral forms of each species were grown in the spent medium of each other evo/anc species for 48 hours at 30℃ and growth was followed using optical density at 600 nm in a Bioscreen plate reader.</p>
+<p>For the Burkholder diffusion assay we will add each species/evolutionary form to a soft agar on a petri dish. Then a small volume of each species will be pipetted directly onto the agar and plates will be checked for zones of inhibition.</p>
+</section>
+<section id="competitioncoexistence-outcomes-species-proportions-from-communities" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="competitioncoexistence-outcomes-species-proportions-from-communities"><span class="header-section-number">3.4</span> Competition/coexistence outcomes (species proportions from communities):</h3>
+<p>Here we wish to ensure that any equilibrium coexistence or competitive exclusion between species is not multistable - meaning that the outcome is deterministic and truly based on the density-independent competitive abilities of the species and not dependent on their starting density. The multistability problem has been addressed in other studies by growing each species from each community at different starting densities. This is typically done by starting all of the rare species at a low density and one abundant species at a higher density (as measured by optical density). For more than 2 species you cannot reasonably achieve all possible permutations of different densities, but you can start each species from rare, while leaving one remaining species high.</p>
+<p>Here we use starting conditions with 10%/90% for pairs, 80%/10%/10% for trios, and 70%/10%/10%/10% for quartets. For pairs, we alternated so that each species started from rare. For trios and quartets, we alternated so that each species was allowed to invade from rare but we did not use all possible staring proportions due to practical and cost limitations. Another important consideration is that we can not distinguish between the ancestral and evolved forms of the same species with amplicon sequencing (or with plate counts) so that our experimental arrangement cannot be fully factorial (e.g., we cannot compete ancestral 1977 against evolved 1977) and thus there are fewer combinations that one would expect from expected scaling of <span class="math inline">\(2^{(8-1)} = 128\)</span></p>
+<p>For the coexistence/exclusion experiments experimental communities are inoculated in 500 μl of 100% R2A in deep 96 well plates at a 50 fold dilution at four different streptomycin levels: 0, 16, 64, and 256 μg/ml. Plates were incubated in the dark at 30℃ with shaking at 800 RPM. Serial transfers (50 fold dilution; 10 μl to 490 μl) were conducted every 48 hours for a total of eight growth cycles. For every growth cycle <span class="math inline">\(\mathrm{log_2(50)} \approx 5.6\)</span> generations will have elapsed for a total of about 45 generations over eight cycles.</p>
+</section>
+</section>
+<section id="measurements-and-data-types" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="measurements-and-data-types"><span class="header-section-number">4</span> Measurements and data types</h2>
+<section id="traits-and-physiology-of-species-1" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="traits-and-physiology-of-species-1"><span class="header-section-number">4.1</span> Traits and physiology of species:</h3>
+<ul>
+<li>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on a gradient of streptomycin concentrations</li>
+</ul>
+</section>
+<section id="species-interactions-1" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="species-interactions-1"><span class="header-section-number">4.2</span> Species interactions:</h3>
+<ul>
+<li>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on the filtrate of all other species.</li>
+<li>(NOT YET COMPLETED) Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). Note: based on past work with these species we don’t expect to detect significant interference competition.</li>
+</ul>
+</section>
+<section id="competitioncoexistence-outcomes-species-proportions-from-communities-1" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="competitioncoexistence-outcomes-species-proportions-from-communities-1"><span class="header-section-number">4.3</span> Competition/coexistence outcomes (species proportions from communities):</h3>
+<ul>
+<li>Community DNA from pairs, trios, and quartets was sampled after eight 48 hour growth cycles</li>
+<li>16S rRNA amplicon sequencing was performed on samples to get the proportion of each species</li>
+<li>Optical density was collected at every other growth cycle</li>
+</ul>
+</section>
+</section>
+<section id="code" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="code"><span class="header-section-number">5</span> Code</h2>
+<p><a href="https://zenodo.org/badge/latestdoi/"><img src="https://zenodo.org/badge/.svg" class="img-fluid" alt="DOI"></a> Data and code here is provided under GPL3. Feel free to use or remix as you see fit.</p>
+<section id="project-structure" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="project-structure"><span class="header-section-number">5.1</span> Project structure</h3>
+<ol type="1">
+<li><code>/R</code> contains R scripts</li>
+<li><code>/data</code> contains data that has been processed in some way for later use</li>
+<li><code>/_data_raw</code> contains unprocessed data scraped from compute cluster</li>
+<li><code>/figs</code> contains figures generated from R scripts</li>
+</ol>
+</section>
+</section>
+<section id="availability" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="availability"><span class="header-section-number">6</span> Availability</h2>
+<p>The rendered project site is available at <a href="https://hambiloopairwisenmr-slhogl-c8d6c219bb8d719ac159d67b545bcea32595.utugit.fi/" class="uri">https://hambiloopairwisenmr-slhogl-c8d6c219bb8d719ac159d67b545bcea32595.utugit.fi/</a>. The website has been produced using <a href="https://quarto.org/">Quarto notebooks</a>.</p>
+<p>This GitLab repository (<a href="https://gitlab.utu.fi/slhogl/hambiBottomUp" class="uri">https://gitlab.utu.fi/slhogl/hambiBottomUp</a>) hosts the code and data for this project. The rendered webpage can be fully recreated using the code at <a href="https://gitlab.utu.fi/slhogl/hambiBottomUp" class="uri">https://gitlab.utu.fi/slhogl/hambiBottomUp</a>.</p>
+</section>
+<section id="reproducibility" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">7</span> Reproducibility</h2>
+<p>The project uses <a href="https://rstudio.github.io/renv/index.html"><code>renv</code></a> to create reproducible environment to execute the code in this project. <a href="https://rstudio.github.io/renv/articles/renv.html#collaboration">See here</a> for a brief overview on collaboration and reproduction of the entire project. To get up and running you can do:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-chang2023" class="csl-entry" role="listitem">
+Chang, Chang-Yu, Djordje Bajić, Jean C. C. Vila, Sylvie Estrela, and Alvaro Sanchez. 2023. <span>“Emergent Coexistence in Multispecies Microbial Communities.”</span> <em>Science</em> 381 (6655): 343–48. <a href="https://doi.org/10.1126/science.adg0727">https://doi.org/10.1126/science.adg0727</a>.
+</div>
+<div id="ref-friedman2017" class="csl-entry" role="listitem">
+Friedman, Jonathan, Logan M. Higgins, and Jeff Gore. 2017. <span>“Community Structure Follows Simple Assembly Rules in Microbial Microcosms.”</span> <em>Nature Ecology &amp; Evolution</em> 1 (5). <a href="https://doi.org/10.1038/s41559-017-0109">https://doi.org/10.1038/s41559-017-0109</a>.
+</div>
+<div id="ref-levine2017" class="csl-entry" role="listitem">
+Levine, Jonathan M., Jordi Bascompte, Peter B. Adler, and Stefano Allesina. 2017. <span>“Beyond Pairwise Mechanisms of Species Coexistence in Complex Communities.”</span> <em>Nature</em> 546 (7656): 56–64. <a href="https://doi.org/10.1038/nature22898">https://doi.org/10.1038/nature22898</a>.
+</div>
+<div id="ref-reasoner1985a" class="csl-entry" role="listitem">
+Reasoner, D J, and E E Geldreich. 1985. <span>“A New Medium for the Enumeration and Subculture of Bacteria from Potable Water.”</span> <em>Applied and Environmental Microbiology</em> 49 (1): 1–7. <a href="https://doi.org/10.1128/aem.49.1.1-7.1985">https://doi.org/10.1128/aem.49.1.1-7.1985</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

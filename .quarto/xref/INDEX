@@ -1,0 +1,23 @@
+{
+  "index.qmd": {
+    "index.html": "e3a59d88"
+  },
+  "R/amplicon/01_format_rbec_tab_20240711_BTK_illumina_v3.qmd": {
+    "01_format_rbec_tab_20240711_BTK_illumina_v3.html": "2bda87c8"
+  },
+  "R/experiment_design/01_pairs.qmd": {
+    "01_pairs.html": "80819460"
+  },
+  "R/experiment_design/02_trios.qmd": {
+    "02_trios.html": "e68ec3fc"
+  },
+  "R/experiment_design/03_quartets.qmd": {
+    "03_quartets.html": "a4ae0541"
+  },
+  "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.qmd": {
+    "01_format_rbec_tab.html": "da08c693"
+  },
+  "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.qmd": {
+    "02_correct_boil_to_qiagen.html": "d820aaf4"
+  }
+}

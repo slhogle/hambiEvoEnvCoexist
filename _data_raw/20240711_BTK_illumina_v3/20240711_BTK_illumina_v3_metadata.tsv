@@ -1,0 +1,737 @@
+sample	community_id	n_species	community_type	transfers	strep_conc	replicate	plate_well	notes
+P01_1_0	P01	2	experiment	8	0	1	01A	
+P02_2_0	P02	2	experiment	8	0	2	01B	
+P25_1_0	P25	2	experiment	8	0	1	01C	
+P26_2_0	P26	2	experiment	8	0	2	01D	
+P03_1_0	P03	2	experiment	8	0	1	01E	
+P04_2_0	P04	2	experiment	8	0	2	01F	
+P27_1_0	P27	2	experiment	8	0	1	01G	
+P28_2_0	P28	2	experiment	8	0	2	01H	
+P01_2_0	P01	2	experiment	8	0	2	02A	
+P02_1_0	P02	2	experiment	8	0	1	02B	
+P25_2_0	P25	2	experiment	8	0	2	02C	
+P26_1_0	P26	2	experiment	8	0	1	02D	
+P03_2_0	P03	2	experiment	8	0	2	02E	
+P04_1_0	P04	2	experiment	8	0	1	02F	
+P27_2_0	P27	2	experiment	8	0	2	02G	
+P28_1_0	P28	2	experiment	8	0	1	02H	
+P07_1_0	P07	2	experiment	8	0	1	03A	
+P08_2_0	P08	2	experiment	8	0	2	03B	
+P31_1_0	P31	2	experiment	8	0	1	03C	
+P32_2_0	P32	2	experiment	8	0	2	03D	
+P09_1_0	P09	2	experiment	8	0	1	03E	
+P10_2_0	P10	2	experiment	8	0	2	03F	
+P33_1_0	P33	2	experiment	8	0	1	03G	
+P34_2_0	P34	2	experiment	8	0	2	03H	
+P07_2_0	P07	2	experiment	8	0	2	04A	
+P08_1_0	P08	2	experiment	8	0	1	04B	
+P31_2_0	P31	2	experiment	8	0	2	04C	
+P32_1_0	P32	2	experiment	8	0	1	04D	
+P09_2_0	P09	2	experiment	8	0	2	04E	
+P10_1_0	P10	2	experiment	8	0	1	04F	
+P33_2_0	P33	2	experiment	8	0	2	04G	
+P34_1_0	P34	2	experiment	8	0	1	04H	
+P13_1_0	P13	2	experiment	8	0	1	05A	
+P14_2_0	P14	2	experiment	8	0	2	05B	
+P37_1_0	P37	2	experiment	8	0	1	05C	
+P38_2_0	P38	2	experiment	8	0	2	05D	
+P15_1_0	P15	2	experiment	8	0	1	05E	
+P16_2_0	P16	2	experiment	8	0	2	05F	
+P39_1_0	P39	2	experiment	8	0	1	05G	
+P40_2_0	P40	2	experiment	8	0	2	05H	
+P13_2_0	P13	2	experiment	8	0	2	06A	
+P14_1_0	P14	2	experiment	8	0	1	06B	
+P37_2_0	P37	2	experiment	8	0	2	06C	
+P38_1_0	P38	2	experiment	8	0	1	06D	
+P15_2_0	P15	2	experiment	8	0	2	06E	
+P16_1_0	P16	2	experiment	8	0	1	06F	
+P39_2_0	P39	2	experiment	8	0	2	06G	
+P40_1_0	P40	2	experiment	8	0	1	06H	
+P17_1_0	P17	2	experiment	8	0	1	07A	
+P18_2_0	P18	2	experiment	8	0	2	07B	
+P41_1_0	P41	2	experiment	8	0	1	07C	
+P42_2_0	P42	2	experiment	8	0	2	07D	
+P19_1_0	P19	2	experiment	8	0	1	07E	
+P20_2_0	P20	2	experiment	8	0	2	07F	
+P43_1_0	P43	2	experiment	8	0	1	07G	
+P44_2_0	P44	2	experiment	8	0	2	07H	
+P17_2_0	P17	2	experiment	8	0	2	08A	
+P18_1_0	P18	2	experiment	8	0	1	08B	
+P41_2_0	P41	2	experiment	8	0	2	08C	
+P42_1_0	P42	2	experiment	8	0	1	08D	
+P19_2_0	P19	2	experiment	8	0	2	08E	
+P20_1_0	P20	2	experiment	8	0	1	08F	
+P43_2_0	P43	2	experiment	8	0	2	08G	
+P44_1_0	P44	2	experiment	8	0	1	08H	
+P21_1_0	P21	2	experiment	8	0	1	09A	
+P22_2_0	P22	2	experiment	8	0	2	09B	
+P45_1_0	P45	2	experiment	8	0	1	09C	
+P46_2_0	P46	2	experiment	8	0	2	09D	
+P05_1_0	P05	2	experiment	8	0	1	09E	
+P06_2_0	P06	2	experiment	8	0	2	09F	
+P29_1_0	P29	2	experiment	8	0	1	09G	
+P30_2_0	P30	2	experiment	8	0	2	09H	
+P21_2_0	P21	2	experiment	8	0	2	10A	
+P22_1_0	P22	2	experiment	8	0	1	10B	
+P45_2_0	P45	2	experiment	8	0	2	10C	
+P46_1_0	P46	2	experiment	8	0	1	10D	
+P05_2_0	P05	2	experiment	8	0	2	10E	
+P06_1_0	P06	2	experiment	8	0	1	10F	
+P29_2_0	P29	2	experiment	8	0	2	10G	
+P30_1_0	P30	2	experiment	8	0	1	10H	
+P23_1_0	P23	2	experiment	8	0	1	11A	
+P24_2_0	P24	2	experiment	8	0	2	11B	
+P47_1_0	P47	2	experiment	8	0	1	11C	
+P48_2_0	P48	2	experiment	8	0	2	11D	
+P11_1_0	P11	2	experiment	8	0	1	11E	
+P12_2_0	P12	2	experiment	8	0	2	11F	
+P35_1_0	P35	2	experiment	8	0	1	11G	
+P36_2_0	P36	2	experiment	8	0	2	11H	
+P23_2_0	P23	2	experiment	8	0	2	12A	
+P24_1_0	P24	2	experiment	8	0	1	12B	
+P47_2_0	P47	2	experiment	8	0	2	12C	
+P48_1_0	P48	2	experiment	8	0	1	12D	
+P11_2_0	P11	2	experiment	8	0	2	12E	
+P12_1_0	P12	2	experiment	8	0	1	12F	
+P35_2_0	P35	2	experiment	8	0	2	12G	
+P36_1_0	P36	2	experiment	8	0	1	12H	
+P01_1_16	P01	2	experiment	8	16	1	01A	
+P02_2_16	P02	2	experiment	8	16	2	01B	
+P25_1_16	P25	2	experiment	8	16	1	01C	
+P26_2_16	P26	2	experiment	8	16	2	01D	
+P03_1_16	P03	2	experiment	8	16	1	01E	
+P04_2_16	P04	2	experiment	8	16	2	01F	
+P27_1_16	P27	2	experiment	8	16	1	01G	
+P28_2_16	P28	2	experiment	8	16	2	01H	
+P01_2_16	P01	2	experiment	8	16	2	02A	
+P02_1_16	P02	2	experiment	8	16	1	02B	
+P25_2_16	P25	2	experiment	8	16	2	02C	
+P26_1_16	P26	2	experiment	8	16	1	02D	
+P03_2_16	P03	2	experiment	8	16	2	02E	
+P04_1_16	P04	2	experiment	8	16	1	02F	
+P27_2_16	P27	2	experiment	8	16	2	02G	
+P28_1_16	P28	2	experiment	8	16	1	02H	
+P07_1_16	P07	2	experiment	8	16	1	03A	
+P08_2_16	P08	2	experiment	8	16	2	03B	
+P31_1_16	P31	2	experiment	8	16	1	03C	
+P32_2_16	P32	2	experiment	8	16	2	03D	
+P09_1_16	P09	2	experiment	8	16	1	03E	
+P10_2_16	P10	2	experiment	8	16	2	03F	
+P33_1_16	P33	2	experiment	8	16	1	03G	
+P34_2_16	P34	2	experiment	8	16	2	03H	
+P07_2_16	P07	2	experiment	8	16	2	04A	
+P08_1_16	P08	2	experiment	8	16	1	04B	
+P31_2_16	P31	2	experiment	8	16	2	04C	
+P32_1_16	P32	2	experiment	8	16	1	04D	
+P09_2_16	P09	2	experiment	8	16	2	04E	
+P10_1_16	P10	2	experiment	8	16	1	04F	
+P33_2_16	P33	2	experiment	8	16	2	04G	
+P34_1_16	P34	2	experiment	8	16	1	04H	
+P13_1_16	P13	2	experiment	8	16	1	05A	
+P14_2_16	P14	2	experiment	8	16	2	05B	
+P37_1_16	P37	2	experiment	8	16	1	05C	
+P38_2_16	P38	2	experiment	8	16	2	05D	
+P15_1_16	P15	2	experiment	8	16	1	05E	
+P16_2_16	P16	2	experiment	8	16	2	05F	
+P39_1_16	P39	2	experiment	8	16	1	05G	
+P40_2_16	P40	2	experiment	8	16	2	05H	
+P13_2_16	P13	2	experiment	8	16	2	06A	
+P14_1_16	P14	2	experiment	8	16	1	06B	
+P37_2_16	P37	2	experiment	8	16	2	06C	
+P38_1_16	P38	2	experiment	8	16	1	06D	
+P15_2_16	P15	2	experiment	8	16	2	06E	
+P16_1_16	P16	2	experiment	8	16	1	06F	
+P39_2_16	P39	2	experiment	8	16	2	06G	
+P40_1_16	P40	2	experiment	8	16	1	06H	
+P17_1_16	P17	2	experiment	8	16	1	07A	
+P18_2_16	P18	2	experiment	8	16	2	07B	
+P41_1_16	P41	2	experiment	8	16	1	07C	
+P42_2_16	P42	2	experiment	8	16	2	07D	
+P19_1_16	P19	2	experiment	8	16	1	07E	
+P20_2_16	P20	2	experiment	8	16	2	07F	
+P43_1_16	P43	2	experiment	8	16	1	07G	
+P44_2_16	P44	2	experiment	8	16	2	07H	
+P17_2_16	P17	2	experiment	8	16	2	08A	
+P18_1_16	P18	2	experiment	8	16	1	08B	
+P41_2_16	P41	2	experiment	8	16	2	08C	
+P42_1_16	P42	2	experiment	8	16	1	08D	
+P19_2_16	P19	2	experiment	8	16	2	08E	
+P20_1_16	P20	2	experiment	8	16	1	08F	
+P43_2_16	P43	2	experiment	8	16	2	08G	
+P44_1_16	P44	2	experiment	8	16	1	08H	
+P21_1_16	P21	2	experiment	8	16	1	09A	
+P22_2_16	P22	2	experiment	8	16	2	09B	
+P45_1_16	P45	2	experiment	8	16	1	09C	
+P46_2_16	P46	2	experiment	8	16	2	09D	
+P05_1_16	P05	2	experiment	8	16	1	09E	
+P06_2_16	P06	2	experiment	8	16	2	09F	
+P29_1_16	P29	2	experiment	8	16	1	09G	
+P30_2_16	P30	2	experiment	8	16	2	09H	
+P21_2_16	P21	2	experiment	8	16	2	10A	
+P22_1_16	P22	2	experiment	8	16	1	10B	
+P45_2_16	P45	2	experiment	8	16	2	10C	
+P46_1_16	P46	2	experiment	8	16	1	10D	
+P05_2_16	P05	2	experiment	8	16	2	10E	
+P06_1_16	P06	2	experiment	8	16	1	10F	
+P29_2_16	P29	2	experiment	8	16	2	10G	
+P30_1_16	P30	2	experiment	8	16	1	10H	
+P23_1_16	P23	2	experiment	8	16	1	11A	
+P24_2_16	P24	2	experiment	8	16	2	11B	
+P47_1_16	P47	2	experiment	8	16	1	11C	
+P48_2_16	P48	2	experiment	8	16	2	11D	
+P11_1_16	P11	2	experiment	8	16	1	11E	
+P12_2_16	P12	2	experiment	8	16	2	11F	
+P35_1_16	P35	2	experiment	8	16	1	11G	
+P36_2_16	P36	2	experiment	8	16	2	11H	
+P23_2_16	P23	2	experiment	8	16	2	12A	
+P24_1_16	P24	2	experiment	8	16	1	12B	
+P47_2_16	P47	2	experiment	8	16	2	12C	
+P48_1_16	P48	2	experiment	8	16	1	12D	
+P11_2_16	P11	2	experiment	8	16	2	12E	
+P12_1_16	P12	2	experiment	8	16	1	12F	
+P35_2_16	P35	2	experiment	8	16	2	12G	
+P36_1_16	P36	2	experiment	8	16	1	12H	
+P01_1_64	P01	2	experiment	8	64	1	01A	
+P02_2_64	P02	2	experiment	8	64	2	01B	
+P25_1_64	P25	2	experiment	8	64	1	01C	
+P26_2_64	P26	2	experiment	8	64	2	01D	
+P03_1_64	P03	2	experiment	8	64	1	01E	
+P04_2_64	P04	2	experiment	8	64	2	01F	
+P27_1_64	P27	2	experiment	8	64	1	01G	
+P28_2_64	P28	2	experiment	8	64	2	01H	
+P01_2_64	P01	2	experiment	8	64	2	02A	
+P02_1_64	P02	2	experiment	8	64	1	02B	
+P25_2_64	P25	2	experiment	8	64	2	02C	
+P26_1_64	P26	2	experiment	8	64	1	02D	
+P03_2_64	P03	2	experiment	8	64	2	02E	
+P04_1_64	P04	2	experiment	8	64	1	02F	
+P27_2_64	P27	2	experiment	8	64	2	02G	
+P28_1_64	P28	2	experiment	8	64	1	02H	
+P07_1_64	P07	2	experiment	8	64	1	03A	
+P08_2_64	P08	2	experiment	8	64	2	03B	
+P31_1_64	P31	2	experiment	8	64	1	03C	
+P32_2_64	P32	2	experiment	8	64	2	03D	
+P09_1_64	P09	2	experiment	8	64	1	03E	
+P10_2_64	P10	2	experiment	8	64	2	03F	
+P33_1_64	P33	2	experiment	8	64	1	03G	
+P34_2_64	P34	2	experiment	8	64	2	03H	
+P07_2_64	P07	2	experiment	8	64	2	04A	
+P08_1_64	P08	2	experiment	8	64	1	04B	
+P31_2_64	P31	2	experiment	8	64	2	04C	
+P32_1_64	P32	2	experiment	8	64	1	04D	
+P09_2_64	P09	2	experiment	8	64	2	04E	
+P10_1_64	P10	2	experiment	8	64	1	04F	
+P33_2_64	P33	2	experiment	8	64	2	04G	
+P34_1_64	P34	2	experiment	8	64	1	04H	
+P13_1_64	P13	2	experiment	8	64	1	05A	
+P14_2_64	P14	2	experiment	8	64	2	05B	
+P37_1_64	P37	2	experiment	8	64	1	05C	
+P38_2_64	P38	2	experiment	8	64	2	05D	
+P15_1_64	P15	2	experiment	8	64	1	05E	
+P16_2_64	P16	2	experiment	8	64	2	05F	
+P39_1_64	P39	2	experiment	8	64	1	05G	
+P40_2_64	P40	2	experiment	8	64	2	05H	
+P13_2_64	P13	2	experiment	8	64	2	06A	
+P14_1_64	P14	2	experiment	8	64	1	06B	
+P37_2_64	P37	2	experiment	8	64	2	06C	
+P38_1_64	P38	2	experiment	8	64	1	06D	
+P15_2_64	P15	2	experiment	8	64	2	06E	
+P16_1_64	P16	2	experiment	8	64	1	06F	
+P39_2_64	P39	2	experiment	8	64	2	06G	
+P40_1_64	P40	2	experiment	8	64	1	06H	
+P17_1_64	P17	2	experiment	8	64	1	07A	
+P18_2_64	P18	2	experiment	8	64	2	07B	
+P41_1_64	P41	2	experiment	8	64	1	07C	
+P42_2_64	P42	2	experiment	8	64	2	07D	
+P19_1_64	P19	2	experiment	8	64	1	07E	
+P20_2_64	P20	2	experiment	8	64	2	07F	
+P43_1_64	P43	2	experiment	8	64	1	07G	
+P44_2_64	P44	2	experiment	8	64	2	07H	
+P17_2_64	P17	2	experiment	8	64	2	08A	
+P18_1_64	P18	2	experiment	8	64	1	08B	
+P41_2_64	P41	2	experiment	8	64	2	08C	
+P42_1_64	P42	2	experiment	8	64	1	08D	
+P19_2_64	P19	2	experiment	8	64	2	08E	
+P20_1_64	P20	2	experiment	8	64	1	08F	
+P43_2_64	P43	2	experiment	8	64	2	08G	
+P44_1_64	P44	2	experiment	8	64	1	08H	
+P21_1_64	P21	2	experiment	8	64	1	09A	
+P22_2_64	P22	2	experiment	8	64	2	09B	
+P45_1_64	P45	2	experiment	8	64	1	09C	
+P46_2_64	P46	2	experiment	8	64	2	09D	
+P05_1_64	P05	2	experiment	8	64	1	09E	
+P06_2_64	P06	2	experiment	8	64	2	09F	
+P29_1_64	P29	2	experiment	8	64	1	09G	
+P30_2_64	P30	2	experiment	8	64	2	09H	
+P21_2_64	P21	2	experiment	8	64	2	10A	
+P22_1_64	P22	2	experiment	8	64	1	10B	
+P45_2_64	P45	2	experiment	8	64	2	10C	
+P46_1_64	P46	2	experiment	8	64	1	10D	
+P05_2_64	P05	2	experiment	8	64	2	10E	
+P06_1_64	P06	2	experiment	8	64	1	10F	
+P29_2_64	P29	2	experiment	8	64	2	10G	
+P30_1_64	P30	2	experiment	8	64	1	10H	
+P23_1_64	P23	2	experiment	8	64	1	11A	
+P24_2_64	P24	2	experiment	8	64	2	11B	
+P47_1_64	P47	2	experiment	8	64	1	11C	
+P48_2_64	P48	2	experiment	8	64	2	11D	
+P11_1_64	P11	2	experiment	8	64	1	11E	
+P12_2_64	P12	2	experiment	8	64	2	11F	
+P35_1_64	P35	2	experiment	8	64	1	11G	
+P36_2_64	P36	2	experiment	8	64	2	11H	
+P23_2_64	P23	2	experiment	8	64	2	12A	
+P24_1_64	P24	2	experiment	8	64	1	12B	
+P47_2_64	P47	2	experiment	8	64	2	12C	
+P48_1_64	P48	2	experiment	8	64	1	12D	
+P11_2_64	P11	2	experiment	8	64	2	12E	
+P12_1_64	P12	2	experiment	8	64	1	12F	
+P35_2_64	P35	2	experiment	8	64	2	12G	
+P36_1_64	P36	2	experiment	8	64	1	12H	
+P01_1_256	P01	2	experiment	8	256	1	01A	
+P02_2_256	P02	2	experiment	8	256	2	01B	
+P25_1_256	P25	2	experiment	8	256	1	01C	
+P26_2_256	P26	2	experiment	8	256	2	01D	
+P03_1_256	P03	2	experiment	8	256	1	01E	
+P04_2_256	P04	2	experiment	8	256	2	01F	
+P27_1_256	P27	2	experiment	8	256	1	01G	
+P28_2_256	P28	2	experiment	8	256	2	01H	
+P01_2_256	P01	2	experiment	8	256	2	02A	
+P02_1_256	P02	2	experiment	8	256	1	02B	
+P25_2_256	P25	2	experiment	8	256	2	02C	
+P26_1_256	P26	2	experiment	8	256	1	02D	
+P03_2_256	P03	2	experiment	8	256	2	02E	
+P04_1_256	P04	2	experiment	8	256	1	02F	
+P27_2_256	P27	2	experiment	8	256	2	02G	
+P28_1_256	P28	2	experiment	8	256	1	02H	
+P07_1_256	P07	2	experiment	8	256	1	03A	
+P08_2_256	P08	2	experiment	8	256	2	03B	
+P31_1_256	P31	2	experiment	8	256	1	03C	
+P32_2_256	P32	2	experiment	8	256	2	03D	
+P09_1_256	P09	2	experiment	8	256	1	03E	
+P10_2_256	P10	2	experiment	8	256	2	03F	
+P33_1_256	P33	2	experiment	8	256	1	03G	
+P34_2_256	P34	2	experiment	8	256	2	03H	
+P07_2_256	P07	2	experiment	8	256	2	04A	
+P08_1_256	P08	2	experiment	8	256	1	04B	
+P31_2_256	P31	2	experiment	8	256	2	04C	
+P32_1_256	P32	2	experiment	8	256	1	04D	
+P09_2_256	P09	2	experiment	8	256	2	04E	
+P10_1_256	P10	2	experiment	8	256	1	04F	
+P33_2_256	P33	2	experiment	8	256	2	04G	
+P34_1_256	P34	2	experiment	8	256	1	04H	
+P13_1_256	P13	2	experiment	8	256	1	05A	
+P14_2_256	P14	2	experiment	8	256	2	05B	
+P37_1_256	P37	2	experiment	8	256	1	05C	
+P38_2_256	P38	2	experiment	8	256	2	05D	
+P15_1_256	P15	2	experiment	8	256	1	05E	
+P16_2_256	P16	2	experiment	8	256	2	05F	
+P39_1_256	P39	2	experiment	8	256	1	05G	
+P40_2_256	P40	2	experiment	8	256	2	05H	
+P13_2_256	P13	2	experiment	8	256	2	06A	
+P14_1_256	P14	2	experiment	8	256	1	06B	
+P37_2_256	P37	2	experiment	8	256	2	06C	
+P38_1_256	P38	2	experiment	8	256	1	06D	
+P15_2_256	P15	2	experiment	8	256	2	06E	
+P16_1_256	P16	2	experiment	8	256	1	06F	
+P39_2_256	P39	2	experiment	8	256	2	06G	
+P40_1_256	P40	2	experiment	8	256	1	06H	
+P17_1_256	P17	2	experiment	8	256	1	07A	
+P18_2_256	P18	2	experiment	8	256	2	07B	
+P41_1_256	P41	2	experiment	8	256	1	07C	
+P42_2_256	P42	2	experiment	8	256	2	07D	
+P19_1_256	P19	2	experiment	8	256	1	07E	
+P20_2_256	P20	2	experiment	8	256	2	07F	
+P43_1_256	P43	2	experiment	8	256	1	07G	
+P44_2_256	P44	2	experiment	8	256	2	07H	
+P17_2_256	P17	2	experiment	8	256	2	08A	
+P18_1_256	P18	2	experiment	8	256	1	08B	
+P41_2_256	P41	2	experiment	8	256	2	08C	
+P42_1_256	P42	2	experiment	8	256	1	08D	
+P19_2_256	P19	2	experiment	8	256	2	08E	
+P20_1_256	P20	2	experiment	8	256	1	08F	
+P43_2_256	P43	2	experiment	8	256	2	08G	
+P44_1_256	P44	2	experiment	8	256	1	08H	
+P21_1_256	P21	2	experiment	8	256	1	09A	
+P22_2_256	P22	2	experiment	8	256	2	09B	
+P45_1_256	P45	2	experiment	8	256	1	09C	
+P46_2_256	P46	2	experiment	8	256	2	09D	
+P05_1_256	P05	2	experiment	8	256	1	09E	
+P06_2_256	P06	2	experiment	8	256	2	09F	
+P29_1_256	P29	2	experiment	8	256	1	09G	
+P30_2_256	P30	2	experiment	8	256	2	09H	
+P21_2_256	P21	2	experiment	8	256	2	10A	
+P22_1_256	P22	2	experiment	8	256	1	10B	
+P45_2_256	P45	2	experiment	8	256	2	10C	
+P46_1_256	P46	2	experiment	8	256	1	10D	
+P05_2_256	P05	2	experiment	8	256	2	10E	
+P06_1_256	P06	2	experiment	8	256	1	10F	
+P29_2_256	P29	2	experiment	8	256	2	10G	
+P30_1_256	P30	2	experiment	8	256	1	10H	
+P23_1_256	P23	2	experiment	8	256	1	11A	
+P24_2_256	P24	2	experiment	8	256	2	11B	
+P47_1_256	P47	2	experiment	8	256	1	11C	
+P48_2_256	P48	2	experiment	8	256	2	11D	
+P11_1_256	P11	2	experiment	8	256	1	11E	
+P12_2_256	P12	2	experiment	8	256	2	11F	
+P35_1_256	P35	2	experiment	8	256	1	11G	
+P36_2_256	P36	2	experiment	8	256	2	11H	
+P23_2_256	P23	2	experiment	8	256	2	12A	
+P24_1_256	P24	2	experiment	8	256	1	12B	
+P47_2_256	P47	2	experiment	8	256	2	12C	
+P48_1_256	P48	2	experiment	8	256	1	12D	
+P11_2_256	P11	2	experiment	8	256	2	12E	
+P12_1_256	P12	2	experiment	8	256	1	12F	
+P35_2_256	P35	2	experiment	8	256	2	12G	
+P36_1_256	P36	2	experiment	8	256	1	12H	
+T03_1_0	T03	3	experiment	8	0	1	01A	
+T06_1_0	T06	3	experiment	8	0	1	01B	
+T09_1_0	T09	3	experiment	8	0	1	01C	
+T12_1_0	T12	3	experiment	8	0	1	01D	
+T01_1_0	T01	3	experiment	8	0	1	01E	
+T04_1_0	T04	3	experiment	8	0	1	01F	
+T75_1_0	T75	3	experiment	8	0	1	01G	
+T78_1_0	T78	3	experiment	8	0	1	01H	
+T15_1_0	T15	3	experiment	8	0	1	02A	
+T18_1_0	T18	3	experiment	8	0	1	02B	
+T21_1_0	T21	3	experiment	8	0	1	02C	
+T24_1_0	T24	3	experiment	8	0	1	02D	
+T13_1_0	T13	3	experiment	8	0	1	02E	
+T16_1_0	T16	3	experiment	8	0	1	02F	
+T87_1_0	T87	3	experiment	8	0	1	02G	
+T90_1_0	T90	3	experiment	8	0	1	02H	
+T27_1_0	T27	3	experiment	8	0	1	03A	
+T30_1_0	T30	3	experiment	8	0	1	03B	
+T33_1_0	T33	3	experiment	8	0	1	03C	
+T36_1_0	T36	3	experiment	8	0	1	03D	
+T25_1_0	T25	3	experiment	8	0	1	03E	
+T28_1_0	T28	3	experiment	8	0	1	03F	
+T74_1_0	T74	3	experiment	8	0	1	03G	
+T77_1_0	T77	3	experiment	8	0	1	03H	
+T39_1_0	T39	3	experiment	8	0	1	04A	
+T42_1_0	T42	3	experiment	8	0	1	04B	
+T45_1_0	T45	3	experiment	8	0	1	04C	
+T48_1_0	T48	3	experiment	8	0	1	04D	
+T37_1_0	T37	3	experiment	8	0	1	04E	
+T40_1_0	T40	3	experiment	8	0	1	04F	
+T86_1_0	T86	3	experiment	8	0	1	04G	
+T89_1_0	T89	3	experiment	8	0	1	04H	
+T02_1_0	T02	3	experiment	8	0	1	05A	
+T05_1_0	T05	3	experiment	8	0	1	05B	
+T08_1_0	T08	3	experiment	8	0	1	05C	
+T11_1_0	T11	3	experiment	8	0	1	05D	
+T49_1_0	T49	3	experiment	8	0	1	05E	
+T52_1_0	T52	3	experiment	8	0	1	05F	
+T81_1_0	T81	3	experiment	8	0	1	05G	
+T84_1_0	T84	3	experiment	8	0	1	05H	
+T14_1_0	T14	3	experiment	8	0	1	06A	
+T17_1_0	T17	3	experiment	8	0	1	06B	
+T20_1_0	T20	3	experiment	8	0	1	06C	
+T23_1_0	T23	3	experiment	8	0	1	06D	
+T61_1_0	T61	3	experiment	8	0	1	06E	
+T64_1_0	T64	3	experiment	8	0	1	06F	
+T93_1_0	T93	3	experiment	8	0	1	06G	
+T96_1_0	T96	3	experiment	8	0	1	06H	
+T26_1_0	T26	3	experiment	8	0	1	07A	
+T29_1_0	T29	3	experiment	8	0	1	07B	
+T32_1_0	T32	3	experiment	8	0	1	07C	
+T35_1_0	T35	3	experiment	8	0	1	07D	
+T07_1_0	T07	3	experiment	8	0	1	07E	
+T10_1_0	T10	3	experiment	8	0	1	07F	
+T80_1_0	T80	3	experiment	8	0	1	07G	
+T83_1_0	T83	3	experiment	8	0	1	07H	
+T38_1_0	T38	3	experiment	8	0	1	08A	
+T41_1_0	T41	3	experiment	8	0	1	08B	
+T44_1_0	T44	3	experiment	8	0	1	08C	
+T47_1_0	T47	3	experiment	8	0	1	08D	
+T19_1_0	T19	3	experiment	8	0	1	08E	
+T22_1_0	T22	3	experiment	8	0	1	08F	
+T92_1_0	T92	3	experiment	8	0	1	08G	
+T95_1_0	T95	3	experiment	8	0	1	08H	
+T51_1_0	T51	3	experiment	8	0	1	09A	
+T54_1_0	T54	3	experiment	8	0	1	09B	
+T57_1_0	T57	3	experiment	8	0	1	09C	
+T60_1_0	T60	3	experiment	8	0	1	09D	
+T31_1_0	T31	3	experiment	8	0	1	09E	
+T34_1_0	T34	3	experiment	8	0	1	09F	
+T73_1_0	T73	3	experiment	8	0	1	09G	
+T76_1_0	T76	3	experiment	8	0	1	09H	
+T63_1_0	T63	3	experiment	8	0	1	10A	
+T66_1_0	T66	3	experiment	8	0	1	10B	
+T69_1_0	T69	3	experiment	8	0	1	10C	
+T72_1_0	T72	3	experiment	8	0	1	10D	
+T43_1_0	T43	3	experiment	8	0	1	10E	
+T46_1_0	T46	3	experiment	8	0	1	10F	
+T85_1_0	T85	3	experiment	8	0	1	10G	
+T88_1_0	T88	3	experiment	8	0	1	10H	
+T50_1_0	T50	3	experiment	8	0	1	11A	
+T53_1_0	T53	3	experiment	8	0	1	11B	
+T56_1_0	T56	3	experiment	8	0	1	11C	
+T59_1_0	T59	3	experiment	8	0	1	11D	
+T55_1_0	T55	3	experiment	8	0	1	11E	
+T58_1_0	T58	3	experiment	8	0	1	11F	
+T79_1_0	T79	3	experiment	8	0	1	11G	
+T82_1_0	T82	3	experiment	8	0	1	11H	
+T62_1_0	T62	3	experiment	8	0	1	12A	
+T65_1_0	T65	3	experiment	8	0	1	12B	
+T68_1_0	T68	3	experiment	8	0	1	12C	
+T71_1_0	T71	3	experiment	8	0	1	12D	
+T67_1_0	T67	3	experiment	8	0	1	12E	
+T70_1_0	T70	3	experiment	8	0	1	12F	
+T91_1_0	T91	3	experiment	8	0	1	12G	
+T94_1_0	T94	3	experiment	8	0	1	12H	
+T03_2_0	T03	3	experiment	8	0	2	01A	
+T06_2_0	T06	3	experiment	8	0	2	01B	
+T09_2_0	T09	3	experiment	8	0	2	01C	
+T12_2_0	T12	3	experiment	8	0	2	01D	
+T01_2_0	T01	3	experiment	8	0	2	01E	
+T04_2_0	T04	3	experiment	8	0	2	01F	
+T75_2_0	T75	3	experiment	8	0	2	01G	
+T78_2_0	T78	3	experiment	8	0	2	01H	
+T15_2_0	T15	3	experiment	8	0	2	02A	
+T18_2_0	T18	3	experiment	8	0	2	02B	
+T21_2_0	T21	3	experiment	8	0	2	02C	
+T24_2_0	T24	3	experiment	8	0	2	02D	
+T13_2_0	T13	3	experiment	8	0	2	02E	
+T16_2_0	T16	3	experiment	8	0	2	02F	
+T87_2_0	T87	3	experiment	8	0	2	02G	
+T90_2_0	T90	3	experiment	8	0	2	02H	
+T27_2_0	T27	3	experiment	8	0	2	03A	
+T30_2_0	T30	3	experiment	8	0	2	03B	
+T33_2_0	T33	3	experiment	8	0	2	03C	
+T36_2_0	T36	3	experiment	8	0	2	03D	
+T25_2_0	T25	3	experiment	8	0	2	03E	
+T28_2_0	T28	3	experiment	8	0	2	03F	
+T74_2_0	T74	3	experiment	8	0	2	03G	
+T77_2_0	T77	3	experiment	8	0	2	03H	
+T39_2_0	T39	3	experiment	8	0	2	04A	
+T42_2_0	T42	3	experiment	8	0	2	04B	
+T45_2_0	T45	3	experiment	8	0	2	04C	
+T48_2_0	T48	3	experiment	8	0	2	04D	
+T37_2_0	T37	3	experiment	8	0	2	04E	
+T40_2_0	T40	3	experiment	8	0	2	04F	
+T86_2_0	T86	3	experiment	8	0	2	04G	
+T89_2_0	T89	3	experiment	8	0	2	04H	
+T02_2_0	T02	3	experiment	8	0	2	05A	
+T05_2_0	T05	3	experiment	8	0	2	05B	
+T08_2_0	T08	3	experiment	8	0	2	05C	
+T11_2_0	T11	3	experiment	8	0	2	05D	
+T49_2_0	T49	3	experiment	8	0	2	05E	
+T52_2_0	T52	3	experiment	8	0	2	05F	
+T81_2_0	T81	3	experiment	8	0	2	05G	
+T84_2_0	T84	3	experiment	8	0	2	05H	
+T14_2_0	T14	3	experiment	8	0	2	06A	
+T17_2_0	T17	3	experiment	8	0	2	06B	
+T20_2_0	T20	3	experiment	8	0	2	06C	
+T23_2_0	T23	3	experiment	8	0	2	06D	
+T61_2_0	T61	3	experiment	8	0	2	06E	
+T64_2_0	T64	3	experiment	8	0	2	06F	
+T93_2_0	T93	3	experiment	8	0	2	06G	
+T96_2_0	T96	3	experiment	8	0	2	06H	
+T26_2_0	T26	3	experiment	8	0	2	07A	
+T29_2_0	T29	3	experiment	8	0	2	07B	
+T32_2_0	T32	3	experiment	8	0	2	07C	
+T35_2_0	T35	3	experiment	8	0	2	07D	
+T07_2_0	T07	3	experiment	8	0	2	07E	
+T10_2_0	T10	3	experiment	8	0	2	07F	
+T80_2_0	T80	3	experiment	8	0	2	07G	
+T83_2_0	T83	3	experiment	8	0	2	07H	
+T38_2_0	T38	3	experiment	8	0	2	08A	
+T41_2_0	T41	3	experiment	8	0	2	08B	
+T44_2_0	T44	3	experiment	8	0	2	08C	
+T47_2_0	T47	3	experiment	8	0	2	08D	
+T19_2_0	T19	3	experiment	8	0	2	08E	
+T22_2_0	T22	3	experiment	8	0	2	08F	
+T92_2_0	T92	3	experiment	8	0	2	08G	
+T95_2_0	T95	3	experiment	8	0	2	08H	
+T51_2_0	T51	3	experiment	8	0	2	09A	
+T54_2_0	T54	3	experiment	8	0	2	09B	
+T57_2_0	T57	3	experiment	8	0	2	09C	
+T60_2_0	T60	3	experiment	8	0	2	09D	
+T31_2_0	T31	3	experiment	8	0	2	09E	
+T34_2_0	T34	3	experiment	8	0	2	09F	
+T73_2_0	T73	3	experiment	8	0	2	09G	
+T76_2_0	T76	3	experiment	8	0	2	09H	
+T63_2_0	T63	3	experiment	8	0	2	10A	
+T66_2_0	T66	3	experiment	8	0	2	10B	
+T69_2_0	T69	3	experiment	8	0	2	10C	
+T72_2_0	T72	3	experiment	8	0	2	10D	
+T43_2_0	T43	3	experiment	8	0	2	10E	
+T46_2_0	T46	3	experiment	8	0	2	10F	
+T85_2_0	T85	3	experiment	8	0	2	10G	
+T88_2_0	T88	3	experiment	8	0	2	10H	
+T50_2_0	T50	3	experiment	8	0	2	11A	
+T53_2_0	T53	3	experiment	8	0	2	11B	
+T56_2_0	T56	3	experiment	8	0	2	11C	
+T59_2_0	T59	3	experiment	8	0	2	11D	
+T55_2_0	T55	3	experiment	8	0	2	11E	
+T58_2_0	T58	3	experiment	8	0	2	11F	
+T79_2_0	T79	3	experiment	8	0	2	11G	
+T82_2_0	T82	3	experiment	8	0	2	11H	
+T62_2_0	T62	3	experiment	8	0	2	12A	
+T65_2_0	T65	3	experiment	8	0	2	12B	
+T68_2_0	T68	3	experiment	8	0	2	12C	
+T71_2_0	T71	3	experiment	8	0	2	12D	
+T67_2_0	T67	3	experiment	8	0	2	12E	
+T70_2_0	T70	3	experiment	8	0	2	12F	
+T91_2_0	T91	3	experiment	8	0	2	12G	
+T94_2_0	T94	3	experiment	8	0	2	12H	
+P01_s_0	P01	2	masterplate	0		1	01A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P07_s_0	P07	2	masterplate	0		1	01B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P13_s_0	P13	2	masterplate	0		1	01C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P17_s_0	P17	2	masterplate	0		1	01D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P21_s_0	P21	2	masterplate	0		1	01E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P23_s_0	P23	2	masterplate	0		1	01F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P05_s_0	P05	2	masterplate	0		1	01G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P11_s_0	P11	2	masterplate	0		1	01H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P02_s_0	P02	2	masterplate	0		1	02A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P08_s_0	P08	2	masterplate	0		1	02B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P14_s_0	P14	2	masterplate	0		1	02C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P18_s_0	P18	2	masterplate	0		1	02D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P22_s_0	P22	2	masterplate	0		1	02E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P24_s_0	P24	2	masterplate	0		1	02F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P06_s_0	P06	2	masterplate	0		1	02G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P12_s_0	P12	2	masterplate	0		1	02H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P03_s_0	P03	2	masterplate	0		1	03A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P09_s_0	P09	2	masterplate	0		1	03B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P15_s_0	P15	2	masterplate	0		1	03C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P19_s_0	P19	2	masterplate	0		1	03D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P04_s_0	P04	2	masterplate	0		1	03E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P10_s_0	P10	2	masterplate	0		1	03F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P16_s_0	P16	2	masterplate	0		1	03G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P20_s_0	P20	2	masterplate	0		1	03H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P25_s_0	P25	2	masterplate	0		1	04A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P31_s_0	P31	2	masterplate	0		1	04B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P37_s_0	P37	2	masterplate	0		1	04C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P41_s_0	P41	2	masterplate	0		1	04D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P45_s_0	P45	2	masterplate	0		1	04E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P47_s_0	P47	2	masterplate	0		1	04F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P29_s_0	P29	2	masterplate	0		1	04G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P35_s_0	P35	2	masterplate	0		1	04H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P26_s_0	P26	2	masterplate	0		1	05A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P32_s_0	P32	2	masterplate	0		1	05B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P38_s_0	P38	2	masterplate	0		1	05C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P42_s_0	P42	2	masterplate	0		1	05D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P46_s_0	P46	2	masterplate	0		1	05E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P48_s_0	P48	2	masterplate	0		1	05F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P30_s_0	P30	2	masterplate	0		1	05G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P36_s_0	P36	2	masterplate	0		1	05H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P27_s_0	P27	2	masterplate	0		1	06A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P33_s_0	P33	2	masterplate	0		1	06B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P39_s_0	P39	2	masterplate	0		1	06C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P43_s_0	P43	2	masterplate	0		1	06D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P28_s_0	P28	2	masterplate	0		1	06E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P34_s_0	P34	2	masterplate	0		1	06F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P40_s_0	P40	2	masterplate	0		1	06G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+P44_s_0	P44	2	masterplate	0		1	06H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+3sp_1_0	T01	3	pos_ctrl			1	07A	These are samples from the trios masterplate, but with DNA extraction done with a Qiagen kit. The goal is to use these “high quality” qiagen samples to correct for the biases in the boil prep.
+3sp_2_0	T03	3	pos_ctrl			2	07B	These are samples from the trios masterplate, but with DNA extraction done with a Qiagen kit. The goal is to use these “high quality” qiagen samples to correct for the biases in the boil prep.
+3sp_3_0	T25	3	pos_ctrl			3	07C	These are samples from the trios masterplate, but with DNA extraction done with a Qiagen kit. The goal is to use these “high quality” qiagen samples to correct for the biases in the boil prep.
+3sp_4_0	T27	3	pos_ctrl			4	07D	These are samples from the trios masterplate, but with DNA extraction done with a Qiagen kit. The goal is to use these “high quality” qiagen samples to correct for the biases in the boil prep.
+3sp_5_0	T50	3	pos_ctrl			5	07E	These are samples from the trios masterplate, but with DNA extraction done with a Qiagen kit. The goal is to use these “high quality” qiagen samples to correct for the biases in the boil prep.
+3sp_6_0	T51	3	pos_ctrl			6	07F	These are samples from the trios masterplate, but with DNA extraction done with a Qiagen kit. The goal is to use these “high quality” qiagen samples to correct for the biases in the boil prep.
+3sp_7_0	T73	3	pos_ctrl			7	07G	These are samples from the trios masterplate, but with DNA extraction done with a Qiagen kit. The goal is to use these “high quality” qiagen samples to correct for the biases in the boil prep.
+3sp_8_0	T74	3	pos_ctrl			8	07H	These are samples from the trios masterplate, but with DNA extraction done with a Qiagen kit. The goal is to use these “high quality” qiagen samples to correct for the biases in the boil prep.
+neg_1_0	pairs_0_1_G02	0	neg_ctrl			1	08A	These samples were extracted from blank wells on the pairs plate. Goal was to use this to check for contamination during the experiment
+neg_2_0	pairs_0_1_D05	0	neg_ctrl			2	08B	These samples were extracted from blank wells on the pairs plate. Goal was to use this to check for contamination during the experiment
+neg_3_0	pairs_0_1_G08	0	neg_ctrl			3	08C	These samples were extracted from blank wells on the pairs plate. Goal was to use this to check for contamination during the experiment
+neg_4_0	pairs_0_1_C12	0	neg_ctrl			4	08D	These samples were extracted from blank wells on the pairs plate. Goal was to use this to check for contamination during the experiment
+neg_5_0	pairs_0_1_B01	0	neg_ctrl			5	08E	These samples were extracted from blank wells on the pairs plate. Goal was to use this to check for contamination during the experiment
+neg_6_0	pairs_0_1_E04	0	neg_ctrl			6	08F	These samples were extracted from blank wells on the pairs plate. Goal was to use this to check for contamination during the experiment
+neg_7_0	pairs_0_1_H07	0	neg_ctrl			7	08G	These samples were extracted from blank wells on the pairs plate. Goal was to use this to check for contamination during the experiment
+neg_8_0	pairs_0_1_E10	0	neg_ctrl			8	08H	These samples were extracted from blank wells on the pairs plate. Goal was to use this to check for contamination during the experiment
+T03_s_0	T03	3	masterplate	0		1	01A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T06_s_0	T06	3	masterplate	0		1	01B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T09_s_0	T09	3	masterplate	0		1	01C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T12_s_0	T12	3	masterplate	0		1	01D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T01_s_0	T01	3	masterplate	0		1	01E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T04_s_0	T04	3	masterplate	0		1	01F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T75_s_0	T75	3	masterplate	0		1	01G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T78_s_0	T78	3	masterplate	0		1	01H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T15_s_0	T15	3	masterplate	0		1	02A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T18_s_0	T18	3	masterplate	0		1	02B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T21_s_0	T21	3	masterplate	0		1	02C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T24_s_0	T24	3	masterplate	0		1	02D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T13_s_0	T13	3	masterplate	0		1	02E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T16_s_0	T16	3	masterplate	0		1	02F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T87_s_0	T87	3	masterplate	0		1	02G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T90_s_0	T90	3	masterplate	0		1	02H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T27_s_0	T27	3	masterplate	0		1	03A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T30_s_0	T30	3	masterplate	0		1	03B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T33_s_0	T33	3	masterplate	0		1	03C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T36_s_0	T36	3	masterplate	0		1	03D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T25_s_0	T25	3	masterplate	0		1	03E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T28_s_0	T28	3	masterplate	0		1	03F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T74_s_0	T74	3	masterplate	0		1	03G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T77_s_0	T77	3	masterplate	0		1	03H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T39_s_0	T39	3	masterplate	0		1	04A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T42_s_0	T42	3	masterplate	0		1	04B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T45_s_0	T45	3	masterplate	0		1	04C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T48_s_0	T48	3	masterplate	0		1	04D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T37_s_0	T37	3	masterplate	0		1	04E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T40_s_0	T40	3	masterplate	0		1	04F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T86_s_0	T86	3	masterplate	0		1	04G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T89_s_0	T89	3	masterplate	0		1	04H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T02_s_0	T02	3	masterplate	0		1	05A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T05_s_0	T05	3	masterplate	0		1	05B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T08_s_0	T08	3	masterplate	0		1	05C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T11_s_0	T11	3	masterplate	0		1	05D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T49_s_0	T49	3	masterplate	0		1	05E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T52_s_0	T52	3	masterplate	0		1	05F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T81_s_0	T81	3	masterplate	0		1	05G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T84_s_0	T84	3	masterplate	0		1	05H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T14_s_0	T14	3	masterplate	0		1	06A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T17_s_0	T17	3	masterplate	0		1	06B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T20_s_0	T20	3	masterplate	0		1	06C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T23_s_0	T23	3	masterplate	0		1	06D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T61_s_0	T61	3	masterplate	0		1	06E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T64_s_0	T64	3	masterplate	0		1	06F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T93_s_0	T93	3	masterplate	0		1	06G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T96_s_0	T96	3	masterplate	0		1	06H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T26_s_0	T26	3	masterplate	0		1	07A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T29_s_0	T29	3	masterplate	0		1	07B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T32_s_0	T32	3	masterplate	0		1	07C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T35_s_0	T35	3	masterplate	0		1	07D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T07_s_0	T07	3	masterplate	0		1	07E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T10_s_0	T10	3	masterplate	0		1	07F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T80_s_0	T80	3	masterplate	0		1	07G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T83_s_0	T83	3	masterplate	0		1	07H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T38_s_0	T38	3	masterplate	0		1	08A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T41_s_0	T41	3	masterplate	0		1	08B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T44_s_0	T44	3	masterplate	0		1	08C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T47_s_0	T47	3	masterplate	0		1	08D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T19_s_0	T19	3	masterplate	0		1	08E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T22_s_0	T22	3	masterplate	0		1	08F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T92_s_0	T92	3	masterplate	0		1	08G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T95_s_0	T95	3	masterplate	0		1	08H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T51_s_0	T51	3	masterplate	0		1	09A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T54_s_0	T54	3	masterplate	0		1	09B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T57_s_0	T57	3	masterplate	0		1	09C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T60_s_0	T60	3	masterplate	0		1	09D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T31_s_0	T31	3	masterplate	0		1	09E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T34_s_0	T34	3	masterplate	0		1	09F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T73_s_0	T73	3	masterplate	0		1	09G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T76_s_0	T76	3	masterplate	0		1	09H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T63_s_0	T63	3	masterplate	0		1	10A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T66_s_0	T66	3	masterplate	0		1	10B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T69_s_0	T69	3	masterplate	0		1	10C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T72_s_0	T72	3	masterplate	0		1	10D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T43_s_0	T43	3	masterplate	0		1	10E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T46_s_0	T46	3	masterplate	0		1	10F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T85_s_0	T85	3	masterplate	0		1	10G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T88_s_0	T88	3	masterplate	0		1	10H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T50_s_0	T50	3	masterplate	0		1	11A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T53_s_0	T53	3	masterplate	0		1	11B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T56_s_0	T56	3	masterplate	0		1	11C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T59_s_0	T59	3	masterplate	0		1	11D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T55_s_0	T55	3	masterplate	0		1	11E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T58_s_0	T58	3	masterplate	0		1	11F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T79_s_0	T79	3	masterplate	0		1	11G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T82_s_0	T82	3	masterplate	0		1	11H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T62_s_0	T62	3	masterplate	0		1	12A	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T65_s_0	T65	3	masterplate	0		1	12B	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T68_s_0	T68	3	masterplate	0		1	12C	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T71_s_0	T71	3	masterplate	0		1	12D	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T67_s_0	T67	3	masterplate	0		1	12E	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T70_s_0	T70	3	masterplate	0		1	12F	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T91_s_0	T91	3	masterplate	0		1	12G	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
+T94_s_0	T94	3	masterplate	0		1	12H	Masterplate samples are those that were constructed ahead of time, then thawed and used in the experiment. They had no time to grow and thus should contain only what we put into them in roughly the proportions we intended
