@@ -1,6 +1,6 @@
-# hambiBottomUp
+# hambiABBAssembly
 
-[Click here to view rendered notebooks of the analysis.](https://hambiloopairwisenmr-slhogl-c8d6c219bb8d719ac159d67b545bcea32595.utugit.fi/)
+[Click here to view rendered notebooks of the analysis.](https://slhogle.github.io/hambiABBAssembly/)
 
 ## Manuscript:
 
@@ -15,16 +15,17 @@ Data and code here is provided under GPL3. Feel free to use or remix as you see 
 [![DOI](https://zenodo.org/badge/.svg)](https://zenodo.org/badge/latestdoi/)
 
 ### Project structure
-1.  `/R` contains R scripts
-2.  `/data` contains data that has been processed in some way for later use
-3.  `/_data_raw` contains unprocessed data scraped from compute cluster
-4.  `/figs` contains figures generated from R scripts
+1.  `/R` contains R scripts and [Quarto notebooks](https://quarto.org/)
+2.  `/renv` code for [`renv`](https://rstudio.github.io/renv/index.html)
+3.  `/data` contains data that has been processed in some way for later use
+4.  `/_data_raw` contains unprocessed data scraped from compute cluster
+5.  `/figs` contains figures generated from R scripts
 
 ## Availability
 
-The rendered project site is available at <https://hambiloopairwisenmr-slhogl-c8d6c219bb8d719ac159d67b545bcea32595.utugit.fi/>. The website has been produced using [Quarto notebooks](https://quarto.org/).
+The rendered project site is available at <https://slhogle.github.io/hambiABBAssembly/>. The website has been produced using [Quarto notebooks](https://quarto.org/).
 
-This GitLab repository (<https://gitlab.utu.fi/slhogl/hambiLOOPairwiseNMR>) hosts the code and data for this project. The rendered webpage can be fully recreated using the code at <https://gitlab.utu.fi/slhogl/hambiLOOPairwiseNMR>. 
+This GitHub repository (<https://github.com/slhogle/hambiABBAssembly>) hosts the code and data for this project. The rendered webpage can be fully recreated using the code.
 
 ## Reproducibility
 

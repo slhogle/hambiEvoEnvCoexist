@@ -46,7 +46,7 @@
     "href": "index.html#availability",
     "title": "Data anlalysis for the project hambiABBAssembly",
     "section": "6 Availability",
-    "text": "6 Availability\nThe rendered project site is available at https://hambiloopairwisenmr-slhogl-c8d6c219bb8d719ac159d67b545bcea32595.utugit.fi/. The website has been produced using Quarto notebooks.\nThis GitHub repository (&lt;&gt;) hosts the code and data for this project. The rendered webpage can be fully recreated using the code at &lt;&gt;."
+    "text": "6 Availability\nThe rendered project site is available at https://slhogle.github.io/hambiABBAssembly/. The website has been produced using Quarto notebooks.\nThis GitHub repository (https://github.com/slhogle/hambiABBAssembly) hosts the code and data for this project. The rendered webpage can be fully recreated using the code."
   },
   {
     "objectID": "index.html#reproducibility",
