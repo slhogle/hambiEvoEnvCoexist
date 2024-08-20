@@ -1,0 +1,553 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data anlalysis for the project hambiABBAssembly",
+    "section": "",
+    "text": "This project contains data and analysis from the hambiABBAssembly project."
+  },
+  {
+    "objectID": "index.html#manuscript",
+    "href": "index.html#manuscript",
+    "title": "Data anlalysis for the project hambiABBAssembly",
+    "section": "1 Manuscript:",
+    "text": "1 Manuscript:\n“TBD”\nPreprint available from bioRxiv"
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Data anlalysis for the project hambiABBAssembly",
+    "section": "2 Introduction",
+    "text": "2 Introduction\nPast work has shown that the composition of small bacterial communities can be predicted remarkably well from outcomes of competitions between small sets of species (Friedman, Higgins, and Gore 2017). Other work has questioned whether such simple qualitative assembly rules hold in more complex situations such as when the species pool shares an evolutionary history (Chang et al. 2023) (also see this blog post). If community assembly dynamics can truly be characterized by additive pairwise processes this would be a great advantage for modelers. It would mean that communities could be described sufficiently using paired species interactions (as in traditional Lotka Volterra). However, if higher-order interactions (Levine et al. 2017) are common and important (e.g., species C mediates the interaction between species A and B in a density independent way) then the number of parameters necessary to sufficiently model the system quickly blows up quickly making the entire problem intractable.\nUnderstanding the fundamental processes in community assembly will be key to designing microbial communities with desirable properties for human use and to anticipate the response of communities in nature to change. Two theoretical camps have emerged in contemporary theory; one arguing for pairwise assembly rules and another arguing for the importance of networks of chained pairwise interactions and/or higher order interactions. Evidence exists for both processes occurring in nature. Thus, the question of when/how/why community assembly can be sufficiently described/predicted from additive pairwise processes is relevant and important for gaining a predictive understanding of microbiome dynamics. For example, when will the assembly process emerge as a property of the community, rather than being a straightforward additive process? In particular, do the previous evolutionary history and patterns of coexistence in the species pool determine emergent coexistence? What is the role for different growth conditions (substrate availability, antibacterial compounds, pH, predator presence)? Or does prior adaptive evolution to the environment change the outcomes? Do the “simple” rules governing community assembly fundamentally change as you add more layers of complexity?\nThe goal here is to shed some additional light on the question of the importance of pairwise competition/emergent coexistence in microbiomes. Our experiment assembles all possible 2, 3, and 4 species sub communities from a 4-species pool under a gradient of antibiotic concentrations and with different evolutionary histories of the four species. We assess the predictability of community assembly outcomes based on subsets of the reduced species assemblies and attempt to understand whether assembly operates in a predominantly pairwise way."
+  },
+  {
+    "objectID": "index.html#experiment-overview",
+    "href": "index.html#experiment-overview",
+    "title": "Data anlalysis for the project hambiABBAssembly",
+    "section": "3 Experiment overview",
+    "text": "3 Experiment overview\n\n3.1 Background:\nIn prior work from our lab we experimentally evolved all species from the HAMBI synthetic community to increasing concentrations of the aminoglycoside antibiotic streptomycin. Briefly, we would grow each species at the highest streptomycin concentration it could tolerate for a number of growth cycles, then we would transfer into a higher streptomycin. We did this until we reached a streptomycin concentration where we could no longer detect growth. Then these cultures were plated and a single clone was isolated.\nThese clones are the source “evolved” starting materials for this experiment, where their clonal ancestor is the “ancestral” starting material.\n\n\n3.2 Traits and physiology of species:\nThe ancestral and evolved form of each species were grown for 48 hours at 30℃ in 100% R2A growth medium (Reasoner and Geldreich 1985) at concentrations of 0, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, and 4096 μg/ml streptomycin. Growth was followed using optical density at 600 nm in a Bioscreen plate reader. Growth rates and carrying capacities were determined from the high resolution growth curves using AMiGA.\n\n\n3.3 Species interactions:\nThe ancestral and evolved forms of each species were grown for 48 hours at 30℃ in 100% R2A growth medium (Reasoner and Geldreich 1985). Cultures were filtered to remove bacterial biomass and the spent media was stored at 4℃ until use. Next the evolved and ancestral forms of each species were grown in the spent medium of each other evo/anc species for 48 hours at 30℃ and growth was followed using optical density at 600 nm in a Bioscreen plate reader.\nFor the Burkholder diffusion assay we will add each species/evolutionary form to a soft agar on a petri dish. Then a small volume of each species will be pipetted directly onto the agar and plates will be checked for zones of inhibition.\n\n\n3.4 Competition/coexistence outcomes (species proportions from communities):\nHere we wish to ensure that any equilibrium coexistence or competitive exclusion between species is not multistable - meaning that the outcome is deterministic and truly based on the density-independent competitive abilities of the species and not dependent on their starting density. The multistability problem has been addressed in other studies by growing each species from each community at different starting densities. This is typically done by starting all of the rare species at a low density and one abundant species at a higher density (as measured by optical density). For more than 2 species you cannot reasonably achieve all possible permutations of different densities, but you can start each species from rare, while leaving one remaining species high.\nHere we use starting conditions with 10%/90% for pairs, 80%/10%/10% for trios, and 70%/10%/10%/10% for quartets. For pairs, we alternated so that each species started from rare. For trios and quartets, we alternated so that each species was allowed to invade from rare but we did not use all possible staring proportions due to practical and cost limitations. Another important consideration is that we can not distinguish between the ancestral and evolved forms of the same species with amplicon sequencing (or with plate counts) so that our experimental arrangement cannot be fully factorial (e.g., we cannot compete ancestral 1977 against evolved 1977) and thus there are fewer combinations that one would expect from expected scaling of \\(2^{(8-1)} = 128\\)\nFor the coexistence/exclusion experiments experimental communities are inoculated in 500 μl of 100% R2A in deep 96 well plates at a 50 fold dilution at four different streptomycin levels: 0, 16, 64, and 256 μg/ml. Plates were incubated in the dark at 30℃ with shaking at 800 RPM. Serial transfers (50 fold dilution; 10 μl to 490 μl) were conducted every 48 hours for a total of eight growth cycles. For every growth cycle \\(\\mathrm{log_2(50)} \\approx 5.6\\) generations will have elapsed for a total of about 45 generations over eight cycles."
+  },
+  {
+    "objectID": "index.html#measurements-and-data-types",
+    "href": "index.html#measurements-and-data-types",
+    "title": "Data anlalysis for the project hambiABBAssembly",
+    "section": "4 Measurements and data types",
+    "text": "4 Measurements and data types\n\n4.1 Traits and physiology of species:\n\nGrowth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on a gradient of streptomycin concentrations\n\n\n\n4.2 Species interactions:\n\nGrowth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on the filtrate of all other species.\n(NOT YET COMPLETED) Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). Note: based on past work with these species we don’t expect to detect significant interference competition.\n\n\n\n4.3 Competition/coexistence outcomes (species proportions from communities):\n\nCommunity DNA from pairs, trios, and quartets was sampled after eight 48 hour growth cycles\n16S rRNA amplicon sequencing was performed on samples to get the proportion of each species\nOptical density was collected at every other growth cycle"
+  },
+  {
+    "objectID": "index.html#code",
+    "href": "index.html#code",
+    "title": "Data anlalysis for the project hambiABBAssembly",
+    "section": "5 Code",
+    "text": "5 Code\n Data and code here is provided under GPL3. Feel free to use or remix as you see fit.\n\n5.1 Project structure\n\n/R contains R scripts\n/data contains data that has been processed in some way for later use\n/_data_raw contains unprocessed data scraped from compute cluster\n/figs contains figures generated from R scripts"
+  },
+  {
+    "objectID": "index.html#availability",
+    "href": "index.html#availability",
+    "title": "Data anlalysis for the project hambiABBAssembly",
+    "section": "6 Availability",
+    "text": "6 Availability\nThe rendered project site is available at https://hambiloopairwisenmr-slhogl-c8d6c219bb8d719ac159d67b545bcea32595.utugit.fi/. The website has been produced using Quarto notebooks.\nThis GitHub repository (&lt;&gt;) hosts the code and data for this project. The rendered webpage can be fully recreated using the code at &lt;&gt;."
+  },
+  {
+    "objectID": "index.html#reproducibility",
+    "href": "index.html#reproducibility",
+    "title": "Data anlalysis for the project hambiABBAssembly",
+    "section": "7 Reproducibility",
+    "text": "7 Reproducibility\nThe project uses renv to create reproducible environment to execute the code in this project. See here for a brief overview on collaboration and reproduction of the entire project. To get up and running you can do:\ninstall.packages(\"renv\")\nrenv::restore()"
+  },
+  {
+    "objectID": "R/experiment_design/03_quartets.html",
+    "href": "R/experiment_design/03_quartets.html",
+    "title": "Designing four-species subcommunities",
+    "section": "",
+    "text": "library(here)\nlibrary(tidyverse)\nlibrary(ggplate)\n\n\n\n\nSpecies color vector\n\nmy_colors &lt;- c(\n  \"ANC_0403_10\" = \"#ffaaaa\", \"ANC_0403_70\" = \"#aa0000\", \"ANC_0403_80\" = \"#aa0000\", \"ANC_0403_90\" = \"#aa0000\", \n  \"ANC_1287_10\" = \"#ffeeaa\", \"ANC_1287_70\" = \"#d4aa00\", \"ANC_1287_80\" = \"#d4aa00\", \"ANC_1287_90\" = \"#d4aa00\", \n  \"ANC_1896_10\" = \"#ccffaa\", \"ANC_1896_70\" = \"#44aa00\", \"ANC_1896_80\" = \"#44aa00\", \"ANC_1896_90\" = \"#44aa00\", \n  \"ANC_1977_10\" = \"#aaccff\", \"ANC_1977_70\" = \"#0055d4\", \"ANC_1977_80\" = \"#0055d4\", \"ANC_1977_90\" = \"#0055d4\",\n  \"EVO_0403_10\" = \"#ffaaee\", \"EVO_0403_70\" = \"#ff00cc\", \"EVO_0403_80\" = \"#ff00cc\", \"EVO_0403_90\" = \"#ff00cc\", \n  \"EVO_1287_10\" = \"#ffccaa\", \"EVO_1287_70\" = \"#ff6600\", \"EVO_1287_80\" = \"#ff6600\", \"EVO_1287_90\" = \"#ff6600\", \n  \"EVO_1896_10\" = \"#aaffee\", \"EVO_1896_70\" = \"#00ffcc\", \"EVO_1896_80\" = \"#00ffcc\", \"EVO_1896_90\" = \"#00ffcc\", \n  \"EVO_1977_10\" = \"#ccaaff\", \"EVO_1977_70\" = \"#7f2aff\", \"EVO_1977_80\" = \"#7f2aff\", \"EVO_1977_90\" = \"#7f2aff\"\n  )\n\nFor plotting plates\n\nplate_plot_steps &lt;- function(df, well_colmun, val_column, step, colr_vec){\n  ggplate::plate_plot(df,\n  position = {{ well_colmun }},\n  value = {{ val_column }},\n  colour = colr_vec,\n  plate_size = 96,\n  plate_type = \"round\"\n) + ggtitle(step)\n}",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "3. Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/03_quartets.html#libraries",
+    "href": "R/experiment_design/03_quartets.html#libraries",
+    "title": "Designing four-species subcommunities",
+    "section": "",
+    "text": "library(here)\nlibrary(tidyverse)\nlibrary(ggplate)",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "3. Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/03_quartets.html#functions-and-vars",
+    "href": "R/experiment_design/03_quartets.html#functions-and-vars",
+    "title": "Designing four-species subcommunities",
+    "section": "",
+    "text": "Species color vector\n\nmy_colors &lt;- c(\n  \"ANC_0403_10\" = \"#ffaaaa\", \"ANC_0403_70\" = \"#aa0000\", \"ANC_0403_80\" = \"#aa0000\", \"ANC_0403_90\" = \"#aa0000\", \n  \"ANC_1287_10\" = \"#ffeeaa\", \"ANC_1287_70\" = \"#d4aa00\", \"ANC_1287_80\" = \"#d4aa00\", \"ANC_1287_90\" = \"#d4aa00\", \n  \"ANC_1896_10\" = \"#ccffaa\", \"ANC_1896_70\" = \"#44aa00\", \"ANC_1896_80\" = \"#44aa00\", \"ANC_1896_90\" = \"#44aa00\", \n  \"ANC_1977_10\" = \"#aaccff\", \"ANC_1977_70\" = \"#0055d4\", \"ANC_1977_80\" = \"#0055d4\", \"ANC_1977_90\" = \"#0055d4\",\n  \"EVO_0403_10\" = \"#ffaaee\", \"EVO_0403_70\" = \"#ff00cc\", \"EVO_0403_80\" = \"#ff00cc\", \"EVO_0403_90\" = \"#ff00cc\", \n  \"EVO_1287_10\" = \"#ffccaa\", \"EVO_1287_70\" = \"#ff6600\", \"EVO_1287_80\" = \"#ff6600\", \"EVO_1287_90\" = \"#ff6600\", \n  \"EVO_1896_10\" = \"#aaffee\", \"EVO_1896_70\" = \"#00ffcc\", \"EVO_1896_80\" = \"#00ffcc\", \"EVO_1896_90\" = \"#00ffcc\", \n  \"EVO_1977_10\" = \"#ccaaff\", \"EVO_1977_70\" = \"#7f2aff\", \"EVO_1977_80\" = \"#7f2aff\", \"EVO_1977_90\" = \"#7f2aff\"\n  )\n\nFor plotting plates\n\nplate_plot_steps &lt;- function(df, well_colmun, val_column, step, colr_vec){\n  ggplate::plate_plot(df,\n  position = {{ well_colmun }},\n  value = {{ val_column }},\n  colour = colr_vec,\n  plate_size = 96,\n  plate_type = \"round\"\n) + ggtitle(step)\n}",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "3. Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/03_quartets.html#first-pipetting-step",
+    "href": "R/experiment_design/03_quartets.html#first-pipetting-step",
+    "title": "Designing four-species subcommunities",
+    "section": "2.1 First pipetting step",
+    "text": "2.1 First pipetting step\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Layout for the first pipetting step for constructing quartets Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 70% (e.g., _70) or 10% (e.g., _10).",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "3. Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/03_quartets.html#second-pipetting-step",
+    "href": "R/experiment_design/03_quartets.html#second-pipetting-step",
+    "title": "Designing four-species subcommunities",
+    "section": "2.2 Second pipetting step",
+    "text": "2.2 Second pipetting step\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Layout for the second pipetting step for constructing quartets Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 70% (e.g., _70) or 10% (e.g., _10).",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "3. Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/03_quartets.html#third-pipetting-step",
+    "href": "R/experiment_design/03_quartets.html#third-pipetting-step",
+    "title": "Designing four-species subcommunities",
+    "section": "2.3 Third pipetting step",
+    "text": "2.3 Third pipetting step\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Layout for the third pipetting step for constructing quartets Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 70% (e.g., _70) or 10% (e.g., _10).",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "3. Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/03_quartets.html#fourth-pipetting-step",
+    "href": "R/experiment_design/03_quartets.html#fourth-pipetting-step",
+    "title": "Designing four-species subcommunities",
+    "section": "2.4 Fourth pipetting step",
+    "text": "2.4 Fourth pipetting step\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: Layout for the fourth pipetting step for constructing quartets Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 70% (e.g., _70) or 10% (e.g., _10).",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "3. Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/01_pairs.html",
+    "href": "R/experiment_design/01_pairs.html",
+    "title": "Designing two-species subcommunities",
+    "section": "",
+    "text": "library(here)\nlibrary(tidyverse)\nlibrary(ggplate)\n\n\n\n\nSpecies color vector\n\nmy_colors &lt;- c(\n  \"ANC_0403_10\" = \"#ffaaaa\", \"ANC_0403_70\" = \"#aa0000\", \"ANC_0403_80\" = \"#aa0000\", \"ANC_0403_90\" = \"#aa0000\", \n  \"ANC_1287_10\" = \"#ffeeaa\", \"ANC_1287_70\" = \"#d4aa00\", \"ANC_1287_80\" = \"#d4aa00\", \"ANC_1287_90\" = \"#d4aa00\", \n  \"ANC_1896_10\" = \"#ccffaa\", \"ANC_1896_70\" = \"#44aa00\", \"ANC_1896_80\" = \"#44aa00\", \"ANC_1896_90\" = \"#44aa00\", \n  \"ANC_1977_10\" = \"#aaccff\", \"ANC_1977_70\" = \"#0055d4\", \"ANC_1977_80\" = \"#0055d4\", \"ANC_1977_90\" = \"#0055d4\",\n  \"EVO_0403_10\" = \"#ffaaee\", \"EVO_0403_70\" = \"#ff00cc\", \"EVO_0403_80\" = \"#ff00cc\", \"EVO_0403_90\" = \"#ff00cc\", \n  \"EVO_1287_10\" = \"#ffccaa\", \"EVO_1287_70\" = \"#ff6600\", \"EVO_1287_80\" = \"#ff6600\", \"EVO_1287_90\" = \"#ff6600\", \n  \"EVO_1896_10\" = \"#aaffee\", \"EVO_1896_70\" = \"#00ffcc\", \"EVO_1896_80\" = \"#00ffcc\", \"EVO_1896_90\" = \"#00ffcc\", \n  \"EVO_1977_10\" = \"#ccaaff\", \"EVO_1977_70\" = \"#7f2aff\", \"EVO_1977_80\" = \"#7f2aff\", \"EVO_1977_90\" = \"#7f2aff\"\n  )\n\nFor plotting plates\n\nplate_plot_steps &lt;- function(df, well_colmun, val_column, step, colr_vec){\n  ggplate::plate_plot(df,\n  position = {{ well_colmun }},\n  value = {{ val_column }},\n  colour = colr_vec,\n  plate_size = 96,\n  plate_type = \"round\"\n) + ggtitle(step)\n}",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "1. Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/01_pairs.html#libraries",
+    "href": "R/experiment_design/01_pairs.html#libraries",
+    "title": "Designing two-species subcommunities",
+    "section": "",
+    "text": "library(here)\nlibrary(tidyverse)\nlibrary(ggplate)",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "1. Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/01_pairs.html#functions-and-vars",
+    "href": "R/experiment_design/01_pairs.html#functions-and-vars",
+    "title": "Designing two-species subcommunities",
+    "section": "",
+    "text": "Species color vector\n\nmy_colors &lt;- c(\n  \"ANC_0403_10\" = \"#ffaaaa\", \"ANC_0403_70\" = \"#aa0000\", \"ANC_0403_80\" = \"#aa0000\", \"ANC_0403_90\" = \"#aa0000\", \n  \"ANC_1287_10\" = \"#ffeeaa\", \"ANC_1287_70\" = \"#d4aa00\", \"ANC_1287_80\" = \"#d4aa00\", \"ANC_1287_90\" = \"#d4aa00\", \n  \"ANC_1896_10\" = \"#ccffaa\", \"ANC_1896_70\" = \"#44aa00\", \"ANC_1896_80\" = \"#44aa00\", \"ANC_1896_90\" = \"#44aa00\", \n  \"ANC_1977_10\" = \"#aaccff\", \"ANC_1977_70\" = \"#0055d4\", \"ANC_1977_80\" = \"#0055d4\", \"ANC_1977_90\" = \"#0055d4\",\n  \"EVO_0403_10\" = \"#ffaaee\", \"EVO_0403_70\" = \"#ff00cc\", \"EVO_0403_80\" = \"#ff00cc\", \"EVO_0403_90\" = \"#ff00cc\", \n  \"EVO_1287_10\" = \"#ffccaa\", \"EVO_1287_70\" = \"#ff6600\", \"EVO_1287_80\" = \"#ff6600\", \"EVO_1287_90\" = \"#ff6600\", \n  \"EVO_1896_10\" = \"#aaffee\", \"EVO_1896_70\" = \"#00ffcc\", \"EVO_1896_80\" = \"#00ffcc\", \"EVO_1896_90\" = \"#00ffcc\", \n  \"EVO_1977_10\" = \"#ccaaff\", \"EVO_1977_70\" = \"#7f2aff\", \"EVO_1977_80\" = \"#7f2aff\", \"EVO_1977_90\" = \"#7f2aff\"\n  )\n\nFor plotting plates\n\nplate_plot_steps &lt;- function(df, well_colmun, val_column, step, colr_vec){\n  ggplate::plate_plot(df,\n  position = {{ well_colmun }},\n  value = {{ val_column }},\n  colour = colr_vec,\n  plate_size = 96,\n  plate_type = \"round\"\n) + ggtitle(step)\n}",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "1. Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/01_pairs.html#first-pipetting-step",
+    "href": "R/experiment_design/01_pairs.html#first-pipetting-step",
+    "title": "Designing two-species subcommunities",
+    "section": "2.1 First pipetting step",
+    "text": "2.1 First pipetting step\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Layout for the first pipetting step for constructing pairs. Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 90% (e.g., _90) or 10% (e.g., _10).",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "1. Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/01_pairs.html#second-pipetting-step",
+    "href": "R/experiment_design/01_pairs.html#second-pipetting-step",
+    "title": "Designing two-species subcommunities",
+    "section": "2.2 Second pipetting step",
+    "text": "2.2 Second pipetting step\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Layout for the second pipetting step for constructing pairs. Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 90% (e.g., _90) or 10% (e.g., _10).",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "1. Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html",
+    "title": "Formatting Rbec output",
+    "section": "",
+    "text": "Contains results from pairs of all streptomycin concentrations and trios for 0 streptomycin from Milla’s bottom up community assembly experiment",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "title": "Formatting Rbec output",
+    "section": "2.1 Libraries",
+    "text": "2.1 Libraries\n\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "title": "Formatting Rbec output",
+    "section": "2.2 Global variables",
+    "text": "2.2 Global variables\n\ndata_raw &lt;- here::here(\"_data_raw\", \"20240711_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"20240711_BTK_illumina_v3\")\namplicontar &lt;- here::here(data_raw, \"rbec_output.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir &lt;- fs::file_temp()",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#data",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#data",
+    "title": "Formatting Rbec output",
+    "section": "2.3 Data",
+    "text": "2.3 Data\nNOTE! We have commented out the species not included in this experiment\n\ntax_locus_copynum &lt;- tibble::tribble(\n     ~strainID, ~rRNA16S_cn, ~rRNA16S_locus,             ~genus,        ~species,\n  \"HAMBI_0006\",          7L,  \"H0006_04757\",      \"Pseudomonas\",        \"putida\",\n  \"HAMBI_0097\",          7L,  \"H0097_00044\",    \"Acinetobacter\",     \"johnsonii\",\n  \"HAMBI_0097\",          7L,  \"H0097_02759\",    \"Acinetobacter\",     \"johnsonii\",\n  \"HAMBI_0097\",          7L,  \"H0097_01762\",    \"Acinetobacter\",     \"johnsonii\",\n  \"HAMBI_0105\",          4L,  \"H0105_02306\",    \"Agrobacterium\",   \"tumefaciens\",\n  \"HAMBI_0262\",          3L,  \"H0262_00030\",    \"Brevundimonas\",       \"bullata\",\n  \"HAMBI_0403\",          9L,  \"H0403_00517\",        \"Comamonas\",  \"testosteroni\",\n  \"HAMBI_0403\",          9L,  \"H0403_00522\",        \"Comamonas\",  \"testosteroni\",\n  \"HAMBI_1279\",          7L,  \"H1279_03627\",           \"Hafnia\",         \"alvei\",\n  \"HAMBI_1279\",          7L,  \"H1279_00125\",           \"Hafnia\",         \"alvei\",\n  \"HAMBI_1279\",          7L,  \"H1279_03957\",           \"Hafnia\",         \"alvei\",\n  \"HAMBI_1287\",          7L,  \"H1287_03997\",      \"Citrobacter\",        \"koseri\",\n  \"HAMBI_1287\",          7L,  \"H1287_03402\",      \"Citrobacter\",        \"koseri\",\n  \"HAMBI_1292\",          7L,  \"H1292_03239\",       \"Morganella\",      \"morganii\",\n  \"HAMBI_1299\",          8L,  \"H1299_04293\",         \"Kluyvera\",    \"intermedia\",\n  \"HAMBI_1299\",          8L,  \"H1299_01283\",         \"Kluyvera\",    \"intermedia\",\n  \"HAMBI_1299\",          8L,  \"H1279_03957\",         \"Kluyvera\",    \"intermedia\",\n  \"HAMBI_1842\",          4L,  \"H1842_01650\",      \"Sphingobium\",    \"yanoikuyae\",\n  \"HAMBI_1896\",          4L,  \"H1896_00963\", \"Sphingobacterium\",  \"spiritivorum\",\n  \"HAMBI_1972\",         10L,  \"H1972_00343\",        \"Aeromonas\",        \"caviae\",\n  \"HAMBI_1972\",         10L,  \"H1972_03531\",        \"Aeromonas\",        \"caviae\",\n  \"HAMBI_1977\",          5L,  \"H1977_00118\",      \"Pseudomonas\",  \"chlororaphis\",\n  \"HAMBI_1988\",          5L,  \"H1988_05160\",     \"Chitinophaga\",        \"sancti\",\n  \"HAMBI_1988\",          5L,  \"H1988_05152\",     \"Chitinophaga\",        \"sancti\",\n  \"HAMBI_1988\",          5L,  \"H1988_05165\",     \"Chitinophaga\",        \"sancti\",\n  \"HAMBI_2159\",          4L,  \"H2159_01406\",        \"Trinickia\",   \"caryophylli\",\n  \"HAMBI_2159\",          4L,  \"H2159_05851\",        \"Trinickia\",   \"caryophylli\",\n  \"HAMBI_2160\",          3L,  \"H2160_00530\",       \"Bordetella\",         \"avium\",\n  \"HAMBI_2164\",          5L,  \"H2164_03337\",      \"Cupriavidus\",    \"oxalaticus\",\n  \"HAMBI_2443\",          3L,  \"H2443_00128\",       \"Paracoccus\", \"denitrificans\",\n  \"HAMBI_2494\",          4L,  \"H2494_03389\", \"Paraburkholderia\",   \"kururiensis\",\n  \"HAMBI_2659\",          4L,  \"H2659_00367\", \"Stenotrophomonas\",   \"maltophilia\",\n  \"HAMBI_2792\",          4L,  \"H2792_00549\",        \"Moraxella\",         \"canis\",\n  \"HAMBI_3031\",          2L,  \"H3031_00830\",         \"Niabella\",  \"yanshanensis\",\n  \"HAMBI_3237\",          6L,  \"H3237_00875\",       \"Microvirga\",   \"lotononidis\",\n  \"HAMBI_1923\",          6L,  \"H1923_00876\",   \"Flavobacterium\",      \"odoratum\"\n  )",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#functions",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#functions",
+    "title": "Formatting Rbec output",
+    "section": "2.4 Functions",
+    "text": "2.4 Functions\n\n# this function \nnormalize_by_copy &lt;- function(.data, tlc = tax_locus_copynum){\n  .data %&gt;% \n    # join with the copy number data frame. We join by the locus tag so this will add H1279_03957 to HAMBI_1299\n    dplyr::left_join(tlc, by = join_by(rRNA16S_locus)) %&gt;%\n    # get total number of mapping reads per species. This aggregates all the difference ASVs per species\n    dplyr::summarize(count = sum(count), .by = c(sample, strainID, rRNA16S_cn)) %&gt;% \n    # group by sample\n    dplyr::group_by(sample) %&gt;% \n    # calculate a corrected count which is simply the count divided by copy num for each species\n    # dividide by the sum of count divided by copy num for whole sample multiplied by the total\n    # number of mapped reads per sample\n    dplyr::mutate(count_correct = round(sum(count)*(count/rRNA16S_cn)/sum(count/rRNA16S_cn))) %&gt;%  \n    dplyr::ungroup() %&gt;% \n    dplyr::select(sample, strainID, count, count_correct)\n  }\n\n# this function replaces missing species counts with zero\ncompletecombos &lt;- function(.data, tlc = tax_locus_copynum, countname = count, remove1923 = TRUE){\n \n  # get unique strainIDs\n  strainID &lt;- unique(tlc$strainID)\n  # table for assigning genus and species names. Doesn't matter if 1923 is there or not\n  # because it is filter joined later\n  tax &lt;- dplyr::distinct(dplyr::select(tlc, strainID, genus, species))\n  if (remove1923) {\n    # get unique strainIDs but exclude 1923 if remove1923 is true\n    strainID &lt;- strainID[strainID != \"HAMBI_1923\"]\n  }\n  \n  dplyr::bind_rows(tibble::tibble(strainID = strainID, sample = \"dummy\"), .data) %&gt;% \n    dplyr::mutate( \"{{ countname }}\" := dplyr::if_else(sample == \"dummy\", 1, {{ countname }})) %&gt;% \n    tidyr::complete(sample, strainID) %&gt;% \n    dplyr::filter(sample != \"dummy\") %&gt;% \n    dplyr::mutate( \"{{ countname }}\" := dplyr::if_else(is.na({{ countname }}), 0, {{ countname }})) %&gt;% \n    tidyr::replace_na(list(count_correct = 0)) %&gt;% \n    dplyr::left_join(dplyr::distinct(dplyr::select(tlc, strainID, genus, species))) %&gt;% \n    dplyr::relocate(genus, species, .after = strainID)\n}",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "title": "Formatting Rbec output",
+    "section": "4.1 Untar Rbec output tarball",
+    "text": "4.1 Untar Rbec output tarball\n\narchive::archive_extract(\n  amplicontar,\n  dir = tmpdir,\n  files = NULL,\n  options = character(),\n  strip_components = 0L\n)",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "title": "Formatting Rbec output",
+    "section": "4.2 Setup directory structure",
+    "text": "4.2 Setup directory structure\n\ntabdir &lt;- here::here(tmpdir, \"rbec_output\")\nsamppaths &lt;- fs::dir_ls(tabdir)\nsampnames &lt;- path_split(samppaths) %&gt;% \n  map_chr(dplyr::last)",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "title": "Formatting Rbec output",
+    "section": "4.3 Read",
+    "text": "4.3 Read\n\nstraintabs &lt;- paste0(samppaths, \"/strain_table.txt\") %&gt;% \n  set_names(sampnames) %&gt;% \n  map_df(\n  read_tsv,\n  skip = 1,\n  col_names = c(\"rRNA16S_locus\",\"count\"),\n  show_col_types = FALSE, \n  .id = \"sample\") %&gt;% \n  # naming scheme inconsistent for one sample\n  mutate(sample = if_else(sample == \"P2_s_0\", \"P02_s_0\", sample))",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "title": "Formatting Rbec output",
+    "section": "6.1 Negative controls",
+    "text": "6.1 Negative controls\nFirst, we’ll check whether the experimental and plate negative controls look good\n\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^neg|pos\")) %&gt;% \n  summarize(tot = sum(count_correct), .by = c(\"sample\", \"community_id\", \"n_species\", \"community_type\", \"replicate\"))\n\n\n  \n\n\n\nThis looks ok, but there are potentially some problems. Specifically, negative control replicates 2, 3, and 4 all have some contamination. neg_2_0 seems to be contaminated with HAMBI_1977, neg_3_0 with HAMBI_1287, and neg_4_0 with HAMBI_1977. However in the 5 remaining negative controls there is no contamination.",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "title": "Formatting Rbec output",
+    "section": "6.2 Positive controls",
+    "text": "6.2 Positive controls\nThe positive controls should each have three species. In all cases the species that shouldn’t be there is very rare\n\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^pos\")) %&gt;%\n  mutate(total_pos_controls = n_distinct(sample)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = round(count_correct/sum(count_correct)*100)) %&gt;%\n  mutate(supposed_2_b_there = if_else(is.na(evo_hist), \"no\", \"yes\")) %&gt;% \n  relocate(f, supposed_2_b_there) %&gt;% \n  distinct(f, supposed_2_b_there, sample, strainID, count_correct, n_species, community_type,)\n\n\n  \n\n\n\nThis is also good - we detect all 3 species that should be there in the positive controls on each plate. In a later step we will use these control samples with metacal to try and correct for the boil prep extraction method.",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "title": "Formatting Rbec output",
+    "section": "6.3 Misassigned reads",
+    "text": "6.3 Misassigned reads\nThese libraries were only prepared with samples from Milla’s 4-species experiment with 403, 1287, 1896, and 1977 so any time species other than these show up is just an incorrect assignment by Rbec. Let’s check quickly how many of these there are…\n\nfinaltable %&gt;% \n  filter(!str_detect(strainID, \"0403|1287|1896|1977\"))\n\n\n  \n\n\n\nThere is one or two incorrectly assigned reads here and there but this is just noise. We can safely exclude all reads not mapping to one of the focal species.\n\nfinaltable &lt;- finaltable %&gt;% \n  filter(str_detect(strainID, \"0403|1287|1896|1977\"))",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-too-few-reads",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-too-few-reads",
+    "title": "Formatting Rbec output",
+    "section": "6.4 Samples with too few reads",
+    "text": "6.4 Samples with too few reads\nSome of the experimental pairs had streptomycin concentrations higher than any of the species individually could tolerate. We would naively expect then that neither species would grow successfully in these samples and that the overall biomass would be very low, thus resulting in a low number of recovered reads from these samples.\nTo look into this. first let’s check which samples have very low OD600 in the endpoint samples.\n\nod &lt;- read_tsv(here::here(\"_data_raw\", \"20240606_optical_density\", \"optical_density_formatted.tsv\"))\n\nRows: 2880 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (1): community_id\ndbl (5): transfers, n_species, strep_conc, replicate, OD\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\nfiltids &lt;- finaltable %&gt;% \n  summarize(tot = sum(count_correct), .by = c(sample, community_id, n_species, transfers, strep_conc, replicate)) %&gt;%\n  left_join(od, by = join_by(community_id, n_species, transfers, strep_conc, replicate)) %&gt;% \n  filter(transfers == 8) %&gt;% \n  arrange(tot) %&gt;% \n  arrange(OD) %&gt;% \n  filter(OD &lt; 0.1 | tot &lt; 1000) %&gt;% \n  pull(sample)\n\nWe’ll filter out samples with an OD of less than 0.1 and also samples with fewer than 1000 reads. It is genearlly good practice to exclude samples with low number of reads.\n\nfinaltable &lt;- finaltable %&gt;% \n  filter(sample %nin% filtids)",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#masterplate-samples",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#masterplate-samples",
+    "title": "Formatting Rbec output",
+    "section": "6.5 Masterplate samples",
+    "text": "6.5 Masterplate samples\nTo set up this experiment, Milla combined the species in the planned proportions on a masterplate. Because this process was time consuming, the masterplate was stored at -80C after construction until the experiment start day when it was taken from the freezer and used to inoculate the experiment. Because Milla knows exactly which strains were added to the master plate and the plates were not allowed to grow, any strains in these samples that are not supposed to be there should be due to Illumina index cross talk and not true contamination. We can get a sense for the average index crosstalk rate from these samples and then draw a threshold of when to exclude likely false positives and when a positive is likely due to contamination.\n\nmasterplate &lt;- finaltable %&gt;%\n  filter(community_type == \"masterplate\") %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup()\n\nHere we focus on masterplate samples with species that should not be there. We exclude species that were inoculated and plot the distribution of percentages of those species\n\n\n\n\nmasterplate %&gt;% \n  # here we take advantage of the fact that for species not supposed to be in a sample\n  # the prior left_join will have filled the evo_hist category with an NA. We can then filter\n  # on this NA value\n  filter(is.na(evo_hist)) %&gt;% \n  filter(f &gt; 0) %&gt;% \n  ggplot(aes(x = f)) +\n  geom_histogram(aes(fill = strainID), bins = 20) +\n  geom_vline(xintercept = 0.01, linetype = \"dashed\") +\n  scale_fill_manual(values = hambi_colors) +\n  scale_x_continuous(trans = \"log10\",  labels = percent, guide = guide_axis(angle=90)) + \n  labs(x = \"Crosstalk frequency\", y = \"Count\") +\n  facet_grid(~strainID) + \n  annotation_logticks(sides = \"b\", color=\"grey30\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"bottom\")\n\n\n\n\n\n\n\n\n\n\nFigure 1: Frequency distribution of each species in masterplate samples where it should not occur. The 1% mark (commonly accepted as an acceptable Illumina cross-talk standard) is demarcated with a dashed line.\n\n\n\nGenerally, the cross talk frequency is pretty OK. For 3/4 species it is 1% or less which is more or less what you can expect when you are multiplexing libraries on an Illumina platform. Values greater than 1% are potentially indicative of a different problem, so 1977 requires a bit more investigation.\n\nsids &lt;- masterplate %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f &gt; 0.01 & strainID == \"HAMBI_1977\") %&gt;% \n  pull(sample) \n\nmasterplate %&gt;% \n  filter(sample %in% sids) %&gt;% \n  dplyr::select(sample, strainID, count_correct, replicate, evo_hist, target_f, f)\n\n\n  \n\n\n\nIt looks like all the “problematic” samples come from plates 7 and 8 in the library prep. Plate 8 only contains the masterplate samples from trios whereas plate 7 contains both masterplate and experimental samples. Figure 2 shows that HAMBI-1977 is very abundant in many of the samples so likely the “leaky” reads come disproportionately from HAMBI-1977 which is why its crosstalk threshold may be higher (Figure 1).\n\n\n\n\nfinaltable %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  # here we take advantage of the fact that for species not supposed to be in a sample\n  # the prior left_join will have filled the evo_hist category with an NA. We can then filter\n  # on this NA value\n  filter(!is.na(evo_hist)) %&gt;% \n  filter(f &gt; 0) %&gt;% \n  ggplot(aes(x = f)) +\n  geom_histogram(aes(fill = strainID), bins = 20) +\n  scale_fill_manual(values = hambi_colors) +\n  scale_x_continuous(trans = \"log10\",  labels = percent, guide = guide_axis(angle=90)) + \n  labs(x = \"Frequency in samples\", y = \"Count\") +\n  facet_grid(~strainID) + \n  annotation_logticks(sides = \"b\", color=\"grey30\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"bottom\")\n\n\n\n\n\n\n\n\n\n\nFigure 2: Frequency distribution of each species in all samples where it should occur.\n\n\n\nAnyway, I don’t think this is a problem and that we can move forward with these samples. However, to define extinction/competitive exclusion we may need to use a higher threshold than 1% (e.g., 3% frequency) because over 3% we can reliably say that a species is present and it is not due to index cross talk.",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "title": "Formatting Rbec output",
+    "section": "6.6 Experimental samples",
+    "text": "6.6 Experimental samples\nNow we need to see how our experimental samples performed and if there are species present in them that shouldn’t be there\n\nexp_contam &lt;- finaltable %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  # because we set 3% as our limit of detection we set read counts of species \n  # less than 1% to 0\n  mutate(count_correct_thresh = if_else(f &lt;= 0.03, 0, count_correct)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct_thresh/sum(count_correct_thresh)) %&gt;% \n  ungroup()\n\n\n\n\n\nexp_contam %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  ggplot(aes(x = f)) +\n  geom_histogram(aes(fill = strainID), bins = 20) +\n  scale_fill_manual(values = hambi_colors) +\n  scale_x_continuous(trans = \"log10\",  labels = percent, guide = guide_axis(angle=90)) + \n  labs(x = \"Frequency in samples\", y = \"Count\") +\n  facet_grid(~ strainID) + \n  annotation_logticks(sides = \"b\", color=\"grey30\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"bottom\")\n\nWarning in scale_x_continuous(trans = \"log10\", labels = percent, guide =\nguide_axis(angle = 90)): log-10 transformation introduced infinite values.\n\n\nWarning: Removed 783 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Frequency distribution of each species in experimental samples where it should not occcur.\n\n\n\nIt’s not too bad… but 72 of 566 samples (12.7%) have probably been contaminated because they contain a species that shouldn’t be in the sample (using the 3% relative abundance as a robust threshold for presence/absence).\n\n6.6.1 Contaminated pairs\nTaking a closer look at specific experimental samples with contamination.\nHere we just select samples that have &gt; 3% of a species that shouldn’t be there and prepare them for plotting.\n\ncontamsampid &lt;- exp_contam %&gt;% \n  filter(f &gt; 0) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  pull(sample)\n\nspcols &lt;- c(\"HAMBI_0403_anc\" = \"#faa019\",\n            \"HAMBI_0403_evo\" = \"#bd7811\",\n            \"HAMBI_1287_anc\" = \"#75afff\",\n            \"HAMBI_1287_evo\" = \"#476c9e\",\n            \"HAMBI_1896_anc\" = \"#59cc4e\",\n            \"HAMBI_1896_evo\" = \"#31752a\",\n            \"HAMBI_1977_anc\" = \"#ffd430\",\n            \"HAMBI_1977_evo\" = \"#ab8e1f\",\n            \n            \"HAMBI_0403_NA\"  = \"#e6e5e3\",\n            \"HAMBI_1287_NA\"  = \"#bdbcbb\",\n            \"HAMBI_1896_NA\"  = \"#8c8c8b\",\n            \"HAMBI_1977_NA\"  = \"#333333\"\n            )\n\nexp_contam_plot &lt;- exp_contam %&gt;%\n  filter(sample %in% contamsampid) %&gt;% \n  mutate(sp = paste0(strainID, \"_\", evo_hist))\n\n\n\n\n\nexp_contam_plot %&gt;% \n  filter(n_species == 2) %&gt;% \n  ggplot() +\n  geom_col(aes(x = sample, y=f, fill = sp)) +\n  facet_wrap( ~ strep_conc, scales = \"free_x\", ncol = 2) +\n  labs(y = \"Abundance\", x = \"\", fill = \"\") +\n  scale_fill_manual(values = spcols) +\n  scale_y_continuous(labels = percent) +\n  scale_x_discrete(guide = guide_axis(angle=90)) +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"right\")\n\n\n\n\n\n\n\n\n\n\nFigure 4: Species composition of pair samples that contain &gt; 3% of a species that shouldn’t be there (shown in grey to black).\n\n\n\nI think pretty much the only way to deal with this is to inspect manually. Most of the comtaminated samples are in the 0 Streptomycin conditions. I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with 10% or less contaminant I think can be retained, and I will discard the contaminating sequences.\n\nnotcontampairs &lt;- c(\"P04_1_0\", \"P45_2_0\", \"P01_2_64\", \"P03_2_64\", \n                    \"P06_1_256\", \"P17_2_256\", \"P30_1_256\", \"P30_2_256\", \n                    \"P41_2_256\")\n\ncontampairs &lt;- setdiff(contamsampid[grepl(\"^P\", contamsampid)], notcontampairs)\n\n\n\n6.6.2 Contaminated trios\nNow we’ll do the same thing and inspect the trios.\n\n\n\n\nexp_contam_plot %&gt;% \n  filter(n_species == 3) %&gt;% \n  ggplot() +\n  geom_col(aes(x = sample, y=f, fill = sp)) +\n  labs(y = \"Abundance\", x = \"\", fill = \"\") +\n  scale_fill_manual(values = spcols) +\n  scale_y_continuous(labels = percent) +\n  scale_x_discrete(guide = guide_axis(angle=90)) +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"right\")\n\n\n\n\n\n\n\n\n\n\nFigure 5: Species composition of trio samples that contain &gt; 3% of a species that shouldn’t be there (shown in grey to black).\n\n\n\nAgain, I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with around 10% or less contaminant I think can be retained, and I will discard the contaminating sequences.\n\nnotcontamtrios &lt;- c(\"T01_2_0\", \"T02_2_0\", \"T04_2_0\", \"T05_2_0\", \"T13_2_0\", \n                    \"T14_2_0\", \"T15_1_0\", \"T15_2_0\", \"T16_1_0\", \"T16_2_0\", \n                    \"T17_2_0\", \"T18_2_0\",\"T31_2_0\", \"T45_1_0\", \"T45_2_0\", \n                    \"T55_1_0\", \"T61_1_0\", \"T61_2_0\", \"T64_1_0\", \"T64_2_0\")\n\ncontamtrios &lt;- setdiff(contamsampid[grepl(\"^T\", contamsampid)], notcontamtrios)",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#posneg-control-samples",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#posneg-control-samples",
+    "title": "Formatting Rbec output",
+    "section": "7.1 pos/neg control samples",
+    "text": "7.1 pos/neg control samples\nSeparate out the pos/neg control samples\n\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^pos|^neg\")) %&gt;% \n  dplyr::select(-transfers, -strep_conc, -evo_hist, -target_f, -count) %&gt;% \n  write_tsv(here::here(data, \"pos_neg_ctrl_counts.tsv\"))",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#pairs",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#pairs",
+    "title": "Formatting Rbec output",
+    "section": "7.2 Pairs",
+    "text": "7.2 Pairs\nseparate, format, and write the pair samples\n\npairs &lt;- finaltable %&gt;% \n  filter(!str_detect(community_type, \"^pos|^neg\")) %&gt;%\n  filter(n_species == 2) %&gt;% \n  filter(sample %nin% contampairs) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  # because we set 3% as our limit of detection we set read counts of species \n  # less than 1% to 0\n  mutate(count_correct_thresh = if_else(f &lt;= 0.03, 0, count_correct)) %&gt;% \n  # also exclude any remaining counts from species that shouldnt be there\n  # using again the fact that evo_hist should be NA for these species\n  filter(!is.na(evo_hist)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct_thresh/sum(count_correct_thresh)) %&gt;% \n  ungroup() %&gt;%\n  dplyr::select(sample, strainID, evo_hist, count_correct, count_correct_thresh, \n                f, target_f, replicate, strep_conc, transfers, n_species, community_type, plate_well)\n\nwrite_tsv(pairs, here::here(data, \"pairs_counts.tsv\"))",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#trios",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#trios",
+    "title": "Formatting Rbec output",
+    "section": "7.3 Trios",
+    "text": "7.3 Trios\n\ntrios &lt;- finaltable %&gt;% \n  filter(!str_detect(community_type, \"^pos|^neg\")) %&gt;%\n  filter(n_species == 3) %&gt;% \n  filter(sample %nin% contamtrios) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  # because we set 3% as our limit of detection we set read counts of species \n  # less than 1% to 0\n  mutate(count_correct_thresh = if_else(f &lt;= 0.03, 0, count_correct)) %&gt;% \n  # also exclude any remaining counts from species that shouldnt be there\n  # using again the fact that evo_hist should be NA for these species\n  filter(!is.na(evo_hist)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct_thresh/sum(count_correct_thresh)) %&gt;% \n  ungroup() %&gt;%\n  dplyr::select(sample, strainID, evo_hist, count_correct, count_correct_thresh, \n                f, target_f, replicate, strep_conc, transfers, n_species, community_type, plate_well)\n\nwrite_tsv(trios, here::here(data, \"trios_counts.tsv\"))",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "1. Data wrangling and QC"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "",
+    "text": "We will use the metacal package for estimating bias and performing calibration in the special case where the bias of all the taxa of interest can be directly measured from the control sample. Since samples extracted by Qiagen and by boil are exactly the same we can estimate scaling factors to produce corrected relative abundance for other samples.\nPublication: Consistent and correctable bias in metagenomic sequencing experiments",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#libraries",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#libraries",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "2.1 Libraries",
+    "text": "2.1 Libraries\n\nlibrary(here)\nlibrary(tidyverse)\nlibrary(metacal)\nlibrary(withr)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#global-variables",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#global-variables",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "2.2 Global variables",
+    "text": "2.2 Global variables\n\ndata_raw &lt;- here::here(\"_data_raw\", \"20240711_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"20240711_BTK_illumina_v3\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#format-positive-control-samples",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#format-positive-control-samples",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "4.1 Format positive control samples",
+    "text": "4.1 Format positive control samples\n\npos_ctrl &lt;- left_join(pos_ctrl, spdf) %&gt;% \n  filter(str_detect(community_type, \"^pos\")) %&gt;%\n  # remove noise from species that aren't really there\n  filter(!is.na(evo_hist)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f_qg = count_correct/sum(count_correct)) %&gt;% \n  dplyr::select(sample, strainID, community_id, count_correct, f_qg) %&gt;% \n  ungroup()\n\nJoining with `by = join_by(strainID, community_id)`",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#plot-masterplate-qiagen-and-boil-prep-side-by-side",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#plot-masterplate-qiagen-and-boil-prep-side-by-side",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "4.2 Plot masterplate Qiagen and boil-prep side by side",
+    "text": "4.2 Plot masterplate Qiagen and boil-prep side by side\n\n\n\n\nleft_join(samp_trios, mddf,\n          by = join_by(sample, replicate, strep_conc, transfers, n_species, community_type, plate_well)) %&gt;% \n  filter(community_type == \"masterplate\") %&gt;% \n  right_join(pos_ctrl, by = join_by(strainID, community_id)) %&gt;% \n  dplyr::select(community_id, strainID, f, f_qg) %&gt;% \n  pivot_longer(c(f, f_qg)) %&gt;% \n  ggplot() +\n    geom_bar(aes(y = value, x=interaction(name, community_id), fill = strainID), \n             color=\"black\",\n             linewidth=0.25, stat=\"identity\") +\n    scale_y_continuous(limits = c(0,1), expand = c(0, 0), labels = percent) +\n    scale_x_discrete(guide = guide_axis(angle = 90)) +\n    labs(x=\"\", y=\"% abundance\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"bottom\") +\n  scale_fill_manual(values = hambi_colors)\n\n\n\n\n\n\n\n\n\n\nFigure 1: Bar plot of masterplate samples extracted by the boilprep method (f) or the Qiagen DNeasy kit (qg). The community trios are appended to the extraction method on the x axs",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#matrix-of-observed-counts",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#matrix-of-observed-counts",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "4.3 Matrix of observed counts",
+    "text": "4.3 Matrix of observed counts\n\nsamp_trios_counts &lt;- left_join(samp_trios, mddf) %&gt;% \n  filter(community_type == \"masterplate\") %&gt;% \n  filter(community_id %in% pull(pos_ctrl, community_id)) %&gt;% \n  dplyr::select(community_id, strainID, count_correct) %&gt;% \n  pivot_wider(names_from=\"strainID\", values_from=\"count_correct\") %&gt;% \n  column_to_rownames(var=\"community_id\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;% \n  as.matrix()\n\nJoining with `by = join_by(sample, replicate, strep_conc, transfers, n_species,\ncommunity_type, plate_well)`",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#make-a-matrix-of-true-proportions",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#make-a-matrix-of-true-proportions",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "4.4 Make a matrix of true proportions",
+    "text": "4.4 Make a matrix of true proportions\n\npos_ctrl_proportions &lt;- pos_ctrl %&gt;% \n  dplyr::select(community_id, strainID, f_qg) %&gt;%\n  pivot_wider(names_from=\"strainID\", values_from=\"f_qg\") %&gt;% \n  column_to_rownames(var=\"community_id\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;% \n  as.matrix()",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#estimate-bias",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#estimate-bias",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "5.1 Estimate bias",
+    "text": "5.1 Estimate bias\n\nset.seed(12378)\nmc_fit_trios &lt;- metacal::estimate_bias(samp_trios_counts, pos_ctrl_proportions, 1, boot=TRUE)\nmc_fit_trios_summary &lt;- summary(mc_fit_trios)\nmc_fit_trios_summary_coef &lt;-mc_fit_trios_summary[['coefficients']]\n\n\n5.1.1 Plot bias estimation\n\n\n\n\nmc_fit_trios_summary_coef %&gt;% \n  mutate(taxon = fct_reorder(taxon, estimate)) |&gt; \n  ggplot(aes(taxon, estimate, \n             ymin = estimate / gm_se^2, ymax = estimate * gm_se^2)) +\n  geom_hline(yintercept = 1, color = \"grey\") +\n  geom_pointrange(aes(color = taxon)) +\n  scale_color_manual(values = hambi_colors) +\n  labs(x = \"\", y = \"Bias estimate\", color = \"\") +\n  coord_flip() + \n  theme_bw() +\n  theme(panel.grid.major = element_blank(),\n        panel.grid.minor = element_blank())\n\n\n\n\n\n\n\n\n\n\nFigure 2: Bias estimates for each species from the metacal procedure.\n\n\n\n\n\n5.1.2 Plot metacal model fit\n\na &lt;- as.data.frame(fitted(mc_fit_trios)) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample) %&gt;% \n  mutate(type=\"Fitted\")\n\nb &lt;- as.data.frame(pos_ctrl_proportions) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample) %&gt;% \n  mutate(type=\"Actual\")\n\nc &lt;- as.data.frame(samp_trios_counts/rowSums(samp_trios_counts)) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample,  values_to=\"observed\")\n\n\n\n\n\nbind_rows(a,b) %&gt;% \n  left_join(c) %&gt;% \n  ggplot(aes(x=observed, y=value, color = name)) +\n  geom_abline(linetype = \"dashed\") +\n  geom_point() +\n  scale_color_manual(values = hambi_colors) +\n  labs(x = \"Species proportion in boil-prepped samples\", y = \"Species proportion in Qiagen-prepped samples\", color = \"\") +\n  facet_grid(~type) + \n  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) + \n  theme_bw() +\n  theme(panel.grid.major = element_blank(),\n        panel.grid.minor = element_blank())\n\nJoining with `by = join_by(sample, name)`\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Porportion of each species from boil-prepped samples (x-axis) and from the Qiagen DNeasy extracted samples (y-axis) colored by species identity. The left panel shows the relationship between the two extraction procedures before correction with metacal. The right panel shows the relationship after correction. The dashed line is 1:1.",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#calibrate",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#calibrate",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "5.2 Calibrate",
+    "text": "5.2 Calibrate\nMake a matrix of observed counts\n\ntrios_2_cal &lt;- left_join(samp_trios, mddf) %&gt;% \n  dplyr::select(sample, strainID, count_correct) %&gt;% \n  pivot_wider(names_from=\"strainID\", values_from=\"count_correct\") %&gt;% \n  column_to_rownames(var=\"sample\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;%\n  as.matrix()\n\nJoining with `by = join_by(sample, replicate, strep_conc, transfers, n_species,\ncommunity_type, plate_well)`\n\npairs_2_cal &lt;- left_join(samp_pairs, mddf) %&gt;% \n  dplyr::select(sample, strainID, count_correct) %&gt;% \n  pivot_wider(names_from=\"strainID\", values_from=\"count_correct\") %&gt;% \n  column_to_rownames(var=\"sample\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;%\n  as.matrix()\n\nJoining with `by = join_by(sample, replicate, strep_conc, transfers, n_species,\ncommunity_type, plate_well)`",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#run-the-calibrate-function",
+    "href": "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#run-the-calibrate-function",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "5.3 Run the calibrate function",
+    "text": "5.3 Run the calibrate function\n\nset.seed(435761)\n\npairs_calibrated &lt;- metacal::calibrate(pairs_2_cal, coef(mc_fit_trios), margin=1)\ntrios_calibrated &lt;- metacal::calibrate(trios_2_cal, coef(mc_fit_trios), margin=1)\n\n\npairs_calibrated_l &lt;- data.frame(pairs_calibrated) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample, names_to = \"strainID\", values_to = \"f_metacal\") %&gt;% \n  filter(f_metacal &gt; 0)\n\ntrios_calibrated_l &lt;- data.frame(trios_calibrated) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample, names_to = \"strainID\", values_to = \"f_metacal\") %&gt;% \n  filter(f_metacal &gt; 0)",
+    "crumbs": [
+      "Community composition amplicon - 20240711 BTK Illumina v3",
+      "2. Metacal calibration procedure"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/02_trios.html",
+    "href": "R/experiment_design/02_trios.html",
+    "title": "Designing three-species subcommunities",
+    "section": "",
+    "text": "library(here)\nlibrary(tidyverse)\nlibrary(ggplate)\n\n\n\n\nSpecies color vector\n\nmy_colors &lt;- c(\n  \"ANC_0403_10\" = \"#ffaaaa\", \"ANC_0403_70\" = \"#aa0000\", \"ANC_0403_80\" = \"#aa0000\", \"ANC_0403_90\" = \"#aa0000\", \n  \"ANC_1287_10\" = \"#ffeeaa\", \"ANC_1287_70\" = \"#d4aa00\", \"ANC_1287_80\" = \"#d4aa00\", \"ANC_1287_90\" = \"#d4aa00\", \n  \"ANC_1896_10\" = \"#ccffaa\", \"ANC_1896_70\" = \"#44aa00\", \"ANC_1896_80\" = \"#44aa00\", \"ANC_1896_90\" = \"#44aa00\", \n  \"ANC_1977_10\" = \"#aaccff\", \"ANC_1977_70\" = \"#0055d4\", \"ANC_1977_80\" = \"#0055d4\", \"ANC_1977_90\" = \"#0055d4\",\n  \"EVO_0403_10\" = \"#ffaaee\", \"EVO_0403_70\" = \"#ff00cc\", \"EVO_0403_80\" = \"#ff00cc\", \"EVO_0403_90\" = \"#ff00cc\", \n  \"EVO_1287_10\" = \"#ffccaa\", \"EVO_1287_70\" = \"#ff6600\", \"EVO_1287_80\" = \"#ff6600\", \"EVO_1287_90\" = \"#ff6600\", \n  \"EVO_1896_10\" = \"#aaffee\", \"EVO_1896_70\" = \"#00ffcc\", \"EVO_1896_80\" = \"#00ffcc\", \"EVO_1896_90\" = \"#00ffcc\", \n  \"EVO_1977_10\" = \"#ccaaff\", \"EVO_1977_70\" = \"#7f2aff\", \"EVO_1977_80\" = \"#7f2aff\", \"EVO_1977_90\" = \"#7f2aff\"\n  )\n\nFor plotting plates\n\nplate_plot_steps &lt;- function(df, well_colmun, val_column, step, colr_vec){\n  ggplate::plate_plot(df,\n  position = {{ well_colmun }},\n  value = {{ val_column }},\n  colour = colr_vec,\n  plate_size = 96,\n  plate_type = \"round\"\n) + ggtitle(step)\n}",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "2. Species trios"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/02_trios.html#libraries",
+    "href": "R/experiment_design/02_trios.html#libraries",
+    "title": "Designing three-species subcommunities",
+    "section": "",
+    "text": "library(here)\nlibrary(tidyverse)\nlibrary(ggplate)",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "2. Species trios"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/02_trios.html#functions-and-vars",
+    "href": "R/experiment_design/02_trios.html#functions-and-vars",
+    "title": "Designing three-species subcommunities",
+    "section": "",
+    "text": "Species color vector\n\nmy_colors &lt;- c(\n  \"ANC_0403_10\" = \"#ffaaaa\", \"ANC_0403_70\" = \"#aa0000\", \"ANC_0403_80\" = \"#aa0000\", \"ANC_0403_90\" = \"#aa0000\", \n  \"ANC_1287_10\" = \"#ffeeaa\", \"ANC_1287_70\" = \"#d4aa00\", \"ANC_1287_80\" = \"#d4aa00\", \"ANC_1287_90\" = \"#d4aa00\", \n  \"ANC_1896_10\" = \"#ccffaa\", \"ANC_1896_70\" = \"#44aa00\", \"ANC_1896_80\" = \"#44aa00\", \"ANC_1896_90\" = \"#44aa00\", \n  \"ANC_1977_10\" = \"#aaccff\", \"ANC_1977_70\" = \"#0055d4\", \"ANC_1977_80\" = \"#0055d4\", \"ANC_1977_90\" = \"#0055d4\",\n  \"EVO_0403_10\" = \"#ffaaee\", \"EVO_0403_70\" = \"#ff00cc\", \"EVO_0403_80\" = \"#ff00cc\", \"EVO_0403_90\" = \"#ff00cc\", \n  \"EVO_1287_10\" = \"#ffccaa\", \"EVO_1287_70\" = \"#ff6600\", \"EVO_1287_80\" = \"#ff6600\", \"EVO_1287_90\" = \"#ff6600\", \n  \"EVO_1896_10\" = \"#aaffee\", \"EVO_1896_70\" = \"#00ffcc\", \"EVO_1896_80\" = \"#00ffcc\", \"EVO_1896_90\" = \"#00ffcc\", \n  \"EVO_1977_10\" = \"#ccaaff\", \"EVO_1977_70\" = \"#7f2aff\", \"EVO_1977_80\" = \"#7f2aff\", \"EVO_1977_90\" = \"#7f2aff\"\n  )\n\nFor plotting plates\n\nplate_plot_steps &lt;- function(df, well_colmun, val_column, step, colr_vec){\n  ggplate::plate_plot(df,\n  position = {{ well_colmun }},\n  value = {{ val_column }},\n  colour = colr_vec,\n  plate_size = 96,\n  plate_type = \"round\"\n) + ggtitle(step)\n}",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "2. Species trios"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/02_trios.html#first-pipetting-step",
+    "href": "R/experiment_design/02_trios.html#first-pipetting-step",
+    "title": "Designing three-species subcommunities",
+    "section": "2.1 First pipetting step",
+    "text": "2.1 First pipetting step\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Layout for the first pipetting step for constructing trios Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 80% (e.g., _80) or 10% (e.g., _10).",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "2. Species trios"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/02_trios.html#second-pipetting-step",
+    "href": "R/experiment_design/02_trios.html#second-pipetting-step",
+    "title": "Designing three-species subcommunities",
+    "section": "2.2 Second pipetting step",
+    "text": "2.2 Second pipetting step\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Layout for the second pipetting step for constructing trios Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 80% (e.g., _80) or 10% (e.g., _10).",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "2. Species trios"
+    ]
+  },
+  {
+    "objectID": "R/experiment_design/02_trios.html#third-pipetting-step",
+    "href": "R/experiment_design/02_trios.html#third-pipetting-step",
+    "title": "Designing three-species subcommunities",
+    "section": "2.3 Third pipetting step",
+    "text": "2.3 Third pipetting step\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Layout for the third pipetting step for constructing trios Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 80% (e.g., _80) or 10% (e.g., _10).",
+    "crumbs": [
+      "Experiment design - 96 Well plate layout",
+      "2. Species trios"
+    ]
+  }
+]
