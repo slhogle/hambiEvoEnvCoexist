@@ -194,8 +194,8 @@
     "section": "",
     "text": "Contains results from pairs of all streptomycin concentrations and trios for 0 streptomycin from Milla’s bottom up community assembly experiment",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -205,8 +205,8 @@
     "section": "2.1 Libraries",
     "text": "2.1 Libraries\n\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -216,8 +216,8 @@
     "section": "2.2 Global variables",
     "text": "2.2 Global variables\n\ndata_raw &lt;- here::here(\"_data_raw\", \"20240711_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"20240711_BTK_illumina_v3\")\namplicontar &lt;- here::here(data_raw, \"rbec_output.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir &lt;- fs::file_temp()",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -227,8 +227,8 @@
     "section": "2.3 Data",
     "text": "2.3 Data\nNOTE! We have commented out the species not included in this experiment\n\ntax_locus_copynum &lt;- tibble::tribble(\n     ~strainID, ~rRNA16S_cn, ~rRNA16S_locus,             ~genus,        ~species,\n  \"HAMBI_0006\",          7L,  \"H0006_04757\",      \"Pseudomonas\",        \"putida\",\n  \"HAMBI_0097\",          7L,  \"H0097_00044\",    \"Acinetobacter\",     \"johnsonii\",\n  \"HAMBI_0097\",          7L,  \"H0097_02759\",    \"Acinetobacter\",     \"johnsonii\",\n  \"HAMBI_0097\",          7L,  \"H0097_01762\",    \"Acinetobacter\",     \"johnsonii\",\n  \"HAMBI_0105\",          4L,  \"H0105_02306\",    \"Agrobacterium\",   \"tumefaciens\",\n  \"HAMBI_0262\",          3L,  \"H0262_00030\",    \"Brevundimonas\",       \"bullata\",\n  \"HAMBI_0403\",          9L,  \"H0403_00517\",        \"Comamonas\",  \"testosteroni\",\n  \"HAMBI_0403\",          9L,  \"H0403_00522\",        \"Comamonas\",  \"testosteroni\",\n  \"HAMBI_1279\",          7L,  \"H1279_03627\",           \"Hafnia\",         \"alvei\",\n  \"HAMBI_1279\",          7L,  \"H1279_00125\",           \"Hafnia\",         \"alvei\",\n  \"HAMBI_1279\",          7L,  \"H1279_03957\",           \"Hafnia\",         \"alvei\",\n  \"HAMBI_1287\",          7L,  \"H1287_03997\",      \"Citrobacter\",        \"koseri\",\n  \"HAMBI_1287\",          7L,  \"H1287_03402\",      \"Citrobacter\",        \"koseri\",\n  \"HAMBI_1292\",          7L,  \"H1292_03239\",       \"Morganella\",      \"morganii\",\n  \"HAMBI_1299\",          8L,  \"H1299_04293\",         \"Kluyvera\",    \"intermedia\",\n  \"HAMBI_1299\",          8L,  \"H1299_01283\",         \"Kluyvera\",    \"intermedia\",\n  \"HAMBI_1299\",          8L,  \"H1279_03957\",         \"Kluyvera\",    \"intermedia\",\n  \"HAMBI_1842\",          4L,  \"H1842_01650\",      \"Sphingobium\",    \"yanoikuyae\",\n  \"HAMBI_1896\",          4L,  \"H1896_00963\", \"Sphingobacterium\",  \"spiritivorum\",\n  \"HAMBI_1972\",         10L,  \"H1972_00343\",        \"Aeromonas\",        \"caviae\",\n  \"HAMBI_1972\",         10L,  \"H1972_03531\",        \"Aeromonas\",        \"caviae\",\n  \"HAMBI_1977\",          5L,  \"H1977_00118\",      \"Pseudomonas\",  \"chlororaphis\",\n  \"HAMBI_1988\",          5L,  \"H1988_05160\",     \"Chitinophaga\",        \"sancti\",\n  \"HAMBI_1988\",          5L,  \"H1988_05152\",     \"Chitinophaga\",        \"sancti\",\n  \"HAMBI_1988\",          5L,  \"H1988_05165\",     \"Chitinophaga\",        \"sancti\",\n  \"HAMBI_2159\",          4L,  \"H2159_01406\",        \"Trinickia\",   \"caryophylli\",\n  \"HAMBI_2159\",          4L,  \"H2159_05851\",        \"Trinickia\",   \"caryophylli\",\n  \"HAMBI_2160\",          3L,  \"H2160_00530\",       \"Bordetella\",         \"avium\",\n  \"HAMBI_2164\",          5L,  \"H2164_03337\",      \"Cupriavidus\",    \"oxalaticus\",\n  \"HAMBI_2443\",          3L,  \"H2443_00128\",       \"Paracoccus\", \"denitrificans\",\n  \"HAMBI_2494\",          4L,  \"H2494_03389\", \"Paraburkholderia\",   \"kururiensis\",\n  \"HAMBI_2659\",          4L,  \"H2659_00367\", \"Stenotrophomonas\",   \"maltophilia\",\n  \"HAMBI_2792\",          4L,  \"H2792_00549\",        \"Moraxella\",         \"canis\",\n  \"HAMBI_3031\",          2L,  \"H3031_00830\",         \"Niabella\",  \"yanshanensis\",\n  \"HAMBI_3237\",          6L,  \"H3237_00875\",       \"Microvirga\",   \"lotononidis\",\n  \"HAMBI_1923\",          6L,  \"H1923_00876\",   \"Flavobacterium\",      \"odoratum\"\n  )",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -238,8 +238,8 @@
     "section": "2.4 Functions",
     "text": "2.4 Functions\n\n# this function \nnormalize_by_copy &lt;- function(.data, tlc = tax_locus_copynum){\n  .data %&gt;% \n    # join with the copy number data frame. We join by the locus tag so this will add H1279_03957 to HAMBI_1299\n    dplyr::left_join(tlc, by = join_by(rRNA16S_locus)) %&gt;%\n    # get total number of mapping reads per species. This aggregates all the difference ASVs per species\n    dplyr::summarize(count = sum(count), .by = c(sample, strainID, rRNA16S_cn)) %&gt;% \n    # group by sample\n    dplyr::group_by(sample) %&gt;% \n    # calculate a corrected count which is simply the count divided by copy num for each species\n    # dividide by the sum of count divided by copy num for whole sample multiplied by the total\n    # number of mapped reads per sample\n    dplyr::mutate(count_correct = round(sum(count)*(count/rRNA16S_cn)/sum(count/rRNA16S_cn))) %&gt;%  \n    dplyr::ungroup() %&gt;% \n    dplyr::select(sample, strainID, count, count_correct)\n  }\n\n# this function replaces missing species counts with zero\ncompletecombos &lt;- function(.data, tlc = tax_locus_copynum, countname = count, remove1923 = TRUE){\n \n  # get unique strainIDs\n  strainID &lt;- unique(tlc$strainID)\n  # table for assigning genus and species names. Doesn't matter if 1923 is there or not\n  # because it is filter joined later\n  tax &lt;- dplyr::distinct(dplyr::select(tlc, strainID, genus, species))\n  if (remove1923) {\n    # get unique strainIDs but exclude 1923 if remove1923 is true\n    strainID &lt;- strainID[strainID != \"HAMBI_1923\"]\n  }\n  \n  dplyr::bind_rows(tibble::tibble(strainID = strainID, sample = \"dummy\"), .data) %&gt;% \n    dplyr::mutate( \"{{ countname }}\" := dplyr::if_else(sample == \"dummy\", 1, {{ countname }})) %&gt;% \n    tidyr::complete(sample, strainID) %&gt;% \n    dplyr::filter(sample != \"dummy\") %&gt;% \n    dplyr::mutate( \"{{ countname }}\" := dplyr::if_else(is.na({{ countname }}), 0, {{ countname }})) %&gt;% \n    tidyr::replace_na(list(count_correct = 0)) %&gt;% \n    dplyr::left_join(dplyr::distinct(dplyr::select(tlc, strainID, genus, species))) %&gt;% \n    dplyr::relocate(genus, species, .after = strainID)\n}",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -249,8 +249,8 @@
     "section": "4.1 Untar Rbec output tarball",
     "text": "4.1 Untar Rbec output tarball\n\narchive::archive_extract(\n  amplicontar,\n  dir = tmpdir,\n  files = NULL,\n  options = character(),\n  strip_components = 0L\n)",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -260,8 +260,8 @@
     "section": "4.2 Setup directory structure",
     "text": "4.2 Setup directory structure\n\ntabdir &lt;- here::here(tmpdir, \"rbec_output\")\nsamppaths &lt;- fs::dir_ls(tabdir)\nsampnames &lt;- path_split(samppaths) %&gt;% \n  map_chr(dplyr::last)",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -271,8 +271,8 @@
     "section": "4.3 Read",
     "text": "4.3 Read\n\nstraintabs &lt;- paste0(samppaths, \"/strain_table.txt\") %&gt;% \n  set_names(sampnames) %&gt;% \n  map_df(\n  read_tsv,\n  skip = 1,\n  col_names = c(\"rRNA16S_locus\",\"count\"),\n  show_col_types = FALSE, \n  .id = \"sample\") %&gt;% \n  # naming scheme inconsistent for one sample\n  mutate(sample = if_else(sample == \"P2_s_0\", \"P02_s_0\", sample))",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -282,8 +282,8 @@
     "section": "6.1 Negative controls",
     "text": "6.1 Negative controls\nFirst, we’ll check whether the experimental and plate negative controls look good\n\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^neg|pos\")) %&gt;% \n  summarize(tot = sum(count_correct), .by = c(\"sample\", \"community_id\", \"n_species\", \"community_type\", \"replicate\"))\n\n\n  \n\n\n\nThis looks ok, but there are potentially some problems. Specifically, negative control replicates 2, 3, and 4 all have some contamination. neg_2_0 seems to be contaminated with HAMBI_1977, neg_3_0 with HAMBI_1287, and neg_4_0 with HAMBI_1977. However in the 5 remaining negative controls there is no contamination.",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -293,8 +293,8 @@
     "section": "6.2 Positive controls",
     "text": "6.2 Positive controls\nThe positive controls should each have three species. In all cases the species that shouldn’t be there is very rare\n\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^pos\")) %&gt;%\n  mutate(total_pos_controls = n_distinct(sample)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = round(count_correct/sum(count_correct)*100)) %&gt;%\n  mutate(supposed_2_b_there = if_else(is.na(evo_hist), \"no\", \"yes\")) %&gt;% \n  relocate(f, supposed_2_b_there) %&gt;% \n  distinct(f, supposed_2_b_there, sample, strainID, count_correct, n_species, community_type,)\n\n\n  \n\n\n\nThis is also good - we detect all 3 species that should be there in the positive controls on each plate. In a later step we will use these control samples with metacal to try and correct for the boil prep extraction method.",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -304,8 +304,8 @@
     "section": "6.3 Misassigned reads",
     "text": "6.3 Misassigned reads\nThese libraries were only prepared with samples from Milla’s 4-species experiment with 403, 1287, 1896, and 1977 so any time species other than these show up is just an incorrect assignment by Rbec. Let’s check quickly how many of these there are…\n\nfinaltable %&gt;% \n  filter(!str_detect(strainID, \"0403|1287|1896|1977\"))\n\n\n  \n\n\n\nThere is one or two incorrectly assigned reads here and there but this is just noise. We can safely exclude all reads not mapping to one of the focal species.\n\nfinaltable &lt;- finaltable %&gt;% \n  filter(str_detect(strainID, \"0403|1287|1896|1977\"))",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -315,8 +315,8 @@
     "section": "6.4 Samples with too few reads",
     "text": "6.4 Samples with too few reads\nSome of the experimental pairs had streptomycin concentrations higher than any of the species individually could tolerate. We would naively expect then that neither species would grow successfully in these samples and that the overall biomass would be very low, thus resulting in a low number of recovered reads from these samples.\nTo look into this. first let’s check which samples have very low OD600 in the endpoint samples.\n\nod &lt;- read_tsv(here::here(\"_data_raw\", \"20240606_optical_density\", \"optical_density_formatted.tsv\"))\n\nRows: 2880 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (1): community_id\ndbl (5): transfers, n_species, strep_conc, replicate, OD\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\nfiltids &lt;- finaltable %&gt;% \n  summarize(tot = sum(count_correct), .by = c(sample, community_id, n_species, transfers, strep_conc, replicate)) %&gt;%\n  left_join(od, by = join_by(community_id, n_species, transfers, strep_conc, replicate)) %&gt;% \n  filter(transfers == 8) %&gt;% \n  arrange(tot) %&gt;% \n  arrange(OD) %&gt;% \n  filter(OD &lt; 0.1 | tot &lt; 1000) %&gt;% \n  pull(sample)\n\nWe’ll filter out samples with an OD of less than 0.1 and also samples with fewer than 1000 reads. It is genearlly good practice to exclude samples with low number of reads.\n\nfinaltable &lt;- finaltable %&gt;% \n  filter(sample %nin% filtids)",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -326,8 +326,8 @@
     "section": "6.5 Masterplate samples",
     "text": "6.5 Masterplate samples\nTo set up this experiment, Milla combined the species in the planned proportions on a masterplate. Because this process was time consuming, the masterplate was stored at -80C after construction until the experiment start day when it was taken from the freezer and used to inoculate the experiment. Because Milla knows exactly which strains were added to the master plate and the plates were not allowed to grow, any strains in these samples that are not supposed to be there should be due to Illumina index cross talk and not true contamination. We can get a sense for the average index crosstalk rate from these samples and then draw a threshold of when to exclude likely false positives and when a positive is likely due to contamination.\n\nmasterplate &lt;- finaltable %&gt;%\n  filter(community_type == \"masterplate\") %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup()\n\nHere we focus on masterplate samples with species that should not be there. We exclude species that were inoculated and plot the distribution of percentages of those species\n\n\n\n\nmasterplate %&gt;% \n  # here we take advantage of the fact that for species not supposed to be in a sample\n  # the prior left_join will have filled the evo_hist category with an NA. We can then filter\n  # on this NA value\n  filter(is.na(evo_hist)) %&gt;% \n  filter(f &gt; 0) %&gt;% \n  ggplot(aes(x = f)) +\n  geom_histogram(aes(fill = strainID), bins = 20) +\n  geom_vline(xintercept = 0.01, linetype = \"dashed\") +\n  scale_fill_manual(values = hambi_colors) +\n  scale_x_continuous(trans = \"log10\",  labels = percent, guide = guide_axis(angle=90)) + \n  labs(x = \"Crosstalk frequency\", y = \"Count\") +\n  facet_grid(~strainID) + \n  annotation_logticks(sides = \"b\", color=\"grey30\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"bottom\")\n\n\n\n\n\n\n\n\n\n\nFigure 1: Frequency distribution of each species in masterplate samples where it should not occur. The 1% mark (commonly accepted as an acceptable Illumina cross-talk standard) is demarcated with a dashed line.\n\n\n\nGenerally, the cross talk frequency is pretty OK. For 3/4 species it is 1% or less which is more or less what you can expect when you are multiplexing libraries on an Illumina platform. Values greater than 1% are potentially indicative of a different problem, so 1977 requires a bit more investigation.\n\nsids &lt;- masterplate %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f &gt; 0.01 & strainID == \"HAMBI_1977\") %&gt;% \n  pull(sample) \n\nmasterplate %&gt;% \n  filter(sample %in% sids) %&gt;% \n  dplyr::select(sample, strainID, count_correct, replicate, evo_hist, target_f, f)\n\n\n  \n\n\n\nIt looks like all the “problematic” samples come from plates 7 and 8 in the library prep. Plate 8 only contains the masterplate samples from trios whereas plate 7 contains both masterplate and experimental samples. Figure 2 shows that HAMBI-1977 is very abundant in many of the samples so likely the “leaky” reads come disproportionately from HAMBI-1977 which is why its crosstalk threshold may be higher (Figure 1).\n\n\n\n\nfinaltable %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  # here we take advantage of the fact that for species not supposed to be in a sample\n  # the prior left_join will have filled the evo_hist category with an NA. We can then filter\n  # on this NA value\n  filter(!is.na(evo_hist)) %&gt;% \n  filter(f &gt; 0) %&gt;% \n  ggplot(aes(x = f)) +\n  geom_histogram(aes(fill = strainID), bins = 20) +\n  scale_fill_manual(values = hambi_colors) +\n  scale_x_continuous(trans = \"log10\",  labels = percent, guide = guide_axis(angle=90)) + \n  labs(x = \"Frequency in samples\", y = \"Count\") +\n  facet_grid(~strainID) + \n  annotation_logticks(sides = \"b\", color=\"grey30\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"bottom\")\n\n\n\n\n\n\n\n\n\n\nFigure 2: Frequency distribution of each species in all samples where it should occur.\n\n\n\nAnyway, I don’t think this is a problem and that we can move forward with these samples. However, to define extinction/competitive exclusion we may need to use a higher threshold than 1% (e.g., 3% frequency) because over 3% we can reliably say that a species is present and it is not due to index cross talk.",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -337,8 +337,8 @@
     "section": "6.6 Experimental samples",
     "text": "6.6 Experimental samples\nNow we need to see how our experimental samples performed and if there are species present in them that shouldn’t be there\n\nexp_contam &lt;- finaltable %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  # because we set 3% as our limit of detection we set read counts of species \n  # less than 1% to 0\n  mutate(count_correct_thresh = if_else(f &lt;= 0.03, 0, count_correct)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct_thresh/sum(count_correct_thresh)) %&gt;% \n  ungroup()\n\n\n\n\n\nexp_contam %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  ggplot(aes(x = f)) +\n  geom_histogram(aes(fill = strainID), bins = 20) +\n  scale_fill_manual(values = hambi_colors) +\n  scale_x_continuous(trans = \"log10\",  labels = percent, guide = guide_axis(angle=90)) + \n  labs(x = \"Frequency in samples\", y = \"Count\") +\n  facet_grid(~ strainID) + \n  annotation_logticks(sides = \"b\", color=\"grey30\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"bottom\")\n\nWarning in scale_x_continuous(trans = \"log10\", labels = percent, guide =\nguide_axis(angle = 90)): log-10 transformation introduced infinite values.\n\n\nWarning: Removed 783 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Frequency distribution of each species in experimental samples where it should not occcur.\n\n\n\nIt’s not too bad… but 72 of 566 samples (12.7%) have probably been contaminated because they contain a species that shouldn’t be in the sample (using the 3% relative abundance as a robust threshold for presence/absence).\n\n6.6.1 Contaminated pairs\nTaking a closer look at specific experimental samples with contamination.\nHere we just select samples that have &gt; 3% of a species that shouldn’t be there and prepare them for plotting.\n\ncontamsampid &lt;- exp_contam %&gt;% \n  filter(f &gt; 0) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  pull(sample)\n\nspcols &lt;- c(\"HAMBI_0403_anc\" = \"#faa019\",\n            \"HAMBI_0403_evo\" = \"#bd7811\",\n            \"HAMBI_1287_anc\" = \"#75afff\",\n            \"HAMBI_1287_evo\" = \"#476c9e\",\n            \"HAMBI_1896_anc\" = \"#59cc4e\",\n            \"HAMBI_1896_evo\" = \"#31752a\",\n            \"HAMBI_1977_anc\" = \"#ffd430\",\n            \"HAMBI_1977_evo\" = \"#ab8e1f\",\n            \n            \"HAMBI_0403_NA\"  = \"#e6e5e3\",\n            \"HAMBI_1287_NA\"  = \"#bdbcbb\",\n            \"HAMBI_1896_NA\"  = \"#8c8c8b\",\n            \"HAMBI_1977_NA\"  = \"#333333\"\n            )\n\nexp_contam_plot &lt;- exp_contam %&gt;%\n  filter(sample %in% contamsampid) %&gt;% \n  mutate(sp = paste0(strainID, \"_\", evo_hist))\n\n\n\n\n\nexp_contam_plot %&gt;% \n  filter(n_species == 2) %&gt;% \n  ggplot() +\n  geom_col(aes(x = sample, y=f, fill = sp)) +\n  facet_wrap( ~ strep_conc, scales = \"free_x\", ncol = 2) +\n  labs(y = \"Abundance\", x = \"\", fill = \"\") +\n  scale_fill_manual(values = spcols) +\n  scale_y_continuous(labels = percent) +\n  scale_x_discrete(guide = guide_axis(angle=90)) +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"right\")\n\n\n\n\n\n\n\n\n\n\nFigure 4: Species composition of pair samples that contain &gt; 3% of a species that shouldn’t be there (shown in grey to black).\n\n\n\nI think pretty much the only way to deal with this is to inspect manually. Most of the comtaminated samples are in the 0 Streptomycin conditions. I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with 10% or less contaminant I think can be retained, and I will discard the contaminating sequences.\n\nnotcontampairs &lt;- c(\"P04_1_0\", \"P45_2_0\", \"P01_2_64\", \"P03_2_64\", \n                    \"P06_1_256\", \"P17_2_256\", \"P30_1_256\", \"P30_2_256\", \n                    \"P41_2_256\")\n\ncontampairs &lt;- setdiff(contamsampid[grepl(\"^P\", contamsampid)], notcontampairs)\n\n\n\n6.6.2 Contaminated trios\nNow we’ll do the same thing and inspect the trios.\n\n\n\n\nexp_contam_plot %&gt;% \n  filter(n_species == 3) %&gt;% \n  ggplot() +\n  geom_col(aes(x = sample, y=f, fill = sp)) +\n  labs(y = \"Abundance\", x = \"\", fill = \"\") +\n  scale_fill_manual(values = spcols) +\n  scale_y_continuous(labels = percent) +\n  scale_x_discrete(guide = guide_axis(angle=90)) +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"right\")\n\n\n\n\n\n\n\n\n\n\nFigure 5: Species composition of trio samples that contain &gt; 3% of a species that shouldn’t be there (shown in grey to black).\n\n\n\nAgain, I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with around 10% or less contaminant I think can be retained, and I will discard the contaminating sequences.\n\nnotcontamtrios &lt;- c(\"T01_2_0\", \"T02_2_0\", \"T04_2_0\", \"T05_2_0\", \"T13_2_0\", \n                    \"T14_2_0\", \"T15_1_0\", \"T15_2_0\", \"T16_1_0\", \"T16_2_0\", \n                    \"T17_2_0\", \"T18_2_0\",\"T31_2_0\", \"T45_1_0\", \"T45_2_0\", \n                    \"T55_1_0\", \"T61_1_0\", \"T61_2_0\", \"T64_1_0\", \"T64_2_0\")\n\ncontamtrios &lt;- setdiff(contamsampid[grepl(\"^T\", contamsampid)], notcontamtrios)",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -348,8 +348,8 @@
     "section": "7.1 pos/neg control samples",
     "text": "7.1 pos/neg control samples\nSeparate out the pos/neg control samples\n\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^pos|^neg\")) %&gt;% \n  dplyr::select(-transfers, -strep_conc, -evo_hist, -target_f, -count) %&gt;% \n  write_tsv(here::here(data, \"pos_neg_ctrl_counts.tsv\"))",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -359,8 +359,8 @@
     "section": "7.2 Pairs",
     "text": "7.2 Pairs\nseparate, format, and write the pair samples\n\npairs &lt;- finaltable %&gt;% \n  filter(!str_detect(community_type, \"^pos|^neg\")) %&gt;%\n  filter(n_species == 2) %&gt;% \n  filter(sample %nin% contampairs) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  # because we set 3% as our limit of detection we set read counts of species \n  # less than 1% to 0\n  mutate(count_correct_thresh = if_else(f &lt;= 0.03, 0, count_correct)) %&gt;% \n  # also exclude any remaining counts from species that shouldnt be there\n  # using again the fact that evo_hist should be NA for these species\n  filter(!is.na(evo_hist)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct_thresh/sum(count_correct_thresh)) %&gt;% \n  ungroup() %&gt;%\n  dplyr::select(sample, strainID, evo_hist, count_correct, count_correct_thresh, \n                f, target_f, replicate, strep_conc, transfers, n_species, community_type, plate_well)\n\nwrite_tsv(pairs, here::here(data, \"pairs_counts.tsv\"))",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -370,8 +370,8 @@
     "section": "7.3 Trios",
     "text": "7.3 Trios\n\ntrios &lt;- finaltable %&gt;% \n  filter(!str_detect(community_type, \"^pos|^neg\")) %&gt;%\n  filter(n_species == 3) %&gt;% \n  filter(sample %nin% contamtrios) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct/sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  # because we set 3% as our limit of detection we set read counts of species \n  # less than 1% to 0\n  mutate(count_correct_thresh = if_else(f &lt;= 0.03, 0, count_correct)) %&gt;% \n  # also exclude any remaining counts from species that shouldnt be there\n  # using again the fact that evo_hist should be NA for these species\n  filter(!is.na(evo_hist)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = count_correct_thresh/sum(count_correct_thresh)) %&gt;% \n  ungroup() %&gt;%\n  dplyr::select(sample, strainID, evo_hist, count_correct, count_correct_thresh, \n                f, target_f, replicate, strep_conc, transfers, n_species, community_type, plate_well)\n\nwrite_tsv(trios, here::here(data, \"trios_counts.tsv\"))",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "1. Data wrangling and QC"
+      "Community composition amplicon",
+      "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
     ]
   },
   {
@@ -381,8 +381,8 @@
     "section": "",
     "text": "We will use the metacal package for estimating bias and performing calibration in the special case where the bias of all the taxa of interest can be directly measured from the control sample. Since samples extracted by Qiagen and by boil are exactly the same we can estimate scaling factors to produce corrected relative abundance for other samples.\nPublication: Consistent and correctable bias in metagenomic sequencing experiments",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -392,8 +392,8 @@
     "section": "2.1 Libraries",
     "text": "2.1 Libraries\n\nlibrary(here)\nlibrary(tidyverse)\nlibrary(metacal)\nlibrary(withr)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -403,8 +403,8 @@
     "section": "2.2 Global variables",
     "text": "2.2 Global variables\n\ndata_raw &lt;- here::here(\"_data_raw\", \"20240711_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"20240711_BTK_illumina_v3\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -414,8 +414,8 @@
     "section": "4.1 Format positive control samples",
     "text": "4.1 Format positive control samples\n\npos_ctrl &lt;- left_join(pos_ctrl, spdf) %&gt;% \n  filter(str_detect(community_type, \"^pos\")) %&gt;%\n  # remove noise from species that aren't really there\n  filter(!is.na(evo_hist)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f_qg = count_correct/sum(count_correct)) %&gt;% \n  dplyr::select(sample, strainID, community_id, count_correct, f_qg) %&gt;% \n  ungroup()\n\nJoining with `by = join_by(strainID, community_id)`",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -425,8 +425,8 @@
     "section": "4.2 Plot masterplate Qiagen and boil-prep side by side",
     "text": "4.2 Plot masterplate Qiagen and boil-prep side by side\n\n\n\n\nleft_join(samp_trios, mddf,\n          by = join_by(sample, replicate, strep_conc, transfers, n_species, community_type, plate_well)) %&gt;% \n  filter(community_type == \"masterplate\") %&gt;% \n  right_join(pos_ctrl, by = join_by(strainID, community_id)) %&gt;% \n  dplyr::select(community_id, strainID, f, f_qg) %&gt;% \n  pivot_longer(c(f, f_qg)) %&gt;% \n  ggplot() +\n    geom_bar(aes(y = value, x=interaction(name, community_id), fill = strainID), \n             color=\"black\",\n             linewidth=0.25, stat=\"identity\") +\n    scale_y_continuous(limits = c(0,1), expand = c(0, 0), labels = percent) +\n    scale_x_discrete(guide = guide_axis(angle = 90)) +\n    labs(x=\"\", y=\"% abundance\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"bottom\") +\n  scale_fill_manual(values = hambi_colors)\n\n\n\n\n\n\n\n\n\n\nFigure 1: Bar plot of masterplate samples extracted by the boilprep method (f) or the Qiagen DNeasy kit (qg). The community trios are appended to the extraction method on the x axs",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -436,8 +436,8 @@
     "section": "4.3 Matrix of observed counts",
     "text": "4.3 Matrix of observed counts\n\nsamp_trios_counts &lt;- left_join(samp_trios, mddf) %&gt;% \n  filter(community_type == \"masterplate\") %&gt;% \n  filter(community_id %in% pull(pos_ctrl, community_id)) %&gt;% \n  dplyr::select(community_id, strainID, count_correct) %&gt;% \n  pivot_wider(names_from=\"strainID\", values_from=\"count_correct\") %&gt;% \n  column_to_rownames(var=\"community_id\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;% \n  as.matrix()\n\nJoining with `by = join_by(sample, replicate, strep_conc, transfers, n_species,\ncommunity_type, plate_well)`",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -447,8 +447,8 @@
     "section": "4.4 Make a matrix of true proportions",
     "text": "4.4 Make a matrix of true proportions\n\npos_ctrl_proportions &lt;- pos_ctrl %&gt;% \n  dplyr::select(community_id, strainID, f_qg) %&gt;%\n  pivot_wider(names_from=\"strainID\", values_from=\"f_qg\") %&gt;% \n  column_to_rownames(var=\"community_id\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;% \n  as.matrix()",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -458,8 +458,8 @@
     "section": "5.1 Estimate bias",
     "text": "5.1 Estimate bias\n\nset.seed(12378)\nmc_fit_trios &lt;- metacal::estimate_bias(samp_trios_counts, pos_ctrl_proportions, 1, boot=TRUE)\nmc_fit_trios_summary &lt;- summary(mc_fit_trios)\nmc_fit_trios_summary_coef &lt;-mc_fit_trios_summary[['coefficients']]\n\n\n5.1.1 Plot bias estimation\n\n\n\n\nmc_fit_trios_summary_coef %&gt;% \n  mutate(taxon = fct_reorder(taxon, estimate)) |&gt; \n  ggplot(aes(taxon, estimate, \n             ymin = estimate / gm_se^2, ymax = estimate * gm_se^2)) +\n  geom_hline(yintercept = 1, color = \"grey\") +\n  geom_pointrange(aes(color = taxon)) +\n  scale_color_manual(values = hambi_colors) +\n  labs(x = \"\", y = \"Bias estimate\", color = \"\") +\n  coord_flip() + \n  theme_bw() +\n  theme(panel.grid.major = element_blank(),\n        panel.grid.minor = element_blank())\n\n\n\n\n\n\n\n\n\n\nFigure 2: Bias estimates for each species from the metacal procedure.\n\n\n\n\n\n5.1.2 Plot metacal model fit\n\na &lt;- as.data.frame(fitted(mc_fit_trios)) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample) %&gt;% \n  mutate(type=\"Fitted\")\n\nb &lt;- as.data.frame(pos_ctrl_proportions) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample) %&gt;% \n  mutate(type=\"Actual\")\n\nc &lt;- as.data.frame(samp_trios_counts/rowSums(samp_trios_counts)) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample,  values_to=\"observed\")\n\n\n\n\n\nbind_rows(a,b) %&gt;% \n  left_join(c) %&gt;% \n  ggplot(aes(x=observed, y=value, color = name)) +\n  geom_abline(linetype = \"dashed\") +\n  geom_point() +\n  scale_color_manual(values = hambi_colors) +\n  labs(x = \"Species proportion in boil-prepped samples\", y = \"Species proportion in Qiagen-prepped samples\", color = \"\") +\n  facet_grid(~type) + \n  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) + \n  theme_bw() +\n  theme(panel.grid.major = element_blank(),\n        panel.grid.minor = element_blank())\n\nJoining with `by = join_by(sample, name)`\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Porportion of each species from boil-prepped samples (x-axis) and from the Qiagen DNeasy extracted samples (y-axis) colored by species identity. The left panel shows the relationship between the two extraction procedures before correction with metacal. The right panel shows the relationship after correction. The dashed line is 1:1.",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -469,8 +469,8 @@
     "section": "5.2 Calibrate",
     "text": "5.2 Calibrate\nMake a matrix of observed counts\n\ntrios_2_cal &lt;- left_join(samp_trios, mddf) %&gt;% \n  dplyr::select(sample, strainID, count_correct) %&gt;% \n  pivot_wider(names_from=\"strainID\", values_from=\"count_correct\") %&gt;% \n  column_to_rownames(var=\"sample\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;%\n  as.matrix()\n\nJoining with `by = join_by(sample, replicate, strep_conc, transfers, n_species,\ncommunity_type, plate_well)`\n\npairs_2_cal &lt;- left_join(samp_pairs, mddf) %&gt;% \n  dplyr::select(sample, strainID, count_correct) %&gt;% \n  pivot_wider(names_from=\"strainID\", values_from=\"count_correct\") %&gt;% \n  column_to_rownames(var=\"sample\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;%\n  as.matrix()\n\nJoining with `by = join_by(sample, replicate, strep_conc, transfers, n_species,\ncommunity_type, plate_well)`",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -480,8 +480,8 @@
     "section": "5.3 Run the calibrate function",
     "text": "5.3 Run the calibrate function\n\nset.seed(435761)\n\npairs_calibrated &lt;- metacal::calibrate(pairs_2_cal, coef(mc_fit_trios), margin=1)\ntrios_calibrated &lt;- metacal::calibrate(trios_2_cal, coef(mc_fit_trios), margin=1)\n\n\npairs_calibrated_l &lt;- data.frame(pairs_calibrated) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample, names_to = \"strainID\", values_to = \"f_metacal\") %&gt;% \n  filter(f_metacal &gt; 0)\n\ntrios_calibrated_l &lt;- data.frame(trios_calibrated) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample, names_to = \"strainID\", values_to = \"f_metacal\") %&gt;% \n  filter(f_metacal &gt; 0)",
     "crumbs": [
-      "Community composition amplicon - 20240711 BTK Illumina v3",
-      "2. Metacal calibration procedure"
+      "Community composition amplicon",
+      "2.  20240711 BTK Illumina v3 / Metacal calibration"
     ]
   },
   {
@@ -548,6 +548,149 @@
     "crumbs": [
       "Experiment design - 96 Well plate layout",
       "2. Species trios"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html",
+    "href": "R/amplicon/analysis_pairs.html",
+    "title": "Analysis of pairwise competition",
+    "section": "",
+    "text": "Contains results from pairs of all streptomycin concentrations and trios for 0 streptomycin from Milla’s bottom up community assembly experiment",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#libraries",
+    "href": "R/amplicon/analysis_pairs.html#libraries",
+    "title": "Analysis of pairwise competition",
+    "section": "2.1 Libraries",
+    "text": "2.1 Libraries\n\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)\nlibrary(ggh4x)\nlibrary(patchwork)\nlibrary(broom)\nsource(here::here(\"R\", \"utils_generic.R\"))",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#global-variables",
+    "href": "R/amplicon/analysis_pairs.html#global-variables",
+    "title": "Analysis of pairwise competition",
+    "section": "2.2 Global variables",
+    "text": "2.2 Global variables\n\ndata_raw &lt;- here::here(\"_data_raw\", \"20240711_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"20240711_BTK_illumina_v3\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#metadata",
+    "href": "R/amplicon/analysis_pairs.html#metadata",
+    "title": "Analysis of pairwise competition",
+    "section": "3.1 Metadata",
+    "text": "3.1 Metadata\n\nmddf &lt;- readr::read_tsv(here::here(data_raw, \"20240711_BTK_illumina_v3_metadata.tsv\"))\nspdf &lt;- readr::read_tsv(here::here(data_raw, \"sample_compositions.tsv\"))",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#species-abundances",
+    "href": "R/amplicon/analysis_pairs.html#species-abundances",
+    "title": "Analysis of pairwise competition",
+    "section": "3.2 Species abundances",
+    "text": "3.2 Species abundances\n\nsamp_pairs &lt;- readr::read_tsv(here::here(data, \"pairs_counts.tsv\"))\n#samp_trios &lt;- readr::read_tsv(here::here(data, \"trios_counts.tsv\"))\n\nsamp_pairs_cal &lt;- readr::read_tsv(here::here(data, \"pairs_metacal.tsv\"))\n#samp_trios_cal &lt;- readr::read_tsv(here::here(data, \"trios_metacal.tsv\"))",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#transfer-0-starting-proportions",
+    "href": "R/amplicon/analysis_pairs.html#transfer-0-starting-proportions",
+    "title": "Analysis of pairwise competition",
+    "section": "4.1 Transfer 0 (starting proportions)",
+    "text": "4.1 Transfer 0 (starting proportions)\nFirst get abundances from transfer 0 (masterplate)\n\nsamp_pairs_fmt_mp &lt;- samp_pairs %&gt;% \n  dplyr::filter(community_type == \"masterplate\") %&gt;% \n  # make a combined evolution and species identifier and extract the community ID\n  dplyr::mutate(sp = paste(str_to_upper(evo_hist), str_extract(strainID, \"\\\\d+\"), sep = \"_\"),\n         community_id = str_extract(sample, \"P\\\\d\\\\d\")) %&gt;%\n  # this step is important to ensure that when dfs are pivoted wider the \n  # sp_1 and sp_2 stay consistent \n  dplyr::arrange(community_id, sp) %&gt;%\n  # this creates an index for each species present in each community, it is needed\n  # for the pivot to be consistent between the master plate and the samples\n  dplyr::group_by(community_id) %&gt;% \n  dplyr::mutate(n = 1:n()) %&gt;% \n  dplyr::ungroup() %&gt;% \n  tidyr::pivot_wider(id_cols = community_id, values_from = c(sp, f), names_from = n) %&gt;% \n  dplyr::mutate(transfer = 0) %&gt;% \n  tidyr::expand_grid(strep_conc = c(0, 16, 64, 256))",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#transfer-8-ending-proportions",
+    "href": "R/amplicon/analysis_pairs.html#transfer-8-ending-proportions",
+    "title": "Analysis of pairwise competition",
+    "section": "4.2 Transfer 8 (ending proportions)",
+    "text": "4.2 Transfer 8 (ending proportions)\nFormat abundances from the experiment, summarizing over replicates. Here we calculate the median frequency across biological replicates using Hmisc::smedian.hilow which computes the sample median and the outer quantiles (0.025 and 0.975).\n\nsamp_pairs_fmt_exp &lt;- samp_pairs %&gt;% \n  dplyr::filter(community_type == \"experiment\") %&gt;% \n  # make a combined evolution and species identifier and extract the community ID\n  dplyr::mutate(sp = paste(str_to_upper(evo_hist), str_extract(strainID, \"\\\\d+\"), sep = \"_\"),\n         community_id = str_extract(sample, \"P\\\\d\\\\d\")) %&gt;%\n  # calculate median and 95% CI across replicates\n  dplyr::summarize(ggplot2::median_hilow(f), .by = c(\"community_id\", \"sp\", \"strep_conc\")) %&gt;% \n  # rename the y columns as f for compatibility\n  dplyr::rename_with(.cols = starts_with(\"y\"), \\(x) str_replace(x, \"y\", \"f\")) %&gt;% \n  # this step is important to ensure that when dfs are pivoted wider the \n  # sp_1 and sp_2 stay consistent \n  dplyr::arrange(community_id, sp, strep_conc) %&gt;%\n  # this creates an index for each species present in each community, it is needed\n  # for the pivot to be consistent between the master plate and the samples\n  dplyr::group_by(community_id, strep_conc) %&gt;% \n  dplyr::mutate(n = 1:n()) %&gt;% \n  dplyr::ungroup() %&gt;% \n  tidyr::pivot_wider(id_cols = c(community_id, strep_conc), values_from = c(sp, f, fmin, fmax), names_from = n) %&gt;% \n  dplyr::mutate(transfer = 8)",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#binomial-sampling-and-wilcox-test",
+    "href": "R/amplicon/analysis_pairs.html#binomial-sampling-and-wilcox-test",
+    "title": "Analysis of pairwise competition",
+    "section": "5.1 Binomial sampling and Wilcox test",
+    "text": "5.1 Binomial sampling and Wilcox test\nFirst need to determine which samples significantly decreased/increased from T0 to T8. We don’t have enough biological replicates for to compute a statistic across replicates for outcome variability. However, we can estimate the mean fraction of A and quantify the inferential uncertainty of the mean by bootstrap resampling. We the used median proportion of species A from two biological replicates of each T8 pair as the probability of success (i.e., drawing species A) from 1000 draws (i.e., sequencing reads) from the binomial distribution. To determine whether the frequency of Species A significantly changed from T0 to T8, the means of the 1000 binomial draws for T0 and T8 were compared using a Wilcoxon rank sum test (N = 2000). Tests with Bonferroni multiple test corrected p values &lt; 1e-5 were considered to represent significantly different T0 and T8 samples.\n\nset.seed(124341)\n\n# first join the T0 and T8 abundances\nwc_test &lt;- left_join(samp_pairs_fmt_exp, samp_pairs_fmt_mp, by = join_by(community_id, strep_conc, sp_1, sp_2)) %&gt;% \n  dplyr::mutate(delta_f_1 = f_1.x - f_1.y) %&gt;% \n  dplyr::select(community_id, strep_conc, sp_1, sp_2, delta_f_1, f_1_8 = f_1.x, f_1_0 = f_1.y, \n                f_2_8 = f_2.x, f_2_0 = f_2.y) %&gt;% \n  tidyr::nest(data = c(-community_id, -strep_conc)) %&gt;%\n  # samples 1000 draws from binomial distribution using f_a median as the probability of success\n  dplyr::mutate(f_1_0_rs = purrr::map(data, \\(x) map(1:100, \\(i) sum(rbinom(1000, 1, x$f_1_0))/1000)),\n         f_1_8_rs = purrr::map(data, \\(x) map(1:100, \\(i) sum(rbinom(1000, 1, x$f_1_8))/1000))) %&gt;% \n  tidyr::unnest(cols = c(data, f_1_0_rs, f_1_8_rs)) %&gt;% \n  # nest the samples\n  tidyr::nest(bs = c(f_1_0_rs, f_1_8_rs)) %&gt;%\n  # perform the wilcox test\n  dplyr::mutate(wc = purrr::map(bs, \\(i) wilcox.test(x = as.numeric(i$f_1_0_rs), y = as.numeric(i$f_1_8_rs)))) %&gt;% \n  # tidy-ify the test output\n  dplyr::mutate(tidy_wc = purrr::map(wc, \\(x) broom::tidy(x))) %&gt;% \n  tidyr::unnest(cols = c(tidy_wc)) %&gt;% \n  # p-value adjust using bonferroni correction\n  dplyr::mutate(p_adjusted = p.adjust(p.value, method = \"bonferroni\", n = n())) %&gt;% \n  dplyr::arrange(strep_conc, sp_1, sp_2) %&gt;% \n  # define whether change is significantly positive or negative\n  dplyr::mutate(change = dplyr::case_when(p.value &gt; 1e-5 ~ 0,\n                             sign(delta_f_1) == -1 & p.value &lt;= 1e-5 ~ -1, \n                             sign(delta_f_1) == 1 & p.value &lt;= 1e-5 ~ 1))",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#competition-outcome-rules",
+    "href": "R/amplicon/analysis_pairs.html#competition-outcome-rules",
+    "title": "Analysis of pairwise competition",
+    "section": "5.2 Competition outcome rules",
+    "text": "5.2 Competition outcome rules\nHere we set up the rules for defining the competition outcomes.\nNeed to write these down formally instead of just in the case_when statement…\n\n# upper threshold for deciding whether a species goes extinct\nupper &lt;- 0.99\n# lower threshold for deciding whether a species goes extinct\nlower &lt;- 0.01\n# slope change threshold for deciding whether change from T0 to T8 is important (e.g. requires at least a 5% change of the focal species) \nslope_thresh &lt;- 0.05\n\noutcomes_classified &lt;- wc_test %&gt;% \n  dplyr::group_by(strep_conc, sp_1, sp_2) %&gt;% \n  dplyr::mutate(outcome = dplyr::case_when(# Bistability: Requires sp_1 to both increase from T0 high freq and decrease from T0 low freq\n                             sum(change &lt; 0 & f_1_0 == min(f_1_0), change &gt; 0 & f_1_0 == max(f_1_0)) == 2 ~ \"bistable_stable\",\n                             # Exclusion: sp_1 increases from both low and high T0 freqs and T8 freq is &gt; than the T0 high freq\n                             sum(change) == 2 & f_1_8 &gt;= upper & abs(delta_f_1) &gt; slope_thresh ~ \"exclusion_stable\", \n                             # Exclusion: sp_1 decreases from both low and high T0 freqs and T8 freq is &lt; than the T0 low freq\n                             sum(change) == -2 & f_1_8 &lt;= lower & abs(delta_f_1) &gt; slope_thresh ~ \"exclusion_stable\",\n                             # Coexistence: sp_1 significantly increases from rare and significantly decreases from abundant\n                             sum(change) == 0 & dplyr::if_else(f_1_0 == pmin(f_1_0, f_2_0), f_1_8 &gt; f_1_0, f_1_8 &lt; f_1_0) ~ \"coexistence_stable\",\n                             # Incomplete coexistence: sp_1 is found within extinction thresholds in both experiments, but no condition is\n                             # placed on the significance of the change from T0 to T8\n                             sum(dplyr::between(f_1_8, lower, upper)) == 2 ~ \"coexistence_incomplete\",\n                             # Incomplete exclusion: sp_1 is outside of the extinction threshold (extinct) for at least one sample and within the the \n                             # threshold for the other sample.\n                             sum(!dplyr::between(f_1_8, lower, upper)) == 1 & sum(dplyr::between(f_1_8, lower, upper)) == 1 ~ \"exclusion_incomplete\",\n                             # Inconclusive: samples failing to meet any of the above rules\n                             TRUE ~ \"inconclusive_\")) %&gt;% \n  dplyr::ungroup() %&gt;% \n  dplyr::mutate(type = dplyr::if_else(stringr::str_detect(outcome, \"incomplete\"), \"incomplete\", \"stable\"),\n         outcome = stringr::str_extract(outcome, \"(^.+)_.*\", group = 1)) %&gt;% \n  dplyr::relocate(outcome, type, change)",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#plotting-pairwise-outpcomes",
+    "href": "R/amplicon/analysis_pairs.html#plotting-pairwise-outpcomes",
+    "title": "Analysis of pairwise competition",
+    "section": "5.3 Plotting pairwise outpcomes",
+    "text": "5.3 Plotting pairwise outpcomes\nConstruct final dataframe to be used for plotting\n\nsamp_pairs_fmt &lt;- dplyr::bind_rows(samp_pairs_fmt_mp, samp_pairs_fmt_exp) %&gt;%\n  dplyr::mutate(\n    group = interaction(community_id, strep_conc),\n    evo_group = dplyr::case_when(\n      dplyr::if_all(c(sp_1, sp_2), \\(x) stringr::str_detect(x, \"ANC\")) ~ \"both_anc\",\n      dplyr::if_all(c(sp_1, sp_2), \\(x) stringr::str_detect(x, \"EVO\")) ~ \"both_evo\",\n      TRUE ~ \"mix\"\n    )\n  ) %&gt;%\n  dplyr::left_join(outcomes_classified,\n                   by = dplyr::join_by(community_id, sp_1, sp_2, strep_conc)) %&gt;%\n  dplyr::mutate(\n    outcome = factor(outcome, levels = c(\"exclusion\", \"coexistence\", \n                                         \"bistable\", \"inconclusive\")),\n    type = factor(type, levels = c(\"stable\", \"incomplete\"))\n  )\n\nPlotting function and colors/linetypes\n\noutcome_pal &lt;- c(\"exclusion\" = \"#800020\", \"coexistence\" = \"#0659bf\", \"inconclusive\" = \"#7c26c7\", \"bistable\" = \"#098f07\")\n\ntype_pal &lt;- c(\"stable\" = \"solid\", \"incomplete\" = \"dashed\", \"potential\" = \"dotted\")\n\npair_plot &lt;- function(df){\n  pj &lt;- ggplot2::position_jitterdodge(jitter.width=0.0,\n                           jitter.height = 0.0,\n                           dodge.width = 0.5,\n                           seed=9)\n  \n  ggplot2::ggplot(df, aes(x = transfer, y = f_1, group = group)) +\n  ggplot2::geom_hline(yintercept = 0, lty = 2, color = \"grey70\") +\n  ggplot2::geom_hline(yintercept = 0.5, lty = 3, color = \"grey70\") +\n  ggplot2::geom_hline(yintercept = 1, lty = 2, color = \"grey70\") +\n  ggplot2::geom_linerange(aes(ymin = fmin_1, ymax = fmax_1, color = outcome), position = pj) +\n  ggh4x::geom_pointpath(aes(color = outcome, linetype = type), position = pj, mult = 0.2) +\n  ggplot2::scale_color_manual(values = outcome_pal) +\n  ggplot2::scale_linetype_manual(values = type_pal) +\n  ggplot2::facet_grid(sp_1 ~ sp_2) +\n  ggplot2::scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1), labels = percent) +\n  ggplot2::scale_x_continuous(breaks = c(0, 8)) +\n  ggplot2::labs(x = \"\", y = \"\", color = \"\") +\n  ggplot2::theme_bw() + \n  ggplot2::theme(panel.grid = element_blank(),\n        strip.background = element_blank(),\n        legend.position = \"none\", \n        panel.border = element_blank(),\n        axis.text = element_text(size = 8),\n        strip.text = element_text(size = 8))\n}\n\nCreate different lists of plots for the mixed (i.e. evo competed against anc) conditions\n\nsamp_pairs_fmt_plots_split_a &lt;- samp_pairs_fmt %&gt;% \n  dplyr::filter(evo_group != \"mix\") %&gt;% \n  dplyr::group_by(strep_conc, evo_group) %&gt;% \n  dplyr::group_split() %&gt;% \n  purrr::map(pair_plot)\n\nsamp_pairs_fmt_plots_split_b &lt;- samp_pairs_fmt %&gt;% \n  dplyr::filter(evo_group == \"mix\") %&gt;% \n  dplyr::group_by(strep_conc) %&gt;% \n  dplyr::group_split() %&gt;% \n  purrr::map(pair_plot)\n\n\n\n\n\npatchwork::wrap_plots(samp_pairs_fmt_plots_split_a, ncol = 2) +\n  patchwork::plot_annotation(tag_levels = \"A\")\n\n\n\n\n\n\n\n\n\n\nFigure 1: Outcomes from pairwise cocultures of ancestral (left, A:G) and streptomycin adapted (right, B:H) 0403, 1287, 1896 and 1977 species. Rows in the grid represent differen streptomycin concentrations applied (A:B = 0 µg/ml, C:D = 16 µg/ml, E:F = 64 µg/ml, G:H = 256 µg/ml). Using the rules defined above, red lines show cocultures resulting in exclusion of one of the species, blue lines show cocultures that resulted in coexistence, and purple lines represent inconclusive outcomes due to lack of data or exception to therules. Solid lines show a “definite” outcome and dashed lines show a potentially “incomplete” outcome. Two solid lines of the same color indicate stable coexistence or stable exclusion, a solid and dashed line indicate incomplete coexistence/exclusion, while two dashed lines indicates coexistence without evidence of mutual invasibility. Note some statistical noise has been applied to point positions to prevent overlaps in the plot and aid in visualization.\n\n\n\n\n\n\n\npatchwork::wrap_plots(samp_pairs_fmt_plots_split_b, ncol = 2) +\n  patchwork::plot_annotation(tag_levels = \"A\")\n\n\n\n\n\n\n\n\n\n\nFigure 2: Results from co-cultures of mixed ancestal and evolved combinations. Line colors and types are as in Figure 1, with the addition of green showing bistability (i.e., Species A and Species B exclude each other when invading from high abundance, and each are excluded by the other when invading from low abundance).",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#functions-for-formatting-and-plotting",
+    "href": "R/amplicon/analysis_pairs.html#functions-for-formatting-and-plotting",
+    "title": "Analysis of pairwise competition",
+    "section": "6.1 Functions for formatting and plotting",
+    "text": "6.1 Functions for formatting and plotting\n\nmake_pairs &lt;- function(pairs_df, sp){\n  pairs_df %&gt;%\n    dplyr::filter(transfer == 8) %&gt;%\n    dplyr::distinct(evo_group, strep_conc, sp_1, sp_2) %&gt;%\n    dplyr::group_by(evo_group, strep_conc) %&gt;%\n    dplyr::count( {{ sp }} ) %&gt;% \n    dplyr::rename(sp = {{ sp }} ) %&gt;% \n    dplyr::ungroup()\n}\n\nmake_nodes &lt;- function(pairs_df, ...){\n  sp_1 &lt;- make_pairs(pairs_df, sp_1)\n  sp_2 &lt;- make_pairs(pairs_df, sp_2)\n  \n  total_games &lt;- bind_rows(sp_1, sp_2) %&gt;%\n    dplyr::summarize(games = sum(n),\n              .by = c(sp, ...))\n  \n  win_games &lt;- pairs_df %&gt;%\n    dplyr::filter(transfer == 8) %&gt;%\n    dplyr::filter(outcome == \"exclusion\") %&gt;%\n    dplyr::group_by(sp_1, sp_2, ...) %&gt;%\n    dplyr::mutate(win = case_when(f_1 &gt;= f_2 ~ sp_1, f_2 &gt; f_1 ~ sp_2)) %&gt;%\n    dplyr::ungroup() %&gt;%\n    dplyr::distinct(sp_1, sp_2, win, ...) %&gt;%\n    dplyr::group_by(...) %&gt;%\n    dplyr::count(win, name = \"wins\") %&gt;%\n    dplyr::rename(sp = win) %&gt;%\n    dplyr::ungroup()\n  \n  lose_games &lt;- pairs_df %&gt;%\n    dplyr::filter(transfer == 8) %&gt;%\n    dplyr::filter(outcome == \"exclusion\") %&gt;%\n    dplyr::group_by(sp_1, sp_2, ...) %&gt;%\n    dplyr::mutate(loss = case_when(f_1 &gt;= f_2 ~ sp_2, f_2 &gt; f_1 ~ sp_1)) %&gt;%\n    dplyr::ungroup() %&gt;%\n    dplyr::distinct(sp_1, sp_2, loss, ...) %&gt;%\n    dplyr::group_by(...) %&gt;%\n    dplyr::count(loss, name = \"losses\") %&gt;%\n    dplyr::rename(sp = loss) %&gt;%\n    dplyr::ungroup()\n  \nleft_join(total_games, win_games, by = join_by(sp, ...)) %&gt;% \n  dplyr::left_join(lose_games, by = join_by(sp, ...)) %&gt;% \n  dplyr::mutate(across(everything(), ~replace_na(.x, 0))) %&gt;% \n  dplyr::mutate(score = (wins - losses)/games) %&gt;% \n  dplyr::group_by(...) %&gt;% \n  dplyr::arrange(..., desc(score)) %&gt;% \n  dplyr::mutate(rank = dense_rank(desc(score)),\n         plotrank = row_number(desc(score)),\n         id = 1:n()) %&gt;% \n  dplyr::ungroup() %&gt;% \n  dplyr::select(name = sp, ..., rank, plotrank)\n}\n\nmake_edges &lt;- function(pairs_df, ...){\n  pairs_df %&gt;% \n    dplyr::filter(transfer == 8) %&gt;% \n    dplyr::mutate(from = if_else(f_1 &gt; f_2, sp_1, sp_2),\n           to = if_else(f_1 &lt; f_2, sp_1, sp_2)) %&gt;% \n    dplyr::group_by(from, to, ...) %&gt;% \n    dplyr::mutate(type = if_else(sum(type == \"stable\") == 2, \"stable\", \"incomplete\")) %&gt;% \n    dplyr::ungroup() %&gt;% \n    dplyr::select(from, to, ..., outcome, type) %&gt;% \n    dplyr::distinct() %&gt;% \n    dplyr::arrange(from, to, ...)\n}\n\nplot_network_hierarchy &lt;- function(net, tune_angle = 1, n_rank = 10, n_break = 10) {\n  # code for formatting the positions of the nodes with the ranks was taken from\n  # here: https://github.com/Chang-Yu-Chang/emergent-coexistence/blob/v2.0.0/plotting_scripts/Fig3.R\n  \n  node_size &lt;- 3\n  edge_width &lt;- 0.8\n\n  graph_ranked &lt;- net %&gt;%\n    tidygraph::activate(nodes) %&gt;%\n    dplyr::select(name, rank, plotrank) %&gt;%\n    tidygraph::activate(edges) %&gt;%\n    dplyr::mutate(fromRank = .N()$plotrank[match(from, .N()$name)],\n           toRank = .N()$plotrank[match(to, .N()$name)])\n\n  graph_ranked &lt;- graph_ranked %&gt;%\n    tidygraph::activate(nodes) %&gt;%\n    dplyr::mutate(y = -rank) %&gt;%\n    dplyr::group_by(rank) %&gt;%\n    dplyr::mutate(x = {seq(0, 1, length.out = n() + 2) %&gt;% `[`(c(-1, -length(.)))}) %&gt;%\n    dplyr::ungroup() %&gt;%\n    tidygraph::activate(edges) %&gt;%\n    dplyr::filter(!str_detect(outcome, \"inconclusive\")) %&gt;%\n    dplyr::arrange(outcome)\n\n  ggraph(graph_ranked, layout = \"nicely\") +\n    geom_hline(yintercept = c(-n_rank:-1), color = \"grey90\") +\n    geom_node_text(aes(label = name), repel = TRUE) +\n    geom_node_point(size = node_size, shape = 21, fill = \"grey\", stroke = node_size/5, color = \"black\") +\n    geom_edge_diagonal(aes(color = outcome, linetype = type),\n                       arrow = arrow(length = unit(1, \"mm\"), type = \"closed\", angle = 30, ends = \"last\"),\n                       start_cap = circle(node_size*.8, \"mm\"),\n                       end_cap = circle(node_size*0.8, \"mm\")) +\n    scale_edge_color_manual(values = outcome_pal) +\n    scale_edge_linetype_manual(values = type_pal) +\n    scale_x_continuous(limits = c(0.1, 0.9), expand = c(0,0)) +\n    scale_y_continuous(limits = c(-n_break-1, 0), breaks = -n_break:-1, labels = n_break:1) +\n    theme_void() +\n    theme(\n        legend.title = element_blank(),\n        axis.title = element_blank(),\n        strip.text = element_blank(),\n        plot.margin = unit(c(0,0,0,0),\"mm\")\n    )\n}",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#evolution-and-streptomycin-categories-separate",
+    "href": "R/amplicon/analysis_pairs.html#evolution-and-streptomycin-categories-separate",
+    "title": "Analysis of pairwise competition",
+    "section": "6.2 Evolution and Streptomycin categories separate",
+    "text": "6.2 Evolution and Streptomycin categories separate\nHere we plot a separate graph for each streptomycin concentrations and also by different evolutionary groupings. For example, there is one graph for the competition outcomes of only ancestral species, there is one graph of the outcomes of only evolved species, and there is one graph for the outcomes of mixed competitions where an ancestral species competes against an evolved species.\n\nnodes1 &lt;- make_nodes(samp_pairs_fmt, strep_conc, evo_group)\nedges1 &lt;- make_edges(samp_pairs_fmt, strep_conc, evo_group)\n\ngraphs1 &lt;- nest(nodes1, sps = -c(strep_conc, evo_group)) %&gt;% \n  left_join(nest(edges1, pairs = -c(strep_conc, evo_group)),\n            by = join_by(strep_conc, evo_group)) %&gt;% \n  mutate(network = map2(sps, pairs, function(sps, pairs) tbl_graph(nodes = sps, edges = pairs, directed = T))) %&gt;% \n  mutate(plot = map(network, function(network) plot_network_hierarchy(network, tune_angle = 1.5, n_rank = 7, n_break = 7)))\n\n\n\n\n\npatchwork::wrap_plots(graphs1[[6]], nrow = 1, guides= \"collect\") +\n  patchwork::plot_annotation(tag_levels = \"A\")\n\n\n\n\n\n\n\n\n\n\nFigure 3: Competitive hierarchy of species pairs separated by evolution grouping (only ancestral pairs, only evolved pairs, and mixed ancestral and evolved pairs) and streptomycin concentration. Subplots A-D are for only ancestral pairs, E-H for only evolved pairs, and I-L for mixed ancestral and evolved pairs. Subplots A, E, I show experiments under no streptomycin, B, F, J 16 µg/ml streptomycin, C, G, K for 64 µg/ml streptomycin, and D, H, L for 256 µg/ml streptomycin. For each evolution/streptomycin grouping, strains are rank ordered on the basis of the number of other strains they exclude, based on data shown in Figure 1 and Figure 2. Grey nodes represent strains (denoted by text), red arrows point from winning strain to losing strain, blue arrows indicate coexistence (ignore the arrow heads for blue, coulnd’t figure out how to remove them for only a subset of the edges), and green arrows indicate the presence of bistability (i.e., Species A and Species B exclude each other when invading from high abundance, and each are excluded by the other when invading from low abundance). Line type indicates the degree of certainty of the outcome in each pair: dashed lines represent incomplete exclusion or coexistence without evidence of mutual invasibility, while solid lines indicate complete exclusion or stable coexistence (mutual invasibility).",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
+    ]
+  },
+  {
+    "objectID": "R/amplicon/analysis_pairs.html#only-streptomycin-category-separate",
+    "href": "R/amplicon/analysis_pairs.html#only-streptomycin-category-separate",
+    "title": "Analysis of pairwise competition",
+    "section": "6.3 Only Streptomycin category separate",
+    "text": "6.3 Only Streptomycin category separate\n\nnodes2 &lt;- make_nodes(samp_pairs_fmt, strep_conc)\nedges2 &lt;- make_edges(samp_pairs_fmt, strep_conc)\n\ngraphs2 &lt;- nest(nodes2, sps = -c(strep_conc)) %&gt;% \n  left_join(nest(edges2, pairs = -c(strep_conc)),\n            by = join_by(strep_conc)) %&gt;% \n  mutate(network = map2(sps, pairs, function(sps, pairs) tbl_graph(nodes = sps, edges = pairs, directed = T))) %&gt;% \n  mutate(plot = map(network, function(network) plot_network_hierarchy(network, tune_angle = 1.5, n_rank = 7, n_break = 7)))\n\n\n\n\n\npatchwork::wrap_plots(graphs2[[5]], nrow = 1, guides= \"collect\") +\n  patchwork::plot_annotation(tag_levels = \"A\")\n\n\n\n\n\n\n\n\n\n\nFigure 4: Competitive hierarchy of species pairs separated by streptomycin concentration. Subplot A shows experiments under no streptomycin, B with 16 µg/ml streptomycin, C with 64 µg/ml streptomycin, and D with 256 µg/ml streptomycin. For each evolution/streptomycin grouping, strains are rank ordered on the basis of the number of other strains they exclude, based on data shown in Figure 1 and Figure 2. Grey nodes represent strains (denoted by text), red arrows point from winning strain to losing strain, blue arrows indicate coexistence (ignore the arrow heads for blue, coulnd’t figure out how to remove them for only a subset of the edges), and green arrows indicate the presence of bistability (i.e., Species A and Species B exclude each other when invading from high abundance, and each are excluded by the other when invading from low abundance). Line type indicates the degree of certainty of the outcome in each pair: dashed lines represent incomplete exclusion or coexistence without evidence of mutual invasibility, while solid lines indicate complete exclusion or stable coexistence (mutual invasibility).",
+    "crumbs": [
+      "Community composition amplicon",
+      "3. Species pairs analysis"
     ]
   }
 ]

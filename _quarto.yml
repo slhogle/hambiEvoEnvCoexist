@@ -21,12 +21,14 @@ website:
             file: R/experiment_design/02_trios.qmd
           - text: "3. Species quartets"
             file: R/experiment_design/03_quartets.qmd
-      - section: "Community composition amplicon - 20240711 BTK Illumina v3"
+      - section: "Community composition amplicon"
         contents:
-          - text: "1. Data wrangling and QC"
+          - text: "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
             file: R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.qmd
-          - text: "2. Metacal calibration procedure"
+          - text: "2.  20240711 BTK Illumina v3 / Metacal calibration"
             file: R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.qmd
+          - text: "3. Species pairs analysis"
+            file: R/amplicon/analysis_pairs.qmd
             
 format:
   html:

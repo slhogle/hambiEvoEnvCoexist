@@ -19,5 +19,8 @@
   },
   "R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.qmd": {
     "02_correct_boil_to_qiagen.html": "d820aaf4"
+  },
+  "R/amplicon/analysis_pairs.qmd": {
+    "analysis_pairs.html": "fd544c07"
   }
 }
