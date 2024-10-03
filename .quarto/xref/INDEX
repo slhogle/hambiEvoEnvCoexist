@@ -22,5 +22,38 @@
   },
   "R/amplicon/analysis_pairs.qmd": {
     "analysis_pairs.html": "fd544c07"
+  },
+  "R/optical_density/01_format_plot_od.qmd": {
+    "01_format_plot_od.html": "f30f508c"
+  },
+  "R/bioscreen/01_format_growthcurves_batch.qmd": {
+    "01_format_growthcurves_batch.html": "0cd3ffb5"
+  },
+  "R/monocultures/bioscreen/01_format_growthcurves_batch.qmd": {
+    "01_format_growthcurves_batch.html": "1a4925d6"
+  },
+  "R/monocultures/bioscreen/02_plot_analyze_growth.qmd": {
+    "02_plot_analyze_growth.html": "07cb4236"
+  },
+  "R/communities/amplicon/analysis_pairs.qmd": {
+    "analysis_pairs.html": "bcd80711"
+  },
+  "R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.qmd": {
+    "01_format_rbec_tab.html": "8293bafd"
+  },
+  "R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.qmd": {
+    "02_correct_boil_to_qiagen.html": "9b0e3b77"
+  },
+  "R/communities/experiment_design/01_pairs.qmd": {
+    "01_pairs.html": "4180c9ac"
+  },
+  "R/communities/experiment_design/02_trios.qmd": {
+    "02_trios.html": "c31a457e"
+  },
+  "R/communities/experiment_design/03_quartets.qmd": {
+    "03_quartets.html": "01c198fe"
+  },
+  "R/communities/optical_density/01_format_plot_od.qmd": {
+    "01_format_plot_od.html": "d662c48b"
   }
 }

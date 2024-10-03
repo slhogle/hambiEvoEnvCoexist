@@ -1,0 +1,552 @@
+---
+title: "Analysis of pairwise competition"
+author: "Shane Hogle"
+date: today
+link-citations: true
+---
+
+# Introduction
+
+Contains results from pairs of all streptomycin concentrations and trios for 0 streptomycin from Milla's bottom up community assembly experiment
+
+# Setup
+
+## Libraries
+
+```{r}
+#| output: false
+library(tidyverse)
+library(here)
+library(fs)
+library(scales)
+library(ggh4x)
+library(patchwork)
+library(broom)
+source(here::here("R", "utils_generic.R"))
+```
+
+## Global variables
+
+```{r}
+data_raw <- here::here("_data_raw", "communities", "20240711_BTK_illumina_v3")
+data <- here::here("data", "communities", "20240711_BTK_illumina_v3")
+# make processed data directory if it doesn't exist
+fs::dir_create(data)
+```
+
+# Read data
+
+## Metadata
+
+```{r}
+#| output: false
+mddf <- readr::read_tsv(here::here(data_raw, "20240711_BTK_illumina_v3_metadata.tsv"))
+spdf <- readr::read_tsv(here::here(data_raw, "sample_compositions.tsv"))
+```
+
+## Species abundances
+
+```{r}
+#| output: false
+samp_pairs <- readr::read_tsv(here::here(data, "pairs_counts.tsv"))
+#samp_trios <- readr::read_tsv(here::here(data, "trios_counts.tsv"))
+
+samp_pairs_cal <- readr::read_tsv(here::here(data, "pairs_metacal.tsv"))
+#samp_trios_cal <- readr::read_tsv(here::here(data, "trios_metacal.tsv"))
+```
+
+# Formatting
+
+## Transfer 0 (starting proportions)
+
+First get abundances from transfer 0 (masterplate)
+
+```{r}
+samp_pairs_fmt_mp <- samp_pairs %>% 
+  dplyr::filter(community_type == "masterplate") %>% 
+  # make a combined evolution and species identifier and extract the community ID
+  dplyr::mutate(sp = paste(str_to_upper(evo_hist), str_extract(strainID, "\\d+"), sep = "_"),
+         community_id = str_extract(sample, "P\\d\\d")) %>%
+  # this step is important to ensure that when dfs are pivoted wider the 
+  # sp_1 and sp_2 stay consistent 
+  dplyr::arrange(community_id, sp) %>%
+  # this creates an index for each species present in each community, it is needed
+  # for the pivot to be consistent between the master plate and the samples
+  dplyr::group_by(community_id) %>% 
+  dplyr::mutate(n = 1:n()) %>% 
+  dplyr::ungroup() %>% 
+  tidyr::pivot_wider(id_cols = community_id, values_from = c(sp, f), names_from = n) %>% 
+  dplyr::mutate(transfer = 0) %>% 
+  tidyr::expand_grid(strep_conc = c(0, 16, 64, 256))
+```
+
+## Transfer 8 (ending proportions)
+
+Format abundances from the experiment, summarizing over replicates. Here we calculate the median frequency across biological replicates using `Hmisc::smedian.hilow` which computes the sample median and the outer quantiles (0.025 and 0.975).
+
+```{r}
+samp_pairs_fmt_exp <- samp_pairs %>% 
+  dplyr::filter(community_type == "experiment") %>% 
+  # make a combined evolution and species identifier and extract the community ID
+  dplyr::mutate(sp = paste(str_to_upper(evo_hist), str_extract(strainID, "\\d+"), sep = "_"),
+         community_id = str_extract(sample, "P\\d\\d")) %>%
+  # calculate median and 95% CI across replicates
+  dplyr::summarize(ggplot2::median_hilow(f), .by = c("community_id", "sp", "strep_conc")) %>% 
+  # rename the y columns as f for compatibility
+  dplyr::rename_with(.cols = starts_with("y"), \(x) str_replace(x, "y", "f")) %>% 
+  # this step is important to ensure that when dfs are pivoted wider the 
+  # sp_1 and sp_2 stay consistent 
+  dplyr::arrange(community_id, sp, strep_conc) %>%
+  # this creates an index for each species present in each community, it is needed
+  # for the pivot to be consistent between the master plate and the samples
+  dplyr::group_by(community_id, strep_conc) %>% 
+  dplyr::mutate(n = 1:n()) %>% 
+  dplyr::ungroup() %>% 
+  tidyr::pivot_wider(id_cols = c(community_id, strep_conc), values_from = c(sp, f, fmin, fmax), names_from = n) %>% 
+  dplyr::mutate(transfer = 8)
+```
+
+# Define competition outcomes
+
+## Binomial sampling and Wilcox test
+
+First need to determine which samples significantly decreased/increased from T0 to T8. We don't have enough biological replicates for to compute a statistic across replicates for [outcome variability](https://www.pnas.org/doi/10.1073/pnas.2302491120). However, we can estimate the mean fraction of A and quantify the inferential uncertainty of the mean by bootstrap resampling. We the used median proportion of species A from two biological replicates of each T8 pair as the probability of success (i.e., drawing species A) from 1000 draws (i.e., sequencing reads) from the binomial distribution. To determine whether the frequency of Species A significantly changed from T0 to T8, the means of the 1000 binomial draws for T0 and T8 were compared using a Wilcoxon rank sum test (N = 2000). Tests with Bonferroni multiple test corrected p values < 1e-5 were considered to represent significantly different T0 and T8 samples.  
+
+```{r}
+set.seed(124341)
+
+# first join the T0 and T8 abundances
+wc_test <- left_join(samp_pairs_fmt_exp, samp_pairs_fmt_mp, by = join_by(community_id, strep_conc, sp_1, sp_2)) %>% 
+  dplyr::mutate(delta_f_1 = f_1.x - f_1.y) %>% 
+  dplyr::select(community_id, strep_conc, sp_1, sp_2, delta_f_1, f_1_8 = f_1.x, f_1_0 = f_1.y, 
+                f_2_8 = f_2.x, f_2_0 = f_2.y) %>% 
+  tidyr::nest(data = c(-community_id, -strep_conc)) %>%
+  # samples 1000 draws from binomial distribution using f_a median as the probability of success
+  dplyr::mutate(f_1_0_rs = purrr::map(data, \(x) map(1:100, \(i) sum(rbinom(1000, 1, x$f_1_0))/1000)),
+         f_1_8_rs = purrr::map(data, \(x) map(1:100, \(i) sum(rbinom(1000, 1, x$f_1_8))/1000))) %>% 
+  tidyr::unnest(cols = c(data, f_1_0_rs, f_1_8_rs)) %>% 
+  # nest the samples
+  tidyr::nest(bs = c(f_1_0_rs, f_1_8_rs)) %>%
+  # perform the wilcox test
+  dplyr::mutate(wc = purrr::map(bs, \(i) wilcox.test(x = as.numeric(i$f_1_0_rs), y = as.numeric(i$f_1_8_rs)))) %>% 
+  # tidy-ify the test output
+  dplyr::mutate(tidy_wc = purrr::map(wc, \(x) broom::tidy(x))) %>% 
+  tidyr::unnest(cols = c(tidy_wc)) %>% 
+  # p-value adjust using bonferroni correction
+  dplyr::mutate(p_adjusted = p.adjust(p.value, method = "bonferroni", n = n())) %>% 
+  dplyr::arrange(strep_conc, sp_1, sp_2) %>% 
+  # define whether change is significantly positive or negative
+  dplyr::mutate(change = dplyr::case_when(p.value > 1e-5 ~ 0,
+                             sign(delta_f_1) == -1 & p.value <= 1e-5 ~ -1, 
+                             sign(delta_f_1) == 1 & p.value <= 1e-5 ~ 1)) 
+```
+
+## Competition outcome rules
+
+Here we set up the rules for defining the competition outcomes.
+
+Need to write these down formally instead of just in the `case_when` statement...
+
+```{r}
+# upper threshold for deciding whether a species goes extinct
+upper <- 0.99
+# lower threshold for deciding whether a species goes extinct
+lower <- 0.01
+# slope change threshold for deciding whether change from T0 to T8 is important (e.g. requires at least a 5% change of the focal species) 
+slope_thresh <- 0.05
+
+outcomes_classified <- wc_test %>% 
+  dplyr::group_by(strep_conc, sp_1, sp_2) %>% 
+  dplyr::mutate(outcome = dplyr::case_when(# Bistability: Requires sp_1 to both increase from T0 high freq and decrease from T0 low freq
+                             sum(change < 0 & f_1_0 == min(f_1_0), change > 0 & f_1_0 == max(f_1_0)) == 2 ~ "bistable_stable",
+                             # Exclusion: sp_1 increases from both low and high T0 freqs and T8 freq is > than the T0 high freq
+                             sum(change) == 2 & f_1_8 >= upper & abs(delta_f_1) > slope_thresh ~ "exclusion_stable", 
+                             # Exclusion: sp_1 decreases from both low and high T0 freqs and T8 freq is < than the T0 low freq
+                             sum(change) == -2 & f_1_8 <= lower & abs(delta_f_1) > slope_thresh ~ "exclusion_stable",
+                             # Coexistence: sp_1 significantly increases from rare and significantly decreases from abundant
+                             sum(change) == 0 & dplyr::if_else(f_1_0 == pmin(f_1_0, f_2_0), f_1_8 > f_1_0, f_1_8 < f_1_0) ~ "coexistence_stable",
+                             # Incomplete coexistence: sp_1 is found within extinction thresholds in both experiments, but no condition is
+                             # placed on the significance of the change from T0 to T8
+                             sum(dplyr::between(f_1_8, lower, upper)) == 2 ~ "coexistence_incomplete",
+                             # Incomplete exclusion: sp_1 is outside of the extinction threshold (extinct) for at least one sample and within the the 
+                             # threshold for the other sample.
+                             sum(!dplyr::between(f_1_8, lower, upper)) == 1 & sum(dplyr::between(f_1_8, lower, upper)) == 1 ~ "exclusion_incomplete",
+                             # Inconclusive: samples failing to meet any of the above rules
+                             TRUE ~ "inconclusive_")) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::mutate(type = dplyr::if_else(stringr::str_detect(outcome, "incomplete"), "incomplete", "stable"),
+         outcome = stringr::str_extract(outcome, "(^.+)_.*", group = 1)) %>% 
+  dplyr::relocate(outcome, type, change)
+```
+
+## Plotting pairwise outpcomes
+
+Construct final dataframe to be used for plotting
+
+```{r}
+samp_pairs_fmt <- dplyr::bind_rows(samp_pairs_fmt_mp, samp_pairs_fmt_exp) %>%
+  dplyr::mutate(
+    group = interaction(community_id, strep_conc),
+    evo_group = dplyr::case_when(
+      dplyr::if_all(c(sp_1, sp_2), \(x) stringr::str_detect(x, "ANC")) ~ "both_anc",
+      dplyr::if_all(c(sp_1, sp_2), \(x) stringr::str_detect(x, "EVO")) ~ "both_evo",
+      TRUE ~ "mix"
+    )
+  ) %>%
+  dplyr::left_join(outcomes_classified,
+                   by = dplyr::join_by(community_id, sp_1, sp_2, strep_conc)) %>%
+  dplyr::mutate(
+    outcome = factor(outcome, levels = c("exclusion", "coexistence", 
+                                         "bistable", "inconclusive")),
+    type = factor(type, levels = c("stable", "incomplete"))
+  )
+```
+
+Plotting function and colors/linetypes
+
+```{r}
+outcome_pal <- c("exclusion" = "#800020", "coexistence" = "#0659bf", "inconclusive" = "#7c26c7", "bistable" = "#098f07")
+
+type_pal <- c("stable" = "solid", "incomplete" = "dashed", "potential" = "dotted")
+
+pair_plot <- function(df){
+  pj <- ggplot2::position_jitterdodge(jitter.width=0.0,
+                           jitter.height = 0.0,
+                           dodge.width = 0.5,
+                           seed=9)
+  
+  ggplot2::ggplot(df, aes(x = transfer, y = f_1, group = group)) +
+  ggplot2::geom_hline(yintercept = 0, lty = 2, color = "grey70") +
+  ggplot2::geom_hline(yintercept = 0.5, lty = 3, color = "grey70") +
+  ggplot2::geom_hline(yintercept = 1, lty = 2, color = "grey70") +
+  ggplot2::geom_linerange(aes(ymin = fmin_1, ymax = fmax_1, color = outcome), position = pj) +
+  ggh4x::geom_pointpath(aes(color = outcome, linetype = type), position = pj, mult = 0.2) +
+  ggplot2::scale_color_manual(values = outcome_pal) +
+  ggplot2::scale_linetype_manual(values = type_pal) +
+  ggplot2::facet_grid(sp_1 ~ sp_2) +
+  ggplot2::scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1), labels = percent) +
+  ggplot2::scale_x_continuous(breaks = c(0, 8)) +
+  ggplot2::labs(x = "", y = "", color = "") +
+  ggplot2::theme_bw() + 
+  ggplot2::theme(panel.grid = element_blank(),
+        strip.background = element_blank(),
+        legend.position = "none", 
+        panel.border = element_blank(),
+        axis.text = element_text(size = 8),
+        strip.text = element_text(size = 8))
+}
+```
+
+Create different lists of plots for the mixed (i.e. evo competed against anc) conditions
+```{r}
+samp_pairs_fmt_plots_split_a <- samp_pairs_fmt %>% 
+  dplyr::filter(evo_group != "mix") %>% 
+  dplyr::group_by(strep_conc, evo_group) %>% 
+  dplyr::group_split() %>% 
+  purrr::map(pair_plot)
+
+samp_pairs_fmt_plots_split_b <- samp_pairs_fmt %>% 
+  dplyr::filter(evo_group == "mix") %>% 
+  dplyr::group_by(strep_conc) %>% 
+  dplyr::group_split() %>% 
+  purrr::map(pair_plot)
+```
+
+```{r}
+#| warning: false
+fig01 <- patchwork::wrap_plots(samp_pairs_fmt_plots_split_a, ncol = 2) +
+  patchwork::plot_annotation(tag_levels = "A")
+
+ggsave(
+  here::here("figs", "coexistence_pairs.svg"),
+  fig01,
+  width = 7,
+  height = 12,
+  units = "in",
+  device = "svg"
+)
+
+ggsave(
+  here::here("figs", "coexistence_pairs.png"),
+  fig01,
+  width = 7,
+  height = 12,
+  units = "in",
+  device = "png"
+)
+```
+
+::: {#fig-01}
+```{r}
+#| fig-width: 7
+#| fig-height: 12
+#| warning: false
+#| echo: false
+fig01
+```
+Outcomes from pairwise cocultures of ancestral (left, A:G) and streptomycin adapted (right, B:H) 0403, 1287, 1896 and 1977 species. Rows in the grid represent differen streptomycin concentrations applied (A:B = 0 µg/ml, C:D = 16 µg/ml, E:F = 64 µg/ml, G:H = 256 µg/ml). Using the rules defined above, red lines show cocultures resulting in exclusion of one of the species, blue lines show cocultures that resulted in coexistence, and purple lines represent inconclusive outcomes due to lack of data or exception to therules. Solid lines show a "definite" outcome and dashed lines show a potentially "incomplete" outcome. Two solid lines of the same color indicate stable coexistence or stable exclusion, a solid and dashed line indicate incomplete coexistence/exclusion, while two dashed lines indicates coexistence without evidence of mutual invasibility. Note some statistical noise has been applied to point positions to prevent overlaps in the plot and aid in visualization.
+:::
+
+```{r}
+#| warning: false
+fig02 <- patchwork::wrap_plots(samp_pairs_fmt_plots_split_b, ncol = 2) +
+  patchwork::plot_annotation(tag_levels = "A")
+
+ggsave(
+  here::here("figs", "coexistence_pairs_mixed_hist.svg"),
+  fig02,
+  width = 7,
+  height = 7,
+  units = "in",
+  device = "svg"
+)
+
+ggsave(
+  here::here("figs", "coexistence_pairs_mixed_hist.png"),
+  fig02,
+  width = 7,
+  height = 7,
+  units = "in",
+  device = "png"
+)
+```
+
+
+::: {#fig-02}
+```{r}
+#| fig-width: 7
+#| fig-height: 7
+#| warning: false
+#| echo: false
+fig02
+```
+Results from co-cultures of mixed ancestal and evolved combinations. Line colors and types are as in @fig-01, with the addition of green showing bistability (i.e., Species A and Species B exclude each other when invading from high abundance, and each are excluded by the other when invading from low abundance).
+:::
+
+# Network
+
+Here we will plot the pairwise competition outcomes as a network. **NOTE:** I don't have time/energy to figure out how to manage all the links in the networks so that they line up properly and don't overlap so there will need to be some postprocessing in inkscape to move some of the links so they don't overlap.
+
+```{r}
+#| output: false
+library(ggraph)
+library(tidygraph)
+```
+
+## Functions for formatting and plotting
+
+```{r}
+make_pairs <- function(pairs_df, sp){
+  pairs_df %>%
+    dplyr::filter(transfer == 8) %>%
+    dplyr::distinct(evo_group, strep_conc, sp_1, sp_2) %>%
+    dplyr::group_by(evo_group, strep_conc) %>%
+    dplyr::count( {{ sp }} ) %>% 
+    dplyr::rename(sp = {{ sp }} ) %>% 
+    dplyr::ungroup()
+}
+
+make_nodes <- function(pairs_df, ...){
+  sp_1 <- make_pairs(pairs_df, sp_1)
+  sp_2 <- make_pairs(pairs_df, sp_2)
+  
+  total_games <- bind_rows(sp_1, sp_2) %>%
+    dplyr::summarize(games = sum(n),
+              .by = c(sp, ...))
+  
+  win_games <- pairs_df %>%
+    dplyr::filter(transfer == 8) %>%
+    dplyr::filter(outcome == "exclusion") %>%
+    dplyr::group_by(sp_1, sp_2, ...) %>%
+    dplyr::mutate(win = case_when(f_1 >= f_2 ~ sp_1, f_2 > f_1 ~ sp_2)) %>%
+    dplyr::ungroup() %>%
+    dplyr::distinct(sp_1, sp_2, win, ...) %>%
+    dplyr::group_by(...) %>%
+    dplyr::count(win, name = "wins") %>%
+    dplyr::rename(sp = win) %>%
+    dplyr::ungroup()
+  
+  lose_games <- pairs_df %>%
+    dplyr::filter(transfer == 8) %>%
+    dplyr::filter(outcome == "exclusion") %>%
+    dplyr::group_by(sp_1, sp_2, ...) %>%
+    dplyr::mutate(loss = case_when(f_1 >= f_2 ~ sp_2, f_2 > f_1 ~ sp_1)) %>%
+    dplyr::ungroup() %>%
+    dplyr::distinct(sp_1, sp_2, loss, ...) %>%
+    dplyr::group_by(...) %>%
+    dplyr::count(loss, name = "losses") %>%
+    dplyr::rename(sp = loss) %>%
+    dplyr::ungroup()
+  
+left_join(total_games, win_games, by = join_by(sp, ...)) %>% 
+  dplyr::left_join(lose_games, by = join_by(sp, ...)) %>% 
+  dplyr::mutate(across(everything(), ~replace_na(.x, 0))) %>% 
+  dplyr::mutate(score = (wins - losses)/games) %>% 
+  dplyr::group_by(...) %>% 
+  dplyr::arrange(..., desc(score)) %>% 
+  dplyr::mutate(rank = dense_rank(desc(score)),
+         plotrank = row_number(desc(score)),
+         id = 1:n()) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::select(name = sp, ..., rank, plotrank)
+}
+
+make_edges <- function(pairs_df, ...){
+  pairs_df %>% 
+    dplyr::filter(transfer == 8) %>% 
+    dplyr::mutate(from = if_else(f_1 > f_2, sp_1, sp_2),
+           to = if_else(f_1 < f_2, sp_1, sp_2)) %>% 
+    dplyr::group_by(from, to, ...) %>% 
+    dplyr::mutate(type = if_else(sum(type == "stable") == 2, "stable", "incomplete")) %>% 
+    dplyr::ungroup() %>% 
+    dplyr::select(from, to, ..., outcome, type) %>% 
+    dplyr::distinct() %>% 
+    dplyr::arrange(from, to, ...)
+}
+
+plot_network_hierarchy <- function(net, tune_angle = 1, n_rank = 10, n_break = 10) {
+  # code for formatting the positions of the nodes with the ranks was taken from
+  # here: https://github.com/Chang-Yu-Chang/emergent-coexistence/blob/v2.0.0/plotting_scripts/Fig3.R
+  
+  node_size <- 3
+  edge_width <- 0.8
+
+  graph_ranked <- net %>%
+    tidygraph::activate(nodes) %>%
+    dplyr::select(name, rank, plotrank) %>%
+    tidygraph::activate(edges) %>%
+    dplyr::mutate(fromRank = .N()$plotrank[match(from, .N()$name)],
+           toRank = .N()$plotrank[match(to, .N()$name)])
+
+  graph_ranked <- graph_ranked %>%
+    tidygraph::activate(nodes) %>%
+    dplyr::mutate(y = -rank) %>%
+    dplyr::group_by(rank) %>%
+    dplyr::mutate(x = {seq(0, 1, length.out = n() + 2) %>% `[`(c(-1, -length(.)))}) %>%
+    dplyr::ungroup() %>%
+    tidygraph::activate(edges) %>%
+    dplyr::filter(!str_detect(outcome, "inconclusive")) %>%
+    dplyr::arrange(outcome)
+
+  ggraph(graph_ranked, layout = "nicely") +
+    geom_hline(yintercept = c(-n_rank:-1), color = "grey90") +
+    geom_node_text(aes(label = name), repel = TRUE) +
+    geom_node_point(size = node_size, shape = 21, fill = "grey", stroke = node_size/5, color = "black") +
+    geom_edge_diagonal(aes(color = outcome, linetype = type),
+                       arrow = arrow(length = unit(1, "mm"), type = "closed", angle = 30, ends = "last"),
+                       start_cap = circle(node_size*.8, "mm"),
+                       end_cap = circle(node_size*0.8, "mm")) +
+    scale_edge_color_manual(values = outcome_pal) +
+    scale_edge_linetype_manual(values = type_pal) +
+    scale_x_continuous(limits = c(0.1, 0.9), expand = c(0,0)) +
+    scale_y_continuous(limits = c(-n_break-1, 0), breaks = -n_break:-1, labels = n_break:1) +
+    theme_void() +
+    theme(
+        legend.title = element_blank(),
+        axis.title = element_blank(),
+        strip.text = element_blank(),
+        plot.margin = unit(c(0,0,0,0),"mm")
+    )
+}
+```
+
+## Evolution and Streptomycin categories separate
+
+Here we plot a separate graph for each streptomycin concentrations and also by different evolutionary groupings. For example, there is one graph for the competition outcomes of only ancestral species, there is one graph of the outcomes of only evolved species, and there is one graph for the outcomes of mixed competitions where an ancestral species competes against an evolved species.
+
+```{r}
+#| warning: false
+nodes1 <- make_nodes(samp_pairs_fmt, evo_group, strep_conc)
+edges1 <- make_edges(samp_pairs_fmt, evo_group, strep_conc)
+
+graphs1 <- nest(nodes1, sps = -c(evo_group, strep_conc)) %>% 
+  left_join(nest(edges1, pairs = -c(evo_group, strep_conc)),
+            by = join_by(evo_group, strep_conc)) %>% 
+  mutate(network = map2(sps, pairs, function(sps, pairs) tbl_graph(nodes = sps, edges = pairs, directed = T))) %>% 
+  mutate(plot = map(network, function(network) plot_network_hierarchy(network, tune_angle = 1.5, n_rank = 7, n_break = 7)))
+```
+
+
+```{r}
+#| warning: false
+fig03 <- patchwork::wrap_plots(graphs1[[6]], nrow = 3, guides= "collect") +
+  patchwork::plot_annotation(tag_levels = "A")
+
+ggsave(
+  here::here("figs", "coexistence_networks_nested_evo_strep.svg"),
+  fig03,
+  width = 8,
+  height = 10,
+  units = "in",
+  device = "svg"
+)
+
+ggsave(
+  here::here("figs", "coexistence_networks_nested_evo_strep.png"),
+  fig03,
+  width = 8,
+  height = 10,
+  units = "in",
+  device = "png"
+)
+```
+
+::: {#fig-03}
+```{r}
+#| fig-width: 8
+#| fig-height: 10
+#| warning: false
+#| echo: false
+fig03
+```
+Competitive hierarchy of species pairs separated by evolution grouping (only ancestral pairs, only evolved pairs, and mixed ancestral and evolved pairs) and streptomycin concentration. Subplots A-D are for only ancestral pairs, E-H for only evolved pairs, and I-L for mixed ancestral and evolved pairs. Subplots A, E, I show experiments under no streptomycin, B, F, J 16 µg/ml streptomycin, C, G, K for 64 µg/ml streptomycin, and D, H, L for 256 µg/ml streptomycin. For each evolution/streptomycin grouping, strains are rank ordered on the basis of the number of other strains they exclude, based on data shown in @fig-01 and @fig-02. Grey nodes represent strains (denoted by text), red arrows point from winning strain to losing strain, blue arrows indicate coexistence (ignore the arrow heads for blue, coulnd't figure out how to remove them for only a subset of the edges), and green arrows indicate the presence of bistability (i.e., Species A and Species B exclude each other when invading from high abundance, and each are excluded by the other when invading from low abundance). Line type indicates the degree of certainty of the outcome in each pair: dashed lines represent incomplete exclusion or coexistence without evidence of mutual invasibility, while solid lines indicate complete exclusion or stable coexistence (mutual invasibility). 
+:::
+
+## Only Streptomycin category separate
+
+```{r}
+#| warning: false
+nodes2 <- make_nodes(samp_pairs_fmt, strep_conc)
+edges2 <- make_edges(samp_pairs_fmt, strep_conc)
+
+graphs2 <- nest(nodes2, sps = -c(strep_conc)) %>% 
+  left_join(nest(edges2, pairs = -c(strep_conc)),
+            by = join_by(strep_conc)) %>% 
+  mutate(network = map2(sps, pairs, function(sps, pairs) tbl_graph(nodes = sps, edges = pairs, directed = T))) %>% 
+  mutate(plot = map(network, function(network) plot_network_hierarchy(network, tune_angle = 1.5, n_rank = 7, n_break = 7)))
+```
+
+```{r}
+#| warning: false
+fig04 <- patchwork::wrap_plots(graphs2[[5]], nrow = 1, guides= "collect") +
+  patchwork::plot_annotation(tag_levels = "A")
+
+ggsave(
+  here::here("figs", "coexistence_networks_nested_strep.svg"),
+  fig04,
+  width = 9,
+  height = 4,
+  units = "in",
+  device = "svg"
+)
+
+ggsave(
+  here::here("figs", "coexistence_networks_nested_strep.png"),
+  fig04,
+  width = 9,
+  height = 4,
+  units = "in",
+  device = "png"
+)
+```
+
+::: {#fig-04}
+```{r}
+#| fig-width: 9
+#| fig-height: 4
+#| warning: false
+#| echo: false
+fig04
+```
+Competitive hierarchy of species pairs separated by streptomycin concentration. Subplot A shows experiments under no streptomycin, B with 16 µg/ml streptomycin, C with 64 µg/ml streptomycin, and D with 256 µg/ml streptomycin. For each evolution/streptomycin grouping, strains are rank ordered on the basis of the number of other strains they exclude, based on data shown in @fig-01 and @fig-02. Grey nodes represent strains (denoted by text), red arrows point from winning strain to losing strain, blue arrows indicate coexistence (ignore the arrow heads for blue, coulnd't figure out how to remove them for only a subset of the edges), and green arrows indicate the presence of bistability (i.e., Species A and Species B exclude each other when invading from high abundance, and each are excluded by the other when invading from low abundance). Line type indicates the degree of certainty of the outcome in each pair: dashed lines represent incomplete exclusion or coexistence without evidence of mutual invasibility, while solid lines indicate complete exclusion or stable coexistence (mutual invasibility). 
+:::

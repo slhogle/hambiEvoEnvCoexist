@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shane Hogle &amp; Milla Similä">
-<meta name="dcterms.date" content="2024-09-11">
+<meta name="dcterms.date" content="2024-10-03">
 
 <title>hambiBottomUp data analysis - Data anlalysis for the project hambiABBAssembly</title>
 <style>
@@ -194,7 +194,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Experiment design - 96 Well plate layout</span></a>
+ <span class="menu-text">1. Monoculture growth</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -202,20 +202,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/experiment_design/01_pairs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1. Species pairs</span></a>
+  <a href="./R/monocultures/bioscreen/01_format_growthcurves_batch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">i) Inspect and format growth curves</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/experiment_design/02_trios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2. Species trios</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./R/experiment_design/03_quartets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Species quartets</span></a>
+  <a href="./R/monocultures/bioscreen/02_plot_analyze_growth.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ii) Plot growth summaries</span></a>
   </div>
 </li>
       </ul>
@@ -223,7 +217,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Community composition amplicon</span></a>
+ <span class="menu-text">2. Community growth - experiment design</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -231,20 +225,66 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1. 20240711 BTK Illumina v3 / Data wrangling and QC</span></a>
+  <a href="./R/communities/experiment_design/01_pairs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">i) Species pairs - 96 Well plate layout</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2. 20240711 BTK Illumina v3 / Metacal calibration</span></a>
+  <a href="./R/communities/experiment_design/02_trios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ii) Species trios - 96 Well plate layout</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/amplicon/analysis_pairs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Species pairs analysis</span></a>
+  <a href="./R/communities/experiment_design/03_quartets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iii) Species quartets - 96 Well plate layout</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">3. Community growth - optical density</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/optical_density/01_format_plot_od.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">i) Process and plot OD data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">4. Community growth - amplicon composition</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">i) 20240711 BTK Illumina v3 / Data wrangling and QC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ii) 20240711 BTK Illumina v3 / Metacal calibration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/amplicon/analysis_pairs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iii) Species pairs analysis</span></a>
   </div>
 </li>
       </ul>
@@ -305,7 +345,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 11, 2024</p>
+      <p class="date">October 3, 2024</p>
     </div>
   </div>
   

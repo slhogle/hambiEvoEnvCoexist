@@ -1,0 +1,295 @@
+---
+title: "Analyzing monoculture growth summary"
+author: "Shane Hogle"
+date: today
+link-citations: true
+---
+
+# Introduction
+
+In the prior step we imported, smoothed, and calculated summary statistics for the species growth in monocultures. These monocultures include experiments either with 100% R2A and different levels of streptomycin or with no streptomycin and the pairwise filtrates from all other species.
+
+Here we will do some simple plots and analysis of the growth data. We will also look into the filtrate data.
+
+# Setup
+
+## Libraries
+
+```{r}
+#| output: false
+#| warning: false
+#| error: false
+library(tidyverse)
+library(here)
+library(fs)
+library(scales)
+library(ggraph)
+source(here::here("R", "utils_generic.R"))
+```
+
+## Global variables
+
+```{r}
+#| output: false
+#| warning: false
+#| error: false
+data_raw <- here::here("_data_raw", "monocultures", "20240328_bioscreen")
+data <- here::here("data", "monocultures", "20240328_bioscreen")
+
+# make processed data directory if it doesn't exist
+fs::dir_create(data)
+```
+
+## Read growth summary data
+
+```{r}
+#| output: false
+#| warning: false
+#| error: false
+many_auc_res <- readr::read_tsv(here::here(data, "gcurve_auc_results.tsv"))
+many_spline_res <- readr::read_tsv(here::here(data, "gcurve_spline_results.tsv"))
+many_linear_res <- readr::read_tsv(here::here(data, "gcurve_linear_results.tsv"))
+many_baranyi_res <- readr::read_tsv(here::here(data, "gcurve_baranyi_results.tsv"))
+many_huang_res <- readr::read_tsv(here::here(data, "gcurve_huang_results.tsv"))
+```
+
+# Select and format
+
+The past notebook showed that different nonparametric and parametric models fit the data with different degrees of quality. Overall, it appears that the Huang parametric model fits the data the best so we will default to using the Huang growth rates. If the Huang doesn't fit well
+
+Moving forward we'll use Huang-derived growth rates if the fit looks good. Otherwise we will go with the spline estimate which seemed to perform pretty well and was quite flexible.
+
+Here we determine a threshold for filtering out cultures that don't grow as 1.25$\times$ the mean minimum optical density of all cultures. For these cultures growth rates estimates are not really reliable. 
+```{r}
+many_auc_res %>% 
+  summarize(mn = mean(min_od), 
+            sd = sd(min_od)) %>% 
+  mutate(thresh = 1.25*mn) %>% 
+  pull(thresh)
+```
+
+```{r}
+best_parametric <- bind_rows(
+  dplyr::select(many_huang_res, plate_name:sp_filtrate, y0, mumax, K, r2) %>% mutate(model = "huang"),
+  dplyr::select(many_baranyi_res, plate_name:sp_filtrate, y0, mumax, K, r2) %>% mutate(model = "baranyi")) %>% 
+  arrange(plate_name, bioscreen_well) %>% 
+  group_by(plate_name, bioscreen_well) %>% 
+  filter(r2 == max(r2)) %>% 
+  ungroup()
+```
+
+The Huang model fits best for about 75% of all growth curves.
+
+```{r}
+best_parametric %>% 
+  count(model) %>% 
+  mutate(p = n/sum(n))
+```
+# Update!! 
+
+After looking at this more and more I think for the rest of this analysis we will just go with the spline non-parametric fits. Sometimes the Huang model fits really really well, but other times it doesn't. It's not worth going into every single growth curve to find out
+
+# Monoculture growth with streptomycin
+
+We'll now examine how the monoculture growth changed with respect to evolutionary history and streptomycin concentrations
+
+## Growth rates
+
+```{r}
+gr_strep <- many_spline_res %>% 
+  filter(!str_detect(plate_name, "pairwise")) %>% 
+  mutate(hist = str_split_i(sp_hist, "_", 1),
+         sp = str_split_i(sp_hist, "_", 2)) %>% 
+  summarize(ggplot2::mean_cl_boot(mumax), .by=c(sp, hist, strep_conc)) %>% 
+  ggplot(aes(x = strep_conc, y = y)) +
+  geom_linerange(aes(ymin = ymin, ymax = ymax, color = hist)) +
+  geom_line(aes(color = hist), lty=2) +
+  geom_point(aes(color = hist)) +
+  labs(y = "Maximum per capita growth rate μ (hr-1)", x = "Streptomycin conc. (μg/ml)", 
+       color = "Evolutionary\nhistory") +
+  facet_grid(~sp) +
+  scale_x_continuous(trans="log1p", breaks = c(0, 1, 10, 100, 1000, 5000))
+
+ggsave(
+  here::here("figs", "monoculture_gr_strep.svg"),
+  gr_strep,
+  width = 10,
+  height = 4,
+  units = "in",
+  device = "svg"
+)
+
+ggsave(
+  here::here("figs", "monoculture_gr_strep.png"),
+  gr_strep,
+  width = 10,
+  height = 4,
+  units = "in",
+  device = "png"
+)
+```
+
+
+::: {#fig-01}
+```{r}
+#| fig.width: 10
+#| fig.height: 4
+#| echo: false
+#| warning: false
+gr_strep
+```
+Maximum specific growth rate ($\mathrm{\mu_{max}}$ in $\mathrm{hr^{-1}}$) for the four different bacterial species (panels) and their different evolutionary histories (colors) at different streptomycin concentrations (horizontal axis, μg/ml). Points are the mean over five biological replicates and line ranges show the 95% confidence interval from bootstraps. EVO = experimentally evolved to high streptomycin.
+:::
+
+## AUC (area under the growth curve)
+
+```{r}
+auc_strep <- many_auc_res %>% 
+  filter(!str_detect(plate_name, "pairwise")) %>% 
+  mutate(hist = str_split_i(sp_hist, "_", 1),
+         sp = str_split_i(sp_hist, "_", 2)) %>% 
+  summarize(ggplot2::mean_cl_boot(auc), .by=c(sp, hist, strep_conc)) %>% 
+  ggplot(aes(x = strep_conc, y = y)) +
+  geom_linerange(aes(ymin = ymin, ymax = ymax, color = hist)) +
+  geom_line(aes(color = hist), lty=2) +
+  geom_point(aes(color = hist)) +
+  labs(y = "Total area under the growth curve", x = "Streptomycin conc. (μg/ml)", 
+       color = "Evolutionary\nhistory") +
+  facet_grid(~sp) +
+  scale_x_continuous(trans="log1p", breaks = c(0, 1, 10, 100, 1000, 5000))
+
+ggsave(
+  here::here("figs", "monoculture_auc_strep.svg"),
+  auc_strep,
+  width = 10,
+  height = 4,
+  units = "in",
+  device = "svg"
+)
+
+ggsave(
+  here::here("figs", "monoculture_auc_strep.png"),
+  auc_strep,
+  width = 10,
+  height = 4,
+  units = "in",
+  device = "png"
+)
+```
+
+::: {#fig-02}
+```{r}
+#| fig.width: 10
+#| fig.height: 4
+#| echo: false
+#| warning: false
+auc_strep
+```
+Area under the growth curve for the four different bacterial species (panels) and their different evolutionary histories (colors) at different streptomycin concentrations (horizontal axis, μg/ml). Points are the mean over five biological replicates and line ranges show the 95% confidence interval from bootstraps. EVO = experimentally evolved to high streptomycin.
+:::
+
+# Pairwise filtrate growth
+
+This is information about how well each species grew on the filtrate of all the species.
+
+## Growth rate
+
+```{r}
+gr_filtrate <- many_spline_res %>% 
+  filter(str_detect(plate_name, "pairwise")) %>% 
+  summarize(m = mean(mumax), .by=c(sp_hist, sp_filtrate)) %>% 
+  mutate(sp_filtrate = factor(sp_filtrate, levels =c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
+                                              "EVO_1896", "ANC_1977", "EVO_1977")),
+         sp_hist = factor(sp_hist, levels = c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
+                                              "EVO_1896", "ANC_1977", "EVO_1977"))) %>% 
+  ggplot(aes(x = sp_filtrate, y = sp_hist)) +
+  geom_tile(aes(fill = m)) +
+  labs(y = "Growth of species/evolutionary history", x = "Filtrate from species/evolutionary history",
+       fill = "μ (hr-1)") +
+  scale_fill_viridis() +
+  coord_fixed() + 
+  ggplot2::theme(panel.grid = element_blank(),
+                 panel.background = element_blank(), 
+                 strip.background = element_blank(),
+                 panel.border = element_blank())
+
+ggsave(
+  here::here("figs", "monoculture_gr_filtrate.svg"),
+  gr_filtrate,
+  width = 8,
+  height = 8,
+  units = "in",
+  device = "svg"
+)
+
+ggsave(
+  here::here("figs", "monoculture_gr_filtrate.png"),
+  gr_filtrate,
+  width = 8,
+  height = 8,
+  units = "in",
+  device = "png"
+)
+```
+
+::: {#fig-03}
+```{r}
+#| fig.width: 7
+#| fig.height: 7
+#| echo: false
+#| warning: false
+gr_filtrate
+```
+Mean growth rate (color) of each species/evolutionary history (vertical axis) on the filtrate of other species, including itself (horizontal axis). 
+:::
+
+## AUC (area under the growth curve)
+
+```{r}
+auc_filtrate <- many_auc_res %>% 
+  filter(str_detect(plate_name, "pairwise")) %>% 
+  summarize(m = mean(auc), .by=c(sp_hist, sp_filtrate)) %>% 
+  mutate(sp_filtrate = factor(sp_filtrate, levels =c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
+                                              "EVO_1896", "ANC_1977", "EVO_1977")),
+         sp_hist = factor(sp_hist, levels = c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
+                                              "EVO_1896", "ANC_1977", "EVO_1977"))) %>% 
+  ggplot(aes(x = sp_filtrate, y = sp_hist)) +
+  geom_tile(aes(fill = m)) +
+  labs(y = "Growth of species/evolutionary history", x = "Filtrate from species/evolutionary history",
+       fill = "μ (hr-1)") +
+  scale_fill_viridis() +
+  coord_fixed() + 
+  ggplot2::theme(panel.grid = element_blank(),
+                 panel.background = element_blank(), 
+                 strip.background = element_blank(),
+                 panel.border = element_blank())
+
+ggsave(
+  here::here("figs", "monoculture_auc_filtrate.svg"),
+  auc_filtrate,
+  width = 7,
+  height = 7,
+  units = "in",
+  device = "svg"
+)
+
+ggsave(
+  here::here("figs", "monoculture_auc_filtrate.png"),
+  auc_filtrate,
+  width = 7,
+  height = 7,
+  units = "in",
+  device = "png"
+)
+```
+
+::: {#fig-04}
+```{r}
+#| fig.width: 7
+#| fig.height: 7
+#| echo: false
+#| warning: false
+auc_filtrate
+```
+Mean area under the growth curve (color) of each species/evolutionary history (vertical axis) on the filtrate of other species, including itself (horizontal axis). 
+:::

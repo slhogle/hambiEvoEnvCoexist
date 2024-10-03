@@ -13,22 +13,32 @@ website:
     background: light
     search: true
     contents:
-      - section: "Experiment design - 96 Well plate layout"
+      - section: "1. Monoculture growth"
         contents:
-          - text: "1. Species pairs"
-            file: R/experiment_design/01_pairs.qmd
-          - text: "2. Species trios"
-            file: R/experiment_design/02_trios.qmd
-          - text: "3. Species quartets"
-            file: R/experiment_design/03_quartets.qmd
-      - section: "Community composition amplicon"
+          - text: "i) Inspect and format growth curves"
+            file: R/monocultures/bioscreen/01_format_growthcurves_batch.qmd
+          - text: "ii) Plot growth summaries"
+            file: R/monocultures/bioscreen/02_plot_analyze_growth.qmd
+      - section: "2. Community growth - experiment design"
         contents:
-          - text: "1. 20240711 BTK Illumina v3 / Data wrangling and QC"
-            file: R/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.qmd
-          - text: "2.  20240711 BTK Illumina v3 / Metacal calibration"
-            file: R/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.qmd
-          - text: "3. Species pairs analysis"
-            file: R/amplicon/analysis_pairs.qmd
+          - text: "i) Species pairs - 96 Well plate layout"
+            file: R/communities/experiment_design/01_pairs.qmd
+          - text: "ii) Species trios - 96 Well plate layout"
+            file: R/communities/experiment_design/02_trios.qmd
+          - text: "iii) Species quartets - 96 Well plate layout"
+            file: R/communities/experiment_design/03_quartets.qmd
+      - section: "3. Community growth - optical density"
+        contents:
+          - text: "i) Process and plot OD data"
+            file: R/communities/optical_density/01_format_plot_od.qmd
+      - section: "4. Community growth - amplicon composition"
+        contents:
+          - text: "i) 20240711 BTK Illumina v3 / Data wrangling and QC"
+            file: R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.qmd
+          - text: "ii) 20240711 BTK Illumina v3 / Metacal calibration"
+            file: R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.qmd
+          - text: "iii) Species pairs analysis"
+            file: R/communities/amplicon/analysis_pairs.qmd
             
 format:
   html:
