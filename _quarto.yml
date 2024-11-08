@@ -7,7 +7,7 @@ project:
   output-dir: docs
 
 website:
-  title: "hambiBottomUp data analysis"
+  title: "hambiEvoEnvCoexist data analysis"
   sidebar:
     style: "docked"
     background: light
@@ -44,7 +44,6 @@ format:
   html:
     theme:
       - cosmo
-      - mystyle.scss
     # include table of contents
     toc: true
     # when printing dataframes use rmarkdown::paged_table())
@@ -53,12 +52,15 @@ format:
     fig-width: 8
     fig-height: 6
     # tidy format R code upon render
-    tidy: true
+    tidy: false
     # include line numbers in code blocks
     code-line-numbers: true
     # The code-link option enables hyper-linking of functions within code blocks to their online documentation:
     #code-link: true
     number-sections: true
+    code-fold: show
+    code-summary: "Show/hide code"
+    code-tools: true
   
 # auto: re-render only when source changes   
 execute:

@@ -6,10 +6,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Shane Hogle &amp; Milla Similä">
-<meta name="dcterms.date" content="2024-10-03">
+<meta name="author" content="Shane L Hogle">
+<meta name="author" content="Milla Similä">
+<meta name="dcterms.date" content="2024-11-08">
+<meta name="keywords" content="Microbiology, Community assembly, Evolution, Antimicrobial resistance (AMR)">
 
-<title>hambiBottomUp data analysis - Data anlalysis for the project hambiABBAssembly</title>
+<title>hambiEvoEnvCoexist data analysis - Data anlalysis for the project hambiEvoEnvCoexist</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -165,7 +167,7 @@ window.Quarto = {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      hambiBottomUp data analysis
+      hambiEvoEnvCoexist data analysis
       </li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
@@ -181,7 +183,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">hambiBottomUp data analysis</a> 
+      <a href="./">hambiEvoEnvCoexist data analysis</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -299,7 +301,11 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#manuscript" id="toc-manuscript" class="nav-link active" data-scroll-target="#manuscript"><span class="header-section-number">1</span> Manuscript:</a></li>
+  <li><a href="#manuscript" id="toc-manuscript" class="nav-link active" data-scroll-target="#manuscript"><span class="header-section-number">1</span> Manuscript:</a>
+  <ul class="collapse">
+  <li><a href="#published-record" id="toc-published-record" class="nav-link" data-scroll-target="#published-record"><span class="header-section-number">1.1</span> Published record</a></li>
+  <li><a href="#preprint" id="toc-preprint" class="nav-link" data-scroll-target="#preprint"><span class="header-section-number">1.2</span> Preprint</a></li>
+  </ul></li>
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">2</span> Introduction</a></li>
   <li><a href="#experiment-overview" id="toc-experiment-overview" class="nav-link" data-scroll-target="#experiment-overview"><span class="header-section-number">3</span> Experiment overview</a>
   <ul class="collapse">
@@ -314,12 +320,8 @@ window.Quarto = {
   <li><a href="#species-interactions-1" id="toc-species-interactions-1" class="nav-link" data-scroll-target="#species-interactions-1"><span class="header-section-number">4.2</span> Species interactions:</a></li>
   <li><a href="#competitioncoexistence-outcomes-species-proportions-from-communities-1" id="toc-competitioncoexistence-outcomes-species-proportions-from-communities-1" class="nav-link" data-scroll-target="#competitioncoexistence-outcomes-species-proportions-from-communities-1"><span class="header-section-number">4.3</span> Competition/coexistence outcomes (species proportions from communities):</a></li>
   </ul></li>
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">5</span> Code</a>
-  <ul class="collapse">
-  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure"><span class="header-section-number">5.1</span> Project structure</a></li>
-  </ul></li>
-  <li><a href="#availability" id="toc-availability" class="nav-link" data-scroll-target="#availability"><span class="header-section-number">6</span> Availability</a></li>
-  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">7</span> Reproducibility</a></li>
+  <li><a href="#availability" id="toc-availability" class="nav-link" data-scroll-target="#availability"><span class="header-section-number">5</span> Availability</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">6</span> Reproducibility</a></li>
   </ul>
 </nav>
     </div>
@@ -328,24 +330,43 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data anlalysis for the project hambiABBAssembly</h1>
+<div class="quarto-title-block"><div><h1 class="title">Data anlalysis for the project hambiEvoEnvCoexist</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Shane L Hogle <a href="https://orcid.org/0000-0003-2595-3863" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.utu.fi/en">
+            University of Turku
+            </a>
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Milla Similä </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.utu.fi/en">
+            University of Turku
+            </a>
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Shane Hogle &amp; Milla Similä </p>
-          </div>
-  </div>
-    
+      
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 3, 2024</p>
+      <p class="date">November 8, 2024</p>
     </div>
   </div>
   
@@ -353,15 +374,26 @@ window.Quarto = {
   </div>
   
 
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>Microbiology, Community assembly, Evolution, Antimicrobial resistance (AMR)</p>
+  </div>
+</div>
 
 </header>
 
 
-<p>This project contains data and analysis from the hambiABBAssembly project.</p>
 <section id="manuscript" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="manuscript"><span class="header-section-number">1</span> Manuscript:</h2>
-<p>“TBD”</p>
-<p><a href="">Preprint available from bioRxiv</a></p>
+<section id="published-record" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="published-record"><span class="header-section-number">1.1</span> Published record</h3>
+<p>TBD</p>
+</section>
+<section id="preprint" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="preprint"><span class="header-section-number">1.2</span> Preprint</h3>
+<p>TBD</p>
+</section>
 </section>
 <section id="introduction" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2</span> Introduction</h2>
@@ -416,30 +448,20 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="code" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="code"><span class="header-section-number">5</span> Code</h2>
-<p><a href="https://zenodo.org/badge/latestdoi/"><img src="https://zenodo.org/badge/.svg" class="img-fluid" alt="DOI"></a> Data and code here is provided under GPL3. Feel free to use or remix as you see fit.</p>
-<section id="project-structure" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="project-structure"><span class="header-section-number">5.1</span> Project structure</h3>
-<ol type="1">
-<li><code>/R</code> contains R scripts</li>
-<li><code>/data</code> contains data that has been processed in some way for later use</li>
-<li><code>/_data_raw</code> contains unprocessed data scraped from compute cluster</li>
-<li><code>/figs</code> contains figures generated from R scripts</li>
-</ol>
+<section id="availability" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="availability"><span class="header-section-number">5</span> Availability</h2>
+<p>Data and code in this GitHub repository (<a href="https://github.com/slhogle/hambiEvoEnvCoexist" class="uri">https://github.com/slhogle/hambiEvoEnvCoexist</a>) is provided under <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL3</a>. The rendered project site is available at <a href="https://slhogle.github.io/hambiEvoEnvCoexist/" class="uri">https://slhogle.github.io/hambiEvoEnvCoexist/</a>, which has been produced using <a href="https://quarto.org/">Quarto notebooks</a>. The content on the rendered site is released under the <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0.</a> This repository hosts all code and data for this project including the code necessary to fully recreate the rendered webpage.</p>
+<p>An archived release of the code here is available from Zenodo:</p>
+<p>Raw sequencing data using in the project is available from NCBI Bioproject <a href=""></a>.</p>
 </section>
-</section>
-<section id="availability" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="availability"><span class="header-section-number">6</span> Availability</h2>
-<p>The rendered project site is available at <a href="https://slhogle.github.io/hambiABBAssembly/" class="uri">https://slhogle.github.io/hambiABBAssembly/</a>. The website has been produced using <a href="https://quarto.org/">Quarto notebooks</a>.</p>
-<p>This GitHub repository (<a href="https://github.com/slhogle/hambiABBAssembly" class="uri">https://github.com/slhogle/hambiABBAssembly</a>) hosts the code and data for this project. The rendered webpage can be fully recreated using the code.</p>
-</section>
-<section id="reproducibility" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">7</span> Reproducibility</h2>
+<section id="reproducibility" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">6</span> Reproducibility</h2>
 <p>The project uses <a href="https://rstudio.github.io/renv/index.html"><code>renv</code></a> to create reproducible environment to execute the code in this project. <a href="https://rstudio.github.io/renv/articles/renv.html#collaboration">See here</a> for a brief overview on collaboration and reproduction of the entire project. To get up and running you can do:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
+
+<!-- -->
 
 
 </section>
@@ -457,7 +479,7 @@ Levine, Jonathan M., Jordi Bascompte, Peter B. Adler, and Stefano Allesina. 2017
 <div id="ref-reasoner1985a" class="csl-entry" role="listitem">
 Reasoner, D J, and E E Geldreich. 1985. <span>“A New Medium for the Enumeration and Subculture of Bacteria from Potable Water.”</span> <em>Applied and Environmental Microbiology</em> 49 (1): 1–7. <a href="https://doi.org/10.1128/aem.49.1.1-7.1985">https://doi.org/10.1128/aem.49.1.1-7.1985</a>.
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -537,6 +559,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -866,7 +939,123 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="an">title:</span><span class="co"> "Data anlalysis for the project hambiEvoEnvCoexist"</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="an">author:</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">  - name: Shane L Hogle</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">    orcid: 0000-0003-2595-3863</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">    affiliation: </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">      - name: University of Turku</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">        city: Turku</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">        state: Finland</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">        url: https://www.utu.fi/en</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">  - name: Milla Similä</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">    affiliation: </span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">      - name: University of Turku</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">        city: Turku</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">        state: Finland</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">        url: https://www.utu.fi/en</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#abstract: &gt; </span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#  The abstract text can go here </span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#  and also here ...</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="an">keywords:</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co">  - Microbiology</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co">  - Community assembly</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co">  - Evolution</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co">  - Antimicrobial resistance (AMR)</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="an">license:</span><span class="co"> "CC BY"</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="an">copyright:</span><span class="co"> </span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="co">  holder: Shane L Hogle</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="co">  year: 2024</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="co"># citation: </span></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#   container-title: BioRxiv</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="co">#   volume: </span></span>
+<span id="cb2-33"><a href="#cb2-33"></a><span class="co">#   issue: </span></span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="co">#   doi: </span></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="an">funding:</span><span class="co"> "[Research Council of Finland Award 356133](https://research.fi/en/results/funding/77810)"</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a><span class="co">---</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a></span>
+<span id="cb2-39"><a href="#cb2-39"></a><span class="fu">## Manuscript:</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a></span>
+<span id="cb2-41"><a href="#cb2-41"></a><span class="fu">### Published record</span></span>
+<span id="cb2-42"><a href="#cb2-42"></a></span>
+<span id="cb2-43"><a href="#cb2-43"></a>TBD</span>
+<span id="cb2-44"><a href="#cb2-44"></a></span>
+<span id="cb2-45"><a href="#cb2-45"></a><span class="fu">### Preprint</span></span>
+<span id="cb2-46"><a href="#cb2-46"></a></span>
+<span id="cb2-47"><a href="#cb2-47"></a>TBD</span>
+<span id="cb2-48"><a href="#cb2-48"></a></span>
+<span id="cb2-49"><a href="#cb2-49"></a><span class="fu">## Introduction</span></span>
+<span id="cb2-50"><a href="#cb2-50"></a></span>
+<span id="cb2-51"><a href="#cb2-51"></a>Past work has shown that the composition of small bacterial communities can be predicted remarkably well from outcomes of competitions between small sets of species <span class="co">[</span><span class="ot">@friedman2017</span><span class="co">]</span>. Other work has questioned whether such simple qualitative assembly rules hold in more complex situations such as when the species pool shares an evolutionary history <span class="co">[</span><span class="ot">@chang2023</span><span class="co">]</span> (also see <span class="co">[</span><span class="ot">this blog post</span><span class="co">](https://sanchezlaboratory.weebly.com/blog/with-a-little-help-of-bacterial-friends-solo-no-puedes-con-amigos-si)</span>). If community assembly dynamics can truly be characterized by additive pairwise processes this would be a great advantage for modelers. It would mean that communities could be described sufficiently using paired species interactions (as in traditional Lotka Volterra). However, if higher-order interactions <span class="co">[</span><span class="ot">@levine2017</span><span class="co">]</span> are common and important (e.g., species C mediates the interaction between species A and B in a density independent way) then the number of parameters necessary to sufficiently model the system quickly blows up quickly making the entire problem intractable.</span>
+<span id="cb2-52"><a href="#cb2-52"></a></span>
+<span id="cb2-53"><a href="#cb2-53"></a>Understanding the fundamental processes in community assembly will be key to designing microbial communities with desirable properties for human use and to anticipate the response of communities in nature to change. Two theoretical camps have emerged in contemporary theory; one arguing for pairwise assembly rules and another arguing for the importance of networks of chained pairwise interactions and/or higher order interactions. Evidence exists for both processes occurring in nature. Thus, the question of when/how/why community assembly can be sufficiently described/predicted from additive pairwise processes is relevant and important for gaining a predictive understanding of microbiome dynamics. For example, when will the assembly process emerge as a property of the community, rather than being a straightforward additive process? In particular, do the previous evolutionary history and patterns of coexistence in the species pool determine emergent coexistence? What is the role for different growth conditions (substrate availability, antibacterial compounds, pH, predator presence)? Or does prior adaptive evolution to the environment change the outcomes? Do the "simple" rules governing community assembly fundamentally change as you add more layers of complexity?</span>
+<span id="cb2-54"><a href="#cb2-54"></a></span>
+<span id="cb2-55"><a href="#cb2-55"></a>The goal here is to shed some additional light on the question of the importance of pairwise competition/emergent coexistence in microbiomes. Our experiment assembles all possible 2, 3, and 4 species sub communities from a 4-species pool under a gradient of antibiotic concentrations and with different evolutionary histories of the four species. We assess the predictability of community assembly outcomes based on subsets of the reduced species assemblies and attempt to understand whether assembly operates in a predominantly pairwise way.</span>
+<span id="cb2-56"><a href="#cb2-56"></a></span>
+<span id="cb2-57"><a href="#cb2-57"></a><span class="fu">## Experiment overview</span></span>
+<span id="cb2-58"><a href="#cb2-58"></a></span>
+<span id="cb2-59"><a href="#cb2-59"></a><span class="fu">### Background:</span></span>
+<span id="cb2-60"><a href="#cb2-60"></a></span>
+<span id="cb2-61"><a href="#cb2-61"></a>In prior work from our lab we experimentally evolved all species from the HAMBI synthetic community to increasing concentrations of the aminoglycoside antibiotic streptomycin. Briefly, we would grow each species at the highest streptomycin concentration it could tolerate for a number of growth cycles, then we would transfer into a higher streptomycin. We did this until we reached a streptomycin concentration where we could no longer detect growth. Then these cultures were plated and a single clone was isolated.</span>
+<span id="cb2-62"><a href="#cb2-62"></a></span>
+<span id="cb2-63"><a href="#cb2-63"></a>These clones are the source "evolved" starting materials for this experiment, where their clonal ancestor is the "ancestral" starting material.</span>
+<span id="cb2-64"><a href="#cb2-64"></a></span>
+<span id="cb2-65"><a href="#cb2-65"></a><span class="fu">### Traits and physiology of species:</span></span>
+<span id="cb2-66"><a href="#cb2-66"></a></span>
+<span id="cb2-67"><a href="#cb2-67"></a>The ancestral and evolved form of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="co">[</span><span class="ot">@reasoner1985a</span><span class="co">]</span> at concentrations of 0, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, and 4096 μg/ml streptomycin. Growth was followed using optical density at 600 nm in a Bioscreen plate reader. Growth rates and carrying capacities were determined from the high resolution growth curves using AMiGA.</span>
+<span id="cb2-68"><a href="#cb2-68"></a></span>
+<span id="cb2-69"><a href="#cb2-69"></a><span class="fu">### Species interactions:</span></span>
+<span id="cb2-70"><a href="#cb2-70"></a></span>
+<span id="cb2-71"><a href="#cb2-71"></a>The ancestral and evolved forms of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="co">[</span><span class="ot">@reasoner1985a</span><span class="co">]</span>. Cultures were filtered to remove bacterial biomass and the spent media was stored at 4℃ until use. Next the evolved and ancestral forms of each species were grown in the spent medium of each other evo/anc species for 48 hours at 30℃ and growth was followed using optical density at 600 nm in a Bioscreen plate reader.</span>
+<span id="cb2-72"><a href="#cb2-72"></a></span>
+<span id="cb2-73"><a href="#cb2-73"></a>For the Burkholder diffusion assay we will add each species/evolutionary form to a soft agar on a petri dish. Then a small volume of each species will be pipetted directly onto the agar and plates will be checked for zones of inhibition.</span>
+<span id="cb2-74"><a href="#cb2-74"></a></span>
+<span id="cb2-75"><a href="#cb2-75"></a><span class="fu">### Competition/coexistence outcomes (species proportions from communities):</span></span>
+<span id="cb2-76"><a href="#cb2-76"></a></span>
+<span id="cb2-77"><a href="#cb2-77"></a>Here we wish to ensure that any equilibrium coexistence or competitive exclusion between species is not multistable - meaning that the outcome is deterministic and truly based on the density-independent competitive abilities of the species and not dependent on their starting density. The multistability problem has been addressed in other studies by growing each species from each community at different starting densities. This is typically done by starting all of the rare species at a low density and one abundant species at a higher density (as measured by optical density). For more than 2 species you cannot reasonably achieve all possible permutations of different densities, but you can start each species from rare, while leaving one remaining species high.</span>
+<span id="cb2-78"><a href="#cb2-78"></a></span>
+<span id="cb2-79"><a href="#cb2-79"></a>Here we use starting conditions with 10%/90% for pairs, 80%/10%/10% for trios, and 70%/10%/10%/10% for quartets. For pairs, we alternated so that each species started from rare. For trios and quartets, we alternated so that each species was allowed to invade from rare but we did not use all possible staring proportions due to practical and cost limitations. Another important consideration is that we can not distinguish between the ancestral and evolved forms of the same species with amplicon sequencing (or with plate counts) so that our experimental arrangement cannot be fully factorial (e.g., we cannot compete ancestral 1977 against evolved 1977) and thus there are fewer combinations that one would expect from expected scaling of $2^{(8-1)} = 128$</span>
+<span id="cb2-80"><a href="#cb2-80"></a></span>
+<span id="cb2-81"><a href="#cb2-81"></a>For the coexistence/exclusion experiments experimental communities are inoculated in 500 μl of 100% R2A in deep 96 well plates at a 50 fold dilution at four different streptomycin levels: 0, 16, 64, and 256 μg/ml. Plates were incubated in the dark at 30℃ with shaking at 800 RPM. Serial transfers (50 fold dilution; 10 μl to 490 μl) were conducted every 48 hours for a total of eight growth cycles. For every growth cycle $\mathrm{log_2(50)} \approx 5.6$ generations will have elapsed for a total of about 45 generations over eight cycles.</span>
+<span id="cb2-82"><a href="#cb2-82"></a></span>
+<span id="cb2-83"><a href="#cb2-83"></a><span class="fu">## Measurements and data types</span></span>
+<span id="cb2-84"><a href="#cb2-84"></a></span>
+<span id="cb2-85"><a href="#cb2-85"></a><span class="fu">### Traits and physiology of species:</span></span>
+<span id="cb2-86"><a href="#cb2-86"></a></span>
+<span id="cb2-87"><a href="#cb2-87"></a><span class="ss">-   </span>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on a gradient of streptomycin concentrations</span>
+<span id="cb2-88"><a href="#cb2-88"></a></span>
+<span id="cb2-89"><a href="#cb2-89"></a><span class="fu">### Species interactions:</span></span>
+<span id="cb2-90"><a href="#cb2-90"></a></span>
+<span id="cb2-91"><a href="#cb2-91"></a><span class="ss">-   </span>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on the filtrate of all other species.</span>
+<span id="cb2-92"><a href="#cb2-92"></a><span class="ss">-   </span>(NOT YET COMPLETED) Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). Note: based on past work with these species we don't expect to detect significant interference competition.</span>
+<span id="cb2-93"><a href="#cb2-93"></a></span>
+<span id="cb2-94"><a href="#cb2-94"></a><span class="fu">### Competition/coexistence outcomes (species proportions from communities):</span></span>
+<span id="cb2-95"><a href="#cb2-95"></a></span>
+<span id="cb2-96"><a href="#cb2-96"></a><span class="ss">-   </span>Community DNA from pairs, trios, and quartets was sampled after eight 48 hour growth cycles</span>
+<span id="cb2-97"><a href="#cb2-97"></a><span class="ss">-   </span>16S rRNA amplicon sequencing was performed on samples to get the proportion of each species</span>
+<span id="cb2-98"><a href="#cb2-98"></a><span class="ss">-   </span>Optical density was collected at every other growth cycle</span>
+<span id="cb2-99"><a href="#cb2-99"></a></span>
+<span id="cb2-100"><a href="#cb2-100"></a><span class="fu">## Availability</span></span>
+<span id="cb2-101"><a href="#cb2-101"></a></span>
+<span id="cb2-102"><a href="#cb2-102"></a>Data and code in this GitHub repository (<span class="ot">&lt;https://github.com/slhogle/hambiEvoEnvCoexist&gt;</span>) is provided under <span class="co">[</span><span class="ot">GNU AGPL3</span><span class="co">](https://www.gnu.org/licenses/agpl-3.0.html)</span>. The rendered project site is available at <span class="ot">&lt;https://slhogle.github.io/hambiEvoEnvCoexist/&gt;</span>, which has been produced using <span class="co">[</span><span class="ot">Quarto notebooks</span><span class="co">](https://quarto.org/)</span>. The content on the rendered site is released under the <span class="co">[</span><span class="ot">CC BY 4.0.</span><span class="co">](https://creativecommons.org/licenses/by/4.0/)</span> This repository hosts all code and data for this project including the code necessary to fully recreate the rendered webpage.</span>
+<span id="cb2-103"><a href="#cb2-103"></a></span>
+<span id="cb2-104"><a href="#cb2-104"></a>An archived release of the code here is available from Zenodo:</span>
+<span id="cb2-105"><a href="#cb2-105"></a></span>
+<span id="cb2-106"><a href="#cb2-106"></a>Raw sequencing data using in the project is available from NCBI Bioproject <span class="co">[ ]()</span>.</span>
+<span id="cb2-107"><a href="#cb2-107"></a></span>
+<span id="cb2-108"><a href="#cb2-108"></a><span class="fu">## Reproducibility</span></span>
+<span id="cb2-109"><a href="#cb2-109"></a></span>
+<span id="cb2-110"><a href="#cb2-110"></a>The project uses <span class="co">[</span><span class="ot">`renv`</span><span class="co">](https://rstudio.github.io/renv/index.html)</span> to create reproducible environment to execute the code in this project. <span class="co">[</span><span class="ot">See here</span><span class="co">](https://rstudio.github.io/renv/articles/renv.html#collaboration)</span> for a brief overview on collaboration and reproduction of the entire project. To get up and running you can do:</span>
+<span id="cb2-111"><a href="#cb2-111"></a></span>
+<span id="cb2-112"><a href="#cb2-112"></a><span class="in">``` r</span></span>
+<span id="cb2-113"><a href="#cb2-113"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
+<span id="cb2-114"><a href="#cb2-114"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span>
+<span id="cb2-115"><a href="#cb2-115"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

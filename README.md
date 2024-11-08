@@ -1,31 +1,27 @@
-# hambiABBAssembly
+# hambiEvoEnvCoexist
 
-[Click here to view rendered notebooks of the analysis.](https://slhogle.github.io/hambiABBAssembly/)
+[Click here to view rendered notebooks of the analysis.](https://slhogle.github.io/hambiEvoEnvCoexist/)
 
 ## Manuscript:
 
-"TBD"
+### Published record
 
-[Preprint available from bioRxiv]()
+TBD
 
-## Data
+### Preprint
 
-Data and code here is provided under GPL3. Feel free to use or remix as you see fit.
-
-[![DOI](https://zenodo.org/badge/.svg)](https://zenodo.org/badge/latestdoi/)
-
-### Project structure
-1.  `/R` contains R scripts and [Quarto notebooks](https://quarto.org/)
-2.  `/renv` code for [`renv`](https://rstudio.github.io/renv/index.html)
-3.  `/data` contains data that has been processed in some way for later use
-4.  `/_data_raw` contains unprocessed data scraped from compute cluster
-5.  `/figs` contains figures generated from R scripts
+TBD
 
 ## Availability
 
-The rendered project site is available at <https://slhogle.github.io/hambiABBAssembly/>. The website has been produced using [Quarto notebooks](https://quarto.org/).
+Data and code in this GitHub repository (<https://github.com/slhogle/hambiEvoEnvCoexist>) is provided under [GNU AGPL3](https://www.gnu.org/licenses/agpl-3.0.html).
+The rendered project site is available at <https://slhogle.github.io/hambiEvoEnvCoexist/>, which has been produced using [Quarto notebooks](https://quarto.org/). 
+The content on the rendered site is released under the [CC BY 4.0.](https://creativecommons.org/licenses/by/4.0/)
+This repository hosts all code and data for this project including the code necessary to fully recreate the rendered webpage.
 
-This GitHub repository (<https://github.com/slhogle/hambiABBAssembly>) hosts the code and data for this project. The rendered webpage can be fully recreated using the code.
+An archived release of the code here is available from Zenodo: 
+
+Raw sequencing data using in the project is available from NCBI Bioproject []().
 
 ## Reproducibility
 
