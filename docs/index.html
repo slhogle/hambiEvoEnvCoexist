@@ -2,16 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shane L Hogle">
 <meta name="author" content="Milla Similä">
-<meta name="dcterms.date" content="2024-11-08">
+<meta name="dcterms.date" content="2025-03-06">
 <meta name="keywords" content="Microbiology, Community assembly, Evolution, Antimicrobial resistance (AMR)">
 
-<title>hambiEvoEnvCoexist data analysis - Data anlalysis for the project hambiEvoEnvCoexist</title>
+<title>Data anlalysis for the project hambiEvoEnvCoexist – hambiEvoEnvCoexist</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,7 +37,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -93,10 +93,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1f23bf93a17969024013c136d185e5ce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -125,7 +125,7 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -163,15 +163,15 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      hambiEvoEnvCoexist data analysis
+      hambiEvoEnvCoexist
       </li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -183,7 +183,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">hambiEvoEnvCoexist data analysis</a> 
+      <a href="./">hambiEvoEnvCoexist</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -195,9 +195,9 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">1. Monoculture growth</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -218,9 +218,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">2. Community growth - experiment design</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -247,9 +247,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">3. Community growth - optical density</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -264,9 +264,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">4. Community growth - amplicon composition</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">4. Community growth - amplicon formatting</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -274,19 +274,60 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">i) 20240711 BTK Illumina v3 / Data wrangling and QC</span></a>
+ <span class="menu-text">i) Batch 2024-07-11</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ii) 20240711 BTK Illumina v3 / Metacal calibration</span></a>
+ <span class="menu-text">ii) Batch 2024-07-11 calibration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/analysis_pairs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">iii) Species pairs analysis</span></a>
+  <a href="./R/communities/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iii) Batch 2024-10-24</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iv) Batch 2025-01-27</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/amplicon/01_compile_format.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">v) Compile pairs, trios, quartets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">5. Community growth - Coexistence/exclusion analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/amplicon/02_analysis_pairs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">i) Species pairs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/amplicon/03_analysis_trios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ii) Species trios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/amplicon/04_analysis_quartets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iii) Species quartets</span></a>
   </div>
 </li>
       </ul>
@@ -366,7 +407,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 8, 2024</p>
+      <p class="date">March 6, 2025</p>
     </div>
   </div>
   
@@ -415,7 +456,7 @@ window.Quarto = {
 <section id="species-interactions" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="species-interactions"><span class="header-section-number">3.3</span> Species interactions:</h3>
 <p>The ancestral and evolved forms of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="citation" data-cites="reasoner1985a">(<a href="#ref-reasoner1985a" role="doc-biblioref">Reasoner and Geldreich 1985</a>)</span>. Cultures were filtered to remove bacterial biomass and the spent media was stored at 4℃ until use. Next the evolved and ancestral forms of each species were grown in the spent medium of each other evo/anc species for 48 hours at 30℃ and growth was followed using optical density at 600 nm in a Bioscreen plate reader.</p>
-<p>For the Burkholder diffusion assay we will add each species/evolutionary form to a soft agar on a petri dish. Then a small volume of each species will be pipetted directly onto the agar and plates will be checked for zones of inhibition.</p>
+<p>For the Burkholder diffusion assay each species/evolutionary form was added to a soft agar on a petri dish. Then a small volume of each species was pipetted directly onto the agar and plates and checked for zones of inhibition.</p>
 </section>
 <section id="competitioncoexistence-outcomes-species-proportions-from-communities" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="competitioncoexistence-outcomes-species-proportions-from-communities"><span class="header-section-number">3.4</span> Competition/coexistence outcomes (species proportions from communities):</h3>
@@ -436,7 +477,7 @@ window.Quarto = {
 <h3 data-number="4.2" class="anchored" data-anchor-id="species-interactions-1"><span class="header-section-number">4.2</span> Species interactions:</h3>
 <ul>
 <li>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on the filtrate of all other species.</li>
-<li>(NOT YET COMPLETED) Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). Note: based on past work with these species we don’t expect to detect significant interference competition.</li>
+<li>Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). These results show that no species/evolutionary form produced zones of inhibition for any other species/form. This suggests that there will not be significant interference competition in this experiment.</li>
 </ul>
 </section>
 <section id="competitioncoexistence-outcomes-species-proportions-from-communities-1" class="level3" data-number="4.3">
@@ -515,18 +556,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -558,7 +588,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -617,7 +667,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -714,7 +764,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1012,7 +1061,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-70"><a href="#cb2-70"></a></span>
 <span id="cb2-71"><a href="#cb2-71"></a>The ancestral and evolved forms of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="co">[</span><span class="ot">@reasoner1985a</span><span class="co">]</span>. Cultures were filtered to remove bacterial biomass and the spent media was stored at 4℃ until use. Next the evolved and ancestral forms of each species were grown in the spent medium of each other evo/anc species for 48 hours at 30℃ and growth was followed using optical density at 600 nm in a Bioscreen plate reader.</span>
 <span id="cb2-72"><a href="#cb2-72"></a></span>
-<span id="cb2-73"><a href="#cb2-73"></a>For the Burkholder diffusion assay we will add each species/evolutionary form to a soft agar on a petri dish. Then a small volume of each species will be pipetted directly onto the agar and plates will be checked for zones of inhibition.</span>
+<span id="cb2-73"><a href="#cb2-73"></a>For the Burkholder diffusion assay each species/evolutionary form was added to a soft agar on a petri dish. Then a small volume of each species was pipetted directly onto the agar and plates and checked for zones of inhibition.</span>
 <span id="cb2-74"><a href="#cb2-74"></a></span>
 <span id="cb2-75"><a href="#cb2-75"></a><span class="fu">### Competition/coexistence outcomes (species proportions from communities):</span></span>
 <span id="cb2-76"><a href="#cb2-76"></a></span>
@@ -1031,7 +1080,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-89"><a href="#cb2-89"></a><span class="fu">### Species interactions:</span></span>
 <span id="cb2-90"><a href="#cb2-90"></a></span>
 <span id="cb2-91"><a href="#cb2-91"></a><span class="ss">-   </span>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on the filtrate of all other species.</span>
-<span id="cb2-92"><a href="#cb2-92"></a><span class="ss">-   </span>(NOT YET COMPLETED) Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). Note: based on past work with these species we don't expect to detect significant interference competition.</span>
+<span id="cb2-92"><a href="#cb2-92"></a><span class="ss">-   </span>Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). These results show that no species/evolutionary form produced zones of inhibition for any other species/form. This suggests that there will not be significant interference competition in this experiment.</span>
 <span id="cb2-93"><a href="#cb2-93"></a></span>
 <span id="cb2-94"><a href="#cb2-94"></a><span class="fu">### Competition/coexistence outcomes (species proportions from communities):</span></span>
 <span id="cb2-95"><a href="#cb2-95"></a></span>
@@ -1054,7 +1103,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-112"><a href="#cb2-112"></a><span class="in">``` r</span></span>
 <span id="cb2-113"><a href="#cb2-113"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
 <span id="cb2-114"><a href="#cb2-114"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span>
-<span id="cb2-115"><a href="#cb2-115"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-115"><a href="#cb2-115"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

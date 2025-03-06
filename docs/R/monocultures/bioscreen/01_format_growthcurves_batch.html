@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shane Hogle">
-<meta name="dcterms.date" content="2024-11-08">
+<meta name="dcterms.date" content="2025-03-06">
 
-<title>hambiEvoEnvCoexist data analysis - Formatting bioscreen growth curves</title>
+<title>Formatting bioscreen growth curves – hambiEvoEnvCoexist</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-1f23bf93a17969024013c136d185e5ce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -105,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -143,13 +143,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../R/monocultures/bioscreen/01_format_growthcurves_batch.html">1. Monoculture growth</a></li><li class="breadcrumb-item"><a href="../../../R/monocultures/bioscreen/01_format_growthcurves_batch.html">i) Inspect and format growth curves</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -161,7 +161,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../../">hambiEvoEnvCoexist data analysis</a> 
+      <a href="../../../">hambiEvoEnvCoexist</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -173,9 +173,9 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">1. Monoculture growth</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -196,9 +196,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">2. Community growth - experiment design</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -225,9 +225,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">3. Community growth - optical density</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -242,9 +242,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">4. Community growth - amplicon composition</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">4. Community growth - amplicon formatting</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -252,19 +252,60 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">i) 20240711 BTK Illumina v3 / Data wrangling and QC</span></a>
+ <span class="menu-text">i) Batch 2024-07-11</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ii) 20240711 BTK Illumina v3 / Metacal calibration</span></a>
+ <span class="menu-text">ii) Batch 2024-07-11 calibration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/analysis_pairs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">iii) Species pairs analysis</span></a>
+  <a href="../../../R/communities/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iii) Batch 2024-10-24</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iv) Batch 2025-01-27</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/01_compile_format.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">v) Compile pairs, trios, quartets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">5. Community growth - Coexistence/exclusion analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/02_analysis_pairs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">i) Species pairs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/03_analysis_trios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ii) Species trios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/04_analysis_quartets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iii) Species quartets</span></a>
   </div>
 </li>
       </ul>
@@ -369,7 +410,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 8, 2024</p>
+      <p class="date">March 6, 2025</p>
     </div>
   </div>
   
@@ -660,7 +701,7 @@ window.Quarto = {
 <h1 data-number="5"><span class="header-section-number">5</span> Inspect growth curves</h1>
 <section id="bioscreen_strep_01" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="bioscreen_strep_01"><span class="header-section-number">5.1</span> bioscreen_strep_01</h2>
-<div id="fig-01" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-01" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -678,7 +719,7 @@ Figure&nbsp;1: Bioscreen plate “bioscreen_strep_01” wells 1-100. Blue line i
 </figcaption>
 </figure>
 </div>
-<div id="fig-02" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-02" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -699,7 +740,7 @@ Figure&nbsp;2: Bioscreen plate “bioscreen_strep_01” wells 101-200. Blue line
 </section>
 <section id="bioscreen_strep_02" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="bioscreen_strep_02"><span class="header-section-number">5.2</span> bioscreen_strep_02</h2>
-<div id="fig-03" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-03" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-03-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -717,7 +758,7 @@ Figure&nbsp;3: Bioscreen plate “bioscreen_strep_02” wells 1-70. Blue line is
 </figcaption>
 </figure>
 </div>
-<div id="fig-04" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-04" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -738,7 +779,7 @@ Figure&nbsp;4: Bioscreen plate “bioscreen_strep_02” wells 71-140. Blue line 
 </section>
 <section id="bioscreen_strep_03" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="bioscreen_strep_03"><span class="header-section-number">5.3</span> bioscreen_strep_03</h2>
-<div id="fig-05" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-05" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-05-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -756,7 +797,7 @@ Figure&nbsp;5: Bioscreen plate “bioscreen_strep_03” wells 1-70 Blue line is 
 </figcaption>
 </figure>
 </div>
-<div id="fig-06" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-06" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-06-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -777,7 +818,7 @@ Figure&nbsp;6: Bioscreen plate “bioscreen_strep_03” wells 71-140. Blue line 
 </section>
 <section id="bioscreen_pairwise_filtrates_01" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_01"><span class="header-section-number">5.4</span> bioscreen_pairwise_filtrates_01</h2>
-<div id="fig-07" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-07" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-07-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -795,7 +836,7 @@ Figure&nbsp;7: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 1-80 
 </figcaption>
 </figure>
 </div>
-<div id="fig-08" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-08" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-08-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -816,7 +857,7 @@ Figure&nbsp;8: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 81-16
 </section>
 <section id="bioscreen_pairwise_filtrates_02" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_02"><span class="header-section-number">5.5</span> bioscreen_pairwise_filtrates_02</h2>
-<div id="fig-09" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-09" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-09-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -834,7 +875,7 @@ Figure&nbsp;9: Bioscreen plate “bioscreen_pairwise_filtrates_02” wells 1-80.
 </figcaption>
 </figure>
 </div>
-<div id="fig-10" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-10" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -947,7 +988,7 @@ Attaching package: 'DescTools'</code></pre>
 <h3 data-number="6.1.4" class="anchored" data-anchor-id="plot"><span class="header-section-number">6.1.4</span> Plot</h3>
 <section id="bioscreen_strep_01-1" class="level4" data-number="6.1.4.1">
 <h4 data-number="6.1.4.1" class="anchored" data-anchor-id="bioscreen_strep_01-1"><span class="header-section-number">6.1.4.1</span> bioscreen_strep_01</h4>
-<div id="fig-11" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-11" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -965,7 +1006,7 @@ Figure&nbsp;11: Bioscreen plate “bioscreen_strep_01” wells 1-100. Blue line 
 </figcaption>
 </figure>
 </div>
-<div id="fig-12" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-12" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -986,7 +1027,7 @@ Figure&nbsp;12: Bioscreen plate “bioscreen_strep_01” wells 101-200. Blue lin
 </section>
 <section id="bioscreen_strep_02-1" class="level4" data-number="6.1.4.2">
 <h4 data-number="6.1.4.2" class="anchored" data-anchor-id="bioscreen_strep_02-1"><span class="header-section-number">6.1.4.2</span> bioscreen_strep_02</h4>
-<div id="fig-13" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-13" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1004,7 +1045,7 @@ Figure&nbsp;13: Bioscreen plate “bioscreen_strep_02” wells 1-70. Blue line i
 </figcaption>
 </figure>
 </div>
-<div id="fig-14" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-14" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1025,7 +1066,7 @@ Figure&nbsp;14: Bioscreen plate “bioscreen_strep_02” wells 71-140. Blue line
 </section>
 <section id="bioscreen_strep_03-1" class="level4" data-number="6.1.4.3">
 <h4 data-number="6.1.4.3" class="anchored" data-anchor-id="bioscreen_strep_03-1"><span class="header-section-number">6.1.4.3</span> bioscreen_strep_03</h4>
-<div id="fig-15" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-15" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1043,7 +1084,7 @@ Figure&nbsp;15: Bioscreen plate “bioscreen_strep_03” wells 1-70. Blue line i
 </figcaption>
 </figure>
 </div>
-<div id="fig-16" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-16" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1064,7 +1105,7 @@ Figure&nbsp;16: Bioscreen plate “bioscreen_strep_03” wells 71-140. Blue line
 </section>
 <section id="bioscreen_pairwise_filtrates_01-1" class="level4" data-number="6.1.4.4">
 <h4 data-number="6.1.4.4" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_01-1"><span class="header-section-number">6.1.4.4</span> bioscreen_pairwise_filtrates_01</h4>
-<div id="fig-17" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-17" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1082,7 +1123,7 @@ Figure&nbsp;17: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 1-80
 </figcaption>
 </figure>
 </div>
-<div id="fig-18" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-18" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1103,7 +1144,7 @@ Figure&nbsp;18: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 81-1
 </section>
 <section id="bioscreen_pairwise_filtrates_02-1" class="level4" data-number="6.1.4.5">
 <h4 data-number="6.1.4.5" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_02-1"><span class="header-section-number">6.1.4.5</span> bioscreen_pairwise_filtrates_02</h4>
-<div id="fig-19" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-19" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1121,7 +1162,7 @@ Figure&nbsp;19: Bioscreen plate “bioscreen_pairwise_filtrates_02” wells 1-80
 </figcaption>
 </figure>
 </div>
-<div id="fig-20" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-20" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1194,7 +1235,7 @@ Figure&nbsp;20: Bioscreen plate “bioscreen_pairwise_filtrates_02” wells 81-1
 <h3 data-number="6.2.4" class="anchored" data-anchor-id="plot-1"><span class="header-section-number">6.2.4</span> Plot</h3>
 <section id="bioscreen_strep_01-2" class="level4" data-number="6.2.4.1">
 <h4 data-number="6.2.4.1" class="anchored" data-anchor-id="bioscreen_strep_01-2"><span class="header-section-number">6.2.4.1</span> bioscreen_strep_01</h4>
-<div id="fig-21" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-21" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1212,7 +1253,7 @@ Figure&nbsp;21: Bioscreen plate “bioscreen_strep_01” wells 1-100. Blue line 
 </figcaption>
 </figure>
 </div>
-<div id="fig-22" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-22" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1233,7 +1274,7 @@ Figure&nbsp;22: Bioscreen plate “bioscreen_strep_01” wells 101-200. Blue lin
 </section>
 <section id="bioscreen_strep_02-2" class="level4" data-number="6.2.4.2">
 <h4 data-number="6.2.4.2" class="anchored" data-anchor-id="bioscreen_strep_02-2"><span class="header-section-number">6.2.4.2</span> bioscreen_strep_02</h4>
-<div id="fig-23" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-23" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1251,7 +1292,7 @@ Figure&nbsp;23: Bioscreen plate “bioscreen_strep_02” wells 1-70. Blue line i
 </figcaption>
 </figure>
 </div>
-<div id="fig-24" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-24" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1272,7 +1313,7 @@ Figure&nbsp;24: Bioscreen plate “bioscreen_strep_02” wells 71-140. Blue line
 </section>
 <section id="bioscreen_strep_03-2" class="level4" data-number="6.2.4.3">
 <h4 data-number="6.2.4.3" class="anchored" data-anchor-id="bioscreen_strep_03-2"><span class="header-section-number">6.2.4.3</span> bioscreen_strep_03</h4>
-<div id="fig-25" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-25" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-25-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1290,7 +1331,7 @@ Figure&nbsp;25: Bioscreen plate “bioscreen_strep_03” wells 1-70. Blue line i
 </figcaption>
 </figure>
 </div>
-<div id="fig-26" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-26" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-26-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1311,7 +1352,7 @@ Figure&nbsp;26: Bioscreen plate “bioscreen_strep_03” wells 71-140. Blue line
 </section>
 <section id="bioscreen_pairwise_filtrates_01-2" class="level4" data-number="6.2.4.4">
 <h4 data-number="6.2.4.4" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_01-2"><span class="header-section-number">6.2.4.4</span> bioscreen_pairwise_filtrates_01</h4>
-<div id="fig-27" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-27" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-27-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1329,7 +1370,7 @@ Figure&nbsp;27: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 1-80
 </figcaption>
 </figure>
 </div>
-<div id="fig-28" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-28" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-28-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1350,7 +1391,7 @@ Figure&nbsp;28: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 81-1
 </section>
 <section id="bioscreen_pairwise_filtrates_02-2" class="level4" data-number="6.2.4.5">
 <h4 data-number="6.2.4.5" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_02-2"><span class="header-section-number">6.2.4.5</span> bioscreen_pairwise_filtrates_02</h4>
-<div id="fig-29" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-29" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-29-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1368,7 +1409,7 @@ Figure&nbsp;29: Bioscreen plate “bioscreen_pairwise_filtrates_02” wells 1-80
 </figcaption>
 </figure>
 </div>
-<div id="fig-30" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-30" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-30-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1446,7 +1487,7 @@ Figure&nbsp;30: Bioscreen plate “bioscreen_pairwise_filtrates_02” wells 81-1
 <h3 data-number="6.3.4" class="anchored" data-anchor-id="plot-2"><span class="header-section-number">6.3.4</span> Plot</h3>
 <section id="bioscreen_strep_01-3" class="level4" data-number="6.3.4.1">
 <h4 data-number="6.3.4.1" class="anchored" data-anchor-id="bioscreen_strep_01-3"><span class="header-section-number">6.3.4.1</span> bioscreen_strep_01</h4>
-<div id="fig-31" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-31" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-31-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1464,7 +1505,7 @@ Figure&nbsp;31: Bioscreen plate “bioscreen_strep_01” wells 1-100. Blue line 
 </figcaption>
 </figure>
 </div>
-<div id="fig-32" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-32" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-32-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1485,7 +1526,7 @@ Figure&nbsp;32: Bioscreen plate “bioscreen_strep_01” wells 101-200. Blue lin
 </section>
 <section id="bioscreen_strep_02-3" class="level4" data-number="6.3.4.2">
 <h4 data-number="6.3.4.2" class="anchored" data-anchor-id="bioscreen_strep_02-3"><span class="header-section-number">6.3.4.2</span> bioscreen_strep_02</h4>
-<div id="fig-33" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-33" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-33-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1503,7 +1544,7 @@ Figure&nbsp;33: Bioscreen plate “bioscreen_strep_02” wells 1-70. Blue line i
 </figcaption>
 </figure>
 </div>
-<div id="fig-34" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-34" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-34-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1524,7 +1565,7 @@ Figure&nbsp;34: Bioscreen plate “bioscreen_strep_02” wells 71-140. Blue line
 </section>
 <section id="bioscreen_strep_03-3" class="level4" data-number="6.3.4.3">
 <h4 data-number="6.3.4.3" class="anchored" data-anchor-id="bioscreen_strep_03-3"><span class="header-section-number">6.3.4.3</span> bioscreen_strep_03</h4>
-<div id="fig-35" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-35" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-35-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1542,7 +1583,7 @@ Figure&nbsp;35: Bioscreen plate “bioscreen_strep_03” wells 1-70. Blue line i
 </figcaption>
 </figure>
 </div>
-<div id="fig-36" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-36" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-36-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1563,7 +1604,7 @@ Figure&nbsp;36: Bioscreen plate “bioscreen_strep_03” wells 71-140. Blue line
 </section>
 <section id="bioscreen_pairwise_filtrates_01-3" class="level4" data-number="6.3.4.4">
 <h4 data-number="6.3.4.4" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_01-3"><span class="header-section-number">6.3.4.4</span> bioscreen_pairwise_filtrates_01</h4>
-<div id="fig-37" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-37" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-37-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1581,7 +1622,7 @@ Figure&nbsp;37: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 1-80
 </figcaption>
 </figure>
 </div>
-<div id="fig-38" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-38" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-38-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1602,7 +1643,7 @@ Figure&nbsp;38: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 81-1
 </section>
 <section id="bioscreen_pairwise_filtrates_02-3" class="level4" data-number="6.3.4.5">
 <h4 data-number="6.3.4.5" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_02-3"><span class="header-section-number">6.3.4.5</span> bioscreen_pairwise_filtrates_02</h4>
-<div id="fig-39" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-39" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-39-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1620,7 +1661,7 @@ Figure&nbsp;39: Bioscreen plate “bioscreen_pairwise_filtrates_02” wells 1-80
 </figcaption>
 </figure>
 </div>
-<div id="fig-40" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-40" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1699,7 +1740,7 @@ Figure&nbsp;40: Bioscreen plate “bioscreen_pairwise_filtrates_02” wells 81-1
 <h3 data-number="6.4.4" class="anchored" data-anchor-id="plot-3"><span class="header-section-number">6.4.4</span> Plot</h3>
 <section id="bioscreen_strep_01-4" class="level4" data-number="6.4.4.1">
 <h4 data-number="6.4.4.1" class="anchored" data-anchor-id="bioscreen_strep_01-4"><span class="header-section-number">6.4.4.1</span> bioscreen_strep_01</h4>
-<div id="fig-41" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-41" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1717,7 +1758,7 @@ Figure&nbsp;41: Bioscreen plate “bioscreen_strep_01” wells 1-100. Blue line 
 </figcaption>
 </figure>
 </div>
-<div id="fig-42" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-42" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-42-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1738,7 +1779,7 @@ Figure&nbsp;42: Bioscreen plate “bioscreen_strep_01” wells 101-200. Blue lin
 </section>
 <section id="bioscreen_strep_02-4" class="level4" data-number="6.4.4.2">
 <h4 data-number="6.4.4.2" class="anchored" data-anchor-id="bioscreen_strep_02-4"><span class="header-section-number">6.4.4.2</span> bioscreen_strep_02</h4>
-<div id="fig-43" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-43" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-43-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1756,7 +1797,7 @@ Figure&nbsp;43: Bioscreen plate “bioscreen_strep_02” wells 1-70. Blue line i
 </figcaption>
 </figure>
 </div>
-<div id="fig-44" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-44" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-44-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1777,7 +1818,7 @@ Figure&nbsp;44: Bioscreen plate “bioscreen_strep_02” wells 71-140. Blue line
 </section>
 <section id="bioscreen_strep_03-4" class="level4" data-number="6.4.4.3">
 <h4 data-number="6.4.4.3" class="anchored" data-anchor-id="bioscreen_strep_03-4"><span class="header-section-number">6.4.4.3</span> bioscreen_strep_03</h4>
-<div id="fig-45" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-45" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-45-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1795,7 +1836,7 @@ Figure&nbsp;45: Bioscreen plate “bioscreen_strep_03” wells 1-70. Blue line i
 </figcaption>
 </figure>
 </div>
-<div id="fig-46" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-46" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-46-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1816,7 +1857,7 @@ Figure&nbsp;46: Bioscreen plate “bioscreen_strep_03” wells 71-140. Blue line
 </section>
 <section id="bioscreen_pairwise_filtrates_01-4" class="level4" data-number="6.4.4.4">
 <h4 data-number="6.4.4.4" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_01-4"><span class="header-section-number">6.4.4.4</span> bioscreen_pairwise_filtrates_01</h4>
-<div id="fig-47" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-47" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-47-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1834,7 +1875,7 @@ Figure&nbsp;47: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 1-80
 </figcaption>
 </figure>
 </div>
-<div id="fig-48" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-48" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-48-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1855,7 +1896,7 @@ Figure&nbsp;48: Bioscreen plate “bioscreen_pairwise_filtrates_01” wells 81-1
 </section>
 <section id="bioscreen_pairwise_filtrates_02-4" class="level4" data-number="6.4.4.5">
 <h4 data-number="6.4.4.5" class="anchored" data-anchor-id="bioscreen_pairwise_filtrates_02-4"><span class="header-section-number">6.4.4.5</span> bioscreen_pairwise_filtrates_02</h4>
-<div id="fig-49" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-49" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-49-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -1873,7 +1914,7 @@ Figure&nbsp;49: Bioscreen plate “bioscreen_pairwise_filtrates_02” wells 1-80
 </figcaption>
 </figure>
 </div>
-<div id="fig-50" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-50" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-50-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -2005,18 +2046,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2048,7 +2078,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -2107,7 +2157,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -2204,7 +2254,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -3609,7 +3658,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb42-1355"><a href="#cb42-1355"></a>  dplyr<span class="sc">::</span><span class="fu">relocate</span>(y0<span class="sc">:</span>r2, <span class="at">.after=</span><span class="st">"sp_filtrate"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb42-1356"><a href="#cb42-1356"></a>  readr<span class="sc">::</span><span class="fu">write_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_huang_results.tsv"</span>))</span>
 <span id="cb42-1357"><a href="#cb42-1357"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shane Hogle">
-<meta name="dcterms.date" content="2024-10-03">
+<meta name="dcterms.date" content="2025-03-06">
 
-<title>hambiBottomUp data analysis - Designing two-species subcommunities</title>
+<title>Designing two-species subcommunities – hambiEvoEnvCoexist</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-1f23bf93a17969024013c136d185e5ce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -114,13 +114,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../R/communities/experiment_design/01_pairs.html">2. Community growth - experiment design</a></li><li class="breadcrumb-item"><a href="../../../R/communities/experiment_design/01_pairs.html">i) Species pairs - 96 Well plate layout</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -132,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../../">hambiBottomUp data analysis</a> 
+      <a href="../../../">hambiEvoEnvCoexist</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -144,9 +144,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">1. Monoculture growth</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -167,9 +167,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">2. Community growth - experiment design</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -196,9 +196,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">3. Community growth - optical density</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -213,9 +213,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">4. Community growth - amplicon composition</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">4. Community growth - amplicon formatting</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -223,19 +223,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">i) 20240711 BTK Illumina v3 / Data wrangling and QC</span></a>
+ <span class="menu-text">i) Batch 2024-07-11</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ii) 20240711 BTK Illumina v3 / Metacal calibration</span></a>
+ <span class="menu-text">ii) Batch 2024-07-11 calibration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/analysis_pairs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">iii) Species pairs analysis</span></a>
+  <a href="../../../R/communities/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iii) Batch 2024-10-24</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iv) Batch 2025-01-27</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/01_compile_format.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">v) Compile pairs, trios, quartets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">5. Community growth - Coexistence/exclusion analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/02_analysis_pairs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">i) Species pairs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/03_analysis_trios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ii) Species trios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/04_analysis_quartets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iii) Species quartets</span></a>
   </div>
 </li>
       </ul>
@@ -273,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../R/communities/experiment_design/01_pairs.html">2. Community growth - experiment design</a></li><li class="breadcrumb-item"><a href="../../../R/communities/experiment_design/01_pairs.html">i) Species pairs - 96 Well plate layout</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Designing two-species subcommunities</h1>
+<div class="quarto-title-block"><div><h1 class="title">Designing two-species subcommunities</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -290,13 +331,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 3, 2024</p>
+      <p class="date">March 6, 2025</p>
     </div>
   </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    This notebook creates and lays out the steps for constructing the experimental species pairs for this experiment. It is inspired by the method outlined in this paper: <a href="https://doi.org/10.7554/eLife.101906.1">Full factorial construction of synthetic microbial communities, eLife 13:RP101906</a>
+  </div>
+</div>
 
 
 </header>
@@ -307,24 +354,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="libraries" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">1.1</span> Libraries</h2>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(here)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(ggplate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="global-variables" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="global-variables"><span class="header-section-number">1.2</span> Global variables</h2>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>data <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"communities"</span>, <span class="st">"experiment_design"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co"># make processed data directory if it doesn't exist</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>fs<span class="sc">::</span><span class="fu">dir_create</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="functions-and-vars" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="functions-and-vars"><span class="header-section-number">1.3</span> Functions and vars</h2>
 <p>Species color vector</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>my_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="st">"ANC_0403_10"</span> <span class="ot">=</span> <span class="st">"#ffaaaa"</span>, <span class="st">"ANC_0403_70"</span> <span class="ot">=</span> <span class="st">"#aa0000"</span>, <span class="st">"ANC_0403_80"</span> <span class="ot">=</span> <span class="st">"#aa0000"</span>, <span class="st">"ANC_0403_90"</span> <span class="ot">=</span> <span class="st">"#aa0000"</span>, </span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="st">"ANC_1287_10"</span> <span class="ot">=</span> <span class="st">"#ffeeaa"</span>, <span class="st">"ANC_1287_70"</span> <span class="ot">=</span> <span class="st">"#d4aa00"</span>, <span class="st">"ANC_1287_80"</span> <span class="ot">=</span> <span class="st">"#d4aa00"</span>, <span class="st">"ANC_1287_90"</span> <span class="ot">=</span> <span class="st">"#d4aa00"</span>, </span>
@@ -335,9 +390,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-8"><a href="#cb3-8"></a>  <span class="st">"EVO_1896_10"</span> <span class="ot">=</span> <span class="st">"#aaffee"</span>, <span class="st">"EVO_1896_70"</span> <span class="ot">=</span> <span class="st">"#00ffcc"</span>, <span class="st">"EVO_1896_80"</span> <span class="ot">=</span> <span class="st">"#00ffcc"</span>, <span class="st">"EVO_1896_90"</span> <span class="ot">=</span> <span class="st">"#00ffcc"</span>, </span>
 <span id="cb3-9"><a href="#cb3-9"></a>  <span class="st">"EVO_1977_10"</span> <span class="ot">=</span> <span class="st">"#ccaaff"</span>, <span class="st">"EVO_1977_70"</span> <span class="ot">=</span> <span class="st">"#7f2aff"</span>, <span class="st">"EVO_1977_80"</span> <span class="ot">=</span> <span class="st">"#7f2aff"</span>, <span class="st">"EVO_1977_90"</span> <span class="ot">=</span> <span class="st">"#7f2aff"</span></span>
 <span id="cb3-10"><a href="#cb3-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>For plotting plates</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>plate_plot_steps <span class="ot">&lt;-</span> <span class="cf">function</span>(df, well_colmun, val_column, step, colr_vec){</span>
 <span id="cb4-2"><a href="#cb4-2"></a>  ggplate<span class="sc">::</span><span class="fu">plate_plot</span>(df,</span>
 <span id="cb4-3"><a href="#cb4-3"></a>  <span class="at">position =</span> {{ well_colmun }},</span>
@@ -347,6 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-7"><a href="#cb4-7"></a>  <span class="at">plate_type =</span> <span class="st">"round"</span></span>
 <span id="cb4-8"><a href="#cb4-8"></a>) <span class="sc">+</span> <span class="fu">ggtitle</span>(step)</span>
 <span id="cb4-9"><a href="#cb4-9"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 </section>
@@ -354,13 +413,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="2"><span class="header-section-number">2</span> Construct pair combinations</h1>
 <p>Get all possible pairs while excluding combinations of ANC/EVO of the same species</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>combos02 <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">combn</span>(<span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>),  <span class="dv">2</span>))</span>
 <span id="cb5-2"><a href="#cb5-2"></a>combos02 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">"a"</span> <span class="ot">=</span> combos02[, <span class="dv">1</span>], <span class="st">"b"</span> <span class="ot">=</span> combos02[, <span class="dv">2</span>])</span>
 <span id="cb5-3"><a href="#cb5-3"></a>combos02_filt <span class="ot">&lt;-</span> combos02 <span class="sc">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">filter</span>(<span class="fu">str_extract</span>(a, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>) <span class="sc">!=</span> <span class="fu">str_extract</span>(b, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Make plate layouts for the 2-species combos</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>combos02_filt_well_left <span class="ot">&lt;-</span> combos02_filt <span class="sc">%&gt;%</span> </span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">a =</span> <span class="fu">paste</span>(a, <span class="dv">90</span>, <span class="at">sep =</span> <span class="st">"_"</span>), </span>
 <span id="cb6-3"><a href="#cb6-3"></a>         <span class="at">b =</span> <span class="fu">paste</span>(b, <span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span> </span>
@@ -391,10 +455,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-28"><a href="#cb6-28"></a>  <span class="fu">rename</span>(<span class="at">a =</span> b, <span class="at">b =</span> a )</span>
 <span id="cb6-29"><a href="#cb6-29"></a></span>
 <span id="cb6-30"><a href="#cb6-30"></a>combos02_filt_well <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(combos02_filt_well_left, combos02_filt_well_right)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <section id="format-and-save" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="format-and-save"><span class="header-section-number">2.1</span> Format and save</h2>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>combos02_filt_well <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">group_by</span>(a, b) <span class="sc">%&gt;%</span> </span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">mutate</span>(<span class="at">microcosm_id =</span> <span class="fu">cur_group_id</span>()) <span class="sc">%&gt;%</span> </span>
@@ -406,8 +473,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">arrange</span>(well) <span class="sc">%&gt;%</span> </span>
 <span id="cb7-10"><a href="#cb7-10"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(microcosm_id, well, a, a_sp, a_f, b, b_sp, b_f) <span class="sc">%&gt;%</span> </span>
 <span id="cb7-11"><a href="#cb7-11"></a>  readr<span class="sc">::</span><span class="fu">write_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"pairs_sample_composition_wide.tsv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>combos02_filt_well <span class="sc">%&gt;%</span> </span>
 <span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">group_by</span>(a, b) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">mutate</span>(<span class="at">microcosm_id =</span> <span class="fu">cur_group_id</span>()) <span class="sc">%&gt;%</span> </span>
@@ -422,6 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-12"><a href="#cb8-12"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-13"><a href="#cb8-13"></a>  dplyr<span class="sc">::</span><span class="fu">relocate</span>(microcosm_id, n_species) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-14"><a href="#cb8-14"></a>  readr<span class="sc">::</span><span class="fu">write_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"pairs_sample_composition_long.tsv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 </section>
@@ -430,7 +501,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Proceed in the order of steps below to construct master plates used to inoculate different conditions</p>
 <section id="first-pipetting-step" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="first-pipetting-step"><span class="header-section-number">3.1</span> First pipetting step</h2>
-<div id="fig-01" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-01" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -451,7 +522,7 @@ Figure&nbsp;1: Layout for the first pipetting step for constructing pairs. Diffe
 </section>
 <section id="second-pipetting-step" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="second-pipetting-step"><span class="header-section-number">3.2</span> Second pipetting step</h2>
-<div id="fig-02" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-02" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
@@ -470,6 +541,8 @@ Figure&nbsp;2: Layout for the second pipetting step for constructing pairs. Diff
 </figure>
 </div>
 
+
+<!-- -->
 
 </section>
 </section>
@@ -510,18 +583,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -553,7 +615,78 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -561,7 +694,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -658,7 +791,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -883,7 +1015,171 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="an">title:</span><span class="co"> "Designing two-species subcommunities"</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="an">author:</span><span class="co"> "Shane Hogle"</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="an">link-citations:</span><span class="co"> true</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="an">abstract:</span><span class="co"> "This notebook creates and lays out the steps for constructing the experimental species pairs for this experiment. It is inspired by the method outlined in this paper: [Full factorial construction of synthetic microbial communities, eLife 13:RP101906](https://doi.org/10.7554/eLife.101906.1)"</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">---</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="fu"># Setup</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="fu">## Libraries</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="in">```{r}</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#| output: false</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="fu">library</span>(here)</span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="fu">library</span>(ggplate)</span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="in">```</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="fu">## Global variables</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="in">```{r}</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a>data <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"communities"</span>, <span class="st">"experiment_design"</span>)</span>
+<span id="cb9-27"><a href="#cb9-27"></a></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="co"># make processed data directory if it doesn't exist</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a>fs<span class="sc">::</span><span class="fu">dir_create</span>(data)</span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="in">```</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="fu">## Functions and vars</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a></span>
+<span id="cb9-34"><a href="#cb9-34"></a>Species color vector</span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="in">```{r}</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a>my_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb9-39"><a href="#cb9-39"></a>  <span class="st">"ANC_0403_10"</span> <span class="ot">=</span> <span class="st">"#ffaaaa"</span>, <span class="st">"ANC_0403_70"</span> <span class="ot">=</span> <span class="st">"#aa0000"</span>, <span class="st">"ANC_0403_80"</span> <span class="ot">=</span> <span class="st">"#aa0000"</span>, <span class="st">"ANC_0403_90"</span> <span class="ot">=</span> <span class="st">"#aa0000"</span>, </span>
+<span id="cb9-40"><a href="#cb9-40"></a>  <span class="st">"ANC_1287_10"</span> <span class="ot">=</span> <span class="st">"#ffeeaa"</span>, <span class="st">"ANC_1287_70"</span> <span class="ot">=</span> <span class="st">"#d4aa00"</span>, <span class="st">"ANC_1287_80"</span> <span class="ot">=</span> <span class="st">"#d4aa00"</span>, <span class="st">"ANC_1287_90"</span> <span class="ot">=</span> <span class="st">"#d4aa00"</span>, </span>
+<span id="cb9-41"><a href="#cb9-41"></a>  <span class="st">"ANC_1896_10"</span> <span class="ot">=</span> <span class="st">"#ccffaa"</span>, <span class="st">"ANC_1896_70"</span> <span class="ot">=</span> <span class="st">"#44aa00"</span>, <span class="st">"ANC_1896_80"</span> <span class="ot">=</span> <span class="st">"#44aa00"</span>, <span class="st">"ANC_1896_90"</span> <span class="ot">=</span> <span class="st">"#44aa00"</span>, </span>
+<span id="cb9-42"><a href="#cb9-42"></a>  <span class="st">"ANC_1977_10"</span> <span class="ot">=</span> <span class="st">"#aaccff"</span>, <span class="st">"ANC_1977_70"</span> <span class="ot">=</span> <span class="st">"#0055d4"</span>, <span class="st">"ANC_1977_80"</span> <span class="ot">=</span> <span class="st">"#0055d4"</span>, <span class="st">"ANC_1977_90"</span> <span class="ot">=</span> <span class="st">"#0055d4"</span>,</span>
+<span id="cb9-43"><a href="#cb9-43"></a>  <span class="st">"EVO_0403_10"</span> <span class="ot">=</span> <span class="st">"#ffaaee"</span>, <span class="st">"EVO_0403_70"</span> <span class="ot">=</span> <span class="st">"#ff00cc"</span>, <span class="st">"EVO_0403_80"</span> <span class="ot">=</span> <span class="st">"#ff00cc"</span>, <span class="st">"EVO_0403_90"</span> <span class="ot">=</span> <span class="st">"#ff00cc"</span>, </span>
+<span id="cb9-44"><a href="#cb9-44"></a>  <span class="st">"EVO_1287_10"</span> <span class="ot">=</span> <span class="st">"#ffccaa"</span>, <span class="st">"EVO_1287_70"</span> <span class="ot">=</span> <span class="st">"#ff6600"</span>, <span class="st">"EVO_1287_80"</span> <span class="ot">=</span> <span class="st">"#ff6600"</span>, <span class="st">"EVO_1287_90"</span> <span class="ot">=</span> <span class="st">"#ff6600"</span>, </span>
+<span id="cb9-45"><a href="#cb9-45"></a>  <span class="st">"EVO_1896_10"</span> <span class="ot">=</span> <span class="st">"#aaffee"</span>, <span class="st">"EVO_1896_70"</span> <span class="ot">=</span> <span class="st">"#00ffcc"</span>, <span class="st">"EVO_1896_80"</span> <span class="ot">=</span> <span class="st">"#00ffcc"</span>, <span class="st">"EVO_1896_90"</span> <span class="ot">=</span> <span class="st">"#00ffcc"</span>, </span>
+<span id="cb9-46"><a href="#cb9-46"></a>  <span class="st">"EVO_1977_10"</span> <span class="ot">=</span> <span class="st">"#ccaaff"</span>, <span class="st">"EVO_1977_70"</span> <span class="ot">=</span> <span class="st">"#7f2aff"</span>, <span class="st">"EVO_1977_80"</span> <span class="ot">=</span> <span class="st">"#7f2aff"</span>, <span class="st">"EVO_1977_90"</span> <span class="ot">=</span> <span class="st">"#7f2aff"</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a>  )</span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="in">```</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a></span>
+<span id="cb9-50"><a href="#cb9-50"></a>For plotting plates</span>
+<span id="cb9-53"><a href="#cb9-53"></a><span class="in">```{r}</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a>plate_plot_steps <span class="ot">&lt;-</span> <span class="cf">function</span>(df, well_colmun, val_column, step, colr_vec){</span>
+<span id="cb9-55"><a href="#cb9-55"></a>  ggplate<span class="sc">::</span><span class="fu">plate_plot</span>(df,</span>
+<span id="cb9-56"><a href="#cb9-56"></a>  <span class="at">position =</span> {{ well_colmun }},</span>
+<span id="cb9-57"><a href="#cb9-57"></a>  <span class="at">value =</span> {{ val_column }},</span>
+<span id="cb9-58"><a href="#cb9-58"></a>  <span class="at">colour =</span> colr_vec,</span>
+<span id="cb9-59"><a href="#cb9-59"></a>  <span class="at">plate_size =</span> <span class="dv">96</span>,</span>
+<span id="cb9-60"><a href="#cb9-60"></a>  <span class="at">plate_type =</span> <span class="st">"round"</span></span>
+<span id="cb9-61"><a href="#cb9-61"></a>) <span class="sc">+</span> <span class="fu">ggtitle</span>(step)</span>
+<span id="cb9-62"><a href="#cb9-62"></a>}</span>
+<span id="cb9-63"><a href="#cb9-63"></a><span class="in">```</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a></span>
+<span id="cb9-65"><a href="#cb9-65"></a><span class="fu"># Construct pair combinations</span></span>
+<span id="cb9-66"><a href="#cb9-66"></a></span>
+<span id="cb9-67"><a href="#cb9-67"></a>Get all possible pairs while excluding combinations of ANC/EVO of the same species</span>
+<span id="cb9-68"><a href="#cb9-68"></a></span>
+<span id="cb9-71"><a href="#cb9-71"></a><span class="in">```{r}</span></span>
+<span id="cb9-72"><a href="#cb9-72"></a>combos02 <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">combn</span>(<span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>),  <span class="dv">2</span>))</span>
+<span id="cb9-73"><a href="#cb9-73"></a>combos02 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">"a"</span> <span class="ot">=</span> combos02[, <span class="dv">1</span>], <span class="st">"b"</span> <span class="ot">=</span> combos02[, <span class="dv">2</span>])</span>
+<span id="cb9-74"><a href="#cb9-74"></a>combos02_filt <span class="ot">&lt;-</span> combos02 <span class="sc">%&gt;%</span></span>
+<span id="cb9-75"><a href="#cb9-75"></a>  <span class="fu">filter</span>(<span class="fu">str_extract</span>(a, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>) <span class="sc">!=</span> <span class="fu">str_extract</span>(b, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>))</span>
+<span id="cb9-76"><a href="#cb9-76"></a><span class="in">```</span></span>
+<span id="cb9-77"><a href="#cb9-77"></a></span>
+<span id="cb9-78"><a href="#cb9-78"></a>Make plate layouts for the 2-species combos</span>
+<span id="cb9-79"><a href="#cb9-79"></a></span>
+<span id="cb9-82"><a href="#cb9-82"></a><span class="in">```{r}</span></span>
+<span id="cb9-83"><a href="#cb9-83"></a>combos02_filt_well_left <span class="ot">&lt;-</span> combos02_filt <span class="sc">%&gt;%</span> </span>
+<span id="cb9-84"><a href="#cb9-84"></a>  <span class="fu">mutate</span>(<span class="at">a =</span> <span class="fu">paste</span>(a, <span class="dv">90</span>, <span class="at">sep =</span> <span class="st">"_"</span>), </span>
+<span id="cb9-85"><a href="#cb9-85"></a>         <span class="at">b =</span> <span class="fu">paste</span>(b, <span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-86"><a href="#cb9-86"></a>  <span class="fu">add_count</span>(a, <span class="at">name =</span> <span class="st">"a_count"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-87"><a href="#cb9-87"></a>  <span class="fu">add_count</span>(b, <span class="at">name =</span> <span class="st">"b_count"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-88"><a href="#cb9-88"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(a_count), a) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-89"><a href="#cb9-89"></a>  <span class="fu">mutate</span>(<span class="at">row =</span> <span class="fu">rep</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="fu">n_distinct</span>(a)], </span>
+<span id="cb9-90"><a href="#cb9-90"></a>                   <span class="at">times =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="fu">n_distinct</span>(a)<span class="sc">:</span><span class="dv">2</span>)[<span class="fu">n_distinct</span>(a)<span class="sc">:</span><span class="dv">2</span><span class="sc">%%</span><span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>], <span class="at">each =</span> <span class="dv">2</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-91"><a href="#cb9-91"></a>  <span class="fu">group_by</span>(row) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-92"><a href="#cb9-92"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(b_count), b) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-93"><a href="#cb9-93"></a>  <span class="fu">mutate</span>(<span class="at">col =</span> <span class="fu">str_pad</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(row), <span class="dv">2</span>, <span class="at">pad =</span> <span class="st">"0"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-94"><a href="#cb9-94"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-95"><a href="#cb9-95"></a>  <span class="fu">mutate</span>(<span class="at">well =</span> <span class="fu">paste0</span>(row, col))</span>
+<span id="cb9-96"><a href="#cb9-96"></a></span>
+<span id="cb9-97"><a href="#cb9-97"></a>combos02_filt_well_right <span class="ot">&lt;-</span> combos02_filt <span class="sc">%&gt;%</span> </span>
+<span id="cb9-98"><a href="#cb9-98"></a>  <span class="fu">mutate</span>(<span class="at">a =</span> <span class="fu">paste</span>(a, <span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>), </span>
+<span id="cb9-99"><a href="#cb9-99"></a>         <span class="at">b =</span> <span class="fu">paste</span>(b, <span class="dv">90</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-100"><a href="#cb9-100"></a>  <span class="fu">add_count</span>(a, <span class="at">name =</span> <span class="st">"a_count"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-101"><a href="#cb9-101"></a>  <span class="fu">add_count</span>(b, <span class="at">name =</span> <span class="st">"b_count"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-102"><a href="#cb9-102"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(a_count), a) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-103"><a href="#cb9-103"></a>  <span class="fu">mutate</span>(<span class="at">row =</span> <span class="fu">rep</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="fu">n_distinct</span>(a)], </span>
+<span id="cb9-104"><a href="#cb9-104"></a>                   <span class="at">times =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="fu">n_distinct</span>(a)<span class="sc">:</span><span class="dv">2</span>)[<span class="fu">n_distinct</span>(a)<span class="sc">:</span><span class="dv">2</span><span class="sc">%%</span><span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>], <span class="at">each =</span> <span class="dv">2</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-105"><a href="#cb9-105"></a>  <span class="fu">group_by</span>(row) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-106"><a href="#cb9-106"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(b_count), b) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-107"><a href="#cb9-107"></a>  <span class="fu">mutate</span>(<span class="at">col =</span> <span class="fu">str_pad</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(row)<span class="sc">+</span><span class="dv">6</span>, <span class="dv">2</span>, <span class="at">pad =</span> <span class="st">"0"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-108"><a href="#cb9-108"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-109"><a href="#cb9-109"></a>  <span class="fu">mutate</span>(<span class="at">well =</span> <span class="fu">paste0</span>(row, col)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-110"><a href="#cb9-110"></a>  <span class="fu">rename</span>(<span class="at">a =</span> b, <span class="at">b =</span> a )</span>
+<span id="cb9-111"><a href="#cb9-111"></a></span>
+<span id="cb9-112"><a href="#cb9-112"></a>combos02_filt_well <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(combos02_filt_well_left, combos02_filt_well_right)</span>
+<span id="cb9-113"><a href="#cb9-113"></a><span class="in">```</span></span>
+<span id="cb9-114"><a href="#cb9-114"></a></span>
+<span id="cb9-115"><a href="#cb9-115"></a><span class="fu">## Format and save</span></span>
+<span id="cb9-116"><a href="#cb9-116"></a></span>
+<span id="cb9-119"><a href="#cb9-119"></a><span class="in">```{r}</span></span>
+<span id="cb9-120"><a href="#cb9-120"></a>combos02_filt_well <span class="sc">%&gt;%</span></span>
+<span id="cb9-121"><a href="#cb9-121"></a>  <span class="fu">group_by</span>(a, b) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-122"><a href="#cb9-122"></a>  <span class="fu">mutate</span>(<span class="at">microcosm_id =</span> <span class="fu">cur_group_id</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-123"><a href="#cb9-123"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb9-124"><a href="#cb9-124"></a>  <span class="fu">mutate</span>(<span class="at">a_sp =</span> <span class="fu">paste0</span>(<span class="fu">str_split_i</span>(a, <span class="st">"_"</span>, <span class="dv">2</span>), stringr<span class="sc">::</span><span class="fu">str_extract</span>(<span class="fu">str_split_i</span>(a, <span class="st">"_"</span>, <span class="dv">1</span>), <span class="st">"^.{1}"</span>)),</span>
+<span id="cb9-125"><a href="#cb9-125"></a>         <span class="at">b_sp =</span> <span class="fu">paste0</span>(<span class="fu">str_split_i</span>(b, <span class="st">"_"</span>, <span class="dv">2</span>), stringr<span class="sc">::</span><span class="fu">str_extract</span>(<span class="fu">str_split_i</span>(b, <span class="st">"_"</span>, <span class="dv">1</span>), <span class="st">"^.{1}"</span>)),</span>
+<span id="cb9-126"><a href="#cb9-126"></a>         <span class="at">a_f =</span> <span class="fu">str_split_i</span>(a, <span class="st">"_"</span>, <span class="dv">3</span>),</span>
+<span id="cb9-127"><a href="#cb9-127"></a>         <span class="at">b_f =</span> <span class="fu">str_split_i</span>(b, <span class="st">"_"</span>, <span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-128"><a href="#cb9-128"></a>  <span class="fu">arrange</span>(well) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-129"><a href="#cb9-129"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(microcosm_id, well, a, a_sp, a_f, b, b_sp, b_f) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-130"><a href="#cb9-130"></a>  readr<span class="sc">::</span><span class="fu">write_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"pairs_sample_composition_wide.tsv"</span>))</span>
+<span id="cb9-131"><a href="#cb9-131"></a><span class="in">```</span></span>
+<span id="cb9-132"><a href="#cb9-132"></a></span>
+<span id="cb9-135"><a href="#cb9-135"></a><span class="in">```{r}</span></span>
+<span id="cb9-136"><a href="#cb9-136"></a>combos02_filt_well <span class="sc">%&gt;%</span> </span>
+<span id="cb9-137"><a href="#cb9-137"></a>  <span class="fu">group_by</span>(a, b) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-138"><a href="#cb9-138"></a>  <span class="fu">mutate</span>(<span class="at">microcosm_id =</span> <span class="fu">cur_group_id</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-139"><a href="#cb9-139"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb9-140"><a href="#cb9-140"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(a<span class="sc">:</span>b, well, microcosm_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-141"><a href="#cb9-141"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="sc">-</span>well, <span class="sc">-</span>microcosm_id)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-142"><a href="#cb9-142"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(value, <span class="fu">c</span>(<span class="st">"evo_hist"</span>, <span class="st">"strainID"</span>, <span class="st">"target_f"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-143"><a href="#cb9-143"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">evo_hist =</span> stringr<span class="sc">::</span><span class="fu">str_to_lower</span>(evo_hist),</span>
+<span id="cb9-144"><a href="#cb9-144"></a>                <span class="at">strainID =</span> <span class="fu">paste0</span>(<span class="st">"HAMBI_"</span>, strainID),</span>
+<span id="cb9-145"><a href="#cb9-145"></a>                <span class="at">target_f =</span> <span class="fu">as.numeric</span>(target_f)<span class="sc">/</span><span class="dv">100</span>,</span>
+<span id="cb9-146"><a href="#cb9-146"></a>                <span class="at">n_species =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-147"><a href="#cb9-147"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-148"><a href="#cb9-148"></a>  dplyr<span class="sc">::</span><span class="fu">relocate</span>(microcosm_id, n_species) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-149"><a href="#cb9-149"></a>  readr<span class="sc">::</span><span class="fu">write_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"pairs_sample_composition_long.tsv"</span>))</span>
+<span id="cb9-150"><a href="#cb9-150"></a><span class="in">```</span></span>
+<span id="cb9-151"><a href="#cb9-151"></a></span>
+<span id="cb9-152"><a href="#cb9-152"></a><span class="fu"># Pipetting</span></span>
+<span id="cb9-153"><a href="#cb9-153"></a></span>
+<span id="cb9-154"><a href="#cb9-154"></a>Proceed in the order of steps below to construct master plates used to inoculate different conditions</span>
+<span id="cb9-155"><a href="#cb9-155"></a></span>
+<span id="cb9-156"><a href="#cb9-156"></a><span class="fu">## First pipetting step</span></span>
+<span id="cb9-157"><a href="#cb9-157"></a></span>
+<span id="cb9-158"><a href="#cb9-158"></a>::: {#fig-01}</span>
+<span id="cb9-161"><a href="#cb9-161"></a><span class="in">```{r}</span></span>
+<span id="cb9-162"><a href="#cb9-162"></a><span class="co">#| fig.width: 8</span></span>
+<span id="cb9-163"><a href="#cb9-163"></a><span class="co">#| fig.height: 5</span></span>
+<span id="cb9-164"><a href="#cb9-164"></a><span class="co">#| echo: false</span></span>
+<span id="cb9-165"><a href="#cb9-165"></a><span class="fu">plate_plot_steps</span>(combos02_filt_well, well, a, <span class="st">"Pairs Step 1"</span>, my_colors)</span>
+<span id="cb9-166"><a href="#cb9-166"></a><span class="in">```</span></span>
+<span id="cb9-167"><a href="#cb9-167"></a>Layout for the first pipetting step for constructing pairs. Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 90% (e.g., <span class="in">`_90`</span>) or 10% (e.g., <span class="in">`_10`</span>).</span>
+<span id="cb9-168"><a href="#cb9-168"></a>:::</span>
+<span id="cb9-169"><a href="#cb9-169"></a></span>
+<span id="cb9-170"><a href="#cb9-170"></a><span class="fu">## Second pipetting step</span></span>
+<span id="cb9-171"><a href="#cb9-171"></a></span>
+<span id="cb9-172"><a href="#cb9-172"></a>::: {#fig-02}</span>
+<span id="cb9-175"><a href="#cb9-175"></a><span class="in">```{r}</span></span>
+<span id="cb9-176"><a href="#cb9-176"></a><span class="co">#| fig.width: 8</span></span>
+<span id="cb9-177"><a href="#cb9-177"></a><span class="co">#| fig.height: 5</span></span>
+<span id="cb9-178"><a href="#cb9-178"></a><span class="co">#| echo: false</span></span>
+<span id="cb9-179"><a href="#cb9-179"></a><span class="fu">plate_plot_steps</span>(combos02_filt_well, well, b, <span class="st">"Pairs Step 2"</span>, my_colors)</span>
+<span id="cb9-180"><a href="#cb9-180"></a><span class="in">```</span></span>
+<span id="cb9-181"><a href="#cb9-181"></a>Layout for the second pipetting step for constructing pairs. Different colors show different species/evolution combinations. The darkness of the color indicates whether a species/evolution combo is added at 90% (e.g., <span class="in">`_90`</span>) or 10% (e.g., <span class="in">`_10`</span>).</span>
+<span id="cb9-182"><a href="#cb9-182"></a>:::</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

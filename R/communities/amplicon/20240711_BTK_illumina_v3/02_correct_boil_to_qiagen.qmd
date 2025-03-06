@@ -3,13 +3,8 @@ title: "Calibrate boilprep to Qiagen DNeasy"
 author: "Shane Hogle"
 date: today
 link-citations: true
+abstract: "We will use the [metacal package](https://mikemc.github.io/metacal/) for estimating bias and performing calibration in the special case where the bias of all the taxa of interest can be directly measured from the control sample. Since samples extracted by Qiagen and by boil are exactly the same we can estimate scaling factors to produce corrected relative abundance for other samples. Publication: [Consistent and correctable bias in metagenomic sequencing experiments](https://elifesciences.org/articles/46923)"
 ---
-
-# Introduction
-
-We will use the [metacal package](https://mikemc.github.io/metacal/) for estimating bias and performing calibration in the special case where the bias of all the taxa of interest can be directly measured from the control sample. Since samples extracted by Qiagen and by boil are exactly the same we can estimate scaling factors to produce corrected relative abundance for other samples.
-
-Publication: [Consistent and correctable bias in metagenomic sequencing experiments](https://elifesciences.org/articles/46923)
 
 # Setup
 
@@ -22,7 +17,6 @@ Publication: [Consistent and correctable bias in metagenomic sequencing experime
 library(here)
 library(tidyverse)
 library(metacal)
-library(withr)
 library(scales)
 source(here::here("R", "utils_generic.R"))
 ```
@@ -77,8 +71,8 @@ left_join(samp_trios, mddf,
           by = join_by(sample, replicate, strep_conc, transfers, n_species, community_type, plate_well)) %>% 
   filter(community_type == "masterplate") %>% 
   right_join(pos_ctrl, by = join_by(strainID, community_id)) %>% 
-  dplyr::select(community_id, strainID, f, f_qg) %>% 
-  pivot_longer(c(f, f_qg)) %>% 
+  dplyr::select(community_id, strainID, f_thresh, f_qg) %>% 
+  pivot_longer(c(f_thresh, f_qg)) %>% 
   ggplot() +
     geom_bar(aes(y = value, x=interaction(name, community_id), fill = strainID), 
              color="black",
@@ -97,11 +91,13 @@ Bar plot of masterplate samples extracted by the boilprep method (f) or the Qiag
 ## Matrix of observed counts
 
 ```{r}
-samp_trios_counts <- left_join(samp_trios, mddf) %>% 
+samp_trios_counts <- left_join(samp_trios, mddf,
+                               by = join_by(sample, replicate, strep_conc, 
+                                            transfers, n_species, community_type, plate_well)) %>% 
   filter(community_type == "masterplate") %>% 
   filter(community_id %in% pull(pos_ctrl, community_id)) %>% 
-  dplyr::select(community_id, strainID, count_correct) %>% 
-  pivot_wider(names_from="strainID", values_from="count_correct") %>% 
+  dplyr::select(community_id, strainID, count_correct_thresh) %>% 
+  pivot_wider(names_from="strainID", values_from="count_correct_thresh") %>% 
   column_to_rownames(var="community_id") %>% 
   mutate(across(everything(), ~replace_na(.x, 0))) %>% 
   as.matrix()
@@ -171,7 +167,7 @@ c <- as.data.frame(samp_trios_counts/rowSums(samp_trios_counts)) %>%
 ::: {#fig-03}
 ```{r}
 bind_rows(a,b) %>% 
-  left_join(c) %>% 
+  left_join(c, by = join_by(sample, name)) %>% 
   ggplot(aes(x=observed, y=value, color = name)) +
   geom_abline(linetype = "dashed") +
   geom_point() +
@@ -191,16 +187,18 @@ Porportion of each species from boil-prepped samples (x-axis) and from the Qiage
 
 Make a matrix of observed counts
 ```{r}
-trios_2_cal <- left_join(samp_trios, mddf) %>% 
-  dplyr::select(sample, strainID, count_correct) %>% 
-  pivot_wider(names_from="strainID", values_from="count_correct") %>% 
+trios_2_cal <- left_join(samp_trios, mddf, 
+                         by = join_by(sample, replicate, strep_conc, transfers, n_species, community_type, plate_well)) %>% 
+  dplyr::select(sample, strainID, count_correct_thresh) %>% 
+  pivot_wider(names_from="strainID", values_from="count_correct_thresh") %>% 
   column_to_rownames(var="sample") %>% 
   mutate(across(everything(), ~replace_na(.x, 0))) %>%
   as.matrix()
 
-pairs_2_cal <- left_join(samp_pairs, mddf) %>% 
-  dplyr::select(sample, strainID, count_correct) %>% 
-  pivot_wider(names_from="strainID", values_from="count_correct") %>% 
+pairs_2_cal <- left_join(samp_pairs, mddf, 
+                         by = join_by(sample, replicate, strep_conc, transfers, n_species, community_type, plate_well)) %>% 
+  dplyr::select(sample, strainID, count_correct_thresh) %>% 
+  pivot_wider(names_from="strainID", values_from="count_correct_thresh") %>% 
   column_to_rownames(var="sample") %>% 
   mutate(across(everything(), ~replace_na(.x, 0))) %>%
   as.matrix()
@@ -210,7 +208,6 @@ pairs_2_cal <- left_join(samp_pairs, mddf) %>%
 
 ```{r}
 set.seed(435761)
-
 pairs_calibrated <- metacal::calibrate(pairs_2_cal, coef(mc_fit_trios), margin=1)
 trios_calibrated <- metacal::calibrate(trios_2_cal, coef(mc_fit_trios), margin=1)
 ```
@@ -230,7 +227,7 @@ trios_calibrated_l <- data.frame(trios_calibrated) %>%
 
 # Export
 
-Save metacal esimates for later use
+Save metacal estimates for later use
 ```{r}
 write_tsv(pairs_calibrated_l, here::here(data, "pairs_metacal.tsv"))
 write_tsv(trios_calibrated_l, here::here(data, "trios_metacal.tsv"))

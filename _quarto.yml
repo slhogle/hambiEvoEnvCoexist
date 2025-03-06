@@ -7,7 +7,7 @@ project:
   output-dir: docs
 
 website:
-  title: "hambiEvoEnvCoexist data analysis"
+  title: "hambiEvoEnvCoexist"
   sidebar:
     style: "docked"
     background: light
@@ -31,15 +31,27 @@ website:
         contents:
           - text: "i) Process and plot OD data"
             file: R/communities/optical_density/01_format_plot_od.qmd
-      - section: "4. Community growth - amplicon composition"
+      - section: "4. Community growth - amplicon formatting"
         contents:
-          - text: "i) 20240711 BTK Illumina v3 / Data wrangling and QC"
+          - text: "i) Batch 2024-07-11"
             file: R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.qmd
-          - text: "ii) 20240711 BTK Illumina v3 / Metacal calibration"
+          - text: "ii) Batch 2024-07-11 calibration"
             file: R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.qmd
-          - text: "iii) Species pairs analysis"
-            file: R/communities/amplicon/analysis_pairs.qmd
-            
+          - text: "iii) Batch 2024-10-24"
+            file: R/communities/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.qmd
+          - text: "iv) Batch 2025-01-27"
+            file: R/communities/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.qmd
+          - text: "v) Compile pairs, trios, quartets"
+            file: R/communities/amplicon/01_compile_format.qmd
+      - section: "5. Community growth - Coexistence/exclusion analysis"
+        contents:
+          - text: "i) Species pairs"
+            file: R/communities/amplicon/02_analysis_pairs.qmd
+          - text: "ii) Species trios"
+            file: R/communities/amplicon/03_analysis_trios.qmd
+          - text: "iii) Species quartets"
+            file: R/communities/amplicon/04_analysis_quartets.qmd
+
 format:
   html:
     theme:
@@ -52,7 +64,7 @@ format:
     fig-width: 8
     fig-height: 6
     # tidy format R code upon render
-    tidy: false
+    tidy: true
     # include line numbers in code blocks
     code-line-numbers: true
     # The code-link option enables hyper-linking of functions within code blocks to their online documentation:

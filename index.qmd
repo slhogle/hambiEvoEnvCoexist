@@ -70,7 +70,7 @@ The ancestral and evolved form of each species were grown for 48 hours at 30℃ 
 
 The ancestral and evolved forms of each species were grown for 48 hours at 30℃ in 100% R2A growth medium [@reasoner1985a]. Cultures were filtered to remove bacterial biomass and the spent media was stored at 4℃ until use. Next the evolved and ancestral forms of each species were grown in the spent medium of each other evo/anc species for 48 hours at 30℃ and growth was followed using optical density at 600 nm in a Bioscreen plate reader.
 
-For the Burkholder diffusion assay we will add each species/evolutionary form to a soft agar on a petri dish. Then a small volume of each species will be pipetted directly onto the agar and plates will be checked for zones of inhibition.
+For the Burkholder diffusion assay each species/evolutionary form was added to a soft agar on a petri dish. Then a small volume of each species was pipetted directly onto the agar and plates and checked for zones of inhibition.
 
 ### Competition/coexistence outcomes (species proportions from communities):
 
@@ -89,7 +89,7 @@ For the coexistence/exclusion experiments experimental communities are inoculate
 ### Species interactions:
 
 -   Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on the filtrate of all other species.
--   (NOT YET COMPLETED) Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). Note: based on past work with these species we don't expect to detect significant interference competition.
+-   Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). These results show that no species/evolutionary form produced zones of inhibition for any other species/form. This suggests that there will not be significant interference competition in this experiment.
 
 ### Competition/coexistence outcomes (species proportions from communities):
 

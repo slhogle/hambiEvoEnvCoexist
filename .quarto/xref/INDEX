@@ -55,5 +55,23 @@
   },
   "R/communities/optical_density/01_format_plot_od.qmd": {
     "01_format_plot_od.html": "d662c48b"
+  },
+  "R/communities/amplicon/04_analysis_quartets.qmd": {
+    "04_analysis_quartets.html": "4ddc5eba"
+  },
+  "R/communities/amplicon/01_compile_format.qmd": {
+    "01_compile_format.html": "34074427"
+  },
+  "R/communities/amplicon/02_analysis_pairs.qmd": {
+    "02_analysis_pairs.html": "6b0b4b96"
+  },
+  "R/communities/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.qmd": {
+    "01_format_rbec_tab.html": "21b8053d"
+  },
+  "R/communities/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.qmd": {
+    "01_format_rbec_tab.html": "cbd705f7"
+  },
+  "R/communities/amplicon/03_analysis_trios.qmd": {
+    "03_analysis_trios.html": "fffe4656"
   }
 }

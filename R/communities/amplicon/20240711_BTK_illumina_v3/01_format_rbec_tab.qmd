@@ -1,13 +1,10 @@
 ---
-title: "Formatting Rbec output"
-author: "Shane Hogle"
+title: "Formatting Rbec output from  2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers"
+author: "Milla Similä & Shane Hogle"
 date: today
 link-citations: true
+abstract: "Contains results from pairs of all streptomycin concentrations and trios for 0 streptomycin from Milla's community assembly experiment."
 ---
-
-# Introduction
-
-Contains results from pairs of all streptomycin concentrations and trios for 0 streptomycin from Milla's bottom up community assembly experiment
 
 # Setup
 
@@ -15,12 +12,15 @@ Contains results from pairs of all streptomycin concentrations and trios for 0 s
 
 ```{r}
 #| output: false
+#| warning: false
+#| error: false
 library(tidyverse)
 library(here)
 library(fs)
 library(archive)
 library(scales)
 source(here::here("R", "utils_generic.R"))
+source(here::here("R", "communities", "amplicon", "utils_amplicon.R"))
 ```
 
 ## Global variables
@@ -35,94 +35,6 @@ fs::dir_create(data)
 
 # create temporary location to decompress
 tmpdir <- fs::file_temp()
-```
-
-## Data
-
-NOTE! We have commented out the species not included in this experiment  
-```{r}
-tax_locus_copynum <- tibble::tribble(
-     ~strainID, ~rRNA16S_cn, ~rRNA16S_locus,             ~genus,        ~species,
-  "HAMBI_0006",          7L,  "H0006_04757",      "Pseudomonas",        "putida",
-  "HAMBI_0097",          7L,  "H0097_00044",    "Acinetobacter",     "johnsonii",
-  "HAMBI_0097",          7L,  "H0097_02759",    "Acinetobacter",     "johnsonii",
-  "HAMBI_0097",          7L,  "H0097_01762",    "Acinetobacter",     "johnsonii",
-  "HAMBI_0105",          4L,  "H0105_02306",    "Agrobacterium",   "tumefaciens",
-  "HAMBI_0262",          3L,  "H0262_00030",    "Brevundimonas",       "bullata",
-  "HAMBI_0403",          9L,  "H0403_00517",        "Comamonas",  "testosteroni",
-  "HAMBI_0403",          9L,  "H0403_00522",        "Comamonas",  "testosteroni",
-  "HAMBI_1279",          7L,  "H1279_03627",           "Hafnia",         "alvei",
-  "HAMBI_1279",          7L,  "H1279_00125",           "Hafnia",         "alvei",
-  "HAMBI_1279",          7L,  "H1279_03957",           "Hafnia",         "alvei",
-  "HAMBI_1287",          7L,  "H1287_03997",      "Citrobacter",        "koseri",
-  "HAMBI_1287",          7L,  "H1287_03402",      "Citrobacter",        "koseri",
-  "HAMBI_1292",          7L,  "H1292_03239",       "Morganella",      "morganii",
-  "HAMBI_1299",          8L,  "H1299_04293",         "Kluyvera",    "intermedia",
-  "HAMBI_1299",          8L,  "H1299_01283",         "Kluyvera",    "intermedia",
-  "HAMBI_1299",          8L,  "H1279_03957",         "Kluyvera",    "intermedia",
-  "HAMBI_1842",          4L,  "H1842_01650",      "Sphingobium",    "yanoikuyae",
-  "HAMBI_1896",          4L,  "H1896_00963", "Sphingobacterium",  "spiritivorum",
-  "HAMBI_1972",         10L,  "H1972_00343",        "Aeromonas",        "caviae",
-  "HAMBI_1972",         10L,  "H1972_03531",        "Aeromonas",        "caviae",
-  "HAMBI_1977",          5L,  "H1977_00118",      "Pseudomonas",  "chlororaphis",
-  "HAMBI_1988",          5L,  "H1988_05160",     "Chitinophaga",        "sancti",
-  "HAMBI_1988",          5L,  "H1988_05152",     "Chitinophaga",        "sancti",
-  "HAMBI_1988",          5L,  "H1988_05165",     "Chitinophaga",        "sancti",
-  "HAMBI_2159",          4L,  "H2159_01406",        "Trinickia",   "caryophylli",
-  "HAMBI_2159",          4L,  "H2159_05851",        "Trinickia",   "caryophylli",
-  "HAMBI_2160",          3L,  "H2160_00530",       "Bordetella",         "avium",
-  "HAMBI_2164",          5L,  "H2164_03337",      "Cupriavidus",    "oxalaticus",
-  "HAMBI_2443",          3L,  "H2443_00128",       "Paracoccus", "denitrificans",
-  "HAMBI_2494",          4L,  "H2494_03389", "Paraburkholderia",   "kururiensis",
-  "HAMBI_2659",          4L,  "H2659_00367", "Stenotrophomonas",   "maltophilia",
-  "HAMBI_2792",          4L,  "H2792_00549",        "Moraxella",         "canis",
-  "HAMBI_3031",          2L,  "H3031_00830",         "Niabella",  "yanshanensis",
-  "HAMBI_3237",          6L,  "H3237_00875",       "Microvirga",   "lotononidis",
-  "HAMBI_1923",          6L,  "H1923_00876",   "Flavobacterium",      "odoratum"
-  )
-```
-
-## Functions
-```{r}
-# this function 
-normalize_by_copy <- function(.data, tlc = tax_locus_copynum){
-  .data %>% 
-    # join with the copy number data frame. We join by the locus tag so this will add H1279_03957 to HAMBI_1299
-    dplyr::left_join(tlc, by = join_by(rRNA16S_locus)) %>%
-    # get total number of mapping reads per species. This aggregates all the difference ASVs per species
-    dplyr::summarize(count = sum(count), .by = c(sample, strainID, rRNA16S_cn)) %>% 
-    # group by sample
-    dplyr::group_by(sample) %>% 
-    # calculate a corrected count which is simply the count divided by copy num for each species
-    # dividide by the sum of count divided by copy num for whole sample multiplied by the total
-    # number of mapped reads per sample
-    dplyr::mutate(count_correct = round(sum(count)*(count/rRNA16S_cn)/sum(count/rRNA16S_cn))) %>%  
-    dplyr::ungroup() %>% 
-    dplyr::select(sample, strainID, count, count_correct)
-  }
-
-# this function replaces missing species counts with zero
-completecombos <- function(.data, tlc = tax_locus_copynum, countname = count, remove1923 = TRUE){
- 
-  # get unique strainIDs
-  strainID <- unique(tlc$strainID)
-  # table for assigning genus and species names. Doesn't matter if 1923 is there or not
-  # because it is filter joined later
-  tax <- dplyr::distinct(dplyr::select(tlc, strainID, genus, species))
-  if (remove1923) {
-    # get unique strainIDs but exclude 1923 if remove1923 is true
-    strainID <- strainID[strainID != "HAMBI_1923"]
-  }
-  
-  dplyr::bind_rows(tibble::tibble(strainID = strainID, sample = "dummy"), .data) %>% 
-    dplyr::mutate( "{{ countname }}" := dplyr::if_else(sample == "dummy", 1, {{ countname }})) %>% 
-    tidyr::complete(sample, strainID) %>% 
-    dplyr::filter(sample != "dummy") %>% 
-    dplyr::mutate( "{{ countname }}" := dplyr::if_else(is.na({{ countname }}), 0, {{ countname }})) %>% 
-    tidyr::replace_na(list(count_correct = 0)) %>% 
-    dplyr::left_join(dplyr::distinct(dplyr::select(tlc, strainID, genus, species))) %>% 
-    dplyr::relocate(genus, species, .after = strainID)
-}
 ```
 
 # Read metadata
@@ -176,28 +88,107 @@ straintabs <- paste0(samppaths, "/strain_table.txt") %>%
   mutate(sample = if_else(sample == "P2_s_0", "P02_s_0", sample))
 ```
 
-# Format
+## Clean up
 
-Normalize counts by 16S copy number
 ```{r}
-straintabs_norm <- normalize_by_copy(straintabs)
+# remove decompressed directory from temp location
+fs::dir_delete(tmpdir)
 ```
 
+# Format
+
 ```{r}
-finaltable <- left_join(straintabs_norm, mddf) %>% 
-  left_join(spdf)
+straintabs_norm <- straintabs %>% 
+  # Calls function that normalize counts by 16S copy number
+  normalize_by_copy() %>% 
+  # Calls function that completes all combinations of 23 species
+  # this is important because some species go extinct that should be in the samples
+  # and we need to have those in the final table
+  complete_combos()
+```
+
+Make final table
+
+```{r}
+# Later we will take advantage of the fact that for species not supposed to be
+# in a sample the prior left_join will have filled the evo_hist category with an
+# NA. We can then filter using this NA value
+finaltable <- left_join(straintabs_norm, mddf, by = join_by(sample)) %>% 
+  left_join(spdf, by = join_by(community_id, strainID)) %>% 
+  group_by(sample) %>% 
+  dplyr::select(-genus, -species) %>% 
+  mutate(f_raw = count_correct/sum(count_correct),
+         sample_tot_raw = sum(count_correct)) %>% 
+  ungroup() %>% 
+  relocate(sample_tot_raw, f_raw, target_f, evo_hist, .after = count_correct)
 ```
 
 # Analysis
 
+Let's quickly compare and look the at number of reads from the different kinds of experiment categories. Negative controls are samples from the experiment that contained growth medium but no cells. We included them to make sure that there was not contamination between wells during the experiment. Positive controls here contain defined mixtures of the 4 species used in this experiment. These positive control samples were extracted using Qiagen DNeasy kit, with the idea that we would use them to calibrate the remaining experimental samples which were all extracted using a simplified boil-prep methodology. The workflow in [this document](02_correct_boil_to_qiagen.qmd) does this and it shows that the community composition of the same sample extracted using Qiagen or the boil-prep is not drastically different. Thus, we decided to forgo the hassle and expense of doing these calibrations for the remaining samples, but that information is there to demonstrate that our custom extraction proceedure is robust. Experiment samples are those that came from the actual experiment, and masterplate samples are the defined mixtures we made to inoculate the experiment. We sequenced these masterplates so that we would have T0 information for each experimental treatment.
+
+::: {#fig-01}
+```{r}
+#| fig.width: 8
+#| fig.height: 5
+finaltable %>% 
+  dplyr::select(sample, sample_tot_raw, community_type) %>% 
+  distinct() %>% 
+  ggplot(aes(x = sample_tot_raw)) +
+  geom_histogram(bins = 20, aes(fill = community_type)) +
+  scale_x_log10() + 
+  annotation_logticks(sides = "b", color="grey30") +
+  labs(y = "Sample count", x = "Total reads per sample") +
+  facet_wrap(~ community_type, scales="free_y")
+```
+Frequency distribution of total read counts per sample in the experimental samples (red) masterplates (green), negative controls (blue), and the positive controls (purple).
+:::
+
+The smallest number of reads in the experimental samples is `{r} min(finaltable[ grep("^exp", finaltable$community_type), ]$sample_tot_raw)` and the smallest in the negative controls is `{r} min(finaltable[ grep("^neg", finaltable$community_type), ]$sample_tot_raw)`. Clearly some of the experimental samples failed to sequence well. The mean number of reads in the experimental samples is `{r} format(mean(finaltable[ grep("^exp", finaltable$community_type), ]$sample_tot_raw), scientific=F)` and in the negative controls is `{r} mean(finaltable[ grep("^neg", finaltable$community_type), ]$sample_tot_raw)`. The mean for the experimental samples is considerably higher than the mean for the negative controls.
+
+Overall this looks really good. The masterplate samples and positive controls all seem to have succeeded. However, there appears to be a negative control or two which has ~ 10000 reads and so it might have been contaminated. 
+
 ## Negative controls
 
-First, we'll check whether the experimental and plate negative controls look good
+Lets check what species are contaminating negative controls. Most appear to be low abundance contaminants of species excluded from the experiment. Probably this is cross talk from the positive controls and other samples
+
+::: {#fig-02}
+```{r}
+#| fig.width: 8
+#| fig.height: 7
+#| output: true
+#| warning: false
+#| error: false
+finaltable %>% 
+  filter(str_detect(community_type, "^neg")) %>% 
+  filter(f_raw > 0) %>%
+  contam_histogram(trans=TRUE, x = f_raw) +
+  labs(x = "Frequency distribution of each species in the negative controls", y = "Sample count") +
+  facet_wrap(~strainID)
+```
+Frequency distribution of all species in the negative controls
+:::
+
+I am not sure where the off-target species are coming from because we did not include any positive community controls here. However, they are all very low abundance and so I think they are just noise. Also it is worth noting that HAMBI_1972 and HAMBI_1977 are the same genus so if some of the read qualities are crappy it could easily be missassigned. 
+
+::: {#fig-03}
+```{r}
+#| fig.width: 8
+#| fig.height: 3
+finaltable %>% 
+  filter(str_detect(community_type, "^neg")) %>% 
+  filter(str_detect(strainID, "0403|1287|1896|1977")) %>% 
+  filter(f_raw > 0) %>% 
+  contam_histogram(trans=TRUE, x = f_raw) +
+  labs(x = "Frequency distribution of each species in the negative controls", y = "Sample count")
+```
+Frequency distribution of only target species in the negative controls
+:::
 
 ```{r}
 finaltable %>% 
-  filter(str_detect(community_type, "^neg|pos")) %>% 
-  summarize(tot = sum(count_correct), .by = c("sample", "community_id", "n_species", "community_type", "replicate"))
+  filter(str_detect(community_type, "^neg")) %>% 
+  filter(str_detect(strainID, "0403|1287|1896|1977"))
 ```
 
 This looks ok, but there are potentially some problems. Specifically, negative control replicates 2, 3, and 4 all have some contamination. `neg_2_0` seems to be contaminated with HAMBI_1977, `neg_3_0` with HAMBI_1287, and `neg_4_0` with HAMBI_1977. However in the 5 remaining negative controls there is no contamination.
@@ -205,17 +196,20 @@ This looks ok, but there are potentially some problems. Specifically, negative c
 ## Positive controls
 
 The positive controls should each have three species. In all cases the species that shouldn't be there is very rare
+
 ```{r}
 finaltable %>% 
   filter(str_detect(community_type, "^pos")) %>%
   mutate(total_pos_controls = n_distinct(sample)) %>% 
   group_by(sample) %>% 
-  mutate(f = round(count_correct/sum(count_correct)*100)) %>%
+  mutate(f = round(f_raw*100, 1)) %>%
   mutate(supposed_2_b_there = if_else(is.na(evo_hist), "no", "yes")) %>% 
   relocate(f, supposed_2_b_there) %>% 
-  distinct(f, supposed_2_b_there, sample, strainID, count_correct, n_species, community_type,)
+  distinct(f, supposed_2_b_there, sample, strainID, count_correct, n_species, community_type,) %>% 
+  filter(f > 0)
 ```
-This is also good - we detect all 3 species that should be there in the positive controls on each plate. In a later step we will use these control samples with `metacal` to try and correct for the boil prep extraction method. 
+
+This is also good - we detect all 3 species that should be there in the positive controls on each plate.
 
 ## Misassigned reads
 
@@ -223,347 +217,340 @@ These libraries were only prepared with samples from Milla's 4-species experimen
 
 ```{r}
 finaltable %>% 
-  filter(!str_detect(strainID, "0403|1287|1896|1977"))
+  filter(!str_detect(strainID, "0403|1287|1896|1977")) %>% 
+  filter(count_correct > 0) %>% 
+  arrange(desc(count_correct))
 ```
 
 There is one or two incorrectly assigned reads here and there but this is just noise. We can safely exclude all reads not mapping to one of the focal species.
 
-```{r}
-finaltable <- finaltable %>% 
-  filter(str_detect(strainID, "0403|1287|1896|1977"))
-```
-
-## Samples with too few reads
+## Samples with few total reads
 
 Some of the experimental pairs had streptomycin concentrations higher than any of the species individually could tolerate. We would naively expect then that neither species would grow successfully in these samples and that the overall biomass would be very low, thus resulting in a low number of recovered reads from these samples.
 
 To look into this. first let's check which samples have very low OD600 in the endpoint samples.
 
 ```{r}
+#| output: false
+#| warning: false
+#| error: false
 od <- read_tsv(here::here("_data_raw", "communities", "optical_density", "20240606_pairs", "optical_density_formatted.tsv"))
 ```
 
+We'll filter out samples with an OD of less than 0.1 and also samples with fewer than 1000 reads. It is generally good practice to exclude samples with low number of reads.
+
 ```{r}
-filtids <- finaltable %>% 
-  summarize(tot = sum(count_correct), .by = c(sample, community_id, n_species, transfers, strep_conc, replicate)) %>%
-  left_join(od, by = join_by(community_id, n_species, transfers, strep_conc, replicate)) %>% 
+df <- left_join(finaltable, od, 
+                  by = join_by(community_id, n_species, transfers, strep_conc, replicate)) %>% 
   filter(transfers == 8) %>% 
-  arrange(tot) %>% 
+  arrange(sample_tot_raw) %>% 
   arrange(OD) %>% 
-  filter(OD < 0.1 | tot < 1000) %>% 
+  # filter only samples with OD < 0.1 or < 1000 total reads. 1000 read threshold 
+  # was chose based on the first figure in this notebook
+  filter(OD < 0.1 | sample_tot_raw < 1000) %>% 
+  filter(count_correct > 0)
+
+lowread_samps <- df %>% 
+  filter(sample_tot_raw < 3000 & community_type == "experiment") %>% 
+  distinct(sample) %>% 
   pull(sample)
+  
+df %>% 
+  distinct(sample, community_type, OD, sample_tot_raw)
 ```
 
-We'll filter out samples with an OD of less than 0.1 and also samples with fewer than 1000 reads. It is genearlly good practice to exclude samples with low number of reads.
+There are 10 experimental samples that have less than 1000 reads. 6 of those samples have low optical density which indicates nothing was growing there and that they should have low read number. 4 samples have normal optical density (~ 0.3) and these look to be samples that failed at the library preparation/sequencing step. Regardless, all these 10 samples will be excluded from the downstream analysis.
+
+## Filter to target species
+
+Exclude positive and negative controls and also exclude species that are not in the focal 4
 
 ```{r}
-finaltable <- finaltable %>% 
-  filter(sample %nin% filtids)
+finaltable_exp_mstr <- finaltable %>% 
+  filter(community_type %nin% c("empty", "neg_ctrl", "pos_ctrl")) %>% 
+  # also exclude samples with low reads
+  filter(sample %nin% lowread_samps) %>% 
+  filter(strainID %in% c("HAMBI_0403", "HAMBI_1287", "HAMBI_1896", "HAMBI_1977")) %>% 
+  group_by(sample) %>% 
+  mutate(f_raw_targetsp = count_correct/sum(count_correct),
+         sample_tot_targetsp = sum(count_correct)) %>% 
+  ungroup() %>% 
+  relocate(c(sample_tot_targetsp, f_raw_targetsp), .after = f_raw)
 ```
 
 ## Masterplate samples
 
 To set up this experiment, Milla combined the species in the planned proportions on a masterplate. Because this process was time consuming, the masterplate was stored at -80C after construction until the experiment start day when it was taken from the freezer and used to inoculate the experiment. Because Milla knows exactly which strains were added to the master plate and the plates were not allowed to grow, any strains in these samples that are not supposed to be there should be due to Illumina index cross talk and not true contamination. We can get a sense for the average index crosstalk rate from these samples and then draw a threshold of when to exclude likely false positives and when a positive is likely due to contamination.
 
-```{r}
-masterplate <- finaltable %>%
-  filter(community_type == "masterplate") %>% 
-  group_by(sample) %>% 
-  mutate(f = count_correct/sum(count_correct)) %>% 
-  ungroup()
-```
+### Pairs
 
-Here we focus on masterplate samples with species that should not be there. We exclude species that were inoculated and plot the distribution of percentages of those species
+Overall the masterplate pairs look very good. There are no samples where a species that should not be there is present in high abundances. Any contamination 
+(grey to black fill) is well under 5%.
 
-::: {#fig-01}
+::: {#fig-04}
 ```{r}
 #| fig.width: 8
-#| fig.height: 3
-masterplate %>% 
-  # here we take advantage of the fact that for species not supposed to be in a sample
-  # the prior left_join will have filled the evo_hist category with an NA. We can then filter
-  # on this NA value
-  filter(is.na(evo_hist)) %>% 
-  filter(f > 0) %>% 
-  ggplot(aes(x = f)) +
-  geom_histogram(aes(fill = strainID), bins = 20) +
-  geom_vline(xintercept = 0.01, linetype = "dashed") +
-  scale_fill_manual(values = hambi_colors) +
-  scale_x_continuous(trans = "log10",  labels = percent, guide = guide_axis(angle=90)) + 
-  labs(x = "Crosstalk frequency", y = "Count") +
-  facet_grid(~strainID) + 
-  annotation_logticks(sides = "b", color="grey30") +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        legend.position = "bottom")
+#| fig.height: 5
+finaltable_exp_mstr %>%
+  filter(str_detect(community_type, "masterplate") & n_species == 2) %>% 
+  contaminated_barplot(threshold = 0, quartet = FALSE, y=f_raw_targetsp) +
+  ggtitle("All Masterplate pairs")
 ```
-
-Frequency distribution of each species in masterplate samples where it **should not** occur. The 1% mark (commonly accepted as an acceptable Illumina cross-talk standard) is demarcated with a dashed line. 
+Species composition of all masterplate pairs. Any species that shouldn’t be there (> 0%) is shown in grey to black.
 :::
 
-Generally, the cross talk frequency is pretty OK. For 3/4 species it is 1% or less which is more or less what you can expect when you are multiplexing libraries on an Illumina platform. Values greater than 1% are potentially indicative of a different problem, so 1977 requires a bit more investigation.
-
+There are no samples with more than 4% of a species that shouldn't be there
 ```{r}
-sids <- masterplate %>% 
+finaltable_exp_mstr %>% 
+  filter(str_detect(community_type, "masterplate")) %>% 
+  filter(n_species == "2") %>% 
   filter(is.na(evo_hist)) %>% 
-  filter(f > 0.01 & strainID == "HAMBI_1977") %>% 
-  pull(sample) 
-
-masterplate %>% 
-  filter(sample %in% sids) %>% 
-  dplyr::select(sample, strainID, count_correct, replicate, evo_hist, target_f, f)
+  filter(f_raw_targetsp > 0.04 ) %>% 
+  distinct(sample)
 ```
 
-It looks like all the "problematic" samples come from plates 7 and 8 in the library prep. Plate 8 only contains the masterplate samples from trios whereas plate 7 contains both masterplate and experimental samples. @Fig-02 shows that HAMBI-1977 is very abundant in many of the samples so likely the "leaky" reads come disproportionately from HAMBI-1977 which is why its crosstalk threshold may be higher (@Fig-01). 
-
-::: {#fig-02}
+::: {#fig-05}
 ```{r}
 #| fig.width: 8
-#| fig.height: 3
-finaltable %>% 
+#| fig.height: 4
+finaltable_exp_mstr %>%
+  filter(str_detect(community_type, "masterplate") & n_species == 2) %>% 
+  filter(is.na(evo_hist)) %>% 
+  filter(f_raw_targetsp > 0) %>% 
+  contam_histogram(trans = TRUE, x = f_raw_targetsp) +
+  labs(x = "Species frequency", y = "Sample count") +
+  ggtitle("Frequency distribution of misassigned species in masterplate pairs")
+```
+Frequency distribution of each species in masterplate pair samples where it **should not** occur. The 1% mark (commonly accepted as an acceptable Illumina cross-talk standard) is demarcated with a dashed line. 
+:::
+
+### Trios
+
+Trio masterplates also look very good. There are some samples where a species that shouldn't be there is > 3%, but these are always < 5% and there are no samples with major contamination. Importantly these all match the proportions that we used to start the experiment
+
+::: {#fig-06}
+```{r}
+#| fig.width: 8
+#| fig.height: 10
+finaltable_exp_mstr %>%
+  filter(str_detect(community_type, "masterplate") & n_species == 3) %>% 
+  # this is a dumb hack so that I don't have to plot all bars on the same axis
+  # but I can wrap them using a meaningless facet
   group_by(sample) %>% 
-  mutate(f = count_correct/sum(count_correct)) %>% 
+  mutate(id = cur_group_id()) %>% 
   ungroup() %>% 
-  # here we take advantage of the fact that for species not supposed to be in a sample
-  # the prior left_join will have filled the evo_hist category with an NA. We can then filter
-  # on this NA value
-  filter(!is.na(evo_hist)) %>% 
-  filter(f > 0) %>% 
-  ggplot(aes(x = f)) +
-  geom_histogram(aes(fill = strainID), bins = 20) +
-  scale_fill_manual(values = hambi_colors) +
-  scale_x_continuous(trans = "log10",  labels = percent, guide = guide_axis(angle=90)) + 
-  labs(x = "Frequency in samples", y = "Count") +
-  facet_grid(~strainID) + 
-  annotation_logticks(sides = "b", color="grey30") +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        legend.position = "bottom")
+  mutate(facet = ntile(id, 4)) %>% 
+  contaminated_barplot(threshold = 0, quartet = FALSE, y=f_raw_targetsp) +
+  ggtitle("All Masterplate trios") +
+  facet_wrap(~facet, scales="free_x", nrow=4) +
+  theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank()
+    )
 ```
-Frequency distribution of each species in all samples where it **should** occur.
+Species composition of all masterplate trios. Any species that shouldn’t be there (> 0%) is shown in grey to black. The samples are split over four rows to aid in visualization - the specific subplots are meaningless.
 :::
 
-Anyway, I don't think this is a problem and that we can move forward with these samples. However, to define extinction/competitive exclusion we may need to use a higher threshold than 1% (e.g., 3% frequency) because over 3% we can reliably say that a species is present and it is not due to index cross talk.
+::: {#fig-07}
+```{r}
+#| fig.width: 8
+#| fig.height: 4
+finaltable_exp_mstr %>%
+  filter(str_detect(community_type, "masterplate") & n_species == 3) %>% 
+  filter(is.na(evo_hist)) %>% 
+  filter(f_raw_targetsp > 0) %>% 
+  contam_histogram(trans = TRUE, x = f_raw_targetsp) +
+  labs(x = "Species frequency", y = "Sample count") +
+  ggtitle("Frequency distribution of misassigned species in masterplate trios")
+```
+Frequency distribution of each species in masterplate trio samples where it **should not** occur. The 1% mark (commonly accepted as an acceptable Illumina cross-talk standard) is demarcated with a dashed line. 
+:::
+
+There are no samples with more than 3% of a species that shouldn't be there
+```{r}
+finaltable_exp_mstr %>% 
+  filter(str_detect(community_type, "masterplate")) %>% 
+  filter(n_species == "3") %>% 
+  filter(is.na(evo_hist)) %>% 
+  filter(f_raw_targetsp > 0.03 ) %>% 
+  distinct(sample)
+```
+
+### Masterplate Summary
+
+Generally, the cross talk frequency is really good. For 3/4 species it is 1% or less which is more or less what you can expect when you are multiplexing libraries on an Illumina platform. Values greater than 1% are potentially indicative of a different problem, so 1977 requires a bit more investigation.
+
+```{r}
+finaltable_exp_mstr %>%
+  filter(str_detect(community_type, "masterplate")) %>% 
+  filter(is.na(evo_hist)) %>% 
+  filter(f_raw_targetsp > 0.01 & strainID == "HAMBI_1977") %>%
+  arrange(desc(f_raw_targetsp))
+```
+
+It looks like all the "problematic" samples come from plates 7 and 8 in the library prep. Plate 8 only contains the masterplate samples from trios whereas plate 7 contains both masterplate and experimental samples. In @fig-02 it shows that HAMBI-1977 is very abundant in many of the samples so likely the "leaky" reads come disproportionately from HAMBI-1977 which is why its crosstalk threshold may be higher (@Fig-01). Anyway, I don't think this is a problem and that we can move forward with these samples. However, to define extinction/competitive exclusion we may need to use a higher threshold than 1% (e.g., 3% frequency) because over 3% we can reliably say that a species is present and it is not due to index cross talk.
 
 ## Experimental samples
 
-Now we need to see how our experimental samples performed and if there are species present in them that shouldn't be there
+We may need to use a higher threshold than 1% (e.g., 3% frequency) because over 3% we can reliably say that a species is present and it is not due to index cross talk. Below I basically empirically chose 8% as a reasonable threshold value that includes the maximum number of samples with low-level contamination and exclude samples with very high contamination.
 
-```{r}
-exp_contam <- finaltable %>% 
-  filter(str_detect(community_type, "experiment")) %>% 
-  group_by(sample) %>% 
-  mutate(f = count_correct/sum(count_correct)) %>% 
-  ungroup() %>% 
-  # because we set 3% as our limit of detection we set read counts of species 
-  # less than 1% to 0
-  mutate(count_correct_thresh = if_else(f <= 0.03, 0, count_correct)) %>% 
-  group_by(sample) %>% 
-  mutate(f = count_correct_thresh/sum(count_correct_thresh)) %>% 
-  ungroup()
-```
-
-
-::: {#fig-03}
+::: {#fig-08}
 ```{r}
 #| fig.width: 8
-#| fig.height: 3
-exp_contam %>% 
+#| fig.height: 5
+finaltable_exp_mstr %>% 
+  filter(str_detect(community_type, "experiment")) %>% 
   filter(is.na(evo_hist)) %>% 
-  ggplot(aes(x = f)) +
-  geom_histogram(aes(fill = strainID), bins = 20) +
-  scale_fill_manual(values = hambi_colors) +
-  scale_x_continuous(trans = "log10",  labels = percent, guide = guide_axis(angle=90)) + 
-  labs(x = "Frequency in samples", y = "Count") +
-  facet_grid(~ strainID) + 
-  annotation_logticks(sides = "b", color="grey30") +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        legend.position = "bottom")
+  filter(f_raw > 0.03 ) %>% 
+  contam_histogram(trans=TRUE, x = f_raw_targetsp) +
+  labs(x = "Species frequency", y = "Sample count") +
+  ggtitle("Frequency distribution of each species exceeding the 3% threshold") +
+  geom_vline(xintercept = 0.08, color = "red") +
+  facet_grid(n_species~strainID)
 ```
-Frequency distribution of each species in experimental samples where it **should not** occcur.
+Frequency distribution of each species in experimental samples where it **should not** occur and where it exceeds a 3% threshold. Grid columns are the different species and grid rows represent whether the sample was an experiment pair (2) or trio (3). The red vertical line is at 8%.
 :::
+
+```{r}
+finaltable_exp_mstr %>% 
+  filter(str_detect(community_type, "experiment")) %>% 
+  filter(is.na(evo_hist)) %>% 
+  filter(f_raw_targetsp > 0.03 ) %>% 
+  arrange(desc(f_raw_targetsp))
+```
 
 ```{r}
 #| eval: true
 #| echo: false
 #| output: false
-totsamp <- exp_contam %>% 
-  summarize(n_distinct(sample)) %>% 
-  pull()
+myfilter <- function(.data, myexpresion){
+  .data %>% 
+    filter(is.na(evo_hist)) %>% 
+    filter( {{ myexpresion }} ) %>% 
+    distinct(sample) %>% 
+    nrow()
+}
 
-contamsamp <- exp_contam %>% 
-  filter(f > 0) %>% 
-  filter(is.na(evo_hist)) %>% 
-  summarize(n_distinct(sample)) %>% 
-  pull()
+thresh <- 0.08
+totsamp <- nrow(distinct(finaltable_exp_mstr, sample))
+contamsamp <- myfilter(finaltable_exp_mstr, f_raw_targetsp >= 0.03)
+contamsamp_lo <- myfilter(finaltable_exp_mstr, f_raw_targetsp >= 0.03 & f_raw_targetsp < thresh)
+contamsamp_hi <- myfilter(finaltable_exp_mstr, f_raw_targetsp >= thresh)
 ```
 
-It's not too bad... but `{r} contamsamp` of `{r} totsamp` samples (`{r} round(contamsamp/totsamp*100, 1)`%) have probably been contaminated because they contain a species that shouldn't be in the sample (using the 3% relative abundance as a robust threshold for presence/absence).
+There are `{r} contamsamp` samples (`{r} round(contamsamp/totsamp*100)`% of `{r} totsamp` samples) that exceed a 3% crosstalk threshold. `{r} contamsamp_lo` samples (`{r} round(contamsamp_lo/totsamp*100)`% of `{r} totsamp` samples) have contamination <= `{r} thresh*100`% and `{r} contamsamp_hi` samples (`{r} round(contamsamp_hi/totsamp*100)` % of `{r} totsamp` samples) have > `{r} thresh*100`% of a species that should not be there. In most cases the species in highly contaminated samples is HAMBI_1977. I think these `{r} contamsamp_hi` samples are probably at very high risk for legitimate contamination. It is likely that the rest of the `{r} contamsamp_lo` samples with <= `{r} thresh*100`%  contamination are not contaminated but just crosstalk outliers.
 
-### Contaminated pairs
+### Pairs
 
-Taking a closer look at specific experimental samples with contamination.
+Here taking a closer look at the pairs from the experiment that appear to be contaminated.
 
-Here we just select samples that have > 3% of a species that shouldn't be there and prepare them for plotting.
+::: {#fig-09}
 ```{r}
-contamsampid <- exp_contam %>% 
-  filter(f > 0) %>% 
+#| fig.width: 8
+#| fig.height: 5
+finaltable_exp_mstr %>% 
+  filter(str_detect(community_type, "experiment") & n_species == 2) %>% 
+  contaminated_barplot(threshold = 0.16,  quartet = FALSE, y=f_raw_targetsp) +
+  ggtitle("Experiment pairs with >= 15% contamination")
+```
+Species composition of pairs experimental samples that contain >= 15% of a species that shouldn’t be there (shown in grey to black). 
+:::
+
+Most of the comtaminated samples are in the 0 Streptomycin conditions. I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with 8% or less contaminant I think can be retained, and I will discard the contaminating sequences.
+
+```{r}
+contampairs <- finaltable_exp_mstr %>% 
+  filter(str_detect(community_type, "experiment") & n_species == 2) %>% 
   filter(is.na(evo_hist)) %>% 
+  filter(f_raw_targetsp > 0.16 ) %>% 
   pull(sample)
-
-spcols <- c("HAMBI_0403_anc" = "#faa019",
-            "HAMBI_0403_evo" = "#bd7811",
-            "HAMBI_1287_anc" = "#75afff",
-            "HAMBI_1287_evo" = "#476c9e",
-            "HAMBI_1896_anc" = "#59cc4e",
-            "HAMBI_1896_evo" = "#31752a",
-            "HAMBI_1977_anc" = "#ffd430",
-            "HAMBI_1977_evo" = "#ab8e1f",
-            
-            "HAMBI_0403_NA"  = "#e6e5e3",
-            "HAMBI_1287_NA"  = "#bdbcbb",
-            "HAMBI_1896_NA"  = "#8c8c8b",
-            "HAMBI_1977_NA"  = "#333333"
-            )
-
-exp_contam_plot <- exp_contam %>%
-  filter(sample %in% contamsampid) %>% 
-  mutate(sp = paste0(strainID, "_", evo_hist))
 ```
 
+### Trios
 
-::: {#fig-04}
+Here just taking a closer look at the trios from the experiment that appear to be contaminated.
+
+::: {#fig-10}
 ```{r}
 #| fig.width: 8
-#| fig.height: 6
-exp_contam_plot %>% 
-  filter(n_species == 2) %>% 
-  ggplot() +
-  geom_col(aes(x = sample, y=f, fill = sp)) +
-  facet_wrap( ~ strep_conc, scales = "free_x", ncol = 2) +
-  labs(y = "Abundance", x = "", fill = "") +
-  scale_fill_manual(values = spcols) +
-  scale_y_continuous(labels = percent) +
-  scale_x_discrete(guide = guide_axis(angle=90)) +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        legend.position = "right")
+#| fig.height: 5
+finaltable_exp_mstr %>% 
+  filter(str_detect(community_type, "experiment") & n_species == 3) %>% 
+  contaminated_barplot(threshold=0.16,  quartet = FALSE, y=f_raw_targetsp) +
+  ggtitle("Experiment trios with >= 15% contamination")
 ```
-Species composition of pair samples that contain > 3% of a species that shouldn't be there (shown in grey to black).
+Species composition of experiment trio samples that contain >= 15% of a species that shouldn’t be there (shown in grey to black). 
 :::
 
-I think pretty much the only way to deal with this is to inspect manually. Most of the comtaminated samples are in the 0 Streptomycin conditions. I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with 10% or less contaminant I think can be retained, and I will discard the contaminating sequences.
+Again, I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with around less than 15% contaminant I think can be retained, and I will discard the contaminating sequences.
 
 ```{r}
-notcontampairs <- c("P04_1_0", "P45_2_0", "P01_2_64", "P03_2_64", 
-                    "P06_1_256", "P17_2_256", "P30_1_256", "P30_2_256", 
-                    "P41_2_256")
-
-contampairs <- setdiff(contamsampid[grepl("^P", contamsampid)], notcontampairs)
-```
-
-
-### Contaminated trios
-
-Now we'll do the same thing and inspect the trios.
-
-::: {#fig-04}
-```{r}
-#| fig.width: 8
-#| fig.height: 4
-exp_contam_plot %>% 
-  filter(n_species == 3) %>% 
-  ggplot() +
-  geom_col(aes(x = sample, y=f, fill = sp)) +
-  labs(y = "Abundance", x = "", fill = "") +
-  scale_fill_manual(values = spcols) +
-  scale_y_continuous(labels = percent) +
-  scale_x_discrete(guide = guide_axis(angle=90)) +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        legend.position = "right")
-```
-Species composition of trio samples that contain > 3% of a species that shouldn't be there (shown in grey to black).
-:::
-
-Again, I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with around 10% or less contaminant I think can be retained, and I will discard the contaminating sequences.
-
-```{r}
-notcontamtrios <- c("T01_2_0", "T02_2_0", "T04_2_0", "T05_2_0", "T13_2_0", 
-                    "T14_2_0", "T15_1_0", "T15_2_0", "T16_1_0", "T16_2_0", 
-                    "T17_2_0", "T18_2_0","T31_2_0", "T45_1_0", "T45_2_0", 
-                    "T55_1_0", "T61_1_0", "T61_2_0", "T64_1_0", "T64_2_0")
-
-contamtrios <- setdiff(contamsampid[grepl("^T", contamsampid)], notcontamtrios)
+contamtrios <- finaltable_exp_mstr %>% 
+  filter(str_detect(community_type, "experiment") & n_species == 3) %>% 
+  filter(is.na(evo_hist)) %>% 
+  filter(f_raw_targetsp > 0.16) %>% 
+  pull(sample)
 ```
 
 # Export
 
+```{r}
+finaltable_exp_mstr_export <- finaltable_exp_mstr %>% 
+  # first remove samples with low read count (< 3000 reads)
+  filter(sample %nin% lowread_samps) %>% 
+  # next remove masterplate pair samples that were highly contaminated
+  filter(sample %nin% contampairs) %>% 
+  # next remove trio samples that were highly contaminated
+  filter(sample %nin% contamtrios) %>% 
+  # exclude any remaining counts from species that shouldnt be there using again
+  # the fact that evo_hist should be NA for these species
+  filter(!is.na(evo_hist)) %>% 
+  # because we set 3% as our limit of detection we set read counts of species
+  # less than 1% to 0
+  mutate(count_correct_thresh = if_else(f_raw_targetsp <= 0.03, 0, count_correct)) %>% 
+  # now calculate a new relative abundance based only on the species that should
+  # be present and that are > 3% relative abundance
+  group_by(sample) %>% 
+  mutate(f_thresh = count_correct_thresh/sum(count_correct_thresh)) %>% 
+  ungroup() %>%
+  # for marking which sequencing batch these came from 
+  mutate(batch = "run20240711") %>% 
+  dplyr::select(sample, strainID, evo_hist, count_correct_thresh, f_thresh,
+                target_f_masterplate = target_f, replicate, strep_conc, 
+                transfers, n_species, community_type, plate_well, batch)
+```
+
 ## pos/neg control samples
 
 Separate out the pos/neg control samples
+
 ```{r}
 finaltable %>% 
   filter(str_detect(community_type, "^pos|^neg")) %>% 
   dplyr::select(-transfers, -strep_conc, -evo_hist, -target_f, -count) %>% 
+  mutate(batch = "run20240711") %>% 
   write_tsv(here::here(data, "pos_neg_ctrl_counts.tsv"))
 ```
 
 ## Pairs
 
-separate, format, and write the pair samples
-```{r}
-pairs <- finaltable %>% 
-  filter(!str_detect(community_type, "^pos|^neg")) %>%
-  filter(n_species == 2) %>% 
-  filter(sample %nin% contampairs) %>% 
-  group_by(sample) %>% 
-  mutate(f = count_correct/sum(count_correct)) %>% 
-  ungroup() %>% 
-  # because we set 3% as our limit of detection we set read counts of species 
-  # less than 1% to 0
-  mutate(count_correct_thresh = if_else(f <= 0.03, 0, count_correct)) %>% 
-  # also exclude any remaining counts from species that shouldnt be there
-  # using again the fact that evo_hist should be NA for these species
-  filter(!is.na(evo_hist)) %>% 
-  group_by(sample) %>% 
-  mutate(f = count_correct_thresh/sum(count_correct_thresh)) %>% 
-  ungroup() %>%
-  dplyr::select(sample, strainID, evo_hist, count_correct, count_correct_thresh, 
-                f, target_f, replicate, strep_conc, transfers, n_species, community_type, plate_well)
+Write the pair samples
 
-write_tsv(pairs, here::here(data, "pairs_counts.tsv"))
+```{r}
+finaltable_exp_mstr_export %>% 
+  filter(n_species == 2) %>% 
+  arrange(sample) %>% 
+  write_tsv(here::here(data, "pairs_counts.tsv"))
 ```
 
 ## Trios
+
+Write the trio samples
+
 ```{r}
-trios <- finaltable %>% 
-  filter(!str_detect(community_type, "^pos|^neg")) %>%
+finaltable_exp_mstr_export %>% 
   filter(n_species == 3) %>% 
-  filter(sample %nin% contamtrios) %>% 
-  group_by(sample) %>% 
-  mutate(f = count_correct/sum(count_correct)) %>% 
-  ungroup() %>% 
-  # because we set 3% as our limit of detection we set read counts of species 
-  # less than 1% to 0
-  mutate(count_correct_thresh = if_else(f <= 0.03, 0, count_correct)) %>% 
-  # also exclude any remaining counts from species that shouldnt be there
-  # using again the fact that evo_hist should be NA for these species
-  filter(!is.na(evo_hist)) %>% 
-  group_by(sample) %>% 
-  mutate(f = count_correct_thresh/sum(count_correct_thresh)) %>% 
-  ungroup() %>%
-  dplyr::select(sample, strainID, evo_hist, count_correct, count_correct_thresh, 
-                f, target_f, replicate, strep_conc, transfers, n_species, community_type, plate_well)
-
-write_tsv(trios, here::here(data, "trios_counts.tsv"))
-```
-
-# Clean up
-
-```{r}
-# remove decompressed coverage directory from temp location
-fs::dir_delete(tmpdir)
+  arrange(sample) %>% 
+  write_tsv(here::here(data, "trios_counts.tsv"))
 ```
 

@@ -1,0 +1,1153 @@
+sample	microcosm_id	n_species	community_type	transfers	strep_conc	replicate	plate_well	plate_no	notes
+3_p03_A01	1	3	experiment	8	16	1	A01	p03	
+3_p03_A02	2	3	experiment	8	16	1	A02	p03	
+3_p03_A03	3	3	experiment	8	16	1	A03	p03	
+3_p03_A04	4	3	experiment	8	16	1	A04	p03	
+3_p03_A05	5	3	experiment	8	16	1	A05	p03	
+3_p03_A06	6	3	experiment	8	16	1	A06	p03	
+3_p03_A07	7	3	experiment	8	16	1	A07	p03	
+3_p03_A08	8	3	experiment	8	16	1	A08	p03	
+3_p03_A09	9	3	experiment	8	16	1	A09	p03	
+3_p03_A10	10	3	experiment	8	16	1	A10	p03	
+3_p03_A11	11	3	experiment	8	16	1	A11	p03	
+3_p03_A12	12	3	experiment	8	16	1	A12	p03	
+3_p03_B01	49	3	experiment	8	16	1	B01	p03	
+3_p03_B02	50	3	experiment	8	16	1	B02	p03	
+3_p03_B03	51	3	experiment	8	16	1	B03	p03	
+3_p03_B04	52	3	experiment	8	16	1	B04	p03	
+3_p03_B05	53	3	experiment	8	16	1	B05	p03	
+3_p03_B06	54	3	experiment	8	16	1	B06	p03	
+3_p03_B07	55	3	experiment	8	16	1	B07	p03	
+3_p03_B08	56	3	experiment	8	16	1	B08	p03	
+3_p03_B09	57	3	experiment	8	16	1	B09	p03	
+3_p03_B10	58	3	experiment	8	16	1	B10	p03	
+3_p03_B11	59	3	experiment	8	16	1	B11	p03	
+3_p03_B12	60	3	experiment	8	16	1	B12	p03	
+3_p03_C01	13	3	experiment	8	16	1	C01	p03	
+3_p03_C02	14	3	experiment	8	16	1	C02	p03	
+3_p03_C03	15	3	experiment	8	16	1	C03	p03	
+3_p03_C04	16	3	experiment	8	16	1	C04	p03	
+3_p03_C05	17	3	experiment	8	16	1	C05	p03	
+3_p03_C06	18	3	experiment	8	16	1	C06	p03	
+3_p03_C07	19	3	experiment	8	16	1	C07	p03	
+3_p03_C08	20	3	experiment	8	16	1	C08	p03	
+3_p03_C09	21	3	experiment	8	16	1	C09	p03	
+3_p03_C10	22	3	experiment	8	16	1	C10	p03	
+3_p03_C11	23	3	experiment	8	16	1	C11	p03	
+3_p03_C12	24	3	experiment	8	16	1	C12	p03	
+3_p03_D01	61	3	experiment	8	16	1	D01	p03	
+3_p03_D02	62	3	experiment	8	16	1	D02	p03	
+3_p03_D03	63	3	experiment	8	16	1	D03	p03	
+3_p03_D04	64	3	experiment	8	16	1	D04	p03	
+3_p03_D05	65	3	experiment	8	16	1	D05	p03	
+3_p03_D06	66	3	experiment	8	16	1	D06	p03	
+3_p03_D07	67	3	experiment	8	16	1	D07	p03	
+3_p03_D08	68	3	experiment	8	16	1	D08	p03	
+3_p03_D09	69	3	experiment	8	16	1	D09	p03	
+3_p03_D10	70	3	experiment	8	16	1	D10	p03	
+3_p03_D11	71	3	experiment	8	16	1	D11	p03	
+3_p03_D12	72	3	experiment	8	16	1	D12	p03	
+3_p03_E01	25	3	experiment	8	16	1	E01	p03	
+3_p03_E02	26	3	experiment	8	16	1	E02	p03	
+3_p03_E03	27	3	experiment	8	16	1	E03	p03	
+3_p03_E04	28	3	experiment	8	16	1	E04	p03	
+3_p03_E05	29	3	experiment	8	16	1	E05	p03	
+3_p03_E06	30	3	experiment	8	16	1	E06	p03	
+3_p03_E07	31	3	experiment	8	16	1	E07	p03	
+3_p03_E08	32	3	experiment	8	16	1	E08	p03	
+3_p03_E09	33	3	experiment	8	16	1	E09	p03	
+3_p03_E10	34	3	experiment	8	16	1	E10	p03	
+3_p03_E11	35	3	experiment	8	16	1	E11	p03	
+3_p03_E12	36	3	experiment	8	16	1	E12	p03	
+3_p03_F01	73	3	experiment	8	16	1	F01	p03	
+3_p03_F02	74	3	experiment	8	16	1	F02	p03	
+3_p03_F03	75	3	experiment	8	16	1	F03	p03	
+3_p03_F04	76	3	experiment	8	16	1	F04	p03	
+3_p03_F05	77	3	experiment	8	16	1	F05	p03	
+3_p03_F06	78	3	experiment	8	16	1	F06	p03	
+3_p03_F07	79	3	experiment	8	16	1	F07	p03	
+3_p03_F08	80	3	experiment	8	16	1	F08	p03	
+3_p03_F09	81	3	experiment	8	16	1	F09	p03	
+3_p03_F10	82	3	experiment	8	16	1	F10	p03	
+3_p03_F11	83	3	experiment	8	16	1	F11	p03	
+3_p03_F12	84	3	experiment	8	16	1	F12	p03	
+3_p03_G01	37	3	experiment	8	16	1	G01	p03	
+3_p03_G02	38	3	experiment	8	16	1	G02	p03	
+3_p03_G03	39	3	experiment	8	16	1	G03	p03	
+3_p03_G04	40	3	experiment	8	16	1	G04	p03	
+3_p03_G05	41	3	experiment	8	16	1	G05	p03	
+3_p03_G06	42	3	experiment	8	16	1	G06	p03	
+3_p03_G07	43	3	experiment	8	16	1	G07	p03	
+3_p03_G08	44	3	experiment	8	16	1	G08	p03	
+3_p03_G09	45	3	experiment	8	16	1	G09	p03	
+3_p03_G10	46	3	experiment	8	16	1	G10	p03	
+3_p03_G11	47	3	experiment	8	16	1	G11	p03	
+3_p03_G12	48	3	experiment	8	16	1	G12	p03	
+3_p03_H01	85	3	experiment	8	16	1	H01	p03	
+3_p03_H02	86	3	experiment	8	16	1	H02	p03	
+3_p03_H03	87	3	experiment	8	16	1	H03	p03	
+3_p03_H04	88	3	experiment	8	16	1	H04	p03	
+3_p03_H05	89	3	experiment	8	16	1	H05	p03	
+3_p03_H06	90	3	experiment	8	16	1	H06	p03	
+3_p03_H07	91	3	experiment	8	16	1	H07	p03	
+3_p03_H08	92	3	experiment	8	16	1	H08	p03	
+3_p03_H09	93	3	experiment	8	16	1	H09	p03	
+3_p03_H10	94	3	experiment	8	16	1	H10	p03	
+3_p03_H11	95	3	experiment	8	16	1	H11	p03	
+3_p03_H12	96	3	experiment	8	16	1	H12	p03	
+3_p04_A01	1	3	experiment	8	16	2	A01	p04	
+3_p04_A02	2	3	experiment	8	16	2	A02	p04	
+3_p04_A03	3	3	experiment	8	16	2	A03	p04	
+3_p04_A04	4	3	experiment	8	16	2	A04	p04	
+3_p04_A05	5	3	experiment	8	16	2	A05	p04	
+3_p04_A06	6	3	experiment	8	16	2	A06	p04	
+3_p04_A07	7	3	experiment	8	16	2	A07	p04	
+3_p04_A08	8	3	experiment	8	16	2	A08	p04	
+3_p04_A09	9	3	experiment	8	16	2	A09	p04	
+3_p04_A10	10	3	experiment	8	16	2	A10	p04	
+3_p04_A11	11	3	experiment	8	16	2	A11	p04	
+3_p04_A12	12	3	experiment	8	16	2	A12	p04	
+3_p04_B01	49	3	experiment	8	16	2	B01	p04	
+3_p04_B02	50	3	experiment	8	16	2	B02	p04	
+3_p04_B03	51	3	experiment	8	16	2	B03	p04	
+3_p04_B04	52	3	experiment	8	16	2	B04	p04	
+3_p04_B05	53	3	experiment	8	16	2	B05	p04	
+3_p04_B06	54	3	experiment	8	16	2	B06	p04	
+3_p04_B07	55	3	experiment	8	16	2	B07	p04	
+3_p04_B08	56	3	experiment	8	16	2	B08	p04	
+3_p04_B09	57	3	experiment	8	16	2	B09	p04	
+3_p04_B10	58	3	experiment	8	16	2	B10	p04	
+3_p04_B11	59	3	experiment	8	16	2	B11	p04	
+3_p04_B12	60	3	experiment	8	16	2	B12	p04	
+3_p04_C01	13	3	experiment	8	16	2	C01	p04	
+3_p04_C02	14	3	experiment	8	16	2	C02	p04	
+3_p04_C03	15	3	experiment	8	16	2	C03	p04	
+3_p04_C04	16	3	experiment	8	16	2	C04	p04	
+3_p04_C05	17	3	experiment	8	16	2	C05	p04	
+3_p04_C06	18	3	experiment	8	16	2	C06	p04	
+3_p04_C07	19	3	experiment	8	16	2	C07	p04	
+3_p04_C08	20	3	experiment	8	16	2	C08	p04	
+3_p04_C09	21	3	experiment	8	16	2	C09	p04	
+3_p04_C10	22	3	experiment	8	16	2	C10	p04	
+3_p04_C11	23	3	experiment	8	16	2	C11	p04	
+3_p04_C12	24	3	experiment	8	16	2	C12	p04	
+3_p04_D01	61	3	experiment	8	16	2	D01	p04	
+3_p04_D02	62	3	experiment	8	16	2	D02	p04	
+3_p04_D03	63	3	experiment	8	16	2	D03	p04	
+3_p04_D04	64	3	experiment	8	16	2	D04	p04	
+3_p04_D05	65	3	experiment	8	16	2	D05	p04	
+3_p04_D06	66	3	experiment	8	16	2	D06	p04	
+3_p04_D07	67	3	experiment	8	16	2	D07	p04	
+3_p04_D08	68	3	experiment	8	16	2	D08	p04	
+3_p04_D09	69	3	experiment	8	16	2	D09	p04	
+3_p04_D10	70	3	experiment	8	16	2	D10	p04	
+3_p04_D11	71	3	experiment	8	16	2	D11	p04	
+3_p04_D12	72	3	experiment	8	16	2	D12	p04	
+3_p04_E01	25	3	experiment	8	16	2	E01	p04	
+3_p04_E02	26	3	experiment	8	16	2	E02	p04	
+3_p04_E03	27	3	experiment	8	16	2	E03	p04	
+3_p04_E04	28	3	experiment	8	16	2	E04	p04	
+3_p04_E05	29	3	experiment	8	16	2	E05	p04	
+3_p04_E06	30	3	experiment	8	16	2	E06	p04	
+3_p04_E07	31	3	experiment	8	16	2	E07	p04	
+3_p04_E08	32	3	experiment	8	16	2	E08	p04	
+3_p04_E09	33	3	experiment	8	16	2	E09	p04	
+3_p04_E10	34	3	experiment	8	16	2	E10	p04	
+3_p04_E11	35	3	experiment	8	16	2	E11	p04	
+3_p04_E12	36	3	experiment	8	16	2	E12	p04	
+3_p04_F01	73	3	experiment	8	16	2	F01	p04	
+3_p04_F02	74	3	experiment	8	16	2	F02	p04	
+3_p04_F03	75	3	experiment	8	16	2	F03	p04	
+3_p04_F04	76	3	experiment	8	16	2	F04	p04	
+3_p04_F05	77	3	experiment	8	16	2	F05	p04	
+3_p04_F06	78	3	experiment	8	16	2	F06	p04	
+3_p04_F07	79	3	experiment	8	16	2	F07	p04	
+3_p04_F08	80	3	experiment	8	16	2	F08	p04	
+3_p04_F09	81	3	experiment	8	16	2	F09	p04	
+3_p04_F10	82	3	experiment	8	16	2	F10	p04	
+3_p04_F11	83	3	experiment	8	16	2	F11	p04	
+3_p04_F12	84	3	experiment	8	16	2	F12	p04	
+3_p04_G01	37	3	experiment	8	16	2	G01	p04	
+3_p04_G02	38	3	experiment	8	16	2	G02	p04	
+3_p04_G03	39	3	experiment	8	16	2	G03	p04	
+3_p04_G04	40	3	experiment	8	16	2	G04	p04	
+3_p04_G05	41	3	experiment	8	16	2	G05	p04	
+3_p04_G06	42	3	experiment	8	16	2	G06	p04	
+3_p04_G07	43	3	experiment	8	16	2	G07	p04	
+3_p04_G08	44	3	experiment	8	16	2	G08	p04	
+3_p04_G09	45	3	experiment	8	16	2	G09	p04	
+3_p04_G10	46	3	experiment	8	16	2	G10	p04	
+3_p04_G11	47	3	experiment	8	16	2	G11	p04	
+3_p04_G12	48	3	experiment	8	16	2	G12	p04	
+3_p04_H01	85	3	experiment	8	16	2	H01	p04	
+3_p04_H02	86	3	experiment	8	16	2	H02	p04	
+3_p04_H03	87	3	experiment	8	16	2	H03	p04	
+3_p04_H04	88	3	experiment	8	16	2	H04	p04	
+3_p04_H05	89	3	experiment	8	16	2	H05	p04	
+3_p04_H06	90	3	experiment	8	16	2	H06	p04	
+3_p04_H07	91	3	experiment	8	16	2	H07	p04	
+3_p04_H08	92	3	experiment	8	16	2	H08	p04	
+3_p04_H09	93	3	experiment	8	16	2	H09	p04	
+3_p04_H10	94	3	experiment	8	16	2	H10	p04	
+3_p04_H11	95	3	experiment	8	16	2	H11	p04	
+3_p04_H12	96	3	experiment	8	16	2	H12	p04	
+3_p05_A01	1	3	experiment	8	64	1	A01	p05	
+3_p05_A02	2	3	experiment	8	64	1	A02	p05	
+3_p05_A03	3	3	experiment	8	64	1	A03	p05	
+3_p05_A04	4	3	experiment	8	64	1	A04	p05	
+3_p05_A05	5	3	experiment	8	64	1	A05	p05	
+3_p05_A06	6	3	experiment	8	64	1	A06	p05	
+3_p05_A07	7	3	experiment	8	64	1	A07	p05	
+3_p05_A08	8	3	experiment	8	64	1	A08	p05	
+3_p05_A09	9	3	experiment	8	64	1	A09	p05	
+3_p05_A10	10	3	experiment	8	64	1	A10	p05	
+3_p05_A11	11	3	experiment	8	64	1	A11	p05	
+3_p05_A12	12	3	experiment	8	64	1	A12	p05	
+3_p05_B01	49	3	experiment	8	64	1	B01	p05	
+3_p05_B02	50	3	experiment	8	64	1	B02	p05	
+3_p05_B03	51	3	experiment	8	64	1	B03	p05	
+3_p05_B04	52	3	experiment	8	64	1	B04	p05	
+3_p05_B05	53	3	experiment	8	64	1	B05	p05	
+3_p05_B06	54	3	experiment	8	64	1	B06	p05	
+3_p05_B07	55	3	experiment	8	64	1	B07	p05	
+3_p05_B08	56	3	experiment	8	64	1	B08	p05	
+3_p05_B09	57	3	experiment	8	64	1	B09	p05	
+3_p05_B10	58	3	experiment	8	64	1	B10	p05	
+3_p05_B11	59	3	experiment	8	64	1	B11	p05	
+3_p05_B12	60	3	experiment	8	64	1	B12	p05	
+3_p05_C01	13	3	experiment	8	64	1	C01	p05	
+3_p05_C02	14	3	experiment	8	64	1	C02	p05	
+3_p05_C03	15	3	experiment	8	64	1	C03	p05	
+3_p05_C04	16	3	experiment	8	64	1	C04	p05	
+3_p05_C05	17	3	experiment	8	64	1	C05	p05	
+3_p05_C06	18	3	experiment	8	64	1	C06	p05	
+3_p05_C07	19	3	experiment	8	64	1	C07	p05	
+3_p05_C08	20	3	experiment	8	64	1	C08	p05	
+3_p05_C09	21	3	experiment	8	64	1	C09	p05	
+3_p05_C10	22	3	experiment	8	64	1	C10	p05	
+3_p05_C11	23	3	experiment	8	64	1	C11	p05	
+3_p05_C12	24	3	experiment	8	64	1	C12	p05	
+3_p05_D01	61	3	experiment	8	64	1	D01	p05	
+3_p05_D02	62	3	experiment	8	64	1	D02	p05	
+3_p05_D03	63	3	experiment	8	64	1	D03	p05	
+3_p05_D04	64	3	experiment	8	64	1	D04	p05	
+3_p05_D05	65	3	experiment	8	64	1	D05	p05	
+3_p05_D06	66	3	experiment	8	64	1	D06	p05	
+3_p05_D07	67	3	experiment	8	64	1	D07	p05	
+3_p05_D08	68	3	experiment	8	64	1	D08	p05	
+3_p05_D09	69	3	experiment	8	64	1	D09	p05	
+3_p05_D10	70	3	experiment	8	64	1	D10	p05	
+3_p05_D11	71	3	experiment	8	64	1	D11	p05	
+3_p05_D12	72	3	experiment	8	64	1	D12	p05	
+3_p05_E01	25	3	experiment	8	64	1	E01	p05	
+3_p05_E02	26	3	experiment	8	64	1	E02	p05	
+3_p05_E03	27	3	experiment	8	64	1	E03	p05	
+3_p05_E04	28	3	experiment	8	64	1	E04	p05	
+3_p05_E05	29	3	experiment	8	64	1	E05	p05	
+3_p05_E06	30	3	experiment	8	64	1	E06	p05	
+3_p05_E07	31	3	experiment	8	64	1	E07	p05	
+3_p05_E08	32	3	experiment	8	64	1	E08	p05	
+3_p05_E09	33	3	experiment	8	64	1	E09	p05	
+3_p05_E10	34	3	experiment	8	64	1	E10	p05	
+3_p05_E11	35	3	experiment	8	64	1	E11	p05	
+3_p05_E12	36	3	experiment	8	64	1	E12	p05	
+3_p05_F01	73	3	experiment	8	64	1	F01	p05	
+3_p05_F02	74	3	experiment	8	64	1	F02	p05	
+3_p05_F03	75	3	experiment	8	64	1	F03	p05	
+3_p05_F04	76	3	experiment	8	64	1	F04	p05	
+3_p05_F05	77	3	experiment	8	64	1	F05	p05	
+3_p05_F06	78	3	experiment	8	64	1	F06	p05	
+3_p05_F07	79	3	experiment	8	64	1	F07	p05	
+3_p05_F08	80	3	experiment	8	64	1	F08	p05	
+3_p05_F09	81	3	experiment	8	64	1	F09	p05	
+3_p05_F10	82	3	experiment	8	64	1	F10	p05	
+3_p05_F11	83	3	experiment	8	64	1	F11	p05	
+3_p05_F12	84	3	experiment	8	64	1	F12	p05	
+3_p05_G01	37	3	experiment	8	64	1	G01	p05	
+3_p05_G02	38	3	experiment	8	64	1	G02	p05	
+3_p05_G03	39	3	experiment	8	64	1	G03	p05	
+3_p05_G04	40	3	experiment	8	64	1	G04	p05	
+3_p05_G05	41	3	experiment	8	64	1	G05	p05	
+3_p05_G06	42	3	experiment	8	64	1	G06	p05	
+3_p05_G07	43	3	experiment	8	64	1	G07	p05	
+3_p05_G08	44	3	experiment	8	64	1	G08	p05	
+3_p05_G09	45	3	experiment	8	64	1	G09	p05	
+3_p05_G10	46	3	experiment	8	64	1	G10	p05	
+3_p05_G11	47	3	experiment	8	64	1	G11	p05	
+3_p05_G12	48	3	experiment	8	64	1	G12	p05	
+3_p05_H01	85	3	experiment	8	64	1	H01	p05	
+3_p05_H02	86	3	experiment	8	64	1	H02	p05	
+3_p05_H03	87	3	experiment	8	64	1	H03	p05	
+3_p05_H04	88	3	experiment	8	64	1	H04	p05	
+3_p05_H05	89	3	experiment	8	64	1	H05	p05	
+3_p05_H06	90	3	experiment	8	64	1	H06	p05	
+3_p05_H07	91	3	experiment	8	64	1	H07	p05	
+3_p05_H08	92	3	experiment	8	64	1	H08	p05	
+3_p05_H09	93	3	experiment	8	64	1	H09	p05	
+3_p05_H10	94	3	experiment	8	64	1	H10	p05	
+3_p05_H11	95	3	experiment	8	64	1	H11	p05	
+3_p05_H12	96	3	experiment	8	64	1	H12	p05	
+3_p06_A01	1	3	experiment	8	64	2	A01	p06	
+3_p06_A02	2	3	experiment	8	64	2	A02	p06	
+3_p06_A03	3	3	experiment	8	64	2	A03	p06	
+3_p06_A04	4	3	experiment	8	64	2	A04	p06	
+3_p06_A05	5	3	experiment	8	64	2	A05	p06	
+3_p06_A06	6	3	experiment	8	64	2	A06	p06	
+3_p06_A07	7	3	experiment	8	64	2	A07	p06	
+3_p06_A08	8	3	experiment	8	64	2	A08	p06	
+3_p06_A09	9	3	experiment	8	64	2	A09	p06	
+3_p06_A10	10	3	experiment	8	64	2	A10	p06	
+3_p06_A11	11	3	experiment	8	64	2	A11	p06	
+3_p06_A12	12	3	experiment	8	64	2	A12	p06	
+3_p06_B01	49	3	experiment	8	64	2	B01	p06	
+3_p06_B02	50	3	experiment	8	64	2	B02	p06	
+3_p06_B03	51	3	experiment	8	64	2	B03	p06	
+3_p06_B04	52	3	experiment	8	64	2	B04	p06	
+3_p06_B05	53	3	experiment	8	64	2	B05	p06	
+3_p06_B06	54	3	experiment	8	64	2	B06	p06	
+3_p06_B07	55	3	experiment	8	64	2	B07	p06	
+3_p06_B08	56	3	experiment	8	64	2	B08	p06	
+3_p06_B09	57	3	experiment	8	64	2	B09	p06	
+3_p06_B10	58	3	experiment	8	64	2	B10	p06	
+3_p06_B11	59	3	experiment	8	64	2	B11	p06	
+3_p06_B12	60	3	experiment	8	64	2	B12	p06	
+3_p06_C01	13	3	experiment	8	64	2	C01	p06	
+3_p06_C02	14	3	experiment	8	64	2	C02	p06	
+3_p06_C03	15	3	experiment	8	64	2	C03	p06	
+3_p06_C04	16	3	experiment	8	64	2	C04	p06	
+3_p06_C05	17	3	experiment	8	64	2	C05	p06	
+3_p06_C06	18	3	experiment	8	64	2	C06	p06	
+3_p06_C07	19	3	experiment	8	64	2	C07	p06	
+3_p06_C08	20	3	experiment	8	64	2	C08	p06	
+3_p06_C09	21	3	experiment	8	64	2	C09	p06	
+3_p06_C10	22	3	experiment	8	64	2	C10	p06	
+3_p06_C11	23	3	experiment	8	64	2	C11	p06	
+3_p06_C12	24	3	experiment	8	64	2	C12	p06	
+3_p06_D01	61	3	experiment	8	64	2	D01	p06	
+3_p06_D02	62	3	experiment	8	64	2	D02	p06	
+3_p06_D03	63	3	experiment	8	64	2	D03	p06	
+3_p06_D04	64	3	experiment	8	64	2	D04	p06	
+3_p06_D05	65	3	experiment	8	64	2	D05	p06	
+3_p06_D06	66	3	experiment	8	64	2	D06	p06	
+3_p06_D07	67	3	experiment	8	64	2	D07	p06	
+3_p06_D08	68	3	experiment	8	64	2	D08	p06	
+3_p06_D09	69	3	experiment	8	64	2	D09	p06	
+3_p06_D10	70	3	experiment	8	64	2	D10	p06	
+3_p06_D11	71	3	experiment	8	64	2	D11	p06	
+3_p06_D12	72	3	experiment	8	64	2	D12	p06	
+3_p06_E01	25	3	experiment	8	64	2	E01	p06	
+3_p06_E02	26	3	experiment	8	64	2	E02	p06	
+3_p06_E03	27	3	experiment	8	64	2	E03	p06	
+3_p06_E04	28	3	experiment	8	64	2	E04	p06	
+3_p06_E05	29	3	experiment	8	64	2	E05	p06	
+3_p06_E06	30	3	experiment	8	64	2	E06	p06	
+3_p06_E07	31	3	experiment	8	64	2	E07	p06	
+3_p06_E08	32	3	experiment	8	64	2	E08	p06	
+3_p06_E09	33	3	experiment	8	64	2	E09	p06	
+3_p06_E10	34	3	experiment	8	64	2	E10	p06	
+3_p06_E11	35	3	experiment	8	64	2	E11	p06	
+3_p06_E12	36	3	experiment	8	64	2	E12	p06	
+3_p06_F01	73	3	experiment	8	64	2	F01	p06	
+3_p06_F02	74	3	experiment	8	64	2	F02	p06	
+3_p06_F03	75	3	experiment	8	64	2	F03	p06	
+3_p06_F04	76	3	experiment	8	64	2	F04	p06	
+3_p06_F05	77	3	experiment	8	64	2	F05	p06	
+3_p06_F06	78	3	experiment	8	64	2	F06	p06	
+3_p06_F07	79	3	experiment	8	64	2	F07	p06	
+3_p06_F08	80	3	experiment	8	64	2	F08	p06	
+3_p06_F09	81	3	experiment	8	64	2	F09	p06	
+3_p06_F10	82	3	experiment	8	64	2	F10	p06	
+3_p06_F11	83	3	experiment	8	64	2	F11	p06	
+3_p06_F12	84	3	experiment	8	64	2	F12	p06	
+3_p06_G01	37	3	experiment	8	64	2	G01	p06	
+3_p06_G02	38	3	experiment	8	64	2	G02	p06	
+3_p06_G03	39	3	experiment	8	64	2	G03	p06	
+3_p06_G04	40	3	experiment	8	64	2	G04	p06	
+3_p06_G05	41	3	experiment	8	64	2	G05	p06	
+3_p06_G06	42	3	experiment	8	64	2	G06	p06	
+3_p06_G07	43	3	experiment	8	64	2	G07	p06	
+3_p06_G08	44	3	experiment	8	64	2	G08	p06	
+3_p06_G09	45	3	experiment	8	64	2	G09	p06	
+3_p06_G10	46	3	experiment	8	64	2	G10	p06	
+3_p06_G11	47	3	experiment	8	64	2	G11	p06	
+3_p06_G12	48	3	experiment	8	64	2	G12	p06	
+3_p06_H01	85	3	experiment	8	64	2	H01	p06	
+3_p06_H02	86	3	experiment	8	64	2	H02	p06	
+3_p06_H03	87	3	experiment	8	64	2	H03	p06	
+3_p06_H04	88	3	experiment	8	64	2	H04	p06	
+3_p06_H05	89	3	experiment	8	64	2	H05	p06	
+3_p06_H06	90	3	experiment	8	64	2	H06	p06	
+3_p06_H07	91	3	experiment	8	64	2	H07	p06	
+3_p06_H08	92	3	experiment	8	64	2	H08	p06	
+3_p06_H09	93	3	experiment	8	64	2	H09	p06	
+3_p06_H10	94	3	experiment	8	64	2	H10	p06	
+3_p06_H11	95	3	experiment	8	64	2	H11	p06	
+3_p06_H12	96	3	experiment	8	64	2	H12	p06	
+3_p07_A01	1	3	experiment	8	256	1	A01	p07	
+3_p07_A02	2	3	experiment	8	256	1	A02	p07	
+3_p07_A03	3	3	experiment	8	256	1	A03	p07	
+3_p07_A04	4	3	experiment	8	256	1	A04	p07	
+3_p07_A05	5	3	experiment	8	256	1	A05	p07	
+3_p07_A06	6	3	experiment	8	256	1	A06	p07	
+3_p07_A07	7	3	experiment	8	256	1	A07	p07	
+3_p07_A08	8	3	experiment	8	256	1	A08	p07	
+3_p07_A09	9	3	experiment	8	256	1	A09	p07	
+3_p07_A10	10	3	experiment	8	256	1	A10	p07	
+3_p07_A11	11	3	experiment	8	256	1	A11	p07	
+3_p07_A12	12	3	experiment	8	256	1	A12	p07	
+3_p07_B01	49	3	experiment	8	256	1	B01	p07	
+3_p07_B02	50	3	experiment	8	256	1	B02	p07	
+3_p07_B03	51	3	experiment	8	256	1	B03	p07	
+3_p07_B04	52	3	experiment	8	256	1	B04	p07	
+3_p07_B05	53	3	experiment	8	256	1	B05	p07	
+3_p07_B06	54	3	experiment	8	256	1	B06	p07	
+3_p07_B07	55	3	experiment	8	256	1	B07	p07	
+3_p07_B08	56	3	experiment	8	256	1	B08	p07	
+3_p07_B09	57	3	experiment	8	256	1	B09	p07	
+3_p07_B10	58	3	experiment	8	256	1	B10	p07	
+3_p07_B11	59	3	experiment	8	256	1	B11	p07	
+3_p07_B12	60	3	experiment	8	256	1	B12	p07	
+3_p07_C01	13	3	experiment	8	256	1	C01	p07	
+3_p07_C02	14	3	experiment	8	256	1	C02	p07	
+3_p07_C03	15	3	experiment	8	256	1	C03	p07	
+3_p07_C04	16	3	experiment	8	256	1	C04	p07	
+3_p07_C05	17	3	experiment	8	256	1	C05	p07	
+3_p07_C06	18	3	experiment	8	256	1	C06	p07	
+3_p07_C07	19	3	experiment	8	256	1	C07	p07	
+3_p07_C08	20	3	experiment	8	256	1	C08	p07	
+3_p07_C09	21	3	experiment	8	256	1	C09	p07	
+3_p07_C10	22	3	experiment	8	256	1	C10	p07	
+3_p07_C11	23	3	experiment	8	256	1	C11	p07	
+3_p07_C12	24	3	experiment	8	256	1	C12	p07	
+3_p07_D01	61	3	experiment	8	256	1	D01	p07	
+3_p07_D02	62	3	experiment	8	256	1	D02	p07	
+3_p07_D03	63	3	experiment	8	256	1	D03	p07	
+3_p07_D04	64	3	experiment	8	256	1	D04	p07	
+3_p07_D05	65	3	experiment	8	256	1	D05	p07	
+3_p07_D06	66	3	experiment	8	256	1	D06	p07	
+3_p07_D07	67	3	experiment	8	256	1	D07	p07	
+3_p07_D08	68	3	experiment	8	256	1	D08	p07	
+3_p07_D09	69	3	experiment	8	256	1	D09	p07	
+3_p07_D10	70	3	experiment	8	256	1	D10	p07	
+3_p07_D11	71	3	experiment	8	256	1	D11	p07	
+3_p07_D12	72	3	experiment	8	256	1	D12	p07	
+3_p07_E01	25	3	experiment	8	256	1	E01	p07	
+3_p07_E02	26	3	experiment	8	256	1	E02	p07	
+3_p07_E03	27	3	experiment	8	256	1	E03	p07	
+3_p07_E04	28	3	experiment	8	256	1	E04	p07	
+3_p07_E05	29	3	experiment	8	256	1	E05	p07	
+3_p07_E06	30	3	experiment	8	256	1	E06	p07	
+3_p07_E07	31	3	experiment	8	256	1	E07	p07	
+3_p07_E08	32	3	experiment	8	256	1	E08	p07	
+3_p07_E09	33	3	experiment	8	256	1	E09	p07	
+3_p07_E10	34	3	experiment	8	256	1	E10	p07	
+3_p07_E11	35	3	experiment	8	256	1	E11	p07	
+3_p07_E12	36	3	experiment	8	256	1	E12	p07	
+3_p07_F01	73	3	experiment	8	256	1	F01	p07	
+3_p07_F02	74	3	experiment	8	256	1	F02	p07	
+3_p07_F03	75	3	experiment	8	256	1	F03	p07	
+3_p07_F04	76	3	experiment	8	256	1	F04	p07	
+3_p07_F05	77	3	experiment	8	256	1	F05	p07	
+3_p07_F06	78	3	experiment	8	256	1	F06	p07	
+3_p07_F07	79	3	experiment	8	256	1	F07	p07	
+3_p07_F08	80	3	experiment	8	256	1	F08	p07	
+3_p07_F09	81	3	experiment	8	256	1	F09	p07	
+3_p07_F10	82	3	experiment	8	256	1	F10	p07	
+3_p07_F11	83	3	experiment	8	256	1	F11	p07	
+3_p07_F12	84	3	experiment	8	256	1	F12	p07	
+3_p07_G01	37	3	experiment	8	256	1	G01	p07	
+3_p07_G02	38	3	experiment	8	256	1	G02	p07	
+3_p07_G03	39	3	experiment	8	256	1	G03	p07	
+3_p07_G04	40	3	experiment	8	256	1	G04	p07	
+3_p07_G05	41	3	experiment	8	256	1	G05	p07	
+3_p07_G06	42	3	experiment	8	256	1	G06	p07	
+3_p07_G07	43	3	experiment	8	256	1	G07	p07	
+3_p07_G08	44	3	experiment	8	256	1	G08	p07	
+3_p07_G09	45	3	experiment	8	256	1	G09	p07	
+3_p07_G10	46	3	experiment	8	256	1	G10	p07	
+3_p07_G11	47	3	experiment	8	256	1	G11	p07	
+3_p07_G12	48	3	experiment	8	256	1	G12	p07	
+3_p07_H01	85	3	experiment	8	256	1	H01	p07	
+3_p07_H02	86	3	experiment	8	256	1	H02	p07	
+3_p07_H03	87	3	experiment	8	256	1	H03	p07	
+3_p07_H04	88	3	experiment	8	256	1	H04	p07	
+3_p07_H05	89	3	experiment	8	256	1	H05	p07	
+3_p07_H06	90	3	experiment	8	256	1	H06	p07	
+3_p07_H07	91	3	experiment	8	256	1	H07	p07	
+3_p07_H08	92	3	experiment	8	256	1	H08	p07	
+3_p07_H09	93	3	experiment	8	256	1	H09	p07	
+3_p07_H10	94	3	experiment	8	256	1	H10	p07	
+3_p07_H11	95	3	experiment	8	256	1	H11	p07	
+3_p07_H12	96	3	experiment	8	256	1	H12	p07	
+3_p08_A01	1	3	experiment	8	256	2	A01	p08	
+3_p08_A02	2	3	experiment	8	256	2	A02	p08	
+3_p08_A03	3	3	experiment	8	256	2	A03	p08	
+3_p08_A04	4	3	experiment	8	256	2	A04	p08	
+3_p08_A05	5	3	experiment	8	256	2	A05	p08	
+3_p08_A06	6	3	experiment	8	256	2	A06	p08	
+3_p08_A07	7	3	experiment	8	256	2	A07	p08	
+3_p08_A08	8	3	experiment	8	256	2	A08	p08	
+3_p08_A09	9	3	experiment	8	256	2	A09	p08	
+3_p08_A10	10	3	experiment	8	256	2	A10	p08	
+3_p08_A11	11	3	experiment	8	256	2	A11	p08	
+3_p08_A12	12	3	experiment	8	256	2	A12	p08	
+3_p08_B01	49	3	experiment	8	256	2	B01	p08	
+3_p08_B02	50	3	experiment	8	256	2	B02	p08	
+3_p08_B03	51	3	experiment	8	256	2	B03	p08	
+3_p08_B04	52	3	experiment	8	256	2	B04	p08	
+3_p08_B05	53	3	experiment	8	256	2	B05	p08	
+3_p08_B06	54	3	experiment	8	256	2	B06	p08	
+3_p08_B07	55	3	experiment	8	256	2	B07	p08	
+3_p08_B08	56	3	experiment	8	256	2	B08	p08	
+3_p08_B09	57	3	experiment	8	256	2	B09	p08	
+3_p08_B10	58	3	experiment	8	256	2	B10	p08	
+3_p08_B11	59	3	experiment	8	256	2	B11	p08	
+3_p08_B12	60	3	experiment	8	256	2	B12	p08	
+3_p08_C01	13	3	experiment	8	256	2	C01	p08	
+3_p08_C02	14	3	experiment	8	256	2	C02	p08	
+3_p08_C03	15	3	experiment	8	256	2	C03	p08	
+3_p08_C04	16	3	experiment	8	256	2	C04	p08	
+3_p08_C05	17	3	experiment	8	256	2	C05	p08	
+3_p08_C06	18	3	experiment	8	256	2	C06	p08	
+3_p08_C07	19	3	experiment	8	256	2	C07	p08	
+3_p08_C08	20	3	experiment	8	256	2	C08	p08	
+3_p08_C09	21	3	experiment	8	256	2	C09	p08	
+3_p08_C10	22	3	experiment	8	256	2	C10	p08	
+3_p08_C11	23	3	experiment	8	256	2	C11	p08	
+3_p08_C12	24	3	experiment	8	256	2	C12	p08	
+3_p08_D01	61	3	experiment	8	256	2	D01	p08	
+3_p08_D02	62	3	experiment	8	256	2	D02	p08	
+3_p08_D03	63	3	experiment	8	256	2	D03	p08	
+3_p08_D04	64	3	experiment	8	256	2	D04	p08	
+3_p08_D05	65	3	experiment	8	256	2	D05	p08	
+3_p08_D06	66	3	experiment	8	256	2	D06	p08	
+3_p08_D07	67	3	experiment	8	256	2	D07	p08	
+3_p08_D08	68	3	experiment	8	256	2	D08	p08	
+3_p08_D09	69	3	experiment	8	256	2	D09	p08	
+3_p08_D10	70	3	experiment	8	256	2	D10	p08	
+3_p08_D11	71	3	experiment	8	256	2	D11	p08	
+3_p08_D12	72	3	experiment	8	256	2	D12	p08	
+3_p08_E01	25	3	experiment	8	256	2	E01	p08	
+3_p08_E02	26	3	experiment	8	256	2	E02	p08	
+3_p08_E03	27	3	experiment	8	256	2	E03	p08	
+3_p08_E04	28	3	experiment	8	256	2	E04	p08	
+3_p08_E05	29	3	experiment	8	256	2	E05	p08	
+3_p08_E06	30	3	experiment	8	256	2	E06	p08	
+3_p08_E07	31	3	experiment	8	256	2	E07	p08	
+3_p08_E08	32	3	experiment	8	256	2	E08	p08	
+3_p08_E09	33	3	experiment	8	256	2	E09	p08	
+3_p08_E10	34	3	experiment	8	256	2	E10	p08	
+3_p08_E11	35	3	experiment	8	256	2	E11	p08	
+3_p08_E12	36	3	experiment	8	256	2	E12	p08	
+3_p08_F01	73	3	experiment	8	256	2	F01	p08	
+3_p08_F02	74	3	experiment	8	256	2	F02	p08	
+3_p08_F03	75	3	experiment	8	256	2	F03	p08	
+3_p08_F04	76	3	experiment	8	256	2	F04	p08	
+3_p08_F05	77	3	experiment	8	256	2	F05	p08	
+3_p08_F06	78	3	experiment	8	256	2	F06	p08	
+3_p08_F07	79	3	experiment	8	256	2	F07	p08	
+3_p08_F08	80	3	experiment	8	256	2	F08	p08	
+3_p08_F09	81	3	experiment	8	256	2	F09	p08	
+3_p08_F10	82	3	experiment	8	256	2	F10	p08	
+3_p08_F11	83	3	experiment	8	256	2	F11	p08	
+3_p08_F12	84	3	experiment	8	256	2	F12	p08	
+3_p08_G01	37	3	experiment	8	256	2	G01	p08	
+3_p08_G02	38	3	experiment	8	256	2	G02	p08	
+3_p08_G03	39	3	experiment	8	256	2	G03	p08	
+3_p08_G04	40	3	experiment	8	256	2	G04	p08	
+3_p08_G05	41	3	experiment	8	256	2	G05	p08	
+3_p08_G06	42	3	experiment	8	256	2	G06	p08	
+3_p08_G07	43	3	experiment	8	256	2	G07	p08	
+3_p08_G08	44	3	experiment	8	256	2	G08	p08	
+3_p08_G09	45	3	experiment	8	256	2	G09	p08	
+3_p08_G10	46	3	experiment	8	256	2	G10	p08	
+3_p08_G11	47	3	experiment	8	256	2	G11	p08	
+3_p08_G12	48	3	experiment	8	256	2	G12	p08	
+3_p08_H01	85	3	experiment	8	256	2	H01	p08	
+3_p08_H02	86	3	experiment	8	256	2	H02	p08	
+3_p08_H03	87	3	experiment	8	256	2	H03	p08	
+3_p08_H04	88	3	experiment	8	256	2	H04	p08	
+3_p08_H05	89	3	experiment	8	256	2	H05	p08	
+3_p08_H06	90	3	experiment	8	256	2	H06	p08	
+3_p08_H07	91	3	experiment	8	256	2	H07	p08	
+3_p08_H08	92	3	experiment	8	256	2	H08	p08	
+3_p08_H09	93	3	experiment	8	256	2	H09	p08	
+3_p08_H10	94	3	experiment	8	256	2	H10	p08	
+3_p08_H11	95	3	experiment	8	256	2	H11	p08	
+3_p08_H12	96	3	experiment	8	256	2	H12	p08	
+4_p11_A01		4	neg_control	8	16	1	A01	p11	negative control
+4_p11_A02		4	neg_control	8	16	1	A02	p11	negative control
+4_p11_A03		4	neg_control	8	16	1	A03	p11	negative control
+4_p11_A04		4	neg_control	8	16	1	A04	p11	negative control
+4_p11_A05	25	4	experiment	8	16	1	A05	p11	
+4_p11_A06	26	4	experiment	8	16	1	A06	p11	
+4_p11_A07	27	4	experiment	8	16	1	A07	p11	
+4_p11_A08	28	4	experiment	8	16	1	A08	p11	
+4_p11_A09	29	4	experiment	8	16	1	A09	p11	
+4_p11_A10	30	4	experiment	8	16	1	A10	p11	
+4_p11_A11	31	4	experiment	8	16	1	A11	p11	
+4_p11_A12	32	4	experiment	8	16	1	A12	p11	
+4_p11_B01		4	neg_control	8	16	1	B01	p11	negative control
+4_p11_B02		4	neg_control	8	16	1	B02	p11	negative control
+4_p11_B03		4	neg_control	8	16	1	B03	p11	negative control
+4_p11_B04		4	neg_control	8	16	1	B04	p11	negative control
+4_p11_B05	57	4	experiment	8	16	1	B05	p11	
+4_p11_B06	58	4	experiment	8	16	1	B06	p11	
+4_p11_B07	59	4	experiment	8	16	1	B07	p11	
+4_p11_B08	60	4	experiment	8	16	1	B08	p11	
+4_p11_B09	61	4	experiment	8	16	1	B09	p11	
+4_p11_B10	62	4	experiment	8	16	1	B10	p11	
+4_p11_B11	63	4	experiment	8	16	1	B11	p11	
+4_p11_B12	64	4	experiment	8	16	1	B12	p11	
+4_p11_C01	15	4	experiment	8	16	1	C01	p11	
+4_p11_C02	16	4	experiment	8	16	1	C02	p11	
+4_p11_C03	19	4	experiment	8	16	1	C03	p11	
+4_p11_C04	20	4	experiment	8	16	1	C04	p11	
+4_p11_C05	9	4	experiment	8	16	1	C05	p11	
+4_p11_C06	10	4	experiment	8	16	1	C06	p11	
+4_p11_C07	11	4	experiment	8	16	1	C07	p11	
+4_p11_C08	12	4	experiment	8	16	1	C08	p11	
+4_p11_C09	21	4	experiment	8	16	1	C09	p11	
+4_p11_C10	22	4	experiment	8	16	1	C10	p11	
+4_p11_C11	23	4	experiment	8	16	1	C11	p11	
+4_p11_C12	24	4	experiment	8	16	1	C12	p11	
+4_p11_D01	47	4	experiment	8	16	1	D01	p11	
+4_p11_D02	48	4	experiment	8	16	1	D02	p11	
+4_p11_D03	51	4	experiment	8	16	1	D03	p11	
+4_p11_D04	52	4	experiment	8	16	1	D04	p11	
+4_p11_D05	41	4	experiment	8	16	1	D05	p11	
+4_p11_D06	42	4	experiment	8	16	1	D06	p11	
+4_p11_D07	43	4	experiment	8	16	1	D07	p11	
+4_p11_D08	44	4	experiment	8	16	1	D08	p11	
+4_p11_D09	53	4	experiment	8	16	1	D09	p11	
+4_p11_D10	54	4	experiment	8	16	1	D10	p11	
+4_p11_D11	55	4	experiment	8	16	1	D11	p11	
+4_p11_D12	56	4	experiment	8	16	1	D12	p11	
+4_p11_E01	1	4	experiment	8	16	1	E01	p11	
+4_p11_E02	2	4	experiment	8	16	1	E02	p11	
+4_p11_E03	5	4	experiment	8	16	1	E03	p11	
+4_p11_E04	6	4	experiment	8	16	1	E04	p11	
+4_p11_E05	3	4	experiment	8	16	1	E05	p11	
+4_p11_E06	4	4	experiment	8	16	1	E06	p11	
+4_p11_E07	7	4	experiment	8	16	1	E07	p11	
+4_p11_E08	8	4	experiment	8	16	1	E08	p11	
+4_p11_E09	13	4	experiment	8	16	1	E09	p11	
+4_p11_E10	14	4	experiment	8	16	1	E10	p11	
+4_p11_E11	17	4	experiment	8	16	1	E11	p11	
+4_p11_E12	18	4	experiment	8	16	1	E12	p11	
+4_p11_F01	33	4	experiment	8	16	1	F01	p11	
+4_p11_F02	34	4	experiment	8	16	1	F02	p11	
+4_p11_F03	37	4	experiment	8	16	1	F03	p11	
+4_p11_F04	38	4	experiment	8	16	1	F04	p11	
+4_p11_F05	35	4	experiment	8	16	1	F05	p11	
+4_p11_F06	36	4	experiment	8	16	1	F06	p11	
+4_p11_F07	39	4	experiment	8	16	1	F07	p11	
+4_p11_F08	40	4	experiment	8	16	1	F08	p11	
+4_p11_F09	45	4	experiment	8	16	1	F09	p11	
+4_p11_F10	46	4	experiment	8	16	1	F10	p11	
+4_p11_F11	49	4	experiment	8	16	1	F11	p11	
+4_p11_F12	50	4	experiment	8	16	1	F12	p11	
+4_p11_G01		4	neg_control	8	16	1	G01	p11	negative control
+4_p11_G02		4	neg_control	8	16	1	G02	p11	negative control
+4_p11_G03		4	neg_control	8	16	1	G03	p11	negative control
+4_p11_G04		4	neg_control	8	16	1	G04	p11	negative control
+4_p11_G05		4	neg_control	8	16	1	G05	p11	negative control
+4_p11_G06		4	neg_control	8	16	1	G06	p11	negative control
+4_p11_G07		4	neg_control	8	16	1	G07	p11	negative control
+4_p11_G08		4	neg_control	8	16	1	G08	p11	negative control
+4_p11_G09		4	neg_control	8	16	1	G09	p11	negative control
+4_p11_G10		4	neg_control	8	16	1	G10	p11	negative control
+4_p11_G11		4	neg_control	8	16	1	G11	p11	negative control
+4_p11_G12		4	neg_control	8	16	1	G12	p11	negative control
+4_p11_H01		2	neg_control	8	16	1	H01	p11	negative control
+4_p11_H02		2	neg_control	8	16	1	H02	p11	negative control
+4_p11_H03		2	neg_control	8	16	1	H03	p11	negative control
+4_p11_H04		2	neg_control	8	16	1	H04	p11	negative control
+4_p11_H05		2	neg_control	8	16	1	H05	p11	negative control
+4_p11_H06		2	neg_control	8	16	1	H06	p11	negative control
+4_p11_H07		2	neg_control	8	16	1	H07	p11	negative control
+4_p11_H08		2	neg_control	8	16	1	H08	p11	negative control
+4_p11_H09		2	neg_control	8	16	1	H09	p11	negative control
+4_p11_H10		2	neg_control	8	16	1	H10	p11	negative control
+4_p11_H11		2	neg_control	8	16	1	H11	p11	negative control
+4_p11_H12		2	pos_control	8	16	1	H12	p11	positive control, cc
+4_p12_A01		4	neg_control	8	16	2	A01	p12	negative control
+4_p12_A02		4	neg_control	8	16	2	A02	p12	negative control
+4_p12_A03		4	neg_control	8	16	2	A03	p12	negative control
+4_p12_A04		4	neg_control	8	16	2	A04	p12	negative control
+4_p12_A05	25	4	experiment	8	16	2	A05	p12	
+4_p12_A06	26	4	experiment	8	16	2	A06	p12	
+4_p12_A07	27	4	experiment	8	16	2	A07	p12	
+4_p12_A08	28	4	experiment	8	16	2	A08	p12	
+4_p12_A09	29	4	experiment	8	16	2	A09	p12	
+4_p12_A10	30	4	experiment	8	16	2	A10	p12	
+4_p12_A11	31	4	experiment	8	16	2	A11	p12	
+4_p12_A12	32	4	experiment	8	16	2	A12	p12	
+4_p12_B01		4	neg_control	8	16	2	B01	p12	negative control
+4_p12_B02		4	neg_control	8	16	2	B02	p12	negative control
+4_p12_B03		4	neg_control	8	16	2	B03	p12	negative control
+4_p12_B04		4	neg_control	8	16	2	B04	p12	negative control
+4_p12_B05	57	4	experiment	8	16	2	B05	p12	
+4_p12_B06	58	4	experiment	8	16	2	B06	p12	
+4_p12_B07	59	4	experiment	8	16	2	B07	p12	
+4_p12_B08	60	4	experiment	8	16	2	B08	p12	
+4_p12_B09	61	4	experiment	8	16	2	B09	p12	
+4_p12_B10	62	4	experiment	8	16	2	B10	p12	
+4_p12_B11	63	4	experiment	8	16	2	B11	p12	
+4_p12_B12	64	4	experiment	8	16	2	B12	p12	
+4_p12_C01	15	4	experiment	8	16	2	C01	p12	
+4_p12_C02	16	4	experiment	8	16	2	C02	p12	
+4_p12_C03	19	4	experiment	8	16	2	C03	p12	
+4_p12_C04	20	4	experiment	8	16	2	C04	p12	
+4_p12_C05	9	4	experiment	8	16	2	C05	p12	
+4_p12_C06	10	4	experiment	8	16	2	C06	p12	
+4_p12_C07	11	4	experiment	8	16	2	C07	p12	
+4_p12_C08	12	4	experiment	8	16	2	C08	p12	
+4_p12_C09	21	4	experiment	8	16	2	C09	p12	
+4_p12_C10	22	4	experiment	8	16	2	C10	p12	
+4_p12_C11	23	4	experiment	8	16	2	C11	p12	
+4_p12_C12	24	4	experiment	8	16	2	C12	p12	
+4_p12_D01	47	4	experiment	8	16	2	D01	p12	
+4_p12_D02	48	4	experiment	8	16	2	D02	p12	
+4_p12_D03	51	4	experiment	8	16	2	D03	p12	
+4_p12_D04	52	4	experiment	8	16	2	D04	p12	
+4_p12_D05	41	4	experiment	8	16	2	D05	p12	
+4_p12_D06	42	4	experiment	8	16	2	D06	p12	
+4_p12_D07	43	4	experiment	8	16	2	D07	p12	
+4_p12_D08	44	4	experiment	8	16	2	D08	p12	
+4_p12_D09	53	4	experiment	8	16	2	D09	p12	
+4_p12_D10	54	4	experiment	8	16	2	D10	p12	
+4_p12_D11	55	4	experiment	8	16	2	D11	p12	
+4_p12_D12	56	4	experiment	8	16	2	D12	p12	
+4_p12_E01	1	4	experiment	8	16	2	E01	p12	
+4_p12_E02	2	4	experiment	8	16	2	E02	p12	
+4_p12_E03	5	4	experiment	8	16	2	E03	p12	
+4_p12_E04	6	4	experiment	8	16	2	E04	p12	
+4_p12_E05	3	4	experiment	8	16	2	E05	p12	
+4_p12_E06	4	4	experiment	8	16	2	E06	p12	
+4_p12_E07	7	4	experiment	8	16	2	E07	p12	
+4_p12_E08	8	4	experiment	8	16	2	E08	p12	
+4_p12_E09	13	4	experiment	8	16	2	E09	p12	
+4_p12_E10	14	4	experiment	8	16	2	E10	p12	
+4_p12_E11	17	4	experiment	8	16	2	E11	p12	
+4_p12_E12	18	4	experiment	8	16	2	E12	p12	
+4_p12_F01	33	4	experiment	8	16	2	F01	p12	
+4_p12_F02	34	4	experiment	8	16	2	F02	p12	
+4_p12_F03	37	4	experiment	8	16	2	F03	p12	
+4_p12_F04	38	4	experiment	8	16	2	F04	p12	
+4_p12_F05	35	4	experiment	8	16	2	F05	p12	
+4_p12_F06	36	4	experiment	8	16	2	F06	p12	
+4_p12_F07	39	4	experiment	8	16	2	F07	p12	
+4_p12_F08	40	4	experiment	8	16	2	F08	p12	
+4_p12_F09	45	4	experiment	8	16	2	F09	p12	
+4_p12_F10	46	4	experiment	8	16	2	F10	p12	
+4_p12_F11	49	4	experiment	8	16	2	F11	p12	
+4_p12_F12	50	4	experiment	8	16	2	F12	p12	
+4_p12_G01		4	neg_control	8	16	2	G01	p12	negative control
+4_p12_G02		4	neg_control	8	16	2	G02	p12	negative control
+4_p12_G03		4	neg_control	8	16	2	G03	p12	negative control
+4_p12_G04		4	neg_control	8	16	2	G04	p12	negative control
+4_p12_G05		4	neg_control	8	16	2	G05	p12	negative control
+4_p12_G06		4	neg_control	8	16	2	G06	p12	negative control
+4_p12_G07		4	neg_control	8	16	2	G07	p12	negative control
+4_p12_G08		4	neg_control	8	16	2	G08	p12	negative control
+4_p12_G09		4	neg_control	8	16	2	G09	p12	negative control
+4_p12_G10		4	neg_control	8	16	2	G10	p12	negative control
+4_p12_G11		4	neg_control	8	16	2	G11	p12	negative control
+4_p12_G12		4	neg_control	8	16	2	G12	p12	negative control
+4_p12_H01		2	neg_control	8	16	2	H01	p12	negative control
+4_p12_H02		2	neg_control	8	16	2	H02	p12	negative control
+4_p12_H03		2	neg_control	8	16	2	H03	p12	negative control
+4_p12_H04		2	neg_control	8	16	2	H04	p12	negative control
+4_p12_H05		2	neg_control	8	16	2	H05	p12	negative control
+4_p12_H06		2	neg_control	8	16	2	H06	p12	negative control
+4_p12_H07		2	neg_control	8	16	2	H07	p12	negative control
+4_p12_H08		2	neg_control	8	16	2	H08	p12	negative control
+4_p12_H09		2	neg_control	8	16	2	H09	p12	negative control
+4_p12_H10		2	neg_control	8	16	2	H10	p12	negative control
+4_p12_H11		2	neg_control	8	16	2	H11	p12	negative control
+4_p12_H12		2	pos_control	8	16	2	H12	p12	positive control, cc
+4_p13_A01		4	neg_control	8	64	1	A01	p13	negative control
+4_p13_A02		4	neg_control	8	64	1	A02	p13	negative control
+4_p13_A03		4	neg_control	8	64	1	A03	p13	negative control
+4_p13_A04		4	neg_control	8	64	1	A04	p13	negative control
+4_p13_A05	25	4	experiment	8	64	1	A05	p13	
+4_p13_A06	26	4	experiment	8	64	1	A06	p13	
+4_p13_A07	27	4	experiment	8	64	1	A07	p13	
+4_p13_A08	28	4	experiment	8	64	1	A08	p13	
+4_p13_A09	29	4	experiment	8	64	1	A09	p13	
+4_p13_A10	30	4	experiment	8	64	1	A10	p13	
+4_p13_A11	31	4	experiment	8	64	1	A11	p13	
+4_p13_A12	32	4	experiment	8	64	1	A12	p13	
+4_p13_B01		4	neg_control	8	64	1	B01	p13	negative control
+4_p13_B02		4	neg_control	8	64	1	B02	p13	negative control
+4_p13_B03		4	neg_control	8	64	1	B03	p13	negative control
+4_p13_B04		4	neg_control	8	64	1	B04	p13	negative control
+4_p13_B05	57	4	experiment	8	64	1	B05	p13	
+4_p13_B06	58	4	experiment	8	64	1	B06	p13	
+4_p13_B07	59	4	experiment	8	64	1	B07	p13	
+4_p13_B08	60	4	experiment	8	64	1	B08	p13	
+4_p13_B09	61	4	experiment	8	64	1	B09	p13	
+4_p13_B10	62	4	experiment	8	64	1	B10	p13	
+4_p13_B11	63	4	experiment	8	64	1	B11	p13	
+4_p13_B12	64	4	experiment	8	64	1	B12	p13	
+4_p13_C01	15	4	experiment	8	64	1	C01	p13	
+4_p13_C02	16	4	experiment	8	64	1	C02	p13	
+4_p13_C03	19	4	experiment	8	64	1	C03	p13	
+4_p13_C04	20	4	experiment	8	64	1	C04	p13	
+4_p13_C05	9	4	experiment	8	64	1	C05	p13	
+4_p13_C06	10	4	experiment	8	64	1	C06	p13	
+4_p13_C07	11	4	experiment	8	64	1	C07	p13	
+4_p13_C08	12	4	experiment	8	64	1	C08	p13	
+4_p13_C09	21	4	experiment	8	64	1	C09	p13	
+4_p13_C10	22	4	experiment	8	64	1	C10	p13	
+4_p13_C11	23	4	experiment	8	64	1	C11	p13	
+4_p13_C12	24	4	experiment	8	64	1	C12	p13	
+4_p13_D01	47	4	experiment	8	64	1	D01	p13	
+4_p13_D02	48	4	experiment	8	64	1	D02	p13	
+4_p13_D03	51	4	experiment	8	64	1	D03	p13	
+4_p13_D04	52	4	experiment	8	64	1	D04	p13	
+4_p13_D05	41	4	experiment	8	64	1	D05	p13	
+4_p13_D06	42	4	experiment	8	64	1	D06	p13	
+4_p13_D07	43	4	experiment	8	64	1	D07	p13	
+4_p13_D08	44	4	experiment	8	64	1	D08	p13	
+4_p13_D09	53	4	experiment	8	64	1	D09	p13	
+4_p13_D10	54	4	experiment	8	64	1	D10	p13	
+4_p13_D11	55	4	experiment	8	64	1	D11	p13	
+4_p13_D12	56	4	experiment	8	64	1	D12	p13	
+4_p13_E01	1	4	experiment	8	64	1	E01	p13	
+4_p13_E02	2	4	experiment	8	64	1	E02	p13	
+4_p13_E03	5	4	experiment	8	64	1	E03	p13	
+4_p13_E04	6	4	experiment	8	64	1	E04	p13	
+4_p13_E05	3	4	experiment	8	64	1	E05	p13	
+4_p13_E06	4	4	experiment	8	64	1	E06	p13	
+4_p13_E07	7	4	experiment	8	64	1	E07	p13	
+4_p13_E08	8	4	experiment	8	64	1	E08	p13	
+4_p13_E09	13	4	experiment	8	64	1	E09	p13	
+4_p13_E10	14	4	experiment	8	64	1	E10	p13	
+4_p13_E11	17	4	experiment	8	64	1	E11	p13	
+4_p13_E12	18	4	experiment	8	64	1	E12	p13	
+4_p13_F01	33	4	experiment	8	64	1	F01	p13	
+4_p13_F02	34	4	experiment	8	64	1	F02	p13	
+4_p13_F03	37	4	experiment	8	64	1	F03	p13	
+4_p13_F04	38	4	experiment	8	64	1	F04	p13	
+4_p13_F05	35	4	experiment	8	64	1	F05	p13	
+4_p13_F06	36	4	experiment	8	64	1	F06	p13	
+4_p13_F07	39	4	experiment	8	64	1	F07	p13	
+4_p13_F08	40	4	experiment	8	64	1	F08	p13	
+4_p13_F09	45	4	experiment	8	64	1	F09	p13	
+4_p13_F10	46	4	experiment	8	64	1	F10	p13	
+4_p13_F11	49	4	experiment	8	64	1	F11	p13	
+4_p13_F12	50	4	experiment	8	64	1	F12	p13	
+4_p13_G01		4	neg_control	8	64	1	G01	p13	negative control
+4_p13_G02		4	neg_control	8	64	1	G02	p13	negative control
+4_p13_G03		4	neg_control	8	64	1	G03	p13	negative control
+4_p13_G04		4	neg_control	8	64	1	G04	p13	negative control
+4_p13_G05		4	neg_control	8	64	1	G05	p13	negative control
+4_p13_G06		4	neg_control	8	64	1	G06	p13	negative control
+4_p13_G07		4	neg_control	8	64	1	G07	p13	negative control
+4_p13_G08		4	neg_control	8	64	1	G08	p13	negative control
+4_p13_G09		4	neg_control	8	64	1	G09	p13	negative control
+4_p13_G10		4	neg_control	8	64	1	G10	p13	negative control
+4_p13_G11		4	neg_control	8	64	1	G11	p13	negative control
+4_p13_G12		4	neg_control	8	64	1	G12	p13	negative control
+4_p13_H01		2	neg_control	8	64	1	H01	p13	negative control
+4_p13_H02		2	neg_control	8	64	1	H02	p13	negative control
+4_p13_H03		2	neg_control	8	64	1	H03	p13	negative control
+4_p13_H04		2	neg_control	8	64	1	H04	p13	negative control
+4_p13_H05		2	neg_control	8	64	1	H05	p13	negative control
+4_p13_H06		2	neg_control	8	64	1	H06	p13	negative control
+4_p13_H07		2	neg_control	8	64	1	H07	p13	negative control
+4_p13_H08		2	neg_control	8	64	1	H08	p13	negative control
+4_p13_H09		2	neg_control	8	64	1	H09	p13	negative control
+4_p13_H10		2	neg_control	8	64	1	H10	p13	negative control
+4_p13_H11		2	neg_control	8	64	1	H11	p13	negative control
+4_p13_H12		2	pos_control	8	64	1	H12	p13	positive control, cc
+4_p14_A01		4	neg_control	8	64	2	A01	p14	negative control
+4_p14_A02		4	neg_control	8	64	2	A02	p14	negative control
+4_p14_A03		4	neg_control	8	64	2	A03	p14	negative control
+4_p14_A04		4	neg_control	8	64	2	A04	p14	negative control
+4_p14_A05	25	4	experiment	8	64	2	A05	p14	
+4_p14_A06	26	4	experiment	8	64	2	A06	p14	
+4_p14_A07	27	4	experiment	8	64	2	A07	p14	
+4_p14_A08	28	4	experiment	8	64	2	A08	p14	
+4_p14_A09	29	4	experiment	8	64	2	A09	p14	
+4_p14_A10	30	4	experiment	8	64	2	A10	p14	
+4_p14_A11	31	4	experiment	8	64	2	A11	p14	
+4_p14_A12	32	4	experiment	8	64	2	A12	p14	
+4_p14_B01		4	neg_control	8	64	2	B01	p14	negative control
+4_p14_B02		4	neg_control	8	64	2	B02	p14	negative control
+4_p14_B03		4	neg_control	8	64	2	B03	p14	negative control
+4_p14_B04		4	neg_control	8	64	2	B04	p14	negative control
+4_p14_B05	57	4	experiment	8	64	2	B05	p14	
+4_p14_B06	58	4	experiment	8	64	2	B06	p14	
+4_p14_B07	59	4	experiment	8	64	2	B07	p14	
+4_p14_B08	60	4	experiment	8	64	2	B08	p14	
+4_p14_B09	61	4	experiment	8	64	2	B09	p14	
+4_p14_B10	62	4	experiment	8	64	2	B10	p14	
+4_p14_B11	63	4	experiment	8	64	2	B11	p14	
+4_p14_B12	64	4	experiment	8	64	2	B12	p14	
+4_p14_C01	15	4	experiment	8	64	2	C01	p14	
+4_p14_C02	16	4	experiment	8	64	2	C02	p14	
+4_p14_C03	19	4	experiment	8	64	2	C03	p14	
+4_p14_C04	20	4	experiment	8	64	2	C04	p14	
+4_p14_C05	9	4	experiment	8	64	2	C05	p14	
+4_p14_C06	10	4	experiment	8	64	2	C06	p14	
+4_p14_C07	11	4	experiment	8	64	2	C07	p14	
+4_p14_C08	12	4	experiment	8	64	2	C08	p14	
+4_p14_C09	21	4	experiment	8	64	2	C09	p14	
+4_p14_C10	22	4	experiment	8	64	2	C10	p14	
+4_p14_C11	23	4	experiment	8	64	2	C11	p14	
+4_p14_C12	24	4	experiment	8	64	2	C12	p14	
+4_p14_D01	47	4	experiment	8	64	2	D01	p14	
+4_p14_D02	48	4	experiment	8	64	2	D02	p14	
+4_p14_D03	51	4	experiment	8	64	2	D03	p14	
+4_p14_D04	52	4	experiment	8	64	2	D04	p14	
+4_p14_D05	41	4	experiment	8	64	2	D05	p14	
+4_p14_D06	42	4	experiment	8	64	2	D06	p14	
+4_p14_D07	43	4	experiment	8	64	2	D07	p14	
+4_p14_D08	44	4	experiment	8	64	2	D08	p14	
+4_p14_D09	53	4	experiment	8	64	2	D09	p14	
+4_p14_D10	54	4	experiment	8	64	2	D10	p14	
+4_p14_D11	55	4	experiment	8	64	2	D11	p14	
+4_p14_D12	56	4	experiment	8	64	2	D12	p14	
+4_p14_E01	1	4	experiment	8	64	2	E01	p14	
+4_p14_E02	2	4	experiment	8	64	2	E02	p14	
+4_p14_E03	5	4	experiment	8	64	2	E03	p14	
+4_p14_E04	6	4	experiment	8	64	2	E04	p14	
+4_p14_E05	3	4	experiment	8	64	2	E05	p14	
+4_p14_E06	4	4	experiment	8	64	2	E06	p14	
+4_p14_E07	7	4	experiment	8	64	2	E07	p14	
+4_p14_E08	8	4	experiment	8	64	2	E08	p14	
+4_p14_E09	13	4	experiment	8	64	2	E09	p14	
+4_p14_E10	14	4	experiment	8	64	2	E10	p14	
+4_p14_E11	17	4	experiment	8	64	2	E11	p14	
+4_p14_E12	18	4	experiment	8	64	2	E12	p14	
+4_p14_F01	33	4	experiment	8	64	2	F01	p14	
+4_p14_F02	34	4	experiment	8	64	2	F02	p14	
+4_p14_F03	37	4	experiment	8	64	2	F03	p14	
+4_p14_F04	38	4	experiment	8	64	2	F04	p14	
+4_p14_F05	35	4	experiment	8	64	2	F05	p14	
+4_p14_F06	36	4	experiment	8	64	2	F06	p14	
+4_p14_F07	39	4	experiment	8	64	2	F07	p14	
+4_p14_F08	40	4	experiment	8	64	2	F08	p14	
+4_p14_F09	45	4	experiment	8	64	2	F09	p14	
+4_p14_F10	46	4	experiment	8	64	2	F10	p14	
+4_p14_F11	49	4	experiment	8	64	2	F11	p14	
+4_p14_F12	50	4	experiment	8	64	2	F12	p14	
+4_p14_G01		4	neg_control	8	64	2	G01	p14	negative control
+4_p14_G02		4	neg_control	8	64	2	G02	p14	negative control
+4_p14_G03		4	neg_control	8	64	2	G03	p14	negative control
+4_p14_G04		4	neg_control	8	64	2	G04	p14	negative control
+4_p14_G05		4	neg_control	8	64	2	G05	p14	negative control
+4_p14_G06		4	neg_control	8	64	2	G06	p14	negative control
+4_p14_G07		4	neg_control	8	64	2	G07	p14	negative control
+4_p14_G08		4	neg_control	8	64	2	G08	p14	negative control
+4_p14_G09		4	neg_control	8	64	2	G09	p14	negative control
+4_p14_G10		4	neg_control	8	64	2	G10	p14	negative control
+4_p14_G11		4	neg_control	8	64	2	G11	p14	negative control
+4_p14_G12		4	neg_control	8	64	2	G12	p14	negative control
+4_p14_H01		2	neg_control	8	64	2	H01	p14	negative control
+4_p14_H02		2	neg_control	8	64	2	H02	p14	negative control
+4_p14_H03		2	neg_control	8	64	2	H03	p14	negative control
+4_p14_H04		2	neg_control	8	64	2	H04	p14	negative control
+4_p14_H05		2	neg_control	8	64	2	H05	p14	negative control
+4_p14_H06		2	neg_control	8	64	2	H06	p14	negative control
+4_p14_H07		2	neg_control	8	64	2	H07	p14	negative control
+4_p14_H08		2	neg_control	8	64	2	H08	p14	negative control
+4_p14_H09		2	neg_control	8	64	2	H09	p14	negative control
+4_p14_H10		2	neg_control	8	64	2	H10	p14	negative control
+4_p14_H11		2	neg_control	8	64	2	H11	p14	negative control
+4_p14_H12		2	pos_control	8	64	2	H12	p14	positive control, cc
+4_p15_A01		4	neg_control	8	256	1	A01	p15	negative control
+4_p15_A02		4	neg_control	8	256	1	A02	p15	negative control
+4_p15_A03		4	neg_control	8	256	1	A03	p15	negative control
+4_p15_A04		4	neg_control	8	256	1	A04	p15	negative control
+4_p15_A05	25	4	experiment	8	256	1	A05	p15	
+4_p15_A06	26	4	experiment	8	256	1	A06	p15	
+4_p15_A07	27	4	experiment	8	256	1	A07	p15	
+4_p15_A08	28	4	experiment	8	256	1	A08	p15	
+4_p15_A09	29	4	experiment	8	256	1	A09	p15	
+4_p15_A10	30	4	experiment	8	256	1	A10	p15	
+4_p15_A11	31	4	experiment	8	256	1	A11	p15	
+4_p15_A12	32	4	experiment	8	256	1	A12	p15	
+4_p15_B01		4	neg_control	8	256	1	B01	p15	negative control
+4_p15_B02		4	neg_control	8	256	1	B02	p15	negative control
+4_p15_B03		4	neg_control	8	256	1	B03	p15	negative control
+4_p15_B04		4	neg_control	8	256	1	B04	p15	negative control
+4_p15_B05	57	4	experiment	8	256	1	B05	p15	
+4_p15_B06	58	4	experiment	8	256	1	B06	p15	
+4_p15_B07	59	4	experiment	8	256	1	B07	p15	
+4_p15_B08	60	4	experiment	8	256	1	B08	p15	
+4_p15_B09	61	4	experiment	8	256	1	B09	p15	
+4_p15_B10	62	4	experiment	8	256	1	B10	p15	
+4_p15_B11	63	4	experiment	8	256	1	B11	p15	
+4_p15_B12	64	4	experiment	8	256	1	B12	p15	
+4_p15_C01	15	4	experiment	8	256	1	C01	p15	
+4_p15_C02	16	4	experiment	8	256	1	C02	p15	
+4_p15_C03	19	4	experiment	8	256	1	C03	p15	
+4_p15_C04	20	4	experiment	8	256	1	C04	p15	
+4_p15_C05	9	4	experiment	8	256	1	C05	p15	
+4_p15_C06	10	4	experiment	8	256	1	C06	p15	
+4_p15_C07	11	4	experiment	8	256	1	C07	p15	
+4_p15_C08	12	4	experiment	8	256	1	C08	p15	
+4_p15_C09	21	4	experiment	8	256	1	C09	p15	
+4_p15_C10	22	4	experiment	8	256	1	C10	p15	
+4_p15_C11	23	4	experiment	8	256	1	C11	p15	
+4_p15_C12	24	4	experiment	8	256	1	C12	p15	
+4_p15_D01	47	4	experiment	8	256	1	D01	p15	
+4_p15_D02	48	4	experiment	8	256	1	D02	p15	
+4_p15_D03	51	4	experiment	8	256	1	D03	p15	
+4_p15_D04	52	4	experiment	8	256	1	D04	p15	
+4_p15_D05	41	4	experiment	8	256	1	D05	p15	
+4_p15_D06	42	4	experiment	8	256	1	D06	p15	
+4_p15_D07	43	4	experiment	8	256	1	D07	p15	
+4_p15_D08	44	4	experiment	8	256	1	D08	p15	
+4_p15_D09	53	4	experiment	8	256	1	D09	p15	
+4_p15_D10	54	4	experiment	8	256	1	D10	p15	
+4_p15_D11	55	4	experiment	8	256	1	D11	p15	
+4_p15_D12	56	4	experiment	8	256	1	D12	p15	
+4_p15_E01	1	4	experiment	8	256	1	E01	p15	
+4_p15_E02	2	4	experiment	8	256	1	E02	p15	
+4_p15_E03	5	4	experiment	8	256	1	E03	p15	
+4_p15_E04	6	4	experiment	8	256	1	E04	p15	
+4_p15_E05	3	4	experiment	8	256	1	E05	p15	
+4_p15_E06	4	4	experiment	8	256	1	E06	p15	
+4_p15_E07	7	4	experiment	8	256	1	E07	p15	
+4_p15_E08	8	4	experiment	8	256	1	E08	p15	
+4_p15_E09	13	4	experiment	8	256	1	E09	p15	
+4_p15_E10	14	4	experiment	8	256	1	E10	p15	
+4_p15_E11	17	4	experiment	8	256	1	E11	p15	
+4_p15_E12	18	4	experiment	8	256	1	E12	p15	
+4_p15_F01	33	4	experiment	8	256	1	F01	p15	
+4_p15_F02	34	4	experiment	8	256	1	F02	p15	
+4_p15_F03	37	4	experiment	8	256	1	F03	p15	
+4_p15_F04	38	4	experiment	8	256	1	F04	p15	
+4_p15_F05	35	4	experiment	8	256	1	F05	p15	
+4_p15_F06	36	4	experiment	8	256	1	F06	p15	
+4_p15_F07	39	4	experiment	8	256	1	F07	p15	
+4_p15_F08	40	4	experiment	8	256	1	F08	p15	
+4_p15_F09	45	4	experiment	8	256	1	F09	p15	
+4_p15_F10	46	4	experiment	8	256	1	F10	p15	
+4_p15_F11	49	4	experiment	8	256	1	F11	p15	
+4_p15_F12	50	4	experiment	8	256	1	F12	p15	
+4_p15_G01		4	neg_control	8	256	1	G01	p15	negative control
+4_p15_G02		4	neg_control	8	256	1	G02	p15	negative control
+4_p15_G03		4	neg_control	8	256	1	G03	p15	negative control
+4_p15_G04		4	neg_control	8	256	1	G04	p15	negative control
+4_p15_G05		4	neg_control	8	256	1	G05	p15	negative control
+4_p15_G06		4	neg_control	8	256	1	G06	p15	negative control
+4_p15_G07		4	neg_control	8	256	1	G07	p15	negative control
+4_p15_G08		4	neg_control	8	256	1	G08	p15	negative control
+4_p15_G09		4	neg_control	8	256	1	G09	p15	negative control
+4_p15_G10		4	neg_control	8	256	1	G10	p15	negative control
+4_p15_G11		4	neg_control	8	256	1	G11	p15	negative control
+4_p15_G12		4	neg_control	8	256	1	G12	p15	negative control
+4_p15_H01		2	neg_control	8	256	1	H01	p15	negative control
+4_p15_H02		2	neg_control	8	256	1	H02	p15	negative control
+4_p15_H03		2	neg_control	8	256	1	H03	p15	negative control
+4_p15_H04		2	neg_control	8	256	1	H04	p15	negative control
+4_p15_H05		2	neg_control	8	256	1	H05	p15	negative control
+4_p15_H06		2	neg_control	8	256	1	H06	p15	negative control
+4_p15_H07		2	neg_control	8	256	1	H07	p15	negative control
+4_p15_H08		2	neg_control	8	256	1	H08	p15	negative control
+4_p15_H09		2	neg_control	8	256	1	H09	p15	negative control
+4_p15_H10		2	neg_control	8	256	1	H10	p15	negative control
+4_p15_H11		2	neg_control	8	256	1	H11	p15	negative control
+4_p15_H12		2	pos_control	8	256	1	H12	p15	positive control, cc
+4_p16_A01		4	neg_control	8	256	2	A01	p16	negative control
+4_p16_A02		4	neg_control	8	256	2	A02	p16	negative control
+4_p16_A03		4	neg_control	8	256	2	A03	p16	negative control
+4_p16_A04		4	neg_control	8	256	2	A04	p16	negative control
+4_p16_A05	25	4	experiment	8	256	2	A05	p16	
+4_p16_A06	26	4	experiment	8	256	2	A06	p16	
+4_p16_A07	27	4	experiment	8	256	2	A07	p16	
+4_p16_A08	28	4	experiment	8	256	2	A08	p16	
+4_p16_A09	29	4	experiment	8	256	2	A09	p16	
+4_p16_A10	30	4	experiment	8	256	2	A10	p16	
+4_p16_A11	31	4	experiment	8	256	2	A11	p16	
+4_p16_A12	32	4	experiment	8	256	2	A12	p16	
+4_p16_B01		4	neg_control	8	256	2	B01	p16	negative control
+4_p16_B02		4	neg_control	8	256	2	B02	p16	negative control
+4_p16_B03		4	neg_control	8	256	2	B03	p16	negative control
+4_p16_B04		4	neg_control	8	256	2	B04	p16	negative control
+4_p16_B05	57	4	experiment	8	256	2	B05	p16	
+4_p16_B06	58	4	experiment	8	256	2	B06	p16	
+4_p16_B07	59	4	experiment	8	256	2	B07	p16	
+4_p16_B08	60	4	experiment	8	256	2	B08	p16	
+4_p16_B09	61	4	experiment	8	256	2	B09	p16	
+4_p16_B10	62	4	experiment	8	256	2	B10	p16	
+4_p16_B11	63	4	experiment	8	256	2	B11	p16	
+4_p16_B12	64	4	experiment	8	256	2	B12	p16	
+4_p16_C01	15	4	experiment	8	256	2	C01	p16	
+4_p16_C02	16	4	experiment	8	256	2	C02	p16	
+4_p16_C03	19	4	experiment	8	256	2	C03	p16	
+4_p16_C04	20	4	experiment	8	256	2	C04	p16	
+4_p16_C05	9	4	experiment	8	256	2	C05	p16	
+4_p16_C06	10	4	experiment	8	256	2	C06	p16	
+4_p16_C07	11	4	experiment	8	256	2	C07	p16	
+4_p16_C08	12	4	experiment	8	256	2	C08	p16	
+4_p16_C09	21	4	experiment	8	256	2	C09	p16	
+4_p16_C10	22	4	experiment	8	256	2	C10	p16	
+4_p16_C11	23	4	experiment	8	256	2	C11	p16	
+4_p16_C12	24	4	experiment	8	256	2	C12	p16	
+4_p16_D01	47	4	experiment	8	256	2	D01	p16	
+4_p16_D02	48	4	experiment	8	256	2	D02	p16	
+4_p16_D03	51	4	experiment	8	256	2	D03	p16	
+4_p16_D04	52	4	experiment	8	256	2	D04	p16	
+4_p16_D05	41	4	experiment	8	256	2	D05	p16	
+4_p16_D06	42	4	experiment	8	256	2	D06	p16	
+4_p16_D07	43	4	experiment	8	256	2	D07	p16	
+4_p16_D08	44	4	experiment	8	256	2	D08	p16	
+4_p16_D09	53	4	experiment	8	256	2	D09	p16	
+4_p16_D10	54	4	experiment	8	256	2	D10	p16	
+4_p16_D11	55	4	experiment	8	256	2	D11	p16	
+4_p16_D12	56	4	experiment	8	256	2	D12	p16	
+4_p16_E01	1	4	experiment	8	256	2	E01	p16	
+4_p16_E02	2	4	experiment	8	256	2	E02	p16	
+4_p16_E03	5	4	experiment	8	256	2	E03	p16	
+4_p16_E04	6	4	experiment	8	256	2	E04	p16	
+4_p16_E05	3	4	experiment	8	256	2	E05	p16	
+4_p16_E06	4	4	experiment	8	256	2	E06	p16	
+4_p16_E07	7	4	experiment	8	256	2	E07	p16	
+4_p16_E08	8	4	experiment	8	256	2	E08	p16	
+4_p16_E09	13	4	experiment	8	256	2	E09	p16	
+4_p16_E10	14	4	experiment	8	256	2	E10	p16	
+4_p16_E11	17	4	experiment	8	256	2	E11	p16	
+4_p16_E12	18	4	experiment	8	256	2	E12	p16	
+4_p16_F01	33	4	experiment	8	256	2	F01	p16	
+4_p16_F02	34	4	experiment	8	256	2	F02	p16	
+4_p16_F03	37	4	experiment	8	256	2	F03	p16	
+4_p16_F04	38	4	experiment	8	256	2	F04	p16	
+4_p16_F05	35	4	experiment	8	256	2	F05	p16	
+4_p16_F06	36	4	experiment	8	256	2	F06	p16	
+4_p16_F07	39	4	experiment	8	256	2	F07	p16	
+4_p16_F08	40	4	experiment	8	256	2	F08	p16	
+4_p16_F09	45	4	experiment	8	256	2	F09	p16	
+4_p16_F10	46	4	experiment	8	256	2	F10	p16	
+4_p16_F11	49	4	experiment	8	256	2	F11	p16	
+4_p16_F12	50	4	experiment	8	256	2	F12	p16	
+4_p16_G01		4	neg_control	8	256	2	G01	p16	negative control
+4_p16_G02		4	neg_control	8	256	2	G02	p16	negative control
+4_p16_G03		4	neg_control	8	256	2	G03	p16	negative control
+4_p16_G04		4	neg_control	8	256	2	G04	p16	negative control
+4_p16_G05		4	neg_control	8	256	2	G05	p16	negative control
+4_p16_G06		4	neg_control	8	256	2	G06	p16	negative control
+4_p16_G07		4	neg_control	8	256	2	G07	p16	negative control
+4_p16_G08		4	neg_control	8	256	2	G08	p16	negative control
+4_p16_G09		4	neg_control	8	256	2	G09	p16	negative control
+4_p16_G10		4	neg_control	8	256	2	G10	p16	negative control
+4_p16_G11		4	neg_control	8	256	2	G11	p16	negative control
+4_p16_G12		4	neg_control	8	256	2	G12	p16	negative control
+4_p16_H01		2	neg_control	8	256	2	H01	p16	negative control
+4_p16_H02		2	neg_control	8	256	2	H02	p16	negative control
+4_p16_H03		2	neg_control	8	256	2	H03	p16	negative control
+4_p16_H04		2	neg_control	8	256	2	H04	p16	negative control
+4_p16_H05		2	neg_control	8	256	2	H05	p16	negative control
+4_p16_H06		2	neg_control	8	256	2	H06	p16	negative control
+4_p16_H07		2	neg_control	8	256	2	H07	p16	negative control
+4_p16_H08		2	neg_control	8	256	2	H08	p16	negative control
+4_p16_H09		2	neg_control	8	256	2	H09	p16	negative control
+4_p16_H10		2	neg_control	8	256	2	H10	p16	negative control
+4_p16_H11		2	neg_control	8	256	2	H11	p16	negative control
+4_p16_H12		2	pos_control	8	256	2	H12	p16	positive control, cc

@@ -1,3 +1,7 @@
+# repo specific files
+wip/
+_notrack/
+
 # History files
 .Rhistory
 .Rapp.history

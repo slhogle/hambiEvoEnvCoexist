@@ -3,6 +3,7 @@ title: "Designing four-species subcommunities"
 author: "Shane Hogle"
 date: today
 link-citations: true
+abstract: "This notebook creates and lays out the steps for constructing the experimental species quartets for this experiment. It is inspired by the method outlined in this paper: [Full factorial construction of synthetic microbial communities, eLife 13:RP101906](https://doi.org/10.7554/eLife.101906.1)"
 ---
 
 # Setup

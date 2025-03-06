@@ -1,0 +1,60 @@
+---
+title: "Analysis of pairwise competition"
+author: "Shane Hogle"
+date: today
+link-citations: true
+abstract: "Here we compile the amplicon sequencing outputs from all the different batches for later analysis."
+---
+
+# Setup
+
+## Libraries
+
+```{r}
+#| output: false
+library(tidyverse)
+library(here)
+```
+
+## Global variables
+
+```{r}
+data_raw <- here::here("_data_raw", "communities")
+data <- here::here("data", "communities")
+# make processed data directory if it doesn't exist
+fs::dir_create(data)
+```
+
+# Read data
+
+## Compiled pairs data
+
+```{r}
+bind_rows(read_tsv(here::here(data, "20240711_BTK_illumina_v3", "pairs_counts.tsv"), col_types = "cccddddddccc"),
+          read_tsv(here::here(data, "20241024_BTK_illumina_v3", "pairs_counts.tsv"), col_types = "cccddddddccc")) %>% 
+  # these steps ensure we don't get duplicates of some masteplate samples sequenced again in the second batch
+  # filtering to keep samples closest to the target f value
+  mutate(del_f = abs(f_thresh-target_f_masterplate)) %>% 
+  group_by(sample, strainID) %>% 
+  filter(if_else(community_type == "masterplate", del_f == min(del_f), TRUE )) %>% 
+  ungroup() %>% 
+  dplyr::select(-del_f) %>% 
+  write_tsv(here::here(data, "2sps_compiled.tsv"))
+```
+
+## Compiled trios data
+
+```{r}
+bind_rows(read_tsv(here::here(data, "20240711_BTK_illumina_v3", "trios_counts.tsv"), col_types = "cccddddddccc"),
+          read_tsv(here::here(data, "20241024_BTK_illumina_v3", "trios_counts.tsv"), col_types = "cccddddddccc"),
+          read_tsv(here::here(data, "20250127_BTK_illumina_v3", "trios_counts.tsv"), col_types = "cccddddddccc")) %>% 
+  write_tsv(here::here(data, "3sps_compiled.tsv"))
+```
+
+## Compiled quartets data
+
+```{r}
+bind_rows(read_tsv(here::here(data, "20241024_BTK_illumina_v3", "quartets_counts.tsv"), col_types = "cccddddddccc"),
+          read_tsv(here::here(data, "20250127_BTK_illumina_v3", "quartets_counts.tsv"), col_types = "cccddddddccc")) %>% 
+  write_tsv(here::here(data, "4sps_compiled.tsv"))
+```
