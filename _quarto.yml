@@ -41,7 +41,9 @@ website:
             file: R/communities/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.qmd
           - text: "iv) Batch 2025-01-27"
             file: R/communities/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.qmd
-          - text: "v) Compile pairs, trios, quartets"
+          - text: "v) Batch 2025-05-02"
+            file: R/communities/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.qmd
+          - text: "vi) Compile pairs, trios, quartets"
             file: R/communities/amplicon/01_compile_format.qmd
       - section: "5. Community growth - Coexistence/exclusion analysis"
         contents:
@@ -51,6 +53,8 @@ website:
             file: R/communities/amplicon/03_analysis_trios.qmd
           - text: "iii) Species quartets"
             file: R/communities/amplicon/04_analysis_quartets.qmd
+          - text: "iv) All strains combined"
+            file: R/communities/amplicon/05_analysis_octets.qmd
 
 format:
   html:

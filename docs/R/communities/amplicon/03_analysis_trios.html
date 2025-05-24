@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shane Hogle">
-<meta name="dcterms.date" content="2025-03-06">
+<meta name="dcterms.date" content="2025-05-24">
 
 <title>Analysis of trio competition – hambiEvoEnvCoexist</title>
 <style>
@@ -246,8 +246,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">v) Batch 2025-05-02</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../R/communities/amplicon/01_compile_format.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">v) Compile pairs, trios, quartets</span></a>
+ <span class="menu-text">vi) Compile pairs, trios, quartets</span></a>
   </div>
 </li>
       </ul>
@@ -279,6 +285,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">iii) Species quartets</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/05_analysis_octets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iv) All strains combined</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -301,7 +313,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#species-abundances" id="toc-species-abundances" class="nav-link" data-scroll-target="#species-abundances"><span class="header-section-number">2.1</span> Species abundances</a></li>
   </ul></li>
   <li><a href="#format" id="toc-format" class="nav-link" data-scroll-target="#format"><span class="header-section-number">3</span> Format</a></li>
-  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot"><span class="header-section-number">4</span> Plot</a></li>
+  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot"><span class="header-section-number">4</span> Plot</a>
+  <ul class="collapse">
+  <li><a href="#trio-hambi_0403-hambi_1287-hambi_1896" id="toc-trio-hambi_0403-hambi_1287-hambi_1896" class="nav-link" data-scroll-target="#trio-hambi_0403-hambi_1287-hambi_1896"><span class="header-section-number">4.1</span> Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896</a></li>
+  <li><a href="#trio-hambi_0403-hambi_1287-hambi_1977" id="toc-trio-hambi_0403-hambi_1287-hambi_1977" class="nav-link" data-scroll-target="#trio-hambi_0403-hambi_1287-hambi_1977"><span class="header-section-number">4.2</span> Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977</a></li>
+  <li><a href="#trio-hambi_0403-hambi_1896-hambi_1977" id="toc-trio-hambi_0403-hambi_1896-hambi_1977" class="nav-link" data-scroll-target="#trio-hambi_0403-hambi_1896-hambi_1977"><span class="header-section-number">4.3</span> Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977</a></li>
+  <li><a href="#trio-hambi_1287-hambi_1896-hambi_1977" id="toc-trio-hambi_1287-hambi_1896-hambi_1977" class="nav-link" data-scroll-target="#trio-hambi_1287-hambi_1896-hambi_1977"><span class="header-section-number">4.4</span> Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977</a></li>
+  </ul></li>
+  <li><a href="#ternary-plots" id="toc-ternary-plots" class="nav-link" data-scroll-target="#ternary-plots"><span class="header-section-number">5</span> Ternary plots</a>
+  <ul class="collapse">
+  <li><a href="#trio-hambi_0403-hambi_1287-hambi_1896-1" id="toc-trio-hambi_0403-hambi_1287-hambi_1896-1" class="nav-link" data-scroll-target="#trio-hambi_0403-hambi_1287-hambi_1896-1"><span class="header-section-number">5.1</span> Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896</a></li>
+  <li><a href="#trio-hambi_0403-hambi_1287-hambi_1977-1" id="toc-trio-hambi_0403-hambi_1287-hambi_1977-1" class="nav-link" data-scroll-target="#trio-hambi_0403-hambi_1287-hambi_1977-1"><span class="header-section-number">5.2</span> Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977</a></li>
+  <li><a href="#trio-hambi_0403-hambi_1896-hambi_1977-1" id="toc-trio-hambi_0403-hambi_1896-hambi_1977-1" class="nav-link" data-scroll-target="#trio-hambi_0403-hambi_1896-hambi_1977-1"><span class="header-section-number">5.3</span> Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977</a></li>
+  <li><a href="#trio-hambi_1287-hambi_1896-hambi_1977-1" id="toc-trio-hambi_1287-hambi_1896-hambi_1977-1" class="nav-link" data-scroll-target="#trio-hambi_1287-hambi_1896-hambi_1977-1"><span class="header-section-number">5.4</span> Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -327,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 6, 2025</p>
+      <p class="date">May 24, 2025</p>
     </div>
   </div>
   
@@ -493,6 +518,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-52"><a href="#cb6-52"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<section id="trio-hambi_0403-hambi_1287-hambi_1896" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="trio-hambi_0403-hambi_1287-hambi_1896"><span class="header-section-number">4.1</span> Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896</h2>
 <div id="fig-01" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -511,6 +538,9 @@ Figure&nbsp;1: Compositions of all trios with species HAMBI_0403, HAMBI_1287, an
 </figcaption>
 </figure>
 </div>
+</section>
+<section id="trio-hambi_0403-hambi_1287-hambi_1977" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="trio-hambi_0403-hambi_1287-hambi_1977"><span class="header-section-number">4.2</span> Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977</h2>
 <div id="fig-02" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -529,6 +559,9 @@ Figure&nbsp;2: Compositions of all trios with species HAMBI_0403, HAMBI_1287, an
 </figcaption>
 </figure>
 </div>
+</section>
+<section id="trio-hambi_0403-hambi_1896-hambi_1977" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="trio-hambi_0403-hambi_1896-hambi_1977"><span class="header-section-number">4.3</span> Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977</h2>
 <div id="fig-03" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-03-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -547,6 +580,9 @@ Figure&nbsp;3: Compositions of all trios with species HAMBI_0403, HAMBI_1896, an
 </figcaption>
 </figure>
 </div>
+</section>
+<section id="trio-hambi_1287-hambi_1896-hambi_1977" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="trio-hambi_1287-hambi_1896-hambi_1977"><span class="header-section-number">4.4</span> Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977</h2>
 <div id="fig-04" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -565,10 +601,166 @@ Figure&nbsp;4: Compositions of all trios with species HAMBI_1287, HAMBI_1896, an
 </figcaption>
 </figure>
 </div>
+</section>
+</section>
+<section id="ternary-plots" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Ternary plots</h1>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(ggtern)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 methods overwritten by 'ggtern':
+  method           from   
+  grid.draw.ggplot ggplot2
+  plot.ggplot      ggplot2
+  print.ggplot     ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--
+Remember to cite, run citation(package = 'ggtern') for further info.
+--</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'ggtern'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:ggplot2':
+
+    aes, annotate, ggplot, ggplot_build, ggplot_gtable, ggplotGrob,
+    ggsave, layer_data, theme_bw, theme_classic, theme_dark,
+    theme_gray, theme_light, theme_linedraw, theme_minimal, theme_void</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>nestd4tern <span class="ot">&lt;-</span> samp_trios <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">mutate</span>(<span class="at">strep_conc =</span> <span class="fu">if_else</span>(transfers <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA_real_</span>, strep_conc)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">rename</span>(<span class="at">sp =</span> strainID,</span>
+<span id="cb12-4"><a href="#cb12-4"></a>         <span class="at">f0 =</span> target_f_masterplate) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a href="#cb12-5"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sample, strep_conc) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-6"><a href="#cb12-6"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">n =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb12-8"><a href="#cb12-8"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(sample, strep_conc, transfers, replicate), <span class="at">values_from =</span> <span class="fu">c</span>(sp, evo_hist, f, f0), <span class="at">names_from =</span> n) <span class="sc">%&gt;%</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">mutate</span>(<span class="at">f0 =</span> <span class="fu">paste</span>(f0_1, f0_2, f0_3, <span class="at">sep =</span> <span class="st">"|"</span>),</span>
+<span id="cb12-10"><a href="#cb12-10"></a>         <span class="at">hist =</span> <span class="fu">paste</span>(evo_hist_1, evo_hist_2, evo_hist_3, <span class="at">sep =</span> <span class="st">"|"</span>),</span>
+<span id="cb12-11"><a href="#cb12-11"></a>         <span class="at">facetrow =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(strep_conc), <span class="st">"starting"</span>, <span class="fu">paste0</span>(strep_conc, <span class="st">" μg/ml"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  <span class="fu">mutate</span>(<span class="at">facetrow =</span> <span class="fu">factor</span>(facetrow, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"starting"</span>, <span class="st">"0 μg/ml"</span>, <span class="st">"16 μg/ml"</span>, <span class="st">"64 μg/ml"</span>, <span class="st">"256 μg/ml"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-13"><a href="#cb12-13"></a>  <span class="fu">nest</span>(<span class="at">data =</span> <span class="fu">c</span>(f_1, f_2, f_3, hist, f0, facetrow), <span class="at">.by =</span> <span class="fu">c</span>(sp_1, sp_2, sp_3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>tern_plot_func <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">ggtern</span>(df, <span class="fu">aes</span>(f_1, f_2, f_3, <span class="at">fill =</span> facetrow, <span class="at">shape =</span> <span class="fu">factor</span>(f0))) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">position =</span> <span class="fu">position_jitter_tern</span>(<span class="at">x =</span> <span class="fl">0.05</span>, <span class="at">y =</span> <span class="fl">0.05</span>, <span class="at">z =</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey20"</span>, <span class="st">"#0C59FEFF"</span>, <span class="st">"#50D9C1"</span>, <span class="st">"#F0D446FF"</span>, <span class="st">"#FF8D00FF"</span>), <span class="at">guide=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">24</span>)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">labs</span>(<span class="at">shape=</span><span class="st">""</span>,</span>
+<span id="cb13-7"><a href="#cb13-7"></a>       <span class="at">x =</span> <span class="st">"Sp1"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8"></a>       <span class="at">y =</span> <span class="st">"Sp2"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9"></a>       <span class="at">z =</span> <span class="st">"Sp3"</span>) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">facet_grid</span>(facetrow<span class="sc">~</span>hist) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>  <span class="fu">theme</span>(<span class="at">tern.panel.mask.show =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-12"><a href="#cb13-12"></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-13"><a href="#cb13-13"></a>        <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb13-15"><a href="#cb13-15"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb13-16"><a href="#cb13-16"></a>        <span class="at">tern.panel.grid.minor  =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a>  <span class="fu">theme_arrowlong</span>()</span>
+<span id="cb13-18"><a href="#cb13-18"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="trio-hambi_0403-hambi_1287-hambi_1896-1" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="trio-hambi_0403-hambi_1287-hambi_1896-1"><span class="header-section-number">5.1</span> Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896</h2>
+<div id="fig-05" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-05-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_analysis_trios_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-05-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Ternary plot for compositions of species trios with <strong>HAMBI_0403, HAMBI_1287, HAMBI_1896</strong> after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="trio-hambi_0403-hambi_1287-hambi_1977-1" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="trio-hambi_0403-hambi_1287-hambi_1977-1"><span class="header-section-number">5.2</span> Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977</h2>
+<div id="fig-06" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_analysis_trios_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Ternary plot for compositions of species trios with <strong>HAMBI_0403, HAMBI_1287, HAMBI_1977</strong> after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="trio-hambi_0403-hambi_1896-hambi_1977-1" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="trio-hambi_0403-hambi_1896-hambi_1977-1"><span class="header-section-number">5.3</span> Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977</h2>
+<div id="fig-07" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-07-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_analysis_trios_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-07-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Ternary plot for compositions of species trios with <strong>HAMBI_0403, HAMBI_1896, HAMBI_1977</strong> after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="trio-hambi_1287-hambi_1896-hambi_1977-1" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="trio-hambi_1287-hambi_1896-hambi_1977-1"><span class="header-section-number">5.4</span> Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977</h2>
+<div id="fig-08" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-08-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_analysis_trios_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-08-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Ternary plot for compositions of species trios with <strong>HAMBI_1287, HAMBI_1896, HAMBI_1977</strong> after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.
+</figcaption>
+</figure>
+</div>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1040,234 +1232,299 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">---</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="an">title:</span><span class="co"> "Analysis of trio competition"</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="an">author:</span><span class="co"> "Shane Hogle"</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="an">date:</span><span class="co"> today</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="an">link-citations:</span><span class="co"> true</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="an">abstract:</span><span class="co"> "Here we analyze the community outpcomes from all competing species trios."</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">---</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="fu"># Setup</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="fu">## Libraries</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="in">```{r}</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#| output: false</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="fu">library</span>(here)</span>
-<span id="cb7-19"><a href="#cb7-19"></a><span class="fu">library</span>(fs)</span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="fu">library</span>(scales)</span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="fu">library</span>(broom)</span>
-<span id="cb7-23"><a href="#cb7-23"></a><span class="fu">library</span>(ggraph)</span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="fu">library</span>(ggh4x)</span>
-<span id="cb7-25"><a href="#cb7-25"></a><span class="fu">library</span>(tidygraph)</span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R"</span>, <span class="st">"utils_generic.R"</span>))</span>
-<span id="cb7-27"><a href="#cb7-27"></a><span class="co">#source(here::here("R", "communities", "amplicon", "utils_amplicon.R"))</span></span>
-<span id="cb7-28"><a href="#cb7-28"></a><span class="in">```</span></span>
-<span id="cb7-29"><a href="#cb7-29"></a></span>
-<span id="cb7-30"><a href="#cb7-30"></a><span class="fu">## Global variables</span></span>
-<span id="cb7-31"><a href="#cb7-31"></a></span>
-<span id="cb7-34"><a href="#cb7-34"></a><span class="in">```{r}</span></span>
-<span id="cb7-35"><a href="#cb7-35"></a>data <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"communities"</span>)</span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="co"># make processed data directory if it doesn't exist</span></span>
-<span id="cb7-37"><a href="#cb7-37"></a>fs<span class="sc">::</span><span class="fu">dir_create</span>(data)</span>
-<span id="cb7-38"><a href="#cb7-38"></a><span class="in">```</span></span>
-<span id="cb7-39"><a href="#cb7-39"></a></span>
-<span id="cb7-40"><a href="#cb7-40"></a><span class="fu"># Read data</span></span>
-<span id="cb7-41"><a href="#cb7-41"></a></span>
-<span id="cb7-42"><a href="#cb7-42"></a><span class="fu">## Species abundances</span></span>
-<span id="cb7-43"><a href="#cb7-43"></a></span>
-<span id="cb7-46"><a href="#cb7-46"></a><span class="in">```{r}</span></span>
-<span id="cb7-47"><a href="#cb7-47"></a><span class="co">#| output: false</span></span>
-<span id="cb7-48"><a href="#cb7-48"></a>samp_trios <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"3sps_compiled.tsv"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-49"><a href="#cb7-49"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">f =</span> f_thresh)</span>
-<span id="cb7-50"><a href="#cb7-50"></a><span class="in">```</span></span>
-<span id="cb7-51"><a href="#cb7-51"></a></span>
-<span id="cb7-52"><a href="#cb7-52"></a><span class="fu"># Format</span></span>
-<span id="cb7-53"><a href="#cb7-53"></a></span>
-<span id="cb7-54"><a href="#cb7-54"></a>Create a metadata tibble that contains faceting information</span>
-<span id="cb7-55"><a href="#cb7-55"></a></span>
-<span id="cb7-58"><a href="#cb7-58"></a><span class="in">```{r}</span></span>
-<span id="cb7-59"><a href="#cb7-59"></a>md <span class="ot">&lt;-</span> samp_trios <span class="sc">%&gt;%</span> </span>
-<span id="cb7-60"><a href="#cb7-60"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sample, strainID, evo_hist, target_f_masterplate) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-61"><a href="#cb7-61"></a>  <span class="co"># make a combined evolution and species identifier and extract the community ID</span></span>
-<span id="cb7-62"><a href="#cb7-62"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">strainID =</span> <span class="fu">paste0</span>(<span class="st">"H"</span>, <span class="fu">str_extract</span>(strainID, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-63"><a href="#cb7-63"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sample) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-64"><a href="#cb7-64"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">n =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-65"><a href="#cb7-65"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-66"><a href="#cb7-66"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(sample), <span class="at">values_from =</span> <span class="fu">c</span>(strainID, evo_hist, target_f_masterplate), <span class="at">names_from =</span> n) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-67"><a href="#cb7-67"></a>  <span class="fu">mutate</span>(<span class="at">sps =</span> <span class="fu">paste</span>(strainID_1, strainID_2, strainID_3, <span class="at">sep =</span> <span class="st">"-"</span>),</span>
-<span id="cb7-68"><a href="#cb7-68"></a>         <span class="at">f0 =</span> <span class="fu">paste</span>(target_f_masterplate_1, target_f_masterplate_2, target_f_masterplate_3, <span class="at">sep =</span> <span class="st">"-"</span>),</span>
-<span id="cb7-69"><a href="#cb7-69"></a>         <span class="at">hist =</span> <span class="fu">paste</span>(evo_hist_1, evo_hist_2, evo_hist_3, <span class="at">sep =</span> <span class="st">"|"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-70"><a href="#cb7-70"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sample, sps, f0, hist)</span>
-<span id="cb7-71"><a href="#cb7-71"></a><span class="in">```</span></span>
-<span id="cb7-72"><a href="#cb7-72"></a></span>
-<span id="cb7-73"><a href="#cb7-73"></a>Combine into a final tibble</span>
-<span id="cb7-74"><a href="#cb7-74"></a></span>
-<span id="cb7-77"><a href="#cb7-77"></a><span class="in">```{r}</span></span>
-<span id="cb7-78"><a href="#cb7-78"></a>t0 <span class="ot">&lt;-</span> samp_trios <span class="sc">%&gt;%</span> </span>
-<span id="cb7-79"><a href="#cb7-79"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(community_type <span class="sc">==</span> <span class="st">"masterplate"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-80"><a href="#cb7-80"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>strep_conc, <span class="sc">-</span>replicate) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-81"><a href="#cb7-81"></a>  <span class="fu">full_join</span>(<span class="fu">tibble</span>(<span class="at">transfers =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">strep_conc =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">16</span>, <span class="dv">64</span>, <span class="dv">256</span>)),</span>
-<span id="cb7-82"><a href="#cb7-82"></a>            <span class="at">by =</span> <span class="fu">join_by</span>(transfers),</span>
-<span id="cb7-83"><a href="#cb7-83"></a>            <span class="at">relationship =</span> <span class="st">"many-to-many"</span>)</span>
-<span id="cb7-84"><a href="#cb7-84"></a></span>
-<span id="cb7-85"><a href="#cb7-85"></a>t8 <span class="ot">&lt;-</span> samp_trios <span class="sc">%&gt;%</span> </span>
-<span id="cb7-86"><a href="#cb7-86"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(community_type <span class="sc">==</span> <span class="st">"experiment"</span>)</span>
-<span id="cb7-87"><a href="#cb7-87"></a></span>
-<span id="cb7-88"><a href="#cb7-88"></a>tf <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(t0, t8) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-89"><a href="#cb7-89"></a>  <span class="fu">left_join</span>(md, <span class="at">by =</span> <span class="fu">join_by</span>(sample)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-90"><a href="#cb7-90"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(ggplot2<span class="sc">::</span><span class="fu">mean_cl_boot</span>(f),</span>
-<span id="cb7-91"><a href="#cb7-91"></a>                    <span class="at">.by =</span> <span class="fu">c</span>(<span class="st">"sps"</span>, <span class="st">"f0"</span>, <span class="st">"hist"</span>, <span class="st">"strep_conc"</span>, <span class="st">"transfers"</span>, <span class="st">"strainID"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-92"><a href="#cb7-92"></a>  <span class="fu">mutate</span>(<span class="at">extinct =</span> <span class="fu">if_else</span>(y <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">|</span> y <span class="sc">&gt;=</span> <span class="fl">0.99</span>, <span class="st">"extinct"</span>, <span class="st">"coexist"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-93"><a href="#cb7-93"></a>  <span class="fu">nest</span>( <span class="at">.by =</span> sps)</span>
-<span id="cb7-94"><a href="#cb7-94"></a><span class="in">```</span></span>
-<span id="cb7-95"><a href="#cb7-95"></a></span>
-<span id="cb7-96"><a href="#cb7-96"></a><span class="fu"># Plot </span></span>
-<span id="cb7-97"><a href="#cb7-97"></a></span>
-<span id="cb7-100"><a href="#cb7-100"></a><span class="in">```{r}</span></span>
-<span id="cb7-101"><a href="#cb7-101"></a>plot_trios <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
-<span id="cb7-102"><a href="#cb7-102"></a>  spcols <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb7-103"><a href="#cb7-103"></a>    <span class="st">"HAMBI_0403"</span> <span class="ot">=</span> <span class="st">"#bd7811"</span>,</span>
-<span id="cb7-104"><a href="#cb7-104"></a>    <span class="st">"HAMBI_1287"</span> <span class="ot">=</span> <span class="st">"#476c9e"</span>,</span>
-<span id="cb7-105"><a href="#cb7-105"></a>    <span class="st">"HAMBI_1896"</span> <span class="ot">=</span> <span class="st">"#31752a"</span>,</span>
-<span id="cb7-106"><a href="#cb7-106"></a>    <span class="st">"HAMBI_1977"</span> <span class="ot">=</span> <span class="st">"#ffc755"</span></span>
-<span id="cb7-107"><a href="#cb7-107"></a>  )</span>
-<span id="cb7-108"><a href="#cb7-108"></a>  </span>
-<span id="cb7-109"><a href="#cb7-109"></a>  pj <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">position_jitterdodge</span>(</span>
-<span id="cb7-110"><a href="#cb7-110"></a>    <span class="at">jitter.width =</span> <span class="fl">0.0</span>,</span>
-<span id="cb7-111"><a href="#cb7-111"></a>    <span class="at">jitter.height =</span> <span class="fl">0.0</span>,</span>
-<span id="cb7-112"><a href="#cb7-112"></a>    <span class="at">dodge.width =</span> <span class="fl">0.5</span>,</span>
-<span id="cb7-113"><a href="#cb7-113"></a>    <span class="at">seed =</span> <span class="dv">9</span></span>
-<span id="cb7-114"><a href="#cb7-114"></a>  )</span>
-<span id="cb7-115"><a href="#cb7-115"></a>  </span>
-<span id="cb7-116"><a href="#cb7-116"></a>  <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(</span>
-<span id="cb7-117"><a href="#cb7-117"></a>    <span class="at">x =</span> transfers,</span>
-<span id="cb7-118"><a href="#cb7-118"></a>    <span class="at">y =</span> y,</span>
-<span id="cb7-119"><a href="#cb7-119"></a>    <span class="at">group =</span> <span class="fu">interaction</span>(strainID, f0, strep_conc, hist)</span>
-<span id="cb7-120"><a href="#cb7-120"></a>  )) <span class="sc">+</span></span>
-<span id="cb7-121"><a href="#cb7-121"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.01</span>,</span>
-<span id="cb7-122"><a href="#cb7-122"></a>               <span class="at">color =</span> <span class="st">"grey20"</span>,</span>
-<span id="cb7-123"><a href="#cb7-123"></a>               <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb7-124"><a href="#cb7-124"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.99</span>,</span>
-<span id="cb7-125"><a href="#cb7-125"></a>               <span class="at">color =</span> <span class="st">"grey20"</span>,</span>
-<span id="cb7-126"><a href="#cb7-126"></a>               <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb7-127"><a href="#cb7-127"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_linerange</span>(<span class="fu">aes</span>(</span>
-<span id="cb7-128"><a href="#cb7-128"></a>      <span class="at">ymin =</span> ymin,</span>
-<span id="cb7-129"><a href="#cb7-129"></a>      <span class="at">ymax =</span> ymax,</span>
-<span id="cb7-130"><a href="#cb7-130"></a>      <span class="at">color =</span> strainID</span>
-<span id="cb7-131"><a href="#cb7-131"></a>    ), <span class="at">position =</span> pj) <span class="sc">+</span></span>
-<span id="cb7-132"><a href="#cb7-132"></a>    ggh4x<span class="sc">::</span><span class="fu">geom_pointpath</span>(<span class="fu">aes</span>(<span class="at">color =</span> strainID, <span class="at">shape =</span> extinct), <span class="at">position =</span> pj, <span class="at">mult =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb7-133"><a href="#cb7-133"></a>    <span class="fu">facet_grid</span>(hist <span class="sc">~</span> strep_conc) <span class="sc">+</span></span>
-<span id="cb7-134"><a href="#cb7-134"></a>    ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Growth cycle"</span>, <span class="at">y =</span> <span class="st">"Species frequency"</span>, <span class="at">color =</span> <span class="st">"Species"</span>) <span class="sc">+</span></span>
-<span id="cb7-135"><a href="#cb7-135"></a>    ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(</span>
-<span id="cb7-136"><a href="#cb7-136"></a>      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb7-137"><a href="#cb7-137"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
-<span id="cb7-138"><a href="#cb7-138"></a>      <span class="at">labels =</span> percent</span>
-<span id="cb7-139"><a href="#cb7-139"></a>    ) <span class="sc">+</span></span>
-<span id="cb7-140"><a href="#cb7-140"></a>    ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">9</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb7-141"><a href="#cb7-141"></a>    <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">4</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb7-142"><a href="#cb7-142"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> spcols) <span class="sc">+</span></span>
-<span id="cb7-143"><a href="#cb7-143"></a>    ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb7-144"><a href="#cb7-144"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb7-145"><a href="#cb7-145"></a>      <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-146"><a href="#cb7-146"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb7-147"><a href="#cb7-147"></a>      <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-148"><a href="#cb7-148"></a>      <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-149"><a href="#cb7-149"></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb7-150"><a href="#cb7-150"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)</span>
-<span id="cb7-151"><a href="#cb7-151"></a>    )</span>
-<span id="cb7-152"><a href="#cb7-152"></a>}</span>
-<span id="cb7-153"><a href="#cb7-153"></a><span class="in">```</span></span>
-<span id="cb7-154"><a href="#cb7-154"></a></span>
-<span id="cb7-155"><a href="#cb7-155"></a>::: {#fig-01}</span>
-<span id="cb7-158"><a href="#cb7-158"></a><span class="in">```{r}</span></span>
-<span id="cb7-159"><a href="#cb7-159"></a><span class="co">#| fig-width: 5</span></span>
-<span id="cb7-160"><a href="#cb7-160"></a><span class="co">#| fig-height: 9</span></span>
-<span id="cb7-161"><a href="#cb7-161"></a><span class="co">#| warning: false</span></span>
-<span id="cb7-162"><a href="#cb7-162"></a><span class="co">#| echo: false</span></span>
-<span id="cb7-163"><a href="#cb7-163"></a><span class="fu">plot_trios</span>(tf<span class="sc">$</span>data[[<span class="dv">1</span>]]) <span class="sc">+</span></span>
-<span id="cb7-164"><a href="#cb7-164"></a>  <span class="fu">ggtitle</span>(<span class="st">"Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896"</span>)</span>
-<span id="cb7-165"><a href="#cb7-165"></a><span class="in">```</span></span>
-<span id="cb7-166"><a href="#cb7-166"></a>Compositions of all trios with species HAMBI_0403, HAMBI_1287, and HAMBI_1896 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_0403, HAMBI_1287, HAMBI_1896). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap. </span>
-<span id="cb7-167"><a href="#cb7-167"></a>:::</span>
-<span id="cb7-168"><a href="#cb7-168"></a></span>
-<span id="cb7-169"><a href="#cb7-169"></a>::: {#fig-02}</span>
-<span id="cb7-172"><a href="#cb7-172"></a><span class="in">```{r}</span></span>
-<span id="cb7-173"><a href="#cb7-173"></a><span class="co">#| fig-width: 5</span></span>
-<span id="cb7-174"><a href="#cb7-174"></a><span class="co">#| fig-height: 9</span></span>
-<span id="cb7-175"><a href="#cb7-175"></a><span class="co">#| warning: false</span></span>
-<span id="cb7-176"><a href="#cb7-176"></a><span class="co">#| echo: false</span></span>
-<span id="cb7-177"><a href="#cb7-177"></a><span class="fu">plot_trios</span>(tf<span class="sc">$</span>data[[<span class="dv">2</span>]]) <span class="sc">+</span></span>
-<span id="cb7-178"><a href="#cb7-178"></a>  <span class="fu">ggtitle</span>(<span class="st">"Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977"</span>)</span>
-<span id="cb7-179"><a href="#cb7-179"></a><span class="in">```</span></span>
-<span id="cb7-180"><a href="#cb7-180"></a>Compositions of all trios with species HAMBI_0403, HAMBI_1287, and HAMBI_1977 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_0403, HAMBI_1287, HAMBI_1977). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap. </span>
-<span id="cb7-181"><a href="#cb7-181"></a>:::</span>
-<span id="cb7-182"><a href="#cb7-182"></a></span>
-<span id="cb7-183"><a href="#cb7-183"></a>::: {#fig-03}</span>
-<span id="cb7-186"><a href="#cb7-186"></a><span class="in">```{r}</span></span>
-<span id="cb7-187"><a href="#cb7-187"></a><span class="co">#| fig-width: 5</span></span>
-<span id="cb7-188"><a href="#cb7-188"></a><span class="co">#| fig-height: 10</span></span>
-<span id="cb7-189"><a href="#cb7-189"></a><span class="co">#| warning: false</span></span>
-<span id="cb7-190"><a href="#cb7-190"></a><span class="co">#| echo: false</span></span>
-<span id="cb7-191"><a href="#cb7-191"></a><span class="fu">plot_trios</span>(tf<span class="sc">$</span>data[[<span class="dv">3</span>]]) <span class="sc">+</span></span>
-<span id="cb7-192"><a href="#cb7-192"></a>  <span class="fu">ggtitle</span>(<span class="st">"Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977"</span>)</span>
-<span id="cb7-193"><a href="#cb7-193"></a><span class="in">```</span></span>
-<span id="cb7-194"><a href="#cb7-194"></a>Compositions of all trios with species HAMBI_0403, HAMBI_1896, and HAMBI_1977 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_0403, HAMBI_1896, HAMBI_1977). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap. </span>
-<span id="cb7-195"><a href="#cb7-195"></a>:::</span>
-<span id="cb7-196"><a href="#cb7-196"></a></span>
-<span id="cb7-197"><a href="#cb7-197"></a>::: {#fig-04}</span>
-<span id="cb7-200"><a href="#cb7-200"></a><span class="in">```{r}</span></span>
-<span id="cb7-201"><a href="#cb7-201"></a><span class="co">#| fig-width: 5</span></span>
-<span id="cb7-202"><a href="#cb7-202"></a><span class="co">#| fig-height: 10</span></span>
-<span id="cb7-203"><a href="#cb7-203"></a><span class="co">#| warning: false</span></span>
-<span id="cb7-204"><a href="#cb7-204"></a><span class="co">#| echo: false</span></span>
-<span id="cb7-205"><a href="#cb7-205"></a><span class="fu">plot_trios</span>(tf<span class="sc">$</span>data[[<span class="dv">4</span>]]) <span class="sc">+</span></span>
-<span id="cb7-206"><a href="#cb7-206"></a>  <span class="fu">ggtitle</span>(<span class="st">"Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977"</span>)</span>
-<span id="cb7-207"><a href="#cb7-207"></a><span class="in">```</span></span>
-<span id="cb7-208"><a href="#cb7-208"></a>Compositions of all trios with species HAMBI_1287, HAMBI_1896, and HAMBI_1977 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_1287, HAMBI_1896, HAMBI_1977). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap. </span>
-<span id="cb7-209"><a href="#cb7-209"></a>:::</span>
-<span id="cb7-210"><a href="#cb7-210"></a></span>
-<span id="cb7-211"><a href="#cb7-211"></a><span class="in">````{comment}</span></span>
-<span id="cb7-212"><a href="#cb7-212"></a><span class="in"># Ternary plots</span></span>
-<span id="cb7-213"><a href="#cb7-213"></a></span>
-<span id="cb7-216"><a href="#cb7-216"></a><span class="in">```{r}</span></span>
-<span id="cb7-217"><a href="#cb7-217"></a><span class="in">library(ggtern)</span></span>
-<span id="cb7-218"><a href="#cb7-218"></a><span class="in">test &lt;- samp_trios %&gt;% </span></span>
-<span id="cb7-219"><a href="#cb7-219"></a><span class="in">  #filter(batch != "run20240711") %&gt;% </span></span>
-<span id="cb7-220"><a href="#cb7-220"></a><span class="in">  #dplyr::filter(community_type == "experiment") %&gt;% </span></span>
-<span id="cb7-221"><a href="#cb7-221"></a><span class="in">  # make a combined evolution and species identifier and extract the community ID</span></span>
-<span id="cb7-222"><a href="#cb7-222"></a><span class="in">  #dplyr::mutate(sp = paste(str_to_upper(evo_hist), str_extract(strainID, "\\d+"), sep = "_")) %&gt;% </span></span>
-<span id="cb7-223"><a href="#cb7-223"></a><span class="in">  mutate(strep_conc = if_else(transfers == 0, NA_real_, strep_conc)) %&gt;% </span></span>
-<span id="cb7-224"><a href="#cb7-224"></a><span class="in">  rename(sp = strainID,</span></span>
-<span id="cb7-225"><a href="#cb7-225"></a><span class="in">         f0 = target_f_masterplate) %&gt;% </span></span>
-<span id="cb7-226"><a href="#cb7-226"></a><span class="in">  dplyr::group_by(sample, strep_conc) %&gt;% </span></span>
-<span id="cb7-227"><a href="#cb7-227"></a><span class="in">  dplyr::mutate(n = 1:n()) %&gt;% </span></span>
-<span id="cb7-228"><a href="#cb7-228"></a><span class="in">  ungroup() %&gt;% </span></span>
-<span id="cb7-229"><a href="#cb7-229"></a><span class="in">  tidyr::pivot_wider(id_cols = c(sample, strep_conc, transfers, replicate), values_from = c(sp, evo_hist, f, f0), names_from = n) %&gt;%</span></span>
-<span id="cb7-230"><a href="#cb7-230"></a><span class="in">  mutate(f0 = paste(f0_1, f0_2, f0_3, sep = "|"),</span></span>
-<span id="cb7-231"><a href="#cb7-231"></a><span class="in">         hist = paste(evo_hist_1, evo_hist_2, evo_hist_3, sep = "|")) %&gt;% </span></span>
-<span id="cb7-232"><a href="#cb7-232"></a><span class="in">  nest(data = c(f_1, f_2, f_3, hist, f0, strep_conc), .by = c(sp_1, sp_2, sp_3))</span></span>
-<span id="cb7-233"><a href="#cb7-233"></a></span>
-<span id="cb7-234"><a href="#cb7-234"></a><span class="in">```</span></span>
-<span id="cb7-235"><a href="#cb7-235"></a></span>
-<span id="cb7-236"><a href="#cb7-236"></a></span>
-<span id="cb7-239"><a href="#cb7-239"></a><span class="in">```{r}</span></span>
-<span id="cb7-240"><a href="#cb7-240"></a><span class="in">test$data[[2]] %&gt;% </span></span>
-<span id="cb7-241"><a href="#cb7-241"></a><span class="in">  ggtern(aes(f_1, f_2, f_3, fill = factor(strep_conc), shape = factor(f0))) +</span></span>
-<span id="cb7-242"><a href="#cb7-242"></a><span class="in">  geom_point(alpha = 0.7, size = 3, position = position_jitter_tern(x = 0.05, y = 0.05, z = 0.05)) +</span></span>
-<span id="cb7-243"><a href="#cb7-243"></a><span class="in">  ggplot2::scale_fill_viridis_d(na.value = "red", guide="none") +</span></span>
-<span id="cb7-244"><a href="#cb7-244"></a><span class="in">  scale_shape_manual(values = c(21, 22, 24)) +</span></span>
-<span id="cb7-245"><a href="#cb7-245"></a><span class="in">  facet_grid(strep_conc~hist) +</span></span>
-<span id="cb7-246"><a href="#cb7-246"></a><span class="in">  theme(tern.panel.mask.show = FALSE,</span></span>
-<span id="cb7-247"><a href="#cb7-247"></a><span class="in">        legend.position = "bottom",</span></span>
-<span id="cb7-248"><a href="#cb7-248"></a><span class="in">        axis.text = element_text(size=6),</span></span>
-<span id="cb7-249"><a href="#cb7-249"></a><span class="in">        tern.panel.grid.minor  = element_blank()) +</span></span>
-<span id="cb7-250"><a href="#cb7-250"></a><span class="in">  theme_arrowlong()</span></span>
-<span id="cb7-251"><a href="#cb7-251"></a><span class="in">```</span></span>
-<span id="cb7-252"><a href="#cb7-252"></a><span class="in">````</span></span>
+<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">---</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="an">title:</span><span class="co"> "Analysis of trio competition"</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="an">author:</span><span class="co"> "Shane Hogle"</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="an">link-citations:</span><span class="co"> true</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="an">abstract:</span><span class="co"> "Here we analyze the community outpcomes from all competing species trios."</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">---</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="fu"># Setup</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="fu">## Libraries</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="in">```{r}</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="co">#| output: false</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="fu">library</span>(here)</span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="fu">library</span>(fs)</span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="fu">library</span>(scales)</span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb14-22"><a href="#cb14-22"></a><span class="fu">library</span>(broom)</span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="fu">library</span>(ggraph)</span>
+<span id="cb14-24"><a href="#cb14-24"></a><span class="fu">library</span>(ggh4x)</span>
+<span id="cb14-25"><a href="#cb14-25"></a><span class="fu">library</span>(tidygraph)</span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R"</span>, <span class="st">"utils_generic.R"</span>))</span>
+<span id="cb14-27"><a href="#cb14-27"></a><span class="co">#source(here::here("R", "communities", "amplicon", "utils_amplicon.R"))</span></span>
+<span id="cb14-28"><a href="#cb14-28"></a><span class="in">```</span></span>
+<span id="cb14-29"><a href="#cb14-29"></a></span>
+<span id="cb14-30"><a href="#cb14-30"></a><span class="fu">## Global variables</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a></span>
+<span id="cb14-34"><a href="#cb14-34"></a><span class="in">```{r}</span></span>
+<span id="cb14-35"><a href="#cb14-35"></a>data <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"communities"</span>)</span>
+<span id="cb14-36"><a href="#cb14-36"></a><span class="co"># make processed data directory if it doesn't exist</span></span>
+<span id="cb14-37"><a href="#cb14-37"></a>fs<span class="sc">::</span><span class="fu">dir_create</span>(data)</span>
+<span id="cb14-38"><a href="#cb14-38"></a><span class="in">```</span></span>
+<span id="cb14-39"><a href="#cb14-39"></a></span>
+<span id="cb14-40"><a href="#cb14-40"></a><span class="fu"># Read data</span></span>
+<span id="cb14-41"><a href="#cb14-41"></a></span>
+<span id="cb14-42"><a href="#cb14-42"></a><span class="fu">## Species abundances</span></span>
+<span id="cb14-43"><a href="#cb14-43"></a></span>
+<span id="cb14-46"><a href="#cb14-46"></a><span class="in">```{r}</span></span>
+<span id="cb14-47"><a href="#cb14-47"></a><span class="co">#| output: false</span></span>
+<span id="cb14-48"><a href="#cb14-48"></a>samp_trios <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"3sps_compiled.tsv"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-49"><a href="#cb14-49"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">f =</span> f_thresh)</span>
+<span id="cb14-50"><a href="#cb14-50"></a><span class="in">```</span></span>
+<span id="cb14-51"><a href="#cb14-51"></a></span>
+<span id="cb14-52"><a href="#cb14-52"></a><span class="fu"># Format</span></span>
+<span id="cb14-53"><a href="#cb14-53"></a></span>
+<span id="cb14-54"><a href="#cb14-54"></a>Create a metadata tibble that contains faceting information</span>
+<span id="cb14-55"><a href="#cb14-55"></a></span>
+<span id="cb14-58"><a href="#cb14-58"></a><span class="in">```{r}</span></span>
+<span id="cb14-59"><a href="#cb14-59"></a>md <span class="ot">&lt;-</span> samp_trios <span class="sc">%&gt;%</span> </span>
+<span id="cb14-60"><a href="#cb14-60"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sample, strainID, evo_hist, target_f_masterplate) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-61"><a href="#cb14-61"></a>  <span class="co"># make a combined evolution and species identifier and extract the community ID</span></span>
+<span id="cb14-62"><a href="#cb14-62"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">strainID =</span> <span class="fu">paste0</span>(<span class="st">"H"</span>, <span class="fu">str_extract</span>(strainID, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-63"><a href="#cb14-63"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sample) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-64"><a href="#cb14-64"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">n =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-65"><a href="#cb14-65"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb14-66"><a href="#cb14-66"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(sample), <span class="at">values_from =</span> <span class="fu">c</span>(strainID, evo_hist, target_f_masterplate), <span class="at">names_from =</span> n) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-67"><a href="#cb14-67"></a>  <span class="fu">mutate</span>(<span class="at">sps =</span> <span class="fu">paste</span>(strainID_1, strainID_2, strainID_3, <span class="at">sep =</span> <span class="st">"-"</span>),</span>
+<span id="cb14-68"><a href="#cb14-68"></a>         <span class="at">f0 =</span> <span class="fu">paste</span>(target_f_masterplate_1, target_f_masterplate_2, target_f_masterplate_3, <span class="at">sep =</span> <span class="st">"-"</span>),</span>
+<span id="cb14-69"><a href="#cb14-69"></a>         <span class="at">hist =</span> <span class="fu">paste</span>(evo_hist_1, evo_hist_2, evo_hist_3, <span class="at">sep =</span> <span class="st">"|"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-70"><a href="#cb14-70"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sample, sps, f0, hist)</span>
+<span id="cb14-71"><a href="#cb14-71"></a><span class="in">```</span></span>
+<span id="cb14-72"><a href="#cb14-72"></a></span>
+<span id="cb14-73"><a href="#cb14-73"></a>Combine into a final tibble</span>
+<span id="cb14-74"><a href="#cb14-74"></a></span>
+<span id="cb14-77"><a href="#cb14-77"></a><span class="in">```{r}</span></span>
+<span id="cb14-78"><a href="#cb14-78"></a>t0 <span class="ot">&lt;-</span> samp_trios <span class="sc">%&gt;%</span> </span>
+<span id="cb14-79"><a href="#cb14-79"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(community_type <span class="sc">==</span> <span class="st">"masterplate"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-80"><a href="#cb14-80"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>strep_conc, <span class="sc">-</span>replicate) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-81"><a href="#cb14-81"></a>  <span class="fu">full_join</span>(<span class="fu">tibble</span>(<span class="at">transfers =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">strep_conc =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">16</span>, <span class="dv">64</span>, <span class="dv">256</span>)),</span>
+<span id="cb14-82"><a href="#cb14-82"></a>            <span class="at">by =</span> <span class="fu">join_by</span>(transfers),</span>
+<span id="cb14-83"><a href="#cb14-83"></a>            <span class="at">relationship =</span> <span class="st">"many-to-many"</span>)</span>
+<span id="cb14-84"><a href="#cb14-84"></a></span>
+<span id="cb14-85"><a href="#cb14-85"></a>t8 <span class="ot">&lt;-</span> samp_trios <span class="sc">%&gt;%</span> </span>
+<span id="cb14-86"><a href="#cb14-86"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(community_type <span class="sc">==</span> <span class="st">"experiment"</span>)</span>
+<span id="cb14-87"><a href="#cb14-87"></a></span>
+<span id="cb14-88"><a href="#cb14-88"></a>tf <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(t0, t8) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-89"><a href="#cb14-89"></a>  <span class="fu">left_join</span>(md, <span class="at">by =</span> <span class="fu">join_by</span>(sample)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-90"><a href="#cb14-90"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(ggplot2<span class="sc">::</span><span class="fu">mean_cl_boot</span>(f),</span>
+<span id="cb14-91"><a href="#cb14-91"></a>                    <span class="at">.by =</span> <span class="fu">c</span>(<span class="st">"sps"</span>, <span class="st">"f0"</span>, <span class="st">"hist"</span>, <span class="st">"strep_conc"</span>, <span class="st">"transfers"</span>, <span class="st">"strainID"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-92"><a href="#cb14-92"></a>  <span class="fu">mutate</span>(<span class="at">extinct =</span> <span class="fu">if_else</span>(y <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">|</span> y <span class="sc">&gt;=</span> <span class="fl">0.99</span>, <span class="st">"extinct"</span>, <span class="st">"coexist"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-93"><a href="#cb14-93"></a>  <span class="fu">nest</span>( <span class="at">.by =</span> sps)</span>
+<span id="cb14-94"><a href="#cb14-94"></a><span class="in">```</span></span>
+<span id="cb14-95"><a href="#cb14-95"></a></span>
+<span id="cb14-96"><a href="#cb14-96"></a><span class="fu"># Plot </span></span>
+<span id="cb14-97"><a href="#cb14-97"></a></span>
+<span id="cb14-100"><a href="#cb14-100"></a><span class="in">```{r}</span></span>
+<span id="cb14-101"><a href="#cb14-101"></a>plot_trios <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb14-102"><a href="#cb14-102"></a>  spcols <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb14-103"><a href="#cb14-103"></a>    <span class="st">"HAMBI_0403"</span> <span class="ot">=</span> <span class="st">"#bd7811"</span>,</span>
+<span id="cb14-104"><a href="#cb14-104"></a>    <span class="st">"HAMBI_1287"</span> <span class="ot">=</span> <span class="st">"#476c9e"</span>,</span>
+<span id="cb14-105"><a href="#cb14-105"></a>    <span class="st">"HAMBI_1896"</span> <span class="ot">=</span> <span class="st">"#31752a"</span>,</span>
+<span id="cb14-106"><a href="#cb14-106"></a>    <span class="st">"HAMBI_1977"</span> <span class="ot">=</span> <span class="st">"#ffc755"</span></span>
+<span id="cb14-107"><a href="#cb14-107"></a>  )</span>
+<span id="cb14-108"><a href="#cb14-108"></a>  </span>
+<span id="cb14-109"><a href="#cb14-109"></a>  pj <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">position_jitterdodge</span>(</span>
+<span id="cb14-110"><a href="#cb14-110"></a>    <span class="at">jitter.width =</span> <span class="fl">0.0</span>,</span>
+<span id="cb14-111"><a href="#cb14-111"></a>    <span class="at">jitter.height =</span> <span class="fl">0.0</span>,</span>
+<span id="cb14-112"><a href="#cb14-112"></a>    <span class="at">dodge.width =</span> <span class="fl">0.5</span>,</span>
+<span id="cb14-113"><a href="#cb14-113"></a>    <span class="at">seed =</span> <span class="dv">9</span></span>
+<span id="cb14-114"><a href="#cb14-114"></a>  )</span>
+<span id="cb14-115"><a href="#cb14-115"></a>  </span>
+<span id="cb14-116"><a href="#cb14-116"></a>  <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(</span>
+<span id="cb14-117"><a href="#cb14-117"></a>    <span class="at">x =</span> transfers,</span>
+<span id="cb14-118"><a href="#cb14-118"></a>    <span class="at">y =</span> y,</span>
+<span id="cb14-119"><a href="#cb14-119"></a>    <span class="at">group =</span> <span class="fu">interaction</span>(strainID, f0, strep_conc, hist)</span>
+<span id="cb14-120"><a href="#cb14-120"></a>  )) <span class="sc">+</span></span>
+<span id="cb14-121"><a href="#cb14-121"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.01</span>,</span>
+<span id="cb14-122"><a href="#cb14-122"></a>               <span class="at">color =</span> <span class="st">"grey20"</span>,</span>
+<span id="cb14-123"><a href="#cb14-123"></a>               <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-124"><a href="#cb14-124"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.99</span>,</span>
+<span id="cb14-125"><a href="#cb14-125"></a>               <span class="at">color =</span> <span class="st">"grey20"</span>,</span>
+<span id="cb14-126"><a href="#cb14-126"></a>               <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-127"><a href="#cb14-127"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_linerange</span>(<span class="fu">aes</span>(</span>
+<span id="cb14-128"><a href="#cb14-128"></a>      <span class="at">ymin =</span> ymin,</span>
+<span id="cb14-129"><a href="#cb14-129"></a>      <span class="at">ymax =</span> ymax,</span>
+<span id="cb14-130"><a href="#cb14-130"></a>      <span class="at">color =</span> strainID</span>
+<span id="cb14-131"><a href="#cb14-131"></a>    ), <span class="at">position =</span> pj) <span class="sc">+</span></span>
+<span id="cb14-132"><a href="#cb14-132"></a>    ggh4x<span class="sc">::</span><span class="fu">geom_pointpath</span>(<span class="fu">aes</span>(<span class="at">color =</span> strainID, <span class="at">shape =</span> extinct), <span class="at">position =</span> pj, <span class="at">mult =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb14-133"><a href="#cb14-133"></a>    <span class="fu">facet_grid</span>(hist <span class="sc">~</span> strep_conc) <span class="sc">+</span></span>
+<span id="cb14-134"><a href="#cb14-134"></a>    ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Growth cycle"</span>, <span class="at">y =</span> <span class="st">"Species frequency"</span>, <span class="at">color =</span> <span class="st">"Species"</span>) <span class="sc">+</span></span>
+<span id="cb14-135"><a href="#cb14-135"></a>    ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(</span>
+<span id="cb14-136"><a href="#cb14-136"></a>      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb14-137"><a href="#cb14-137"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
+<span id="cb14-138"><a href="#cb14-138"></a>      <span class="at">labels =</span> percent</span>
+<span id="cb14-139"><a href="#cb14-139"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-140"><a href="#cb14-140"></a>    ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">9</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb14-141"><a href="#cb14-141"></a>    <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">4</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb14-142"><a href="#cb14-142"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> spcols) <span class="sc">+</span></span>
+<span id="cb14-143"><a href="#cb14-143"></a>    ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb14-144"><a href="#cb14-144"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb14-145"><a href="#cb14-145"></a>      <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-146"><a href="#cb14-146"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb14-147"><a href="#cb14-147"></a>      <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-148"><a href="#cb14-148"></a>      <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-149"><a href="#cb14-149"></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb14-150"><a href="#cb14-150"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)</span>
+<span id="cb14-151"><a href="#cb14-151"></a>    )</span>
+<span id="cb14-152"><a href="#cb14-152"></a>}</span>
+<span id="cb14-153"><a href="#cb14-153"></a><span class="in">```</span></span>
+<span id="cb14-154"><a href="#cb14-154"></a></span>
+<span id="cb14-155"><a href="#cb14-155"></a><span class="fu">## Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896</span></span>
+<span id="cb14-156"><a href="#cb14-156"></a></span>
+<span id="cb14-157"><a href="#cb14-157"></a>::: {#fig-01}</span>
+<span id="cb14-160"><a href="#cb14-160"></a><span class="in">```{r}</span></span>
+<span id="cb14-161"><a href="#cb14-161"></a><span class="co">#| fig-width: 5</span></span>
+<span id="cb14-162"><a href="#cb14-162"></a><span class="co">#| fig-height: 9</span></span>
+<span id="cb14-163"><a href="#cb14-163"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-164"><a href="#cb14-164"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-165"><a href="#cb14-165"></a><span class="fu">plot_trios</span>(tf<span class="sc">$</span>data[[<span class="dv">1</span>]]) <span class="sc">+</span></span>
+<span id="cb14-166"><a href="#cb14-166"></a>  <span class="fu">ggtitle</span>(<span class="st">"Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896"</span>)</span>
+<span id="cb14-167"><a href="#cb14-167"></a><span class="in">```</span></span>
+<span id="cb14-168"><a href="#cb14-168"></a>Compositions of all trios with species HAMBI_0403, HAMBI_1287, and HAMBI_1896 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_0403, HAMBI_1287, HAMBI_1896). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap. </span>
+<span id="cb14-169"><a href="#cb14-169"></a>:::</span>
+<span id="cb14-170"><a href="#cb14-170"></a></span>
+<span id="cb14-171"><a href="#cb14-171"></a><span class="fu">## Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977</span></span>
+<span id="cb14-172"><a href="#cb14-172"></a></span>
+<span id="cb14-173"><a href="#cb14-173"></a>::: {#fig-02}</span>
+<span id="cb14-176"><a href="#cb14-176"></a><span class="in">```{r}</span></span>
+<span id="cb14-177"><a href="#cb14-177"></a><span class="co">#| fig-width: 5</span></span>
+<span id="cb14-178"><a href="#cb14-178"></a><span class="co">#| fig-height: 9</span></span>
+<span id="cb14-179"><a href="#cb14-179"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-180"><a href="#cb14-180"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-181"><a href="#cb14-181"></a><span class="fu">plot_trios</span>(tf<span class="sc">$</span>data[[<span class="dv">2</span>]]) <span class="sc">+</span></span>
+<span id="cb14-182"><a href="#cb14-182"></a>  <span class="fu">ggtitle</span>(<span class="st">"Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977"</span>)</span>
+<span id="cb14-183"><a href="#cb14-183"></a><span class="in">```</span></span>
+<span id="cb14-184"><a href="#cb14-184"></a>Compositions of all trios with species HAMBI_0403, HAMBI_1287, and HAMBI_1977 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_0403, HAMBI_1287, HAMBI_1977). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap. </span>
+<span id="cb14-185"><a href="#cb14-185"></a>:::</span>
+<span id="cb14-186"><a href="#cb14-186"></a></span>
+<span id="cb14-187"><a href="#cb14-187"></a><span class="fu">## Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977</span></span>
+<span id="cb14-188"><a href="#cb14-188"></a></span>
+<span id="cb14-189"><a href="#cb14-189"></a>::: {#fig-03}</span>
+<span id="cb14-192"><a href="#cb14-192"></a><span class="in">```{r}</span></span>
+<span id="cb14-193"><a href="#cb14-193"></a><span class="co">#| fig-width: 5</span></span>
+<span id="cb14-194"><a href="#cb14-194"></a><span class="co">#| fig-height: 10</span></span>
+<span id="cb14-195"><a href="#cb14-195"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-196"><a href="#cb14-196"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-197"><a href="#cb14-197"></a><span class="fu">plot_trios</span>(tf<span class="sc">$</span>data[[<span class="dv">3</span>]]) <span class="sc">+</span></span>
+<span id="cb14-198"><a href="#cb14-198"></a>  <span class="fu">ggtitle</span>(<span class="st">"Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977"</span>)</span>
+<span id="cb14-199"><a href="#cb14-199"></a><span class="in">```</span></span>
+<span id="cb14-200"><a href="#cb14-200"></a>Compositions of all trios with species HAMBI_0403, HAMBI_1896, and HAMBI_1977 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_0403, HAMBI_1896, HAMBI_1977). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap. </span>
+<span id="cb14-201"><a href="#cb14-201"></a>:::</span>
+<span id="cb14-202"><a href="#cb14-202"></a></span>
+<span id="cb14-203"><a href="#cb14-203"></a><span class="fu">## Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977</span></span>
+<span id="cb14-204"><a href="#cb14-204"></a></span>
+<span id="cb14-205"><a href="#cb14-205"></a>::: {#fig-04}</span>
+<span id="cb14-208"><a href="#cb14-208"></a><span class="in">```{r}</span></span>
+<span id="cb14-209"><a href="#cb14-209"></a><span class="co">#| fig-width: 5</span></span>
+<span id="cb14-210"><a href="#cb14-210"></a><span class="co">#| fig-height: 10</span></span>
+<span id="cb14-211"><a href="#cb14-211"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-212"><a href="#cb14-212"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-213"><a href="#cb14-213"></a><span class="fu">plot_trios</span>(tf<span class="sc">$</span>data[[<span class="dv">4</span>]]) <span class="sc">+</span></span>
+<span id="cb14-214"><a href="#cb14-214"></a>  <span class="fu">ggtitle</span>(<span class="st">"Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977"</span>)</span>
+<span id="cb14-215"><a href="#cb14-215"></a><span class="in">```</span></span>
+<span id="cb14-216"><a href="#cb14-216"></a>Compositions of all trios with species HAMBI_1287, HAMBI_1896, and HAMBI_1977 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_1287, HAMBI_1896, HAMBI_1977). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap. </span>
+<span id="cb14-217"><a href="#cb14-217"></a>:::</span>
+<span id="cb14-218"><a href="#cb14-218"></a></span>
+<span id="cb14-219"><a href="#cb14-219"></a><span class="fu"># Ternary plots</span></span>
+<span id="cb14-220"><a href="#cb14-220"></a></span>
+<span id="cb14-223"><a href="#cb14-223"></a><span class="in">```{r}</span></span>
+<span id="cb14-224"><a href="#cb14-224"></a><span class="fu">library</span>(ggtern)</span>
+<span id="cb14-225"><a href="#cb14-225"></a>nestd4tern <span class="ot">&lt;-</span> samp_trios <span class="sc">%&gt;%</span> </span>
+<span id="cb14-226"><a href="#cb14-226"></a>  <span class="fu">mutate</span>(<span class="at">strep_conc =</span> <span class="fu">if_else</span>(transfers <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA_real_</span>, strep_conc)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-227"><a href="#cb14-227"></a>  <span class="fu">rename</span>(<span class="at">sp =</span> strainID,</span>
+<span id="cb14-228"><a href="#cb14-228"></a>         <span class="at">f0 =</span> target_f_masterplate) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-229"><a href="#cb14-229"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sample, strep_conc) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-230"><a href="#cb14-230"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">n =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-231"><a href="#cb14-231"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb14-232"><a href="#cb14-232"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(sample, strep_conc, transfers, replicate), <span class="at">values_from =</span> <span class="fu">c</span>(sp, evo_hist, f, f0), <span class="at">names_from =</span> n) <span class="sc">%&gt;%</span></span>
+<span id="cb14-233"><a href="#cb14-233"></a>  <span class="fu">mutate</span>(<span class="at">f0 =</span> <span class="fu">paste</span>(f0_1, f0_2, f0_3, <span class="at">sep =</span> <span class="st">"|"</span>),</span>
+<span id="cb14-234"><a href="#cb14-234"></a>         <span class="at">hist =</span> <span class="fu">paste</span>(evo_hist_1, evo_hist_2, evo_hist_3, <span class="at">sep =</span> <span class="st">"|"</span>),</span>
+<span id="cb14-235"><a href="#cb14-235"></a>         <span class="at">facetrow =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(strep_conc), <span class="st">"starting"</span>, <span class="fu">paste0</span>(strep_conc, <span class="st">" μg/ml"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb14-236"><a href="#cb14-236"></a>  <span class="fu">mutate</span>(<span class="at">facetrow =</span> <span class="fu">factor</span>(facetrow, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"starting"</span>, <span class="st">"0 μg/ml"</span>, <span class="st">"16 μg/ml"</span>, <span class="st">"64 μg/ml"</span>, <span class="st">"256 μg/ml"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-237"><a href="#cb14-237"></a>  <span class="fu">nest</span>(<span class="at">data =</span> <span class="fu">c</span>(f_1, f_2, f_3, hist, f0, facetrow), <span class="at">.by =</span> <span class="fu">c</span>(sp_1, sp_2, sp_3))</span>
+<span id="cb14-238"><a href="#cb14-238"></a><span class="in">```</span></span>
+<span id="cb14-239"><a href="#cb14-239"></a></span>
+<span id="cb14-242"><a href="#cb14-242"></a><span class="in">```{r}</span></span>
+<span id="cb14-243"><a href="#cb14-243"></a>tern_plot_func <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb14-244"><a href="#cb14-244"></a>  <span class="fu">ggtern</span>(df, <span class="fu">aes</span>(f_1, f_2, f_3, <span class="at">fill =</span> facetrow, <span class="at">shape =</span> <span class="fu">factor</span>(f0))) <span class="sc">+</span></span>
+<span id="cb14-245"><a href="#cb14-245"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">position =</span> <span class="fu">position_jitter_tern</span>(<span class="at">x =</span> <span class="fl">0.05</span>, <span class="at">y =</span> <span class="fl">0.05</span>, <span class="at">z =</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb14-246"><a href="#cb14-246"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey20"</span>, <span class="st">"#0C59FEFF"</span>, <span class="st">"#50D9C1"</span>, <span class="st">"#F0D446FF"</span>, <span class="st">"#FF8D00FF"</span>), <span class="at">guide=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb14-247"><a href="#cb14-247"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">24</span>)) <span class="sc">+</span></span>
+<span id="cb14-248"><a href="#cb14-248"></a>  <span class="fu">labs</span>(<span class="at">shape=</span><span class="st">""</span>,</span>
+<span id="cb14-249"><a href="#cb14-249"></a>       <span class="at">x =</span> <span class="st">"Sp1"</span>,</span>
+<span id="cb14-250"><a href="#cb14-250"></a>       <span class="at">y =</span> <span class="st">"Sp2"</span>,</span>
+<span id="cb14-251"><a href="#cb14-251"></a>       <span class="at">z =</span> <span class="st">"Sp3"</span>) <span class="sc">+</span></span>
+<span id="cb14-252"><a href="#cb14-252"></a>  <span class="fu">facet_grid</span>(facetrow<span class="sc">~</span>hist) <span class="sc">+</span></span>
+<span id="cb14-253"><a href="#cb14-253"></a>  <span class="fu">theme</span>(<span class="at">tern.panel.mask.show =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-254"><a href="#cb14-254"></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-255"><a href="#cb14-255"></a>        <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb14-256"><a href="#cb14-256"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb14-257"><a href="#cb14-257"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb14-258"><a href="#cb14-258"></a>        <span class="at">tern.panel.grid.minor  =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb14-259"><a href="#cb14-259"></a>  <span class="fu">theme_arrowlong</span>()</span>
+<span id="cb14-260"><a href="#cb14-260"></a>}</span>
+<span id="cb14-261"><a href="#cb14-261"></a><span class="in">```</span></span>
+<span id="cb14-262"><a href="#cb14-262"></a></span>
+<span id="cb14-263"><a href="#cb14-263"></a><span class="fu">## Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896</span></span>
+<span id="cb14-264"><a href="#cb14-264"></a></span>
+<span id="cb14-265"><a href="#cb14-265"></a>::: {#fig-05}</span>
+<span id="cb14-268"><a href="#cb14-268"></a><span class="in">```{r}</span></span>
+<span id="cb14-269"><a href="#cb14-269"></a><span class="co">#| fig-width: 14</span></span>
+<span id="cb14-270"><a href="#cb14-270"></a><span class="co">#| fig-height: 9</span></span>
+<span id="cb14-271"><a href="#cb14-271"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-272"><a href="#cb14-272"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-273"><a href="#cb14-273"></a><span class="fu">tern_plot_func</span>(nestd4tern<span class="sc">$</span>data[[<span class="dv">1</span>]]) <span class="sc">+</span></span>
+<span id="cb14-274"><a href="#cb14-274"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sp1 = HAMBI_0403 | Sp2 = HAMBI_1287 | Sp3 = HAMBI_1896"</span>)</span>
+<span id="cb14-275"><a href="#cb14-275"></a><span class="in">```</span></span>
+<span id="cb14-276"><a href="#cb14-276"></a>Ternary plot for compositions of species trios with **HAMBI_0403, HAMBI_1287, HAMBI_1896** after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.</span>
+<span id="cb14-277"><a href="#cb14-277"></a>:::</span>
+<span id="cb14-278"><a href="#cb14-278"></a></span>
+<span id="cb14-279"><a href="#cb14-279"></a><span class="fu">## Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977</span></span>
+<span id="cb14-280"><a href="#cb14-280"></a></span>
+<span id="cb14-281"><a href="#cb14-281"></a>::: {#fig-06}</span>
+<span id="cb14-284"><a href="#cb14-284"></a><span class="in">```{r}</span></span>
+<span id="cb14-285"><a href="#cb14-285"></a><span class="co">#| fig-width: 14</span></span>
+<span id="cb14-286"><a href="#cb14-286"></a><span class="co">#| fig-height: 9</span></span>
+<span id="cb14-287"><a href="#cb14-287"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-288"><a href="#cb14-288"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-289"><a href="#cb14-289"></a><span class="fu">tern_plot_func</span>(nestd4tern<span class="sc">$</span>data[[<span class="dv">2</span>]]) <span class="sc">+</span></span>
+<span id="cb14-290"><a href="#cb14-290"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sp1 = HAMBI_0403 | Sp2 = HAMBI_1287 | Sp3 = HAMBI_1977"</span>)</span>
+<span id="cb14-291"><a href="#cb14-291"></a><span class="in">```</span></span>
+<span id="cb14-292"><a href="#cb14-292"></a>Ternary plot for compositions of species trios with **HAMBI_0403, HAMBI_1287, HAMBI_1977** after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.</span>
+<span id="cb14-293"><a href="#cb14-293"></a>:::</span>
+<span id="cb14-294"><a href="#cb14-294"></a></span>
+<span id="cb14-295"><a href="#cb14-295"></a><span class="fu">## Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977</span></span>
+<span id="cb14-296"><a href="#cb14-296"></a></span>
+<span id="cb14-297"><a href="#cb14-297"></a>::: {#fig-07}</span>
+<span id="cb14-300"><a href="#cb14-300"></a><span class="in">```{r}</span></span>
+<span id="cb14-301"><a href="#cb14-301"></a><span class="co">#| fig-width: 14</span></span>
+<span id="cb14-302"><a href="#cb14-302"></a><span class="co">#| fig-height: 9</span></span>
+<span id="cb14-303"><a href="#cb14-303"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-304"><a href="#cb14-304"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-305"><a href="#cb14-305"></a><span class="fu">tern_plot_func</span>(nestd4tern<span class="sc">$</span>data[[<span class="dv">3</span>]]) <span class="sc">+</span></span>
+<span id="cb14-306"><a href="#cb14-306"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sp1 = HAMBI_0403 | Sp2 = HAMBI_1896 | Sp3 = HAMBI_1977"</span>)</span>
+<span id="cb14-307"><a href="#cb14-307"></a><span class="in">```</span></span>
+<span id="cb14-308"><a href="#cb14-308"></a>Ternary plot for compositions of species trios with **HAMBI_0403, HAMBI_1896, HAMBI_1977** after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.</span>
+<span id="cb14-309"><a href="#cb14-309"></a>:::</span>
+<span id="cb14-310"><a href="#cb14-310"></a></span>
+<span id="cb14-311"><a href="#cb14-311"></a><span class="fu">## Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977</span></span>
+<span id="cb14-312"><a href="#cb14-312"></a></span>
+<span id="cb14-313"><a href="#cb14-313"></a>::: {#fig-08}</span>
+<span id="cb14-316"><a href="#cb14-316"></a><span class="in">```{r}</span></span>
+<span id="cb14-317"><a href="#cb14-317"></a><span class="co">#| fig-width: 14</span></span>
+<span id="cb14-318"><a href="#cb14-318"></a><span class="co">#| fig-height: 9</span></span>
+<span id="cb14-319"><a href="#cb14-319"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-320"><a href="#cb14-320"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-321"><a href="#cb14-321"></a><span class="fu">tern_plot_func</span>(nestd4tern<span class="sc">$</span>data[[<span class="dv">4</span>]]) <span class="sc">+</span></span>
+<span id="cb14-322"><a href="#cb14-322"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sp1 = HAMBI_1287 | Sp2 = HAMBI_1896 | Sp3 = HAMBI_1977"</span>)</span>
+<span id="cb14-323"><a href="#cb14-323"></a><span class="in">```</span></span>
+<span id="cb14-324"><a href="#cb14-324"></a>Ternary plot for compositions of species trios with **HAMBI_1287, HAMBI_1896, HAMBI_1977** after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.</span>
+<span id="cb14-325"><a href="#cb14-325"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

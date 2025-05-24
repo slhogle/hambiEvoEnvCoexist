@@ -14,6 +14,7 @@ abstract: "In the main experiment, species pairs, trios, or quartets were serial
 #| output: false
 #| warning: false
 #| error: false
+options(repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))
 library(tidyverse)
 library(ggforce)
 library(here)
@@ -43,9 +44,14 @@ pairs <- readr::read_tsv(here::here(data_raw, "20240606_pairs", "optical_density
 tqs <- readr::read_tsv(here::here(data_raw, "20240829_tqs", "optical_density_formatted.tsv")) %>% 
   mutate(well = paste0(str_extract(well, "[A-H]"),
                                str_pad(str_extract(well, "\\d+"), 2, side = "left", pad = "0")))
+pairseights <- readr::read_tsv(here::here(data_raw, "20250425_8sp_5050pairs", "optical_density_formatted.tsv")) %>% 
+  mutate(sample2 = case_when(str_detect(sample, "com_") ~ paste0("8", str_extract(sample, "_\\d+$")),
+                             str_detect(sample, "^3_p") ~ paste0("3_c01_", str_extract(well, "[:upper:]"), str_pad(str_extract(well, "\\d+"), 2, "left", pad = "0")),
+                             str_detect(sample, "^p") ~ str_to_upper(sample)))
 ```
 
 ## Read and format community information
+
 ```{r}
 pairs_comp <- readr::read_tsv(here::here("data", "communities", "experiment_design", "pairs_sample_composition.tsv")) %>%
   dplyr::mutate(name = paste(str_to_upper(evo_hist), str_remove(strainID, "HAMBI_"), target_f*100, sep = "_")) %>% 
@@ -62,17 +68,56 @@ pairs_comp <- readr::read_tsv(here::here("data", "communities", "experiment_desi
   arrange(community_id) %>% 
   mutate(n_species = 2,
          sp = paste(a_sp, b_sp, sep = "|"),
-         f = paste(a_f, b_f, sep = "|"))
+         fr = paste(a_f, b_f, sep = "|"))
 
 trios_comp <- readr::read_tsv(here::here("data", "communities", "experiment_design", "trios_sample_composition_wide.tsv")) %>% 
   dplyr::mutate(n_species = 3,
                 sp = paste(a_sp, b_sp, c_sp, sep = "|"),
-                f = paste(a_f, b_f, c_f, sep = "|"))
+                fr = paste(a_f, b_f, c_f, sep = "|"))
 
 quart_comp <- readr::read_tsv(here::here("data", "communities", "experiment_design", "quartets_sample_composition_wide.tsv")) %>% 
   mutate(n_species = 4,
          sp = paste(a_sp, b_sp, c_sp, d_sp, sep = "|"),
-         f = paste(a_f, b_f, c_f, d_f, sep = "|"))
+         fr = paste(a_f, b_f, c_f, d_f, sep = "|"))
+```
+
+This processes the final experiment with 8 species
+
+```{r}
+pairstrios_comp <- readr::read_tsv(here::here("_data_raw", "communities", "20250502_BTK_illumina_v3", "sample_compositions.tsv")) %>%
+  # focus on pairs and trios first
+  filter(!str_detect(sample, "^8_")) %>% 
+  dplyr::mutate(name = paste(str_to_upper(evo_hist), str_remove(strainID, "HAMBI_"), target_f*100, sep = "_")) %>% 
+  dplyr::select(sample, name) %>%
+  dplyr::group_by(sample) %>% 
+  dplyr::mutate(id = 1:n()) %>% 
+  dplyr::ungroup() %>% 
+  tidyr::pivot_wider(names_from = id, values_from = name) %>% 
+  dplyr::rename(a = `1`, b = `2`, c = `3`) %>% 
+  mutate(a_sp = paste0(str_split_i(a, "_", 2), stringr::str_extract(str_split_i(a, "_", 1), "^.{1}")),
+         b_sp = paste0(str_split_i(b, "_", 2), stringr::str_extract(str_split_i(b, "_", 1), "^.{1}")),
+         c_sp = paste0(str_split_i(c, "_", 2), stringr::str_extract(str_split_i(c, "_", 1), "^.{1}")),
+         a_f = str_split_i(a, "_", 3),
+         b_f = str_split_i(b, "_", 3),
+         c_f = str_split_i(c, "_", 3)
+         ) %>% 
+  arrange(sample)
+
+pairs_comp02 <- pairstrios_comp %>% 
+  filter(str_detect(sample, "^2")) %>% 
+  select(sample, a, b, a_sp, b_sp, a_f, b_f) %>% 
+  mutate(n_species = 2,
+         sp = paste(a_sp, b_sp, sep = "|"),
+         fr = paste(a_f, b_f, sep = "|")) %>% 
+  filter(!str_detect(sample, "_[A-Z]\\d+$")) %>% 
+  mutate(sample2 = paste0("P", str_extract(sample, "\\d+$")))
+
+trios_comp02 <- pairstrios_comp %>% 
+  filter(str_detect(sample, "^3")) %>% 
+  select(sample, a, b, c, a_sp, b_sp, c_sp, a_f, b_f, c_f) %>% 
+  mutate(n_species = 3,
+         sp = paste(a_sp, b_sp, c_sp, sep = "|"),
+         fr = paste(a_f, b_f, c_f, sep = "|"))
 ```
 
 ## Subset to pairs, trios, and quartets
@@ -83,28 +128,67 @@ Also we take the mean and std dev for the 2 replicates of each condition
 pairs_combo <- left_join(pairs_comp, pairs, by = join_by(community_id, n_species)) %>% 
   summarize(OD_mn = mean(OD),
             OD_sd = sd(OD),
-            .by = c(sp, f, transfers, strep_conc)) %>% 
+            .by = c(sp, fr, transfers, strep_conc)) %>% 
   mutate(strep_conc = as.factor(strep_conc))
 
 trios_combo <- left_join(trios_comp, tqs, by = join_by(well, n_species)) %>% 
   summarize(OD_mn = mean(OD),
             OD_sd = sd(OD),
-            .by = c(sp, f, transfers, strep_conc)) %>% 
+            .by = c(sp, fr, transfers, strep_conc)) %>% 
   mutate(strep_conc = as.factor(strep_conc))
 
 quart_combo <- left_join(quart_comp, tqs, by = join_by(well, n_species)) %>% 
   summarize(OD_mn = mean(OD),
             OD_sd = sd(OD),
-            .by = c(sp, f, transfers, strep_conc)) %>% 
+            .by = c(sp, fr, transfers, strep_conc)) %>% 
   mutate(strep_conc = as.factor(strep_conc))
 ```
 
+Need to tack on the pairs, trios, and 8s from the latest experiment
+
+```{r}
+pairs_combo_f <- left_join(pairs_comp02, pairseights, by = join_by(n_species, sample2)) %>% 
+  summarize(OD_mn = mean(OD),
+            OD_sd = sd(OD),
+            .by = c(sp, fr, transfers, strep_conc)) %>% 
+  mutate(strep_conc = as.factor(strep_conc)) %>% 
+  bind_rows(pairs_combo) %>% 
+  mutate(OD_sd = if_else(is.na(OD_sd), 0, OD_sd))
+
+trios_combo_f <- left_join(trios_comp02, pairseights, by = join_by(n_species, sample==sample2)) %>% 
+  summarize(OD_mn = mean(OD),
+            OD_sd = sd(OD),
+            .by = c(sp, fr, transfers, strep_conc)) %>% 
+  mutate(strep_conc = as.factor(strep_conc)) %>% 
+  bind_rows(trios_combo) %>% 
+  drop_na() %>% 
+  mutate(OD_sd = if_else(is.na(OD_sd), 0, OD_sd))
+```
+
+## Subset Octets
+
+Some special formatting here for Octets
+
+```{r}
+eights_combo_f <- readr::read_tsv(here::here("_data_raw", "communities", "20250502_BTK_illumina_v3", "sample_compositions.tsv")) %>% 
+  filter(str_detect(sample, "^8_")) %>% 
+  dplyr::mutate(name = paste0(str_remove(strainID, "HAMBI_"), str_to_upper(str_sub(evo_hist, 0, 1)), "|", target_f*100,"%")) %>% 
+  group_by(sample) %>% 
+  filter(target_f == max(target_f)) %>% 
+  mutate(n = n()) %>% 
+  slice(1) %>% 
+  mutate(name = if_else(n == 8, "All_sps|13%", name)) %>% 
+  select(sample, name) %>% 
+  left_join(pairseights, by = join_by(sample==sample2)) %>% 
+  drop_na() %>%
+  dplyr::select(sample, name, transfers, n_species, strep_conc, OD)
+```
 
 # Plotting optical density
 
 Here we will plot optical density over the batch growth cycles. For ease of visualization we exclude the first transfer because the OD was very high, and this happened in all conditions. We focus on the subsequent transfers because the OD has mostly stabilized after the first growth cycle. 
 
-## Plotting function
+## Plotting functions
 
 ```{r}
 plot_od_grid <- function(df, remove_first_cycle = TRUE, ncol){
@@ -115,9 +199,9 @@ plot_od_grid <- function(df, remove_first_cycle = TRUE, ncol){
   
   df %>% 
     dplyr::filter(if(remove_first_cycle) transfers > 2 else transfers > 0) %>%
-    ggplot2::ggplot(aes(x = transfers, y = OD_mn, color = strep_conc, group = interaction(strep_conc, f))) + 
+    ggplot2::ggplot(aes(x = transfers, y = OD_mn, color = strep_conc, group = interaction(strep_conc, fr))) + 
     ggplot2::geom_linerange(aes(ymin = OD_mn - OD_sd, ymax = OD_mn + OD_sd, color = strep_conc), position = pj) + 
-    ggh4x::geom_pointpath(aes(shape = f), position = pj, mult = 0.2) +
+    ggh4x::geom_pointpath(aes(shape = fr), position = pj, mult = 0.2) +
     #ggplot2::geom_point() + 
     #ggplot2::geom_line(aes(linetype = f)) + 
     ggplot2::facet_wrap(~sp, ncol = ncol) +
@@ -129,13 +213,41 @@ plot_od_grid <- function(df, remove_first_cycle = TRUE, ncol){
         axis.text = element_text(size = 8),
         strip.text = element_text(size = 8))
 }
+
+# Special Octets plotting function
+plot_od_octets <- function(df, remove_first_cycle = TRUE, ncol){
+  cols <- c("#b0fe1b","#006dff","#ffa728","#93a7ff",
+          "#009121","#ff4ab4","#00898b","#e20039",
+          "#85eaff","#bf4400","#003f4c","#d0ffd3",
+          "#8d0077","#744500","#ffc3e3","#230020",
+          "#9d0038")
+
+  pj <- ggplot2::position_jitterdodge(jitter.width=0.0,
+                           jitter.height = 0.0,
+                           dodge.width = 0.5,
+                           seed=9)
+
+  df %>% 
+    dplyr::filter(if(remove_first_cycle) transfers > 2 else transfers > 0) %>%
+    ggplot2::ggplot(aes(x = transfers, y = OD, color = name, group = interaction(strep_conc, name))) + 
+    ggh4x::geom_pointpath(position = pj, mult = 0.2) +
+    ggplot2::facet_wrap(~strep_conc, ncol = ncol) +
+    ggplot2::labs(x = "Growth cycle", y = "OD600", color = "Strain mix ratio") +
+    ggplot2::scale_colour_manual(values = cols) +
+    ggplot2::theme_bw() + 
+    ggplot2::theme(
+      #strip.background = element_blank(),
+      legend.position = "bottom", 
+      axis.text = element_text(size = 8),
+      strip.text = element_text(size = 8))
+}
 ```
 
 ## Pairs
 
 ```{r}
 #| warning: false
-fig_pairs <- plot_od_grid(pairs_combo, remove_first_cycle = TRUE, ncol = 4)
+fig_pairs <- plot_od_grid(pairs_combo_f, remove_first_cycle = TRUE, ncol = 4)
 
 # ggsave(
 #   here::here("figs", ".svg"),
@@ -155,6 +267,8 @@ fig_pairs <- plot_od_grid(pairs_combo, remove_first_cycle = TRUE, ncol = 4)
 #   device = "png"
 # )
 ```
+
+### Pairs *without* first growth cycle
 
 ::: {#fig-01}
 ```{r}
@@ -173,7 +287,7 @@ Species pairs optical density (y-axis) over series of 48 hour growth cycles (x-a
 ```{r}
 #| fig-width: 7
 #| fig-height: 11
-plot_od_grid(pairs_combo, remove_first_cycle = FALSE, ncol = 4)
+plot_od_grid(pairs_combo_f, remove_first_cycle = FALSE, ncol = 4)
 ```
 As in @fig-01 but including data from the first growth cycle.
 :::
@@ -183,7 +297,7 @@ As in @fig-01 but including data from the first growth cycle.
 
 ```{r}
 #| warning: false
-fig_trios <- plot_od_grid(trios_combo, remove_first_cycle = TRUE, ncol = 4)
+fig_trios <- plot_od_grid(trios_combo_f, remove_first_cycle = TRUE, ncol = 4)
 
 # ggsave(
 #   here::here("figs", ".svg"),
@@ -204,6 +318,8 @@ fig_trios <- plot_od_grid(trios_combo, remove_first_cycle = TRUE, ncol = 4)
 # )
 ```
 
+### Trios *without* first growth cycle
+
 ::: {#fig-03}
 ```{r}
 #| fig-width: 7
@@ -221,7 +337,7 @@ Species trios optical density (y-axis) over series of 48 hour growth cycles (x-a
 ```{r}
 #| fig-width: 7
 #| fig-height: 14
-plot_od_grid(trios_combo, remove_first_cycle = FALSE, ncol = 4)
+plot_od_grid(trios_combo_f, remove_first_cycle = FALSE, ncol = 4)
 ```
 As in @fig-03 but including data from the first growth cycle.
 :::
@@ -251,6 +367,8 @@ fig_quarts <- plot_od_grid(quart_combo, remove_first_cycle = TRUE, ncol = 4)
 # )
 ```
 
+### Quartets *without* first growth cycle
+
 ::: {#fig-05}
 ```{r}
 #| fig-width: 7
@@ -272,4 +390,32 @@ Species quartets optical density (y-axis) over series of 48 hour growth cycles (
 plot_od_grid(quart_combo, remove_first_cycle = FALSE, ncol = 4)
 ```
 As in @fig-05 but including data from the first growth cycle.
+:::
+
+## Octets (all strains of all species)
+
+### Octets *without* first growth cycle
+
+::: {#fig-07}
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| warning: false
+#| echo: false
+plot_od_octets(eights_combo_f, remove_first_cycle = TRUE, ncol=4)
+```
+Strain octets (both evolved and ancestral forms added for all four species) optical density (y-axis) over a series of 48 hour growth cycles (x-axis, 16 days total). Different panels in the grid show the four different streptomycin treatments (0, 16, 64, and 256 ug/ml). Point colors represent the mix ratio of each strain. The strain listed is added at the listed percent and all other species are added at an equal ratio. Note that data from the first growth cycle (after 48 hours) is excluded for ease of viewing.
+:::
+
+### Octets with first growth cycle
+
+::: {#fig-08}
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| warning: false
+#| echo: false
+plot_od_octets(eights_combo_f, remove_first_cycle = FALSE, ncol=4)
+```
+As in @fig-07 but including data from the first growth cycle.
 :::

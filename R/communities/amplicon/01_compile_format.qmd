@@ -31,15 +31,19 @@ fs::dir_create(data)
 
 ```{r}
 bind_rows(read_tsv(here::here(data, "20240711_BTK_illumina_v3", "pairs_counts.tsv"), col_types = "cccddddddccc"),
-          read_tsv(here::here(data, "20241024_BTK_illumina_v3", "pairs_counts.tsv"), col_types = "cccddddddccc")) %>% 
-  # these steps ensure we don't get duplicates of some masteplate samples sequenced again in the second batch
+          read_tsv(here::here(data, "20241024_BTK_illumina_v3", "pairs_counts.tsv"), col_types = "cccddddddccc"),
+          ) %>% 
+  # these steps ensure we don't get duplicates of some masterplate samples sequenced again in the second batch
   # filtering to keep samples closest to the target f value
   mutate(del_f = abs(f_thresh-target_f_masterplate)) %>% 
   group_by(sample, strainID) %>% 
   filter(if_else(community_type == "masterplate", del_f == min(del_f), TRUE )) %>% 
   ungroup() %>% 
   dplyr::select(-del_f) %>% 
-  write_tsv(here::here(data, "2sps_compiled.tsv"))
+  write_tsv(here::here(data, "2sps_compiled_9010.tsv"))
+  
+read_tsv(here::here(data, "20250502_BTK_illumina_v3", "pairs_counts.tsv"), col_types = "cccddddddccc") %>% 
+  write_tsv(here::here(data, "2sps_compiled_5050.tsv"))
 ```
 
 ## Compiled trios data
@@ -47,7 +51,8 @@ bind_rows(read_tsv(here::here(data, "20240711_BTK_illumina_v3", "pairs_counts.ts
 ```{r}
 bind_rows(read_tsv(here::here(data, "20240711_BTK_illumina_v3", "trios_counts.tsv"), col_types = "cccddddddccc"),
           read_tsv(here::here(data, "20241024_BTK_illumina_v3", "trios_counts.tsv"), col_types = "cccddddddccc"),
-          read_tsv(here::here(data, "20250127_BTK_illumina_v3", "trios_counts.tsv"), col_types = "cccddddddccc")) %>% 
+          read_tsv(here::here(data, "20250127_BTK_illumina_v3", "trios_counts.tsv"), col_types = "cccddddddccc"),
+          read_tsv(here::here(data, "20250502_BTK_illumina_v3", "trios_counts.tsv"), col_types = "cccddddddccc")) %>% 
   write_tsv(here::here(data, "3sps_compiled.tsv"))
 ```
 
@@ -57,4 +62,11 @@ bind_rows(read_tsv(here::here(data, "20240711_BTK_illumina_v3", "trios_counts.ts
 bind_rows(read_tsv(here::here(data, "20241024_BTK_illumina_v3", "quartets_counts.tsv"), col_types = "cccddddddccc"),
           read_tsv(here::here(data, "20250127_BTK_illumina_v3", "quartets_counts.tsv"), col_types = "cccddddddccc")) %>% 
   write_tsv(here::here(data, "4sps_compiled.tsv"))
+```
+
+## Compiled octets data
+
+```{r}
+read_tsv(here::here(data, "20250502_BTK_illumina_v3", "octets_counts.tsv"), col_types = "ccdddcdddddccc") %>% 
+  write_tsv(here::here(data, "8sps_compiled.tsv"))
 ```

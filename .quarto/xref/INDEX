@@ -73,5 +73,14 @@
   },
   "R/communities/amplicon/03_analysis_trios.qmd": {
     "03_analysis_trios.html": "fffe4656"
+  },
+  "R/communities/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.qmd": {
+    "01_format_rbec_tab.html": "a2e9a319"
+  },
+  "R/communities/experiment_design/01_pairs_5050.qmd": {
+    "01_pairs_5050.html": "3b69a645"
+  },
+  "R/communities/amplicon/05_analysis_octets.qmd": {
+    "05_analysis_octets.html": "c93cec44"
   }
 }

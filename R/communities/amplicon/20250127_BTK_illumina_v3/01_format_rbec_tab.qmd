@@ -3,7 +3,7 @@ title: "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using cust
 author: "Milla Similä & Shane Hogle"
 date: today
 link-citations: true
-abstract: "Results are frm the remainder of samples/conditions (all trios and quartets with 16, 64 and 256 ug/ml streptomycin) from Milla's community assembly experiment."
+abstract: "Results are from the remainder of samples/conditions (all trios and quartets with 16, 64 and 256 ug/ml streptomycin) from Milla's community assembly experiment."
 ---
 
 # Setup

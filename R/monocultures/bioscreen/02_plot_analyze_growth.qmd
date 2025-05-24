@@ -192,27 +192,59 @@ Area under the growth curve for the four different bacterial species (panels) an
 
 This is information about how well each species grew on the filtrate of all the species.
 
-## Growth rate
-
+many_auc_res
 ```{r}
-gr_filtrate <- many_spline_res %>% 
+a <- many_spline_res %>% 
+  filter(strep_conc == 0) %>% 
+  summarize(m_max = mean(mumax), .by=c(sp_hist))
+
+many_spline_res %>% 
   filter(str_detect(plate_name, "pairwise")) %>% 
   summarize(m = mean(mumax), .by=c(sp_hist, sp_filtrate)) %>% 
-  mutate(sp_filtrate = factor(sp_filtrate, levels =c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
-                                              "EVO_1896", "ANC_1977", "EVO_1977")),
-         sp_hist = factor(sp_hist, levels = c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
-                                              "EVO_1896", "ANC_1977", "EVO_1977"))) %>% 
-  ggplot(aes(x = sp_filtrate, y = sp_hist)) +
-  geom_tile(aes(fill = m)) +
-  labs(y = "Growth of species/evolutionary history", x = "Filtrate from species/evolutionary history",
-       fill = "μ (hr-1)") +
+  left_join(a, by = join_by(sp_hist)) %>% 
+  mutate(m_rel = m/m_max*100)
+```
+```{r}
+plot_heatmap <- function(df, fill_var, fill_lab){
+  ggplot(df, aes(x = sp_filtrate, y = sp_hist)) +
+  geom_tile(aes(fill = {{fill_var}})) +
+  geom_text(aes(label = paste0(round({{fill_var}}), "%"), color = {{fill_var}} > 40)) +
+  scale_x_discrete(guide = guide_axis(angle = 45)) +
+  scale_y_discrete(guide = guide_axis(angle = 45)) +
   scale_fill_viridis() +
+  scale_color_manual(values = c("white", "black"), guide = "none") +
+  labs(y = "Growth of species/evolutionary history", x = "Filtrate from species/evolutionary history",
+       fill = fill_lab) +
   coord_fixed() + 
   ggplot2::theme(panel.grid = element_blank(),
                  panel.background = element_blank(), 
                  strip.background = element_blank(),
                  panel.border = element_blank())
+}
+```
 
+## Growth rate
+
+```{r}
+gr_max <- many_spline_res %>% 
+  filter(strep_conc == 0) %>% 
+  summarize(m_max = mean(mumax), .by=c(sp_hist))
+
+gr_filtrate <- many_spline_res %>% 
+  filter(str_detect(plate_name, "pairwise")) %>% 
+  summarize(m_filt = mean(mumax), .by=c(sp_hist, sp_filtrate)) %>% 
+  left_join(gr_max, by = join_by(sp_hist)) %>% 
+  mutate(m_rel = m_filt/m_max*100) %>% 
+  mutate(sp_filtrate = factor(sp_filtrate, levels =c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
+                                              "EVO_1896", "ANC_1977", "EVO_1977")),
+         sp_hist = factor(sp_hist, levels = c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
+                                              "EVO_1896", "ANC_1977", "EVO_1977")))
+
+gr_filtrate_plot <- plot_heatmap(gr_filtrate, m_rel, "% of max μ")
+```
+
+```{r}
+#| eval: false
 ggsave(
   here::here("figs", "monoculture_gr_filtrate.svg"),
   gr_filtrate,
@@ -220,15 +252,6 @@ ggsave(
   height = 8,
   units = "in",
   device = "svg"
-)
-
-ggsave(
-  here::here("figs", "monoculture_gr_filtrate.png"),
-  gr_filtrate,
-  width = 8,
-  height = 8,
-  units = "in",
-  device = "png"
 )
 ```
 
@@ -238,48 +261,40 @@ ggsave(
 #| fig.height: 7
 #| echo: false
 #| warning: false
-gr_filtrate
+gr_filtrate_plot
 ```
-Mean growth rate (color) of each species/evolutionary history (vertical axis) on the filtrate of other species, including itself (horizontal axis). 
+Percent maximum growth rate (μ) of each species/evolutionary history (vertical axis) growing on the filtrate of other species, including itself (horizontal axis). Maximum μ is from monocultures with no competitor or streptomycin. Filtrate μ is from each species grown on the filtrate of every other species.
 :::
 
 ## AUC (area under the growth curve)
 
 ```{r}
+auc_max <- many_auc_res %>% 
+  filter(strep_conc == 0) %>% 
+  summarize(auc_max = mean(auc), .by=c(sp_hist))
+
 auc_filtrate <- many_auc_res %>% 
   filter(str_detect(plate_name, "pairwise")) %>% 
-  summarize(m = mean(auc), .by=c(sp_hist, sp_filtrate)) %>% 
+  summarize(auc_filt = mean(auc), .by=c(sp_hist, sp_filtrate)) %>% 
+  left_join(auc_max, by = join_by(sp_hist)) %>% 
+  mutate(auc_rel = auc_filt/auc_max*100) %>% 
   mutate(sp_filtrate = factor(sp_filtrate, levels =c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
                                               "EVO_1896", "ANC_1977", "EVO_1977")),
          sp_hist = factor(sp_hist, levels = c("ANC_0403", "EVO_0403", "ANC_1287", "EVO_1287", "ANC_1896", 
-                                              "EVO_1896", "ANC_1977", "EVO_1977"))) %>% 
-  ggplot(aes(x = sp_filtrate, y = sp_hist)) +
-  geom_tile(aes(fill = m)) +
-  labs(y = "Growth of species/evolutionary history", x = "Filtrate from species/evolutionary history",
-       fill = "μ (hr-1)") +
-  scale_fill_viridis() +
-  coord_fixed() + 
-  ggplot2::theme(panel.grid = element_blank(),
-                 panel.background = element_blank(), 
-                 strip.background = element_blank(),
-                 panel.border = element_blank())
+                                              "EVO_1896", "ANC_1977", "EVO_1977")))
 
+auc_filtrate_plot <- plot_heatmap(auc_filtrate, auc_rel, "% of max AUC")
+```
+
+```{r}
+#| eval: false
 ggsave(
   here::here("figs", "monoculture_auc_filtrate.svg"),
   auc_filtrate,
-  width = 7,
-  height = 7,
+  width = 8,
+  height = 8,
   units = "in",
   device = "svg"
-)
-
-ggsave(
-  here::here("figs", "monoculture_auc_filtrate.png"),
-  auc_filtrate,
-  width = 7,
-  height = 7,
-  units = "in",
-  device = "png"
 )
 ```
 
@@ -289,7 +304,7 @@ ggsave(
 #| fig.height: 7
 #| echo: false
 #| warning: false
-auc_filtrate
+auc_filtrate_plot
 ```
-Mean area under the growth curve (color) of each species/evolutionary history (vertical axis) on the filtrate of other species, including itself (horizontal axis). 
+Percent maximum Area Under the Growth Curve (AUC) of each species/evolutionary history (vertical axis) growing on the filtrate of other species, including itself (horizontal axis). Maximum AUC is from monocultures with no competitor or streptomycin. Filtrate AUC is from each species grown on the filtrate of every other species.
 :::

@@ -161,32 +161,36 @@ contam_histogram <- function(df, trans, x){
 # of species on the y axis
 
 pair_plot <- function(df){
-  outcome_pal <- c("exclusion" = "#800020", "coexistence" = "#0659bf", 
-                   "inconclusive" = "#7c26c7", "bistable" = "#098f07")
-  type_pal <- c("stable" = "solid", "incomplete" = "dashed", 
-                "potential" = "dotted")
+  outcome_pal <- c("exclusion" = "red", 
+                   "towards exclusion" = "red4",
+                   "stable coexistence" = "dodgerblue", 
+                   "coexistence no mutual invasion" = "dodgerblue4", 
+                   "inconclusive" = "green3")
   
   pj <- ggplot2::position_jitterdodge(jitter.width=0.0,
                                       jitter.height = 0.0,
                                       dodge.width = 0.5,
                                       seed=9)
   
+  evostatus <- case_when(str_unique(df$evo_group) == "both_anc" ~ "Both Ancestral", 
+                         str_unique(df$evo_group) == "both_evo" ~ "Both Evolved",
+                         TRUE ~ "Mixed histories")
+  
   ggplot2::ggplot(df, aes(x = transfer, y = f_1, group = group)) +
     ggplot2::geom_hline(yintercept = 0, lty = 2, color = "grey70") +
     ggplot2::geom_hline(yintercept = 0.5, lty = 3, color = "grey70") +
     ggplot2::geom_hline(yintercept = 1, lty = 2, color = "grey70") +
     ggplot2::geom_linerange(aes(ymin = fmin_1, ymax = fmax_1, color = outcome), position = pj) +
-    ggh4x::geom_pointpath(aes(color = outcome, linetype = type), position = pj, mult = 0.2) +
+    ggh4x::geom_pointpath(aes(color = outcome), position = pj, mult = 0.2) +
     ggplot2::scale_color_manual(values = outcome_pal) +
-    ggplot2::scale_linetype_manual(values = type_pal) +
     ggplot2::facet_grid(sp_1 ~ sp_2) +
     ggplot2::scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1), labels = percent) +
     ggplot2::scale_x_continuous(breaks = c(0, 8)) +
-    ggplot2::labs(x = "", y = "", color = "") +
+    ggplot2::labs(x = "", y = "", color = "", subtitle = paste0(evostatus, ", ", unique(df$strep_conc), " μg/ml Streptomycin")) +
     ggplot2::theme_bw() + 
     ggplot2::theme(panel.grid = element_blank(),
                    strip.background = element_blank(),
-                   legend.position = "none", 
+                   legend.position = "noe", 
                    panel.border = element_blank(),
                    axis.text = element_text(size = 8),
                    strip.text = element_text(size = 8))
@@ -256,9 +260,9 @@ make_edges <- function(pairs_df, ...){
     dplyr::mutate(from = if_else(f_1 > f_2, sp_1, sp_2),
                   to = if_else(f_1 < f_2, sp_1, sp_2)) %>% 
     dplyr::group_by(from, to, ...) %>% 
-    dplyr::mutate(type = if_else(sum(type == "stable") == 2, "stable", "incomplete")) %>% 
+    #dplyr::mutate(type = if_else(sum(type == "stable") == 2, "stable", "incomplete")) %>% 
     dplyr::ungroup() %>% 
-    dplyr::select(from, to, ..., outcome, type) %>% 
+    dplyr::select(from, to, ..., outcome) %>% 
     dplyr::distinct() %>% 
     dplyr::arrange(from, to, ...)
 }
@@ -267,10 +271,15 @@ plot_network_hierarchy <- function(net, tune_angle = 1, n_rank = 10, n_break = 1
   # code for formatting the positions of the nodes with the ranks was taken from
   # here: https://github.com/Chang-Yu-Chang/emergent-coexistence/blob/v2.0.0/plotting_scripts/Fig3.R
   
-  outcome_pal <- c("exclusion" = "#800020", "coexistence" = "#0659bf", 
-                   "inconclusive" = "#7c26c7", "bistable" = "#098f07")
-  type_pal <- c("stable" = "solid", "incomplete" = "dashed", 
-                "potential" = "dotted")
+  # outcome_pal <- c("exclusion" = "#800020", "coexistence" = "#0659bf", 
+  #                  "inconclusive" = "#7c26c7", "bistable" = "#098f07")
+  # type_pal <- c("stable" = "solid", "incomplete" = "dashed", 
+  #               "potential" = "dotted")
+  outcome_pal <- c("exclusion" = "red", 
+                   "towards exclusion" = "red4",
+                   "stable coexistence" = "dodgerblue", 
+                   "coexistence no mutual invasion" = "dodgerblue4", 
+                   "inconclusive" = "green3")
   
   node_size <- 3
   edge_width <- 0.8
@@ -296,12 +305,12 @@ plot_network_hierarchy <- function(net, tune_angle = 1, n_rank = 10, n_break = 1
     geom_hline(yintercept = c(-n_rank:-1), color = "grey90") +
     geom_node_text(aes(label = name), repel = TRUE) +
     geom_node_point(size = node_size, shape = 21, fill = "grey", stroke = node_size/5, color = "black") +
-    geom_edge_diagonal(aes(color = outcome, linetype = type),
+    geom_edge_diagonal(aes(color = outcome),
                        arrow = arrow(length = unit(1, "mm"), type = "closed", angle = 30, ends = "last"),
                        start_cap = circle(node_size*.8, "mm"),
                        end_cap = circle(node_size*0.8, "mm")) +
     scale_edge_color_manual(values = outcome_pal) +
-    scale_edge_linetype_manual(values = type_pal) +
+    #scale_edge_linetype_manual(values = type_pal) +
     scale_x_continuous(limits = c(0.1, 0.9), expand = c(0,0)) +
     scale_y_continuous(limits = c(-n_break-1, 0), breaks = -n_break:-1, labels = n_break:1) +
     theme_void() +

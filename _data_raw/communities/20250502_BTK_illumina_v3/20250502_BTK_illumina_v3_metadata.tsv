@@ -1,0 +1,235 @@
+sample	n_species	community_type	transfers	strep_conc	replicate	plate_well	plate_no	notes	microcosm_no
+8_01	8	master	0	0	1				01
+8_02	8	master	0	0	1				02
+8_03	8	master	0	0	1				03
+8_04	8	master	0	0	1				04
+8_05	8	master	0	0	1				05
+8_06	8	master	0	0	1				06
+8_07	8	master	0	0	1				07
+8_08	8	master	0	0	1				08
+8_09	8	master	0	0	1				09
+8_10	8	master	0	0	1				10
+8_11	8	master	0	0	1				11
+8_12	8	master	0	0	1				12
+8_13	8	master	0	0	1				13
+8_14	8	master	0	0	1				14
+8_15	8	master	0	0	1				15
+8_16	8	master	0	0	1				16
+8_17	8	master	0	0	1				17
+3_c01	3	master	0	0	1			3sp community from well c01 in previous round	
+2_01	2	master	0	0	1				01
+2_02	2	master	0	0	1				02
+2_03	2	master	0	0	1				03
+2_04	2	master	0	0	1				04
+2_05	2	master	0	0	1				05
+2_06	2	master	0	0	1				06
+2_07	2	master	0	0	1				07
+2_08	2	master	0	0	1				08
+2_09	2	master	0	0	1				09
+2_10	2	master	0	0	1				10
+2_11	2	master	0	0	1				11
+2_12	2	master	0	0	1				12
+2_13	2	master	0	0	1				13
+2_14	2	master	0	0	1				14
+2_15	2	master	0	0	1				15
+2_16	2	master	0	0	1				16
+2_17	2	master	0	0	1				17
+2_18	2	master	0	0	1				18
+2_19	2	master	0	0	1				19
+2_20	2	master	0	0	1				20
+2_21	2	master	0	0	1				21
+2_22	2	master	0	0	1				22
+2_23	2	master	0	0	1				23
+2_24	2	master	0	0	1				24
+8_01_A01	8	experiment	8	0	1	A01	1		01
+8_02_B01	8	experiment	8	0	1	B01	1		02
+8_03_C01	8	experiment	8	0	1	C01	1		03
+8_04_D01	8	experiment	8	0	1	D01	1		04
+8_05_E01	8	experiment	8	0	1	E01	1		05
+8_06_F01	8	experiment	8	0	1	F01	1		06
+8_07_G01	8	experiment	8	0	1	G01	1		07
+8_08_H01	8	experiment	8	0	1	H01	1		08
+8_09_A02	8	experiment	8	0	1	A02	1		09
+8_10_B02	8	experiment	8	0	1	B02	1		10
+8_11_C02	8	experiment	8	0	1	C02	1		11
+8_12_D02	8	experiment	8	0	1	D02	1		12
+8_13_E02	8	experiment	8	0	1	E02	1		13
+8_14_F02	8	experiment	8	0	1	F02	1		14
+8_15_G02	8	experiment	8	0	1	G02	1		15
+8_16_H02	8	experiment	8	0	1	H02	1		16
+8_17_A03	8	experiment	8	0	1	A03	1		17
+8_B03	8	neg_control	8	0		B03	1		
+8_C03	8	neg_control	8	0		C03	1		
+8_D03	8	neg_control	8	0		D03	1		
+8_E03	8	neg_control	8	0		E03	1		
+8_F03	8	neg_control	8	0		F03	1		
+3_c01_G03	3	experiment	8	0	1	G03	1		
+3_c01_H03	3	experiment	8	0	2	H03	1		
+8_01_A04	8	experiment	8	16	1	A04	1		01
+8_02_B04	8	experiment	8	16	1	B04	1		02
+8_03_C04	8	experiment	8	16	1	C04	1		03
+8_04_D04	8	experiment	8	16	1	D04	1		04
+8_05_E04	8	experiment	8	16	1	E04	1		05
+8_06_F04	8	experiment	8	16	1	F04	1		06
+8_07_G04	8	experiment	8	16	1	G04	1		07
+8_08_H04	8	experiment	8	16	1	H04	1		08
+8_09_A05	8	experiment	8	16	1	A05	1		09
+8_10_B05	8	experiment	8	16	1	B05	1		10
+8_11_C05	8	experiment	8	16	1	C05	1		11
+8_12_D05	8	experiment	8	16	1	D05	1		12
+8_13_E05	8	experiment	8	16	1	E05	1		13
+8_14_F05	8	experiment	8	16	1	F05	1		14
+8_15_G05	8	experiment	8	16	1	G05	1		15
+8_16_H05	8	experiment	8	16	1	H05	1		16
+8_17_A06	8	experiment	8	16	1	A06	1		17
+8_B06	8	neg_control	8	16		B06	1		
+8_C06	8	neg_control	8	16		C06	1		
+8_D06	8	neg_control	8	16		D06	1		
+8_E06	8	neg_control	8	16		E06	1		
+8_F06	8	neg_control	8	16		F06	1		
+3_c01_G06	3	experiment	8	16	1	G06	1		
+3_c01_H06	3	experiment	8	16	2	H06	1		
+8_01_A07	8	experiment	8	64	1	A07	1		01
+8_02_B07	8	experiment	8	64	1	B07	1		02
+8_03_C07	8	experiment	8	64	1	C07	1		03
+8_04_D07	8	experiment	8	64	1	D07	1		04
+8_05_E07	8	experiment	8	64	1	E07	1		05
+8_06_F07	8	experiment	8	64	1	F07	1		06
+8_07_G07	8	experiment	8	64	1	G07	1		07
+8_08_H07	8	experiment	8	64	1	H07	1		08
+8_09_A08	8	experiment	8	64	1	A08	1		09
+8_10_B08	8	experiment	8	64	1	B08	1		10
+8_11_C08	8	experiment	8	64	1	C08	1		11
+8_12_D08	8	experiment	8	64	1	D08	1		12
+8_13_E08	8	experiment	8	64	1	E08	1		13
+8_14_F08	8	experiment	8	64	1	F08	1		14
+8_15_G08	8	experiment	8	64	1	G08	1		15
+8_16_H08	8	experiment	8	64	1	H08	1		16
+8_17_A09	8	experiment	8	64	1	A09	1		17
+8_B09	8	neg_control	8	64		B09	1		
+8_C09	8	neg_control	8	64		C09	1		
+8_D09	8	neg_control	8	64		D09	1		
+8_E09	8	neg_control	8	64		E09	1		
+8_F09	8	neg_control	8	64		F09	1		
+3_c01_G09	3	experiment	8	64	1	G09	1		
+3_c01_H09	3	experiment	8	64	2	H09	1		
+8_01_A10	8	experiment	8	256	1	A10	1		01
+8_02_B10	8	experiment	8	256	1	B10	1		02
+8_03_C10	8	experiment	8	256	1	C10	1		03
+8_04_D10	8	experiment	8	256	1	D10	1		04
+8_05_E10	8	experiment	8	256	1	E10	1		05
+8_06_F10	8	experiment	8	256	1	F10	1		06
+8_07_G10	8	experiment	8	256	1	G10	1		07
+8_08_H10	8	experiment	8	256	1	H10	1		08
+8_09_A11	8	experiment	8	256	1	A11	1		09
+8_10_B11	8	experiment	8	256	1	B11	1		10
+8_11_C11	8	experiment	8	256	1	C11	1		11
+8_12_D11	8	experiment	8	256	1	D11	1		12
+8_13_E11	8	experiment	8	256	1	E11	1		13
+8_14_F11	8	experiment	8	256	1	F11	1		14
+8_15_G11	8	experiment	8	256	1	G11	1		15
+8_16_H11	8	experiment	8	256	1	H11	1		16
+8_17_A12	8	experiment	8	256	1	A12	1		17
+8_B12	8	neg_control	8	256		B12	1		
+8_C12	8	neg_control	8	256		C12	1		
+8_D12	8	neg_control	8	256		D12	1		
+8_E12	8	neg_control	8	256		E12	1		
+8_F12	8	neg_control	8	256		F12	1		
+3_c01_G12	3	experiment	8	256	1	G12	1		
+3_c01_H12	3	experiment	8	256	2	H12	1		
+2_01_A01	2	experiment	8	0	1	A01	2		01
+2_02_B01	2	experiment	8	0	1	B01	2		02
+2_03_C01	2	experiment	8	0	1	C01	2		03
+2_04_D01	2	experiment	8	0	1	D01	2		04
+2_05_E01	2	experiment	8	0	1	E01	2		05
+2_06_F01	2	experiment	8	0	1	F01	2		06
+2_07_G01	2	experiment	8	0	1	G01	2		07
+2_08_H01	2	experiment	8	0	1	H01	2		08
+2_09_A02	2	experiment	8	0	1	A02	2		09
+2_10_B02	2	experiment	8	0	1	B02	2		10
+2_11_C02	2	experiment	8	0	1	C02	2		11
+2_12_D02	2	experiment	8	0	1	D02	2		12
+2_13_E02	2	experiment	8	0	1	E02	2		13
+2_14_F02	2	experiment	8	0	1	F02	2		14
+2_15_G02	2	experiment	8	0	1	G02	2		15
+2_16_H02	2	experiment	8	0	1	H02	2		16
+2_17_A03	2	experiment	8	0	1	A03	2		17
+2_18_B03	2	experiment	8	0	1	B03	2		18
+2_19_C03	2	experiment	8	0	1	C03	2		19
+2_20_D03	2	experiment	8	0	1	D03	2		20
+2_21_E03	2	experiment	8	0	1	E03	2		21
+2_22_F03	2	experiment	8	0	1	F03	2		22
+2_23_G03	2	experiment	8	0	1	G03	2		23
+2_24_H03	2	experiment	8	0	1	H03	2		24
+2_01_A04	2	experiment	8	16	1	A04	2		01
+2_02_B04	2	experiment	8	16	1	B04	2		02
+2_03_C04	2	experiment	8	16	1	C04	2		03
+2_04_D04	2	experiment	8	16	1	D04	2		04
+2_05_E04	2	experiment	8	16	1	E04	2		05
+2_06_F04	2	experiment	8	16	1	F04	2		06
+2_07_G04	2	experiment	8	16	1	G04	2		07
+2_08_H04	2	experiment	8	16	1	H04	2		08
+2_09_A05	2	experiment	8	16	1	A05	2		09
+2_10_B05	2	experiment	8	16	1	B05	2		10
+2_11_C05	2	experiment	8	16	1	C05	2		11
+2_12_D05	2	experiment	8	16	1	D05	2		12
+2_13_E05	2	experiment	8	16	1	E05	2		13
+2_14_F05	2	experiment	8	16	1	F05	2		14
+2_15_G05	2	experiment	8	16	1	G05	2		15
+2_16_H05	2	experiment	8	16	1	H05	2		16
+2_17_A06	2	experiment	8	16	1	A06	2		17
+2_18_B06	2	experiment	8	16	1	B06	2		18
+2_19_C06	2	experiment	8	16	1	C06	2		19
+2_20_D06	2	experiment	8	16	1	D06	2		20
+2_21_E06	2	experiment	8	16	1	E06	2		21
+2_22_F06	2	experiment	8	16	1	F06	2		22
+2_23_G06	2	experiment	8	16	1	G06	2		23
+2_24_H06	2	experiment	8	16	1	H06	2		24
+2_01_A07	2	experiment	8	64	1	A07	2		01
+2_02_B07	2	experiment	8	64	1	B07	2		02
+2_03_C07	2	experiment	8	64	1	C07	2		03
+2_04_D07	2	experiment	8	64	1	D07	2		04
+2_05_E07	2	experiment	8	64	1	E07	2		05
+2_06_F07	2	experiment	8	64	1	F07	2		06
+2_07_G07	2	experiment	8	64	1	G07	2		07
+2_08_H07	2	experiment	8	64	1	H07	2		08
+2_09_A08	2	experiment	8	64	1	A08	2		09
+2_10_B08	2	experiment	8	64	1	B08	2		10
+2_11_C08	2	experiment	8	64	1	C08	2		11
+2_12_D08	2	experiment	8	64	1	D08	2		12
+2_13_E08	2	experiment	8	64	1	E08	2		13
+2_14_F08	2	experiment	8	64	1	F08	2		14
+2_15_G08	2	experiment	8	64	1	G08	2		15
+2_16_H08	2	experiment	8	64	1	H08	2		16
+2_17_A09	2	experiment	8	64	1	A09	2		17
+2_18_B09	2	experiment	8	64	1	B09	2		18
+2_19_C09	2	experiment	8	64	1	C09	2		19
+2_20_D09	2	experiment	8	64	1	D09	2		20
+2_21_E09	2	experiment	8	64	1	E09	2		21
+2_22_F09	2	experiment	8	64	1	F09	2		22
+2_23_G09	2	experiment	8	64	1	G09	2		23
+2_24_H09	2	experiment	8	64	1	H09	2		24
+2_01_A10	2	experiment	8	256	1	A10	2		01
+2_02_B10	2	experiment	8	256	1	B10	2		02
+2_03_C10	2	experiment	8	256	1	C10	2		03
+2_04_D10	2	experiment	8	256	1	D10	2		04
+2_05_E10	2	experiment	8	256	1	E10	2		05
+2_06_F10	2	experiment	8	256	1	F10	2		06
+2_07_G10	2	experiment	8	256	1	G10	2		07
+2_08_H10	2	experiment	8	256	1	H10	2		08
+2_09_A11	2	experiment	8	256	1	A11	2		09
+2_10_B11	2	experiment	8	256	1	B11	2		10
+2_11_C11	2	experiment	8	256	1	C11	2		11
+2_12_D11	2	experiment	8	256	1	D11	2		12
+2_13_E11	2	experiment	8	256	1	E11	2		13
+2_14_F11	2	experiment	8	256	1	F11	2		14
+2_15_G11	2	experiment	8	256	1	G11	2		15
+2_16_H11	2	experiment	8	256	1	H11	2		16
+2_17_A12	2	experiment	8	256	1	A12	2		17
+2_18_B12	2	experiment	8	256	1	B12	2		18
+2_19_C12	2	experiment	8	256	1	C12	2		19
+2_20_D12	2	experiment	8	256	1	D12	2		20
+2_21_E12	2	experiment	8	256	1	E12	2		21
+2_22_F12	2	experiment	8	256	1	F12	2		22
+2_23_G12	2	experiment	8	256	1	G12	2		23
+2_24_H12	2	experiment	8	256	1	H12	2		24

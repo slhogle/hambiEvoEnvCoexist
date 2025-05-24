@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shane Hogle">
-<meta name="dcterms.date" content="2025-03-06">
+<meta name="dcterms.date" content="2025-05-24">
 
 <title>Analyzing monoculture growth summary – hambiEvoEnvCoexist</title>
 <style>
@@ -275,8 +275,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">v) Batch 2025-05-02</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../R/communities/amplicon/01_compile_format.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">v) Compile pairs, trios, quartets</span></a>
+ <span class="menu-text">vi) Compile pairs, trios, quartets</span></a>
   </div>
 </li>
       </ul>
@@ -306,6 +312,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../R/communities/amplicon/04_analysis_quartets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">iii) Species quartets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/amplicon/05_analysis_octets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iv) All strains combined</span></a>
   </div>
 </li>
       </ul>
@@ -364,7 +376,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 6, 2025</p>
+      <p class="date">May 24, 2025</p>
     </div>
   </div>
   
@@ -596,46 +608,82 @@ Figure&nbsp;2: Area under the growth curve for the four different bacterial spec
 <section id="pairwise-filtrate-growth" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Pairwise filtrate growth</h1>
 <p>This is information about how well each species grew on the filtrate of all the species.</p>
+<p>many_auc_res</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>a <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">filter</span>(strep_conc <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarize</span>(<span class="at">m_max =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist))</span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a>many_spline_res <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">left_join</span>(a, <span class="at">by =</span> <span class="fu">join_by</span>(sp_hist)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">mutate</span>(<span class="at">m_rel =</span> m<span class="sc">/</span>m_max<span class="sc">*</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["sp_hist"],"name":[1],"type":["chr"],"align":["left"]},{"label":["sp_filtrate"],"name":[2],"type":["chr"],"align":["left"]},{"label":["m"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["m_max"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["m_rel"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"ANC_0403","2":"ANC_0403","3":"0.008129561","4":"0.3217523","5":"2.526652"},{"1":"ANC_1287","2":"ANC_0403","3":"0.288282718","4":"0.3844153","5":"74.992519"},{"1":"ANC_1977","2":"ANC_1896","3":"0.204128150","4":"0.3864576","5":"52.820329"},{"1":"ANC_0403","2":"EVO_1896","3":"0.137197457","4":"0.3217523","5":"42.640710"},{"1":"ANC_1287","2":"EVO_1896","3":"0.194955518","4":"0.3844153","5":"50.714817"},{"1":"ANC_1896","2":"ANC_0403","3":"0.196696037","4":"0.1935184","5":"101.642058"},{"1":"ANC_1896","2":"EVO_1896","3":"0.013357753","4":"0.1935184","5":"6.902577"},{"1":"ANC_1977","2":"EVO_1896","3":"0.194574405","4":"0.3864576","5":"50.348196"},{"1":"ANC_0403","2":"ANC_1977","3":"0.012181308","4":"0.3217523","5":"3.785927"},{"1":"ANC_1287","2":"ANC_1977","3":"0.034668902","4":"0.3844153","5":"9.018606"},{"1":"ANC_1896","2":"ANC_1977","3":"0.139253073","4":"0.1935184","5":"71.958587"},{"1":"ANC_1977","2":"ANC_1977","3":"0.004919369","4":"0.3864576","5":"1.272939"},{"1":"ANC_0403","2":"EVO_1977","3":"0.012147918","4":"0.3217523","5":"3.775550"},{"1":"ANC_1287","2":"EVO_1977","3":"0.041822879","4":"0.3844153","5":"10.879608"},{"1":"ANC_1896","2":"EVO_1977","3":"0.102694563","4":"0.1935184","5":"53.067092"},{"1":"ANC_1977","2":"EVO_1977","3":"0.005841038","4":"0.3864576","5":"1.511431"},{"1":"ANC_1977","2":"ANC_0403","3":"0.274289967","4":"0.3864576","5":"70.975445"},{"1":"ANC_0403","2":"EVO_0403","3":"0.008881819","4":"0.3217523","5":"2.760453"},{"1":"ANC_1287","2":"EVO_0403","3":"0.330589727","4":"0.3844153","5":"85.998066"},{"1":"ANC_1896","2":"EVO_0403","3":"0.209308305","4":"0.1935184","5":"108.159407"},{"1":"ANC_1977","2":"EVO_0403","3":"0.282122376","4":"0.3864576","5":"73.002164"},{"1":"ANC_0403","2":"ANC_1287","3":"0.063472729","4":"0.3217523","5":"19.727204"},{"1":"ANC_1287","2":"ANC_1287","3":"0.009234555","4":"0.3844153","5":"2.402234"},{"1":"ANC_1896","2":"ANC_1287","3":"0.088902961","4":"0.1935184","5":"45.940325"},{"1":"ANC_1977","2":"ANC_1287","3":"0.092728926","4":"0.3864576","5":"23.994596"},{"1":"ANC_0403","2":"EVO_1287","3":"0.204141297","4":"0.3217523","5":"63.446728"},{"1":"ANC_1287","2":"EVO_1287","3":"0.044015706","4":"0.3844153","5":"11.450040"},{"1":"ANC_1896","2":"EVO_1287","3":"0.098236145","4":"0.1935184","5":"50.763218"},{"1":"ANC_1977","2":"EVO_1287","3":"0.143998376","4":"0.3864576","5":"37.261111"},{"1":"ANC_0403","2":"ANC_1896","3":"0.163192034","4":"0.3217523","5":"50.719775"},{"1":"ANC_1287","2":"ANC_1896","3":"0.196259187","4":"0.3844153","5":"51.053947"},{"1":"ANC_1896","2":"ANC_1896","3":"0.005969993","4":"0.1935184","5":"3.084975"},{"1":"EVO_0403","2":"ANC_0403","3":"0.009947438","4":"0.3036790","5":"3.275642"},{"1":"EVO_1287","2":"ANC_0403","3":"0.177679394","4":"0.2766804","5":"64.218286"},{"1":"EVO_1977","2":"ANC_1896","3":"0.180892778","4":"0.3498602","5":"51.704304"},{"1":"EVO_0403","2":"EVO_1896","3":"0.157183486","4":"0.3036790","5":"51.759740"},{"1":"EVO_1287","2":"EVO_1896","3":"0.040171406","4":"0.2766804","5":"14.519066"},{"1":"EVO_1896","2":"ANC_0403","3":"0.148716215","4":"0.1587119","5":"93.701970"},{"1":"EVO_1896","2":"EVO_1896","3":"0.018803446","4":"0.1587119","5":"11.847531"},{"1":"EVO_1977","2":"EVO_1896","3":"0.202423724","4":"0.3498602","5":"57.858461"},{"1":"EVO_0403","2":"ANC_1977","3":"0.014311026","4":"0.3036790","5":"4.712550"},{"1":"EVO_1287","2":"ANC_1977","3":"0.014271184","4":"0.2766804","5":"5.158004"},{"1":"EVO_1896","2":"ANC_1977","3":"0.113412597","4":"0.1587119","5":"71.458138"},{"1":"EVO_1977","2":"ANC_1977","3":"0.005139740","4":"0.3498602","5":"1.469084"},{"1":"EVO_0403","2":"EVO_1977","3":"0.016488567","4":"0.3036790","5":"5.429603"},{"1":"EVO_1287","2":"EVO_1977","3":"0.013149736","4":"0.2766804","5":"4.752681"},{"1":"EVO_1896","2":"EVO_1977","3":"0.078621953","4":"0.1587119","5":"49.537516"},{"1":"EVO_1977","2":"EVO_1977","3":"0.006224555","4":"0.3498602","5":"1.779155"},{"1":"EVO_1977","2":"ANC_0403","3":"0.284266072","4":"0.3498602","5":"81.251333"},{"1":"EVO_0403","2":"EVO_0403","3":"0.008457564","4":"0.3036790","5":"2.785034"},{"1":"EVO_1287","2":"EVO_0403","3":"0.182656706","4":"0.2766804","5":"66.017225"},{"1":"EVO_1896","2":"EVO_0403","3":"0.158838753","4":"0.1587119","5":"100.079901"},{"1":"EVO_1977","2":"EVO_0403","3":"0.257965874","4":"0.3498602","5":"73.733988"},{"1":"EVO_0403","2":"ANC_1287","3":"0.052761070","4":"0.3036790","5":"17.373958"},{"1":"EVO_1287","2":"ANC_1287","3":"0.009662324","4":"0.2766804","5":"3.492233"},{"1":"EVO_1896","2":"ANC_1287","3":"0.063799889","4":"0.1587119","5":"40.198544"},{"1":"EVO_1977","2":"ANC_1287","3":"0.086264778","4":"0.3498602","5":"24.656929"},{"1":"EVO_0403","2":"EVO_1287","3":"0.196861082","4":"0.3036790","5":"64.825375"},{"1":"EVO_1287","2":"EVO_1287","3":"0.009733454","4":"0.2766804","5":"3.517942"},{"1":"EVO_1896","2":"EVO_1287","3":"0.066222649","4":"0.1587119","5":"41.725058"},{"1":"EVO_1977","2":"EVO_1287","3":"0.142745573","4":"0.3498602","5":"40.800747"},{"1":"EVO_0403","2":"ANC_1896","3":"0.128184383","4":"0.3036790","5":"42.210480"},{"1":"EVO_1287","2":"ANC_1896","3":"0.028750927","4":"0.2766804","5":"10.391386"},{"1":"EVO_1896","2":"ANC_1896","3":"0.006779999","4":"0.1587119","5":"4.271890"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>plot_heatmap <span class="ot">&lt;-</span> <span class="cf">function</span>(df, fill_var, fill_lab){</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> sp_filtrate, <span class="at">y =</span> sp_hist)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> {{fill_var}})) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>({{fill_var}}), <span class="st">"%"</span>), <span class="at">color =</span> {{fill_var}} <span class="sc">&gt;</span> <span class="dv">40</span>)) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">45</span>)) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">45</span>)) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">scale_fill_viridis</span>() <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Growth of species/evolutionary history"</span>, <span class="at">x =</span> <span class="st">"Filtrate from species/evolutionary history"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10"></a>       <span class="at">fill =</span> fill_lab) <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
+<span id="cb11-12"><a href="#cb11-12"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb11-13"><a href="#cb11-13"></a>                 <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb11-14"><a href="#cb11-14"></a>                 <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb11-15"><a href="#cb11-15"></a>                 <span class="at">panel.border =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb11-16"><a href="#cb11-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <section id="growth-rate" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="growth-rate"><span class="header-section-number">6.1</span> Growth rate</h2>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show/hide code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>gr_filtrate <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">mutate</span>(<span class="at">sp_filtrate =</span> <span class="fu">factor</span>(sp_filtrate, <span class="at">levels =</span><span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
-<span id="cb10-5"><a href="#cb10-5"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)),</span>
-<span id="cb10-6"><a href="#cb10-6"></a>         <span class="at">sp_hist =</span> <span class="fu">factor</span>(sp_hist, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
-<span id="cb10-7"><a href="#cb10-7"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sp_filtrate, <span class="at">y =</span> sp_hist)) <span class="sc">+</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> m)) <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Growth of species/evolutionary history"</span>, <span class="at">x =</span> <span class="st">"Filtrate from species/evolutionary history"</span>,</span>
-<span id="cb10-11"><a href="#cb10-11"></a>       <span class="at">fill =</span> <span class="st">"μ (hr-1)"</span>) <span class="sc">+</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a>  <span class="fu">scale_fill_viridis</span>() <span class="sc">+</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
-<span id="cb10-14"><a href="#cb10-14"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb10-15"><a href="#cb10-15"></a>                 <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
-<span id="cb10-16"><a href="#cb10-16"></a>                 <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb10-17"><a href="#cb10-17"></a>                 <span class="at">panel.border =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb10-18"><a href="#cb10-18"></a></span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="fu">ggsave</span>(</span>
-<span id="cb10-20"><a href="#cb10-20"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_filtrate.svg"</span>),</span>
-<span id="cb10-21"><a href="#cb10-21"></a>  gr_filtrate,</span>
-<span id="cb10-22"><a href="#cb10-22"></a>  <span class="at">width =</span> <span class="dv">8</span>,</span>
-<span id="cb10-23"><a href="#cb10-23"></a>  <span class="at">height =</span> <span class="dv">8</span>,</span>
-<span id="cb10-24"><a href="#cb10-24"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb10-25"><a href="#cb10-25"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
-<span id="cb10-26"><a href="#cb10-26"></a>)</span>
-<span id="cb10-27"><a href="#cb10-27"></a></span>
-<span id="cb10-28"><a href="#cb10-28"></a><span class="fu">ggsave</span>(</span>
-<span id="cb10-29"><a href="#cb10-29"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_filtrate.png"</span>),</span>
-<span id="cb10-30"><a href="#cb10-30"></a>  gr_filtrate,</span>
-<span id="cb10-31"><a href="#cb10-31"></a>  <span class="at">width =</span> <span class="dv">8</span>,</span>
-<span id="cb10-32"><a href="#cb10-32"></a>  <span class="at">height =</span> <span class="dv">8</span>,</span>
-<span id="cb10-33"><a href="#cb10-33"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb10-34"><a href="#cb10-34"></a>  <span class="at">device =</span> <span class="st">"png"</span></span>
-<span id="cb10-35"><a href="#cb10-35"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>gr_max <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">filter</span>(strep_conc <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarize</span>(<span class="at">m_max =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist))</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a>gr_filtrate <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">summarize</span>(<span class="at">m_filt =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">left_join</span>(gr_max, <span class="at">by =</span> <span class="fu">join_by</span>(sp_hist)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">mutate</span>(<span class="at">m_rel =</span> m_filt<span class="sc">/</span>m_max<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="fu">mutate</span>(<span class="at">sp_filtrate =</span> <span class="fu">factor</span>(sp_filtrate, <span class="at">levels =</span><span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
+<span id="cb12-11"><a href="#cb12-11"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)),</span>
+<span id="cb12-12"><a href="#cb12-12"></a>         <span class="at">sp_hist =</span> <span class="fu">factor</span>(sp_hist, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
+<span id="cb12-13"><a href="#cb12-13"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)))</span>
+<span id="cb12-14"><a href="#cb12-14"></a></span>
+<span id="cb12-15"><a href="#cb12-15"></a>gr_filtrate_plot <span class="ot">&lt;-</span> <span class="fu">plot_heatmap</span>(gr_filtrate, m_rel, <span class="st">"% of max μ"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggsave</span>(</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_filtrate.svg"</span>),</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  gr_filtrate,</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">width =</span> <span class="dv">8</span>,</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="at">height =</span> <span class="dv">8</span>,</span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="fig-03" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -645,14 +693,14 @@ Figure&nbsp;2: Area under the growth curve for the four different bacterial spec
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_plot_analyze_growth_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_plot_analyze_growth_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-03-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Mean growth rate (color) of each species/evolutionary history (vertical axis) on the filtrate of other species, including itself (horizontal axis).
+Figure&nbsp;3: Percent maximum growth rate (μ) of each species/evolutionary history (vertical axis) growing on the filtrate of other species, including itself (horizontal axis). Maximum μ is from monocultures with no competitor or streptomycin. Filtrate μ is from each species grown on the filtrate of every other species.
 </figcaption>
 </figure>
 </div>
@@ -662,41 +710,34 @@ Figure&nbsp;3: Mean growth rate (color) of each species/evolutionary history (ve
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show/hide code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>auc_filtrate <span class="ot">&lt;-</span> many_auc_res <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(auc), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">mutate</span>(<span class="at">sp_filtrate =</span> <span class="fu">factor</span>(sp_filtrate, <span class="at">levels =</span><span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
-<span id="cb11-5"><a href="#cb11-5"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)),</span>
-<span id="cb11-6"><a href="#cb11-6"></a>         <span class="at">sp_hist =</span> <span class="fu">factor</span>(sp_hist, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
-<span id="cb11-7"><a href="#cb11-7"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sp_filtrate, <span class="at">y =</span> sp_hist)) <span class="sc">+</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> m)) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Growth of species/evolutionary history"</span>, <span class="at">x =</span> <span class="st">"Filtrate from species/evolutionary history"</span>,</span>
-<span id="cb11-11"><a href="#cb11-11"></a>       <span class="at">fill =</span> <span class="st">"μ (hr-1)"</span>) <span class="sc">+</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">scale_fill_viridis</span>() <span class="sc">+</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
-<span id="cb11-14"><a href="#cb11-14"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb11-15"><a href="#cb11-15"></a>                 <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
-<span id="cb11-16"><a href="#cb11-16"></a>                 <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb11-17"><a href="#cb11-17"></a>                 <span class="at">panel.border =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb11-18"><a href="#cb11-18"></a></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="fu">ggsave</span>(</span>
-<span id="cb11-20"><a href="#cb11-20"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_filtrate.svg"</span>),</span>
-<span id="cb11-21"><a href="#cb11-21"></a>  auc_filtrate,</span>
-<span id="cb11-22"><a href="#cb11-22"></a>  <span class="at">width =</span> <span class="dv">7</span>,</span>
-<span id="cb11-23"><a href="#cb11-23"></a>  <span class="at">height =</span> <span class="dv">7</span>,</span>
-<span id="cb11-24"><a href="#cb11-24"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb11-25"><a href="#cb11-25"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
-<span id="cb11-26"><a href="#cb11-26"></a>)</span>
-<span id="cb11-27"><a href="#cb11-27"></a></span>
-<span id="cb11-28"><a href="#cb11-28"></a><span class="fu">ggsave</span>(</span>
-<span id="cb11-29"><a href="#cb11-29"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_filtrate.png"</span>),</span>
-<span id="cb11-30"><a href="#cb11-30"></a>  auc_filtrate,</span>
-<span id="cb11-31"><a href="#cb11-31"></a>  <span class="at">width =</span> <span class="dv">7</span>,</span>
-<span id="cb11-32"><a href="#cb11-32"></a>  <span class="at">height =</span> <span class="dv">7</span>,</span>
-<span id="cb11-33"><a href="#cb11-33"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb11-34"><a href="#cb11-34"></a>  <span class="at">device =</span> <span class="st">"png"</span></span>
-<span id="cb11-35"><a href="#cb11-35"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>auc_max <span class="ot">&lt;-</span> many_auc_res <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">filter</span>(strep_conc <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">summarize</span>(<span class="at">auc_max =</span> <span class="fu">mean</span>(auc), <span class="at">.by=</span><span class="fu">c</span>(sp_hist))</span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a>auc_filtrate <span class="ot">&lt;-</span> many_auc_res <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">summarize</span>(<span class="at">auc_filt =</span> <span class="fu">mean</span>(auc), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="fu">left_join</span>(auc_max, <span class="at">by =</span> <span class="fu">join_by</span>(sp_hist)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-9"><a href="#cb14-9"></a>  <span class="fu">mutate</span>(<span class="at">auc_rel =</span> auc_filt<span class="sc">/</span>auc_max<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-10"><a href="#cb14-10"></a>  <span class="fu">mutate</span>(<span class="at">sp_filtrate =</span> <span class="fu">factor</span>(sp_filtrate, <span class="at">levels =</span><span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
+<span id="cb14-11"><a href="#cb14-11"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)),</span>
+<span id="cb14-12"><a href="#cb14-12"></a>         <span class="at">sp_hist =</span> <span class="fu">factor</span>(sp_hist, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
+<span id="cb14-13"><a href="#cb14-13"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)))</span>
+<span id="cb14-14"><a href="#cb14-14"></a></span>
+<span id="cb14-15"><a href="#cb14-15"></a>auc_filtrate_plot <span class="ot">&lt;-</span> <span class="fu">plot_heatmap</span>(auc_filtrate, auc_rel, <span class="st">"% of max AUC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show/hide code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggsave</span>(</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_filtrate.svg"</span>),</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  auc_filtrate,</span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="at">width =</span> <span class="dv">8</span>,</span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="at">height =</span> <span class="dv">8</span>,</span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="fig-04" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -706,14 +747,14 @@ Figure&nbsp;3: Mean growth rate (color) of each species/evolutionary history (ve
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_plot_analyze_growth_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_plot_analyze_growth_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Mean area under the growth curve (color) of each species/evolutionary history (vertical axis) on the filtrate of other species, including itself (horizontal axis).
+Figure&nbsp;4: Percent maximum Area Under the Growth Curve (AUC) of each species/evolutionary history (vertical axis) growing on the filtrate of other species, including itself (horizontal axis). Maximum AUC is from monocultures with no competitor or streptomycin. Filtrate AUC is from each species grown on the filtrate of every other species.
 </figcaption>
 </figure>
 </div>
@@ -1193,301 +1234,316 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "Analyzing monoculture growth summary"</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="an">author:</span><span class="co"> "Shane Hogle"</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="an">date:</span><span class="co"> today</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="an">link-citations:</span><span class="co"> true</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">---</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="fu"># Introduction</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a></span>
-<span id="cb12-10"><a href="#cb12-10"></a>In the prior step we imported, smoothed, and calculated summary statistics for the species growth in monocultures. These monocultures include experiments either with 100% R2A and different levels of streptomycin or with no streptomycin and the pairwise filtrates from all other species.</span>
-<span id="cb12-11"><a href="#cb12-11"></a></span>
-<span id="cb12-12"><a href="#cb12-12"></a>Here we will do some simple plots and analysis of the growth data. We will also look into the filtrate data.</span>
-<span id="cb12-13"><a href="#cb12-13"></a></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="fu"># Setup</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="fu">## Libraries</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="in">```{r}</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a><span class="co">#| output: false</span></span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="co">#| warning: false</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="co">#| error: false</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb12-25"><a href="#cb12-25"></a><span class="fu">library</span>(here)</span>
-<span id="cb12-26"><a href="#cb12-26"></a><span class="fu">library</span>(fs)</span>
-<span id="cb12-27"><a href="#cb12-27"></a><span class="fu">library</span>(scales)</span>
-<span id="cb12-28"><a href="#cb12-28"></a><span class="fu">library</span>(ggraph)</span>
-<span id="cb12-29"><a href="#cb12-29"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R"</span>, <span class="st">"utils_generic.R"</span>))</span>
-<span id="cb12-30"><a href="#cb12-30"></a><span class="in">```</span></span>
-<span id="cb12-31"><a href="#cb12-31"></a></span>
-<span id="cb12-32"><a href="#cb12-32"></a><span class="fu">## Global variables</span></span>
-<span id="cb12-33"><a href="#cb12-33"></a></span>
-<span id="cb12-36"><a href="#cb12-36"></a><span class="in">```{r}</span></span>
-<span id="cb12-37"><a href="#cb12-37"></a><span class="co">#| output: false</span></span>
-<span id="cb12-38"><a href="#cb12-38"></a><span class="co">#| warning: false</span></span>
-<span id="cb12-39"><a href="#cb12-39"></a><span class="co">#| error: false</span></span>
-<span id="cb12-40"><a href="#cb12-40"></a>data_raw <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_data_raw"</span>, <span class="st">"monocultures"</span>, <span class="st">"20240328_bioscreen"</span>)</span>
-<span id="cb12-41"><a href="#cb12-41"></a>data <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"monocultures"</span>, <span class="st">"20240328_bioscreen"</span>)</span>
-<span id="cb12-42"><a href="#cb12-42"></a></span>
-<span id="cb12-43"><a href="#cb12-43"></a><span class="co"># make processed data directory if it doesn't exist</span></span>
-<span id="cb12-44"><a href="#cb12-44"></a>fs<span class="sc">::</span><span class="fu">dir_create</span>(data)</span>
-<span id="cb12-45"><a href="#cb12-45"></a><span class="in">```</span></span>
-<span id="cb12-46"><a href="#cb12-46"></a></span>
-<span id="cb12-47"><a href="#cb12-47"></a><span class="fu">## Read growth summary data</span></span>
-<span id="cb12-48"><a href="#cb12-48"></a></span>
-<span id="cb12-51"><a href="#cb12-51"></a><span class="in">```{r}</span></span>
-<span id="cb12-52"><a href="#cb12-52"></a><span class="co">#| output: false</span></span>
-<span id="cb12-53"><a href="#cb12-53"></a><span class="co">#| warning: false</span></span>
-<span id="cb12-54"><a href="#cb12-54"></a><span class="co">#| error: false</span></span>
-<span id="cb12-55"><a href="#cb12-55"></a>many_auc_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_auc_results.tsv"</span>))</span>
-<span id="cb12-56"><a href="#cb12-56"></a>many_spline_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_spline_results.tsv"</span>))</span>
-<span id="cb12-57"><a href="#cb12-57"></a>many_linear_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_linear_results.tsv"</span>))</span>
-<span id="cb12-58"><a href="#cb12-58"></a>many_baranyi_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_baranyi_results.tsv"</span>))</span>
-<span id="cb12-59"><a href="#cb12-59"></a>many_huang_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_huang_results.tsv"</span>))</span>
-<span id="cb12-60"><a href="#cb12-60"></a><span class="in">```</span></span>
-<span id="cb12-61"><a href="#cb12-61"></a></span>
-<span id="cb12-62"><a href="#cb12-62"></a><span class="fu"># Select and format</span></span>
-<span id="cb12-63"><a href="#cb12-63"></a></span>
-<span id="cb12-64"><a href="#cb12-64"></a>The past notebook showed that different nonparametric and parametric models fit the data with different degrees of quality. Overall, it appears that the Huang parametric model fits the data the best so we will default to using the Huang growth rates. If the Huang doesn't fit well</span>
-<span id="cb12-65"><a href="#cb12-65"></a></span>
-<span id="cb12-66"><a href="#cb12-66"></a>Moving forward we'll use Huang-derived growth rates if the fit looks good. Otherwise we will go with the spline estimate which seemed to perform pretty well and was quite flexible.</span>
-<span id="cb12-67"><a href="#cb12-67"></a></span>
-<span id="cb12-68"><a href="#cb12-68"></a>Here we determine a threshold for filtering out cultures that don't grow as 1.25$\times$ the mean minimum optical density of all cultures. For these cultures growth rates estimates are not really reliable. </span>
-<span id="cb12-71"><a href="#cb12-71"></a><span class="in">```{r}</span></span>
-<span id="cb12-72"><a href="#cb12-72"></a>many_auc_res <span class="sc">%&gt;%</span> </span>
-<span id="cb12-73"><a href="#cb12-73"></a>  <span class="fu">summarize</span>(<span class="at">mn =</span> <span class="fu">mean</span>(min_od), </span>
-<span id="cb12-74"><a href="#cb12-74"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(min_od)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-75"><a href="#cb12-75"></a>  <span class="fu">mutate</span>(<span class="at">thresh =</span> <span class="fl">1.25</span><span class="sc">*</span>mn) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-76"><a href="#cb12-76"></a>  <span class="fu">pull</span>(thresh)</span>
-<span id="cb12-77"><a href="#cb12-77"></a><span class="in">```</span></span>
-<span id="cb12-78"><a href="#cb12-78"></a></span>
-<span id="cb12-81"><a href="#cb12-81"></a><span class="in">```{r}</span></span>
-<span id="cb12-82"><a href="#cb12-82"></a>best_parametric <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb12-83"><a href="#cb12-83"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(many_huang_res, plate_name<span class="sc">:</span>sp_filtrate, y0, mumax, K, r2) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"huang"</span>),</span>
-<span id="cb12-84"><a href="#cb12-84"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(many_baranyi_res, plate_name<span class="sc">:</span>sp_filtrate, y0, mumax, K, r2) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"baranyi"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-85"><a href="#cb12-85"></a>  <span class="fu">arrange</span>(plate_name, bioscreen_well) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-86"><a href="#cb12-86"></a>  <span class="fu">group_by</span>(plate_name, bioscreen_well) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-87"><a href="#cb12-87"></a>  <span class="fu">filter</span>(r2 <span class="sc">==</span> <span class="fu">max</span>(r2)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-88"><a href="#cb12-88"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb12-89"><a href="#cb12-89"></a><span class="in">```</span></span>
-<span id="cb12-90"><a href="#cb12-90"></a></span>
-<span id="cb12-91"><a href="#cb12-91"></a>The Huang model fits best for about 75% of all growth curves.</span>
-<span id="cb12-92"><a href="#cb12-92"></a></span>
-<span id="cb12-95"><a href="#cb12-95"></a><span class="in">```{r}</span></span>
-<span id="cb12-96"><a href="#cb12-96"></a>best_parametric <span class="sc">%&gt;%</span> </span>
-<span id="cb12-97"><a href="#cb12-97"></a>  <span class="fu">count</span>(model) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-98"><a href="#cb12-98"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
-<span id="cb12-99"><a href="#cb12-99"></a><span class="in">```</span></span>
-<span id="cb12-100"><a href="#cb12-100"></a><span class="fu"># Update!! </span></span>
-<span id="cb12-101"><a href="#cb12-101"></a></span>
-<span id="cb12-102"><a href="#cb12-102"></a>After looking at this more and more I think for the rest of this analysis we will just go with the spline non-parametric fits. Sometimes the Huang model fits really really well, but other times it doesn't. It's not worth going into every single growth curve to find out</span>
-<span id="cb12-103"><a href="#cb12-103"></a></span>
-<span id="cb12-104"><a href="#cb12-104"></a><span class="fu"># Monoculture growth with streptomycin</span></span>
-<span id="cb12-105"><a href="#cb12-105"></a></span>
-<span id="cb12-106"><a href="#cb12-106"></a>We'll now examine how the monoculture growth changed with respect to evolutionary history and streptomycin concentrations</span>
-<span id="cb12-107"><a href="#cb12-107"></a></span>
-<span id="cb12-108"><a href="#cb12-108"></a><span class="fu">## Growth rates</span></span>
-<span id="cb12-109"><a href="#cb12-109"></a></span>
-<span id="cb12-112"><a href="#cb12-112"></a><span class="in">```{r}</span></span>
-<span id="cb12-113"><a href="#cb12-113"></a>gr_strep <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
-<span id="cb12-114"><a href="#cb12-114"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-115"><a href="#cb12-115"></a>  <span class="fu">mutate</span>(<span class="at">hist =</span> <span class="fu">str_split_i</span>(sp_hist, <span class="st">"_"</span>, <span class="dv">1</span>),</span>
-<span id="cb12-116"><a href="#cb12-116"></a>         <span class="at">sp =</span> <span class="fu">str_split_i</span>(sp_hist, <span class="st">"_"</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-117"><a href="#cb12-117"></a>  <span class="fu">summarize</span>(ggplot2<span class="sc">::</span><span class="fu">mean_cl_boot</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp, hist, strep_conc)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-118"><a href="#cb12-118"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> strep_conc, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb12-119"><a href="#cb12-119"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ymin, <span class="at">ymax =</span> ymax, <span class="at">color =</span> hist)) <span class="sc">+</span></span>
-<span id="cb12-120"><a href="#cb12-120"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> hist), <span class="at">lty=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb12-121"><a href="#cb12-121"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> hist)) <span class="sc">+</span></span>
-<span id="cb12-122"><a href="#cb12-122"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Maximum per capita growth rate μ (hr-1)"</span>, <span class="at">x =</span> <span class="st">"Streptomycin conc. (μg/ml)"</span>, </span>
-<span id="cb12-123"><a href="#cb12-123"></a>       <span class="at">color =</span> <span class="st">"Evolutionary</span><span class="sc">\n</span><span class="st">history"</span>) <span class="sc">+</span></span>
-<span id="cb12-124"><a href="#cb12-124"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sp) <span class="sc">+</span></span>
-<span id="cb12-125"><a href="#cb12-125"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="st">"log1p"</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">5000</span>))</span>
-<span id="cb12-126"><a href="#cb12-126"></a></span>
-<span id="cb12-127"><a href="#cb12-127"></a><span class="fu">ggsave</span>(</span>
-<span id="cb12-128"><a href="#cb12-128"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_strep.svg"</span>),</span>
-<span id="cb12-129"><a href="#cb12-129"></a>  gr_strep,</span>
-<span id="cb12-130"><a href="#cb12-130"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
-<span id="cb12-131"><a href="#cb12-131"></a>  <span class="at">height =</span> <span class="dv">4</span>,</span>
-<span id="cb12-132"><a href="#cb12-132"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb12-133"><a href="#cb12-133"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
-<span id="cb12-134"><a href="#cb12-134"></a>)</span>
-<span id="cb12-135"><a href="#cb12-135"></a></span>
-<span id="cb12-136"><a href="#cb12-136"></a><span class="fu">ggsave</span>(</span>
-<span id="cb12-137"><a href="#cb12-137"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_strep.png"</span>),</span>
-<span id="cb12-138"><a href="#cb12-138"></a>  gr_strep,</span>
-<span id="cb12-139"><a href="#cb12-139"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
-<span id="cb12-140"><a href="#cb12-140"></a>  <span class="at">height =</span> <span class="dv">4</span>,</span>
-<span id="cb12-141"><a href="#cb12-141"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb12-142"><a href="#cb12-142"></a>  <span class="at">device =</span> <span class="st">"png"</span></span>
-<span id="cb12-143"><a href="#cb12-143"></a>)</span>
-<span id="cb12-144"><a href="#cb12-144"></a><span class="in">```</span></span>
-<span id="cb12-145"><a href="#cb12-145"></a></span>
-<span id="cb12-146"><a href="#cb12-146"></a></span>
-<span id="cb12-147"><a href="#cb12-147"></a>::: {#fig-01}</span>
-<span id="cb12-150"><a href="#cb12-150"></a><span class="in">```{r}</span></span>
-<span id="cb12-151"><a href="#cb12-151"></a><span class="co">#| fig.width: 10</span></span>
-<span id="cb12-152"><a href="#cb12-152"></a><span class="co">#| fig.height: 4</span></span>
-<span id="cb12-153"><a href="#cb12-153"></a><span class="co">#| echo: false</span></span>
-<span id="cb12-154"><a href="#cb12-154"></a><span class="co">#| warning: false</span></span>
-<span id="cb12-155"><a href="#cb12-155"></a>gr_strep</span>
-<span id="cb12-156"><a href="#cb12-156"></a><span class="in">```</span></span>
-<span id="cb12-157"><a href="#cb12-157"></a>Maximum specific growth rate ($\mathrm{\mu_{max}}$ in $\mathrm{hr^{-1}}$) for the four different bacterial species (panels) and their different evolutionary histories (colors) at different streptomycin concentrations (horizontal axis, μg/ml). Points are the mean over five biological replicates and line ranges show the 95% confidence interval from bootstraps. EVO = experimentally evolved to high streptomycin.</span>
-<span id="cb12-158"><a href="#cb12-158"></a>:::</span>
-<span id="cb12-159"><a href="#cb12-159"></a></span>
-<span id="cb12-160"><a href="#cb12-160"></a><span class="fu">## AUC (area under the growth curve)</span></span>
-<span id="cb12-161"><a href="#cb12-161"></a></span>
-<span id="cb12-164"><a href="#cb12-164"></a><span class="in">```{r}</span></span>
-<span id="cb12-165"><a href="#cb12-165"></a>auc_strep <span class="ot">&lt;-</span> many_auc_res <span class="sc">%&gt;%</span> </span>
-<span id="cb12-166"><a href="#cb12-166"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-167"><a href="#cb12-167"></a>  <span class="fu">mutate</span>(<span class="at">hist =</span> <span class="fu">str_split_i</span>(sp_hist, <span class="st">"_"</span>, <span class="dv">1</span>),</span>
-<span id="cb12-168"><a href="#cb12-168"></a>         <span class="at">sp =</span> <span class="fu">str_split_i</span>(sp_hist, <span class="st">"_"</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-169"><a href="#cb12-169"></a>  <span class="fu">summarize</span>(ggplot2<span class="sc">::</span><span class="fu">mean_cl_boot</span>(auc), <span class="at">.by=</span><span class="fu">c</span>(sp, hist, strep_conc)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-170"><a href="#cb12-170"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> strep_conc, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb12-171"><a href="#cb12-171"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ymin, <span class="at">ymax =</span> ymax, <span class="at">color =</span> hist)) <span class="sc">+</span></span>
-<span id="cb12-172"><a href="#cb12-172"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> hist), <span class="at">lty=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb12-173"><a href="#cb12-173"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> hist)) <span class="sc">+</span></span>
-<span id="cb12-174"><a href="#cb12-174"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Total area under the growth curve"</span>, <span class="at">x =</span> <span class="st">"Streptomycin conc. (μg/ml)"</span>, </span>
-<span id="cb12-175"><a href="#cb12-175"></a>       <span class="at">color =</span> <span class="st">"Evolutionary</span><span class="sc">\n</span><span class="st">history"</span>) <span class="sc">+</span></span>
-<span id="cb12-176"><a href="#cb12-176"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sp) <span class="sc">+</span></span>
-<span id="cb12-177"><a href="#cb12-177"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="st">"log1p"</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">5000</span>))</span>
-<span id="cb12-178"><a href="#cb12-178"></a></span>
-<span id="cb12-179"><a href="#cb12-179"></a><span class="fu">ggsave</span>(</span>
-<span id="cb12-180"><a href="#cb12-180"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_strep.svg"</span>),</span>
-<span id="cb12-181"><a href="#cb12-181"></a>  auc_strep,</span>
-<span id="cb12-182"><a href="#cb12-182"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
-<span id="cb12-183"><a href="#cb12-183"></a>  <span class="at">height =</span> <span class="dv">4</span>,</span>
-<span id="cb12-184"><a href="#cb12-184"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb12-185"><a href="#cb12-185"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
-<span id="cb12-186"><a href="#cb12-186"></a>)</span>
-<span id="cb12-187"><a href="#cb12-187"></a></span>
-<span id="cb12-188"><a href="#cb12-188"></a><span class="fu">ggsave</span>(</span>
-<span id="cb12-189"><a href="#cb12-189"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_strep.png"</span>),</span>
-<span id="cb12-190"><a href="#cb12-190"></a>  auc_strep,</span>
-<span id="cb12-191"><a href="#cb12-191"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
-<span id="cb12-192"><a href="#cb12-192"></a>  <span class="at">height =</span> <span class="dv">4</span>,</span>
-<span id="cb12-193"><a href="#cb12-193"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb12-194"><a href="#cb12-194"></a>  <span class="at">device =</span> <span class="st">"png"</span></span>
-<span id="cb12-195"><a href="#cb12-195"></a>)</span>
-<span id="cb12-196"><a href="#cb12-196"></a><span class="in">```</span></span>
-<span id="cb12-197"><a href="#cb12-197"></a></span>
-<span id="cb12-198"><a href="#cb12-198"></a>::: {#fig-02}</span>
-<span id="cb12-201"><a href="#cb12-201"></a><span class="in">```{r}</span></span>
-<span id="cb12-202"><a href="#cb12-202"></a><span class="co">#| fig.width: 10</span></span>
-<span id="cb12-203"><a href="#cb12-203"></a><span class="co">#| fig.height: 4</span></span>
-<span id="cb12-204"><a href="#cb12-204"></a><span class="co">#| echo: false</span></span>
-<span id="cb12-205"><a href="#cb12-205"></a><span class="co">#| warning: false</span></span>
-<span id="cb12-206"><a href="#cb12-206"></a>auc_strep</span>
-<span id="cb12-207"><a href="#cb12-207"></a><span class="in">```</span></span>
-<span id="cb12-208"><a href="#cb12-208"></a>Area under the growth curve for the four different bacterial species (panels) and their different evolutionary histories (colors) at different streptomycin concentrations (horizontal axis, μg/ml). Points are the mean over five biological replicates and line ranges show the 95% confidence interval from bootstraps. EVO = experimentally evolved to high streptomycin.</span>
-<span id="cb12-209"><a href="#cb12-209"></a>:::</span>
-<span id="cb12-210"><a href="#cb12-210"></a></span>
-<span id="cb12-211"><a href="#cb12-211"></a><span class="fu"># Pairwise filtrate growth</span></span>
-<span id="cb12-212"><a href="#cb12-212"></a></span>
-<span id="cb12-213"><a href="#cb12-213"></a>This is information about how well each species grew on the filtrate of all the species.</span>
-<span id="cb12-214"><a href="#cb12-214"></a></span>
-<span id="cb12-215"><a href="#cb12-215"></a><span class="fu">## Growth rate</span></span>
-<span id="cb12-216"><a href="#cb12-216"></a></span>
-<span id="cb12-219"><a href="#cb12-219"></a><span class="in">```{r}</span></span>
-<span id="cb12-220"><a href="#cb12-220"></a>gr_filtrate <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
-<span id="cb12-221"><a href="#cb12-221"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-222"><a href="#cb12-222"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-223"><a href="#cb12-223"></a>  <span class="fu">mutate</span>(<span class="at">sp_filtrate =</span> <span class="fu">factor</span>(sp_filtrate, <span class="at">levels =</span><span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
-<span id="cb12-224"><a href="#cb12-224"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)),</span>
-<span id="cb12-225"><a href="#cb12-225"></a>         <span class="at">sp_hist =</span> <span class="fu">factor</span>(sp_hist, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
-<span id="cb12-226"><a href="#cb12-226"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-227"><a href="#cb12-227"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sp_filtrate, <span class="at">y =</span> sp_hist)) <span class="sc">+</span></span>
-<span id="cb12-228"><a href="#cb12-228"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> m)) <span class="sc">+</span></span>
-<span id="cb12-229"><a href="#cb12-229"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Growth of species/evolutionary history"</span>, <span class="at">x =</span> <span class="st">"Filtrate from species/evolutionary history"</span>,</span>
-<span id="cb12-230"><a href="#cb12-230"></a>       <span class="at">fill =</span> <span class="st">"μ (hr-1)"</span>) <span class="sc">+</span></span>
-<span id="cb12-231"><a href="#cb12-231"></a>  <span class="fu">scale_fill_viridis</span>() <span class="sc">+</span></span>
-<span id="cb12-232"><a href="#cb12-232"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
-<span id="cb12-233"><a href="#cb12-233"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb12-234"><a href="#cb12-234"></a>                 <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
-<span id="cb12-235"><a href="#cb12-235"></a>                 <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb12-236"><a href="#cb12-236"></a>                 <span class="at">panel.border =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb12-237"><a href="#cb12-237"></a></span>
-<span id="cb12-238"><a href="#cb12-238"></a><span class="fu">ggsave</span>(</span>
-<span id="cb12-239"><a href="#cb12-239"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_filtrate.svg"</span>),</span>
-<span id="cb12-240"><a href="#cb12-240"></a>  gr_filtrate,</span>
-<span id="cb12-241"><a href="#cb12-241"></a>  <span class="at">width =</span> <span class="dv">8</span>,</span>
-<span id="cb12-242"><a href="#cb12-242"></a>  <span class="at">height =</span> <span class="dv">8</span>,</span>
-<span id="cb12-243"><a href="#cb12-243"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb12-244"><a href="#cb12-244"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
-<span id="cb12-245"><a href="#cb12-245"></a>)</span>
-<span id="cb12-246"><a href="#cb12-246"></a></span>
-<span id="cb12-247"><a href="#cb12-247"></a><span class="fu">ggsave</span>(</span>
-<span id="cb12-248"><a href="#cb12-248"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_filtrate.png"</span>),</span>
-<span id="cb12-249"><a href="#cb12-249"></a>  gr_filtrate,</span>
-<span id="cb12-250"><a href="#cb12-250"></a>  <span class="at">width =</span> <span class="dv">8</span>,</span>
-<span id="cb12-251"><a href="#cb12-251"></a>  <span class="at">height =</span> <span class="dv">8</span>,</span>
-<span id="cb12-252"><a href="#cb12-252"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb12-253"><a href="#cb12-253"></a>  <span class="at">device =</span> <span class="st">"png"</span></span>
-<span id="cb12-254"><a href="#cb12-254"></a>)</span>
-<span id="cb12-255"><a href="#cb12-255"></a><span class="in">```</span></span>
-<span id="cb12-256"><a href="#cb12-256"></a></span>
-<span id="cb12-257"><a href="#cb12-257"></a>::: {#fig-03}</span>
-<span id="cb12-260"><a href="#cb12-260"></a><span class="in">```{r}</span></span>
-<span id="cb12-261"><a href="#cb12-261"></a><span class="co">#| fig.width: 7</span></span>
-<span id="cb12-262"><a href="#cb12-262"></a><span class="co">#| fig.height: 7</span></span>
-<span id="cb12-263"><a href="#cb12-263"></a><span class="co">#| echo: false</span></span>
-<span id="cb12-264"><a href="#cb12-264"></a><span class="co">#| warning: false</span></span>
-<span id="cb12-265"><a href="#cb12-265"></a>gr_filtrate</span>
-<span id="cb12-266"><a href="#cb12-266"></a><span class="in">```</span></span>
-<span id="cb12-267"><a href="#cb12-267"></a>Mean growth rate (color) of each species/evolutionary history (vertical axis) on the filtrate of other species, including itself (horizontal axis). </span>
-<span id="cb12-268"><a href="#cb12-268"></a>:::</span>
-<span id="cb12-269"><a href="#cb12-269"></a></span>
-<span id="cb12-270"><a href="#cb12-270"></a><span class="fu">## AUC (area under the growth curve)</span></span>
-<span id="cb12-271"><a href="#cb12-271"></a></span>
-<span id="cb12-274"><a href="#cb12-274"></a><span class="in">```{r}</span></span>
-<span id="cb12-275"><a href="#cb12-275"></a>auc_filtrate <span class="ot">&lt;-</span> many_auc_res <span class="sc">%&gt;%</span> </span>
-<span id="cb12-276"><a href="#cb12-276"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-277"><a href="#cb12-277"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(auc), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-278"><a href="#cb12-278"></a>  <span class="fu">mutate</span>(<span class="at">sp_filtrate =</span> <span class="fu">factor</span>(sp_filtrate, <span class="at">levels =</span><span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
-<span id="cb12-279"><a href="#cb12-279"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)),</span>
-<span id="cb12-280"><a href="#cb12-280"></a>         <span class="at">sp_hist =</span> <span class="fu">factor</span>(sp_hist, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
-<span id="cb12-281"><a href="#cb12-281"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-282"><a href="#cb12-282"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sp_filtrate, <span class="at">y =</span> sp_hist)) <span class="sc">+</span></span>
-<span id="cb12-283"><a href="#cb12-283"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> m)) <span class="sc">+</span></span>
-<span id="cb12-284"><a href="#cb12-284"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Growth of species/evolutionary history"</span>, <span class="at">x =</span> <span class="st">"Filtrate from species/evolutionary history"</span>,</span>
-<span id="cb12-285"><a href="#cb12-285"></a>       <span class="at">fill =</span> <span class="st">"μ (hr-1)"</span>) <span class="sc">+</span></span>
-<span id="cb12-286"><a href="#cb12-286"></a>  <span class="fu">scale_fill_viridis</span>() <span class="sc">+</span></span>
-<span id="cb12-287"><a href="#cb12-287"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
-<span id="cb12-288"><a href="#cb12-288"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb12-289"><a href="#cb12-289"></a>                 <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
-<span id="cb12-290"><a href="#cb12-290"></a>                 <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb12-291"><a href="#cb12-291"></a>                 <span class="at">panel.border =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb12-292"><a href="#cb12-292"></a></span>
-<span id="cb12-293"><a href="#cb12-293"></a><span class="fu">ggsave</span>(</span>
-<span id="cb12-294"><a href="#cb12-294"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_filtrate.svg"</span>),</span>
-<span id="cb12-295"><a href="#cb12-295"></a>  auc_filtrate,</span>
-<span id="cb12-296"><a href="#cb12-296"></a>  <span class="at">width =</span> <span class="dv">7</span>,</span>
-<span id="cb12-297"><a href="#cb12-297"></a>  <span class="at">height =</span> <span class="dv">7</span>,</span>
-<span id="cb12-298"><a href="#cb12-298"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb12-299"><a href="#cb12-299"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
-<span id="cb12-300"><a href="#cb12-300"></a>)</span>
-<span id="cb12-301"><a href="#cb12-301"></a></span>
-<span id="cb12-302"><a href="#cb12-302"></a><span class="fu">ggsave</span>(</span>
-<span id="cb12-303"><a href="#cb12-303"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_filtrate.png"</span>),</span>
-<span id="cb12-304"><a href="#cb12-304"></a>  auc_filtrate,</span>
-<span id="cb12-305"><a href="#cb12-305"></a>  <span class="at">width =</span> <span class="dv">7</span>,</span>
-<span id="cb12-306"><a href="#cb12-306"></a>  <span class="at">height =</span> <span class="dv">7</span>,</span>
-<span id="cb12-307"><a href="#cb12-307"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb12-308"><a href="#cb12-308"></a>  <span class="at">device =</span> <span class="st">"png"</span></span>
-<span id="cb12-309"><a href="#cb12-309"></a>)</span>
-<span id="cb12-310"><a href="#cb12-310"></a><span class="in">```</span></span>
-<span id="cb12-311"><a href="#cb12-311"></a></span>
-<span id="cb12-312"><a href="#cb12-312"></a>::: {#fig-04}</span>
-<span id="cb12-315"><a href="#cb12-315"></a><span class="in">```{r}</span></span>
-<span id="cb12-316"><a href="#cb12-316"></a><span class="co">#| fig.width: 7</span></span>
-<span id="cb12-317"><a href="#cb12-317"></a><span class="co">#| fig.height: 7</span></span>
-<span id="cb12-318"><a href="#cb12-318"></a><span class="co">#| echo: false</span></span>
-<span id="cb12-319"><a href="#cb12-319"></a><span class="co">#| warning: false</span></span>
-<span id="cb12-320"><a href="#cb12-320"></a>auc_filtrate</span>
-<span id="cb12-321"><a href="#cb12-321"></a><span class="in">```</span></span>
-<span id="cb12-322"><a href="#cb12-322"></a>Mean area under the growth curve (color) of each species/evolutionary history (vertical axis) on the filtrate of other species, including itself (horizontal axis). </span>
-<span id="cb12-323"><a href="#cb12-323"></a>:::</span>
+<div class="sourceCode" id="cb16" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">---</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="an">title:</span><span class="co"> "Analyzing monoculture growth summary"</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="an">author:</span><span class="co"> "Shane Hogle"</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="an">link-citations:</span><span class="co"> true</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">---</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="fu"># Introduction</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a></span>
+<span id="cb16-10"><a href="#cb16-10"></a>In the prior step we imported, smoothed, and calculated summary statistics for the species growth in monocultures. These monocultures include experiments either with 100% R2A and different levels of streptomycin or with no streptomycin and the pairwise filtrates from all other species.</span>
+<span id="cb16-11"><a href="#cb16-11"></a></span>
+<span id="cb16-12"><a href="#cb16-12"></a>Here we will do some simple plots and analysis of the growth data. We will also look into the filtrate data.</span>
+<span id="cb16-13"><a href="#cb16-13"></a></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="fu"># Setup</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="fu">## Libraries</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a></span>
+<span id="cb16-20"><a href="#cb16-20"></a><span class="in">```{r}</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a><span class="co">#| output: false</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a><span class="co">#| error: false</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb16-25"><a href="#cb16-25"></a><span class="fu">library</span>(here)</span>
+<span id="cb16-26"><a href="#cb16-26"></a><span class="fu">library</span>(fs)</span>
+<span id="cb16-27"><a href="#cb16-27"></a><span class="fu">library</span>(scales)</span>
+<span id="cb16-28"><a href="#cb16-28"></a><span class="fu">library</span>(ggraph)</span>
+<span id="cb16-29"><a href="#cb16-29"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R"</span>, <span class="st">"utils_generic.R"</span>))</span>
+<span id="cb16-30"><a href="#cb16-30"></a><span class="in">```</span></span>
+<span id="cb16-31"><a href="#cb16-31"></a></span>
+<span id="cb16-32"><a href="#cb16-32"></a><span class="fu">## Global variables</span></span>
+<span id="cb16-33"><a href="#cb16-33"></a></span>
+<span id="cb16-36"><a href="#cb16-36"></a><span class="in">```{r}</span></span>
+<span id="cb16-37"><a href="#cb16-37"></a><span class="co">#| output: false</span></span>
+<span id="cb16-38"><a href="#cb16-38"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-39"><a href="#cb16-39"></a><span class="co">#| error: false</span></span>
+<span id="cb16-40"><a href="#cb16-40"></a>data_raw <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_data_raw"</span>, <span class="st">"monocultures"</span>, <span class="st">"20240328_bioscreen"</span>)</span>
+<span id="cb16-41"><a href="#cb16-41"></a>data <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"monocultures"</span>, <span class="st">"20240328_bioscreen"</span>)</span>
+<span id="cb16-42"><a href="#cb16-42"></a></span>
+<span id="cb16-43"><a href="#cb16-43"></a><span class="co"># make processed data directory if it doesn't exist</span></span>
+<span id="cb16-44"><a href="#cb16-44"></a>fs<span class="sc">::</span><span class="fu">dir_create</span>(data)</span>
+<span id="cb16-45"><a href="#cb16-45"></a><span class="in">```</span></span>
+<span id="cb16-46"><a href="#cb16-46"></a></span>
+<span id="cb16-47"><a href="#cb16-47"></a><span class="fu">## Read growth summary data</span></span>
+<span id="cb16-48"><a href="#cb16-48"></a></span>
+<span id="cb16-51"><a href="#cb16-51"></a><span class="in">```{r}</span></span>
+<span id="cb16-52"><a href="#cb16-52"></a><span class="co">#| output: false</span></span>
+<span id="cb16-53"><a href="#cb16-53"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-54"><a href="#cb16-54"></a><span class="co">#| error: false</span></span>
+<span id="cb16-55"><a href="#cb16-55"></a>many_auc_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_auc_results.tsv"</span>))</span>
+<span id="cb16-56"><a href="#cb16-56"></a>many_spline_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_spline_results.tsv"</span>))</span>
+<span id="cb16-57"><a href="#cb16-57"></a>many_linear_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_linear_results.tsv"</span>))</span>
+<span id="cb16-58"><a href="#cb16-58"></a>many_baranyi_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_baranyi_results.tsv"</span>))</span>
+<span id="cb16-59"><a href="#cb16-59"></a>many_huang_res <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(data, <span class="st">"gcurve_huang_results.tsv"</span>))</span>
+<span id="cb16-60"><a href="#cb16-60"></a><span class="in">```</span></span>
+<span id="cb16-61"><a href="#cb16-61"></a></span>
+<span id="cb16-62"><a href="#cb16-62"></a><span class="fu"># Select and format</span></span>
+<span id="cb16-63"><a href="#cb16-63"></a></span>
+<span id="cb16-64"><a href="#cb16-64"></a>The past notebook showed that different nonparametric and parametric models fit the data with different degrees of quality. Overall, it appears that the Huang parametric model fits the data the best so we will default to using the Huang growth rates. If the Huang doesn't fit well</span>
+<span id="cb16-65"><a href="#cb16-65"></a></span>
+<span id="cb16-66"><a href="#cb16-66"></a>Moving forward we'll use Huang-derived growth rates if the fit looks good. Otherwise we will go with the spline estimate which seemed to perform pretty well and was quite flexible.</span>
+<span id="cb16-67"><a href="#cb16-67"></a></span>
+<span id="cb16-68"><a href="#cb16-68"></a>Here we determine a threshold for filtering out cultures that don't grow as 1.25$\times$ the mean minimum optical density of all cultures. For these cultures growth rates estimates are not really reliable. </span>
+<span id="cb16-71"><a href="#cb16-71"></a><span class="in">```{r}</span></span>
+<span id="cb16-72"><a href="#cb16-72"></a>many_auc_res <span class="sc">%&gt;%</span> </span>
+<span id="cb16-73"><a href="#cb16-73"></a>  <span class="fu">summarize</span>(<span class="at">mn =</span> <span class="fu">mean</span>(min_od), </span>
+<span id="cb16-74"><a href="#cb16-74"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(min_od)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-75"><a href="#cb16-75"></a>  <span class="fu">mutate</span>(<span class="at">thresh =</span> <span class="fl">1.25</span><span class="sc">*</span>mn) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-76"><a href="#cb16-76"></a>  <span class="fu">pull</span>(thresh)</span>
+<span id="cb16-77"><a href="#cb16-77"></a><span class="in">```</span></span>
+<span id="cb16-78"><a href="#cb16-78"></a></span>
+<span id="cb16-81"><a href="#cb16-81"></a><span class="in">```{r}</span></span>
+<span id="cb16-82"><a href="#cb16-82"></a>best_parametric <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb16-83"><a href="#cb16-83"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(many_huang_res, plate_name<span class="sc">:</span>sp_filtrate, y0, mumax, K, r2) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"huang"</span>),</span>
+<span id="cb16-84"><a href="#cb16-84"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(many_baranyi_res, plate_name<span class="sc">:</span>sp_filtrate, y0, mumax, K, r2) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"baranyi"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-85"><a href="#cb16-85"></a>  <span class="fu">arrange</span>(plate_name, bioscreen_well) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-86"><a href="#cb16-86"></a>  <span class="fu">group_by</span>(plate_name, bioscreen_well) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-87"><a href="#cb16-87"></a>  <span class="fu">filter</span>(r2 <span class="sc">==</span> <span class="fu">max</span>(r2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-88"><a href="#cb16-88"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb16-89"><a href="#cb16-89"></a><span class="in">```</span></span>
+<span id="cb16-90"><a href="#cb16-90"></a></span>
+<span id="cb16-91"><a href="#cb16-91"></a>The Huang model fits best for about 75% of all growth curves.</span>
+<span id="cb16-92"><a href="#cb16-92"></a></span>
+<span id="cb16-95"><a href="#cb16-95"></a><span class="in">```{r}</span></span>
+<span id="cb16-96"><a href="#cb16-96"></a>best_parametric <span class="sc">%&gt;%</span> </span>
+<span id="cb16-97"><a href="#cb16-97"></a>  <span class="fu">count</span>(model) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-98"><a href="#cb16-98"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb16-99"><a href="#cb16-99"></a><span class="in">```</span></span>
+<span id="cb16-100"><a href="#cb16-100"></a><span class="fu"># Update!! </span></span>
+<span id="cb16-101"><a href="#cb16-101"></a></span>
+<span id="cb16-102"><a href="#cb16-102"></a>After looking at this more and more I think for the rest of this analysis we will just go with the spline non-parametric fits. Sometimes the Huang model fits really really well, but other times it doesn't. It's not worth going into every single growth curve to find out</span>
+<span id="cb16-103"><a href="#cb16-103"></a></span>
+<span id="cb16-104"><a href="#cb16-104"></a><span class="fu"># Monoculture growth with streptomycin</span></span>
+<span id="cb16-105"><a href="#cb16-105"></a></span>
+<span id="cb16-106"><a href="#cb16-106"></a>We'll now examine how the monoculture growth changed with respect to evolutionary history and streptomycin concentrations</span>
+<span id="cb16-107"><a href="#cb16-107"></a></span>
+<span id="cb16-108"><a href="#cb16-108"></a><span class="fu">## Growth rates</span></span>
+<span id="cb16-109"><a href="#cb16-109"></a></span>
+<span id="cb16-112"><a href="#cb16-112"></a><span class="in">```{r}</span></span>
+<span id="cb16-113"><a href="#cb16-113"></a>gr_strep <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
+<span id="cb16-114"><a href="#cb16-114"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-115"><a href="#cb16-115"></a>  <span class="fu">mutate</span>(<span class="at">hist =</span> <span class="fu">str_split_i</span>(sp_hist, <span class="st">"_"</span>, <span class="dv">1</span>),</span>
+<span id="cb16-116"><a href="#cb16-116"></a>         <span class="at">sp =</span> <span class="fu">str_split_i</span>(sp_hist, <span class="st">"_"</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-117"><a href="#cb16-117"></a>  <span class="fu">summarize</span>(ggplot2<span class="sc">::</span><span class="fu">mean_cl_boot</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp, hist, strep_conc)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-118"><a href="#cb16-118"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> strep_conc, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb16-119"><a href="#cb16-119"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ymin, <span class="at">ymax =</span> ymax, <span class="at">color =</span> hist)) <span class="sc">+</span></span>
+<span id="cb16-120"><a href="#cb16-120"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> hist), <span class="at">lty=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-121"><a href="#cb16-121"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> hist)) <span class="sc">+</span></span>
+<span id="cb16-122"><a href="#cb16-122"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Maximum per capita growth rate μ (hr-1)"</span>, <span class="at">x =</span> <span class="st">"Streptomycin conc. (μg/ml)"</span>, </span>
+<span id="cb16-123"><a href="#cb16-123"></a>       <span class="at">color =</span> <span class="st">"Evolutionary</span><span class="sc">\n</span><span class="st">history"</span>) <span class="sc">+</span></span>
+<span id="cb16-124"><a href="#cb16-124"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sp) <span class="sc">+</span></span>
+<span id="cb16-125"><a href="#cb16-125"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="st">"log1p"</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">5000</span>))</span>
+<span id="cb16-126"><a href="#cb16-126"></a></span>
+<span id="cb16-127"><a href="#cb16-127"></a><span class="fu">ggsave</span>(</span>
+<span id="cb16-128"><a href="#cb16-128"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_strep.svg"</span>),</span>
+<span id="cb16-129"><a href="#cb16-129"></a>  gr_strep,</span>
+<span id="cb16-130"><a href="#cb16-130"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
+<span id="cb16-131"><a href="#cb16-131"></a>  <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb16-132"><a href="#cb16-132"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb16-133"><a href="#cb16-133"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
+<span id="cb16-134"><a href="#cb16-134"></a>)</span>
+<span id="cb16-135"><a href="#cb16-135"></a></span>
+<span id="cb16-136"><a href="#cb16-136"></a><span class="fu">ggsave</span>(</span>
+<span id="cb16-137"><a href="#cb16-137"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_strep.png"</span>),</span>
+<span id="cb16-138"><a href="#cb16-138"></a>  gr_strep,</span>
+<span id="cb16-139"><a href="#cb16-139"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
+<span id="cb16-140"><a href="#cb16-140"></a>  <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb16-141"><a href="#cb16-141"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb16-142"><a href="#cb16-142"></a>  <span class="at">device =</span> <span class="st">"png"</span></span>
+<span id="cb16-143"><a href="#cb16-143"></a>)</span>
+<span id="cb16-144"><a href="#cb16-144"></a><span class="in">```</span></span>
+<span id="cb16-145"><a href="#cb16-145"></a></span>
+<span id="cb16-146"><a href="#cb16-146"></a></span>
+<span id="cb16-147"><a href="#cb16-147"></a>::: {#fig-01}</span>
+<span id="cb16-150"><a href="#cb16-150"></a><span class="in">```{r}</span></span>
+<span id="cb16-151"><a href="#cb16-151"></a><span class="co">#| fig.width: 10</span></span>
+<span id="cb16-152"><a href="#cb16-152"></a><span class="co">#| fig.height: 4</span></span>
+<span id="cb16-153"><a href="#cb16-153"></a><span class="co">#| echo: false</span></span>
+<span id="cb16-154"><a href="#cb16-154"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-155"><a href="#cb16-155"></a>gr_strep</span>
+<span id="cb16-156"><a href="#cb16-156"></a><span class="in">```</span></span>
+<span id="cb16-157"><a href="#cb16-157"></a>Maximum specific growth rate ($\mathrm{\mu_{max}}$ in $\mathrm{hr^{-1}}$) for the four different bacterial species (panels) and their different evolutionary histories (colors) at different streptomycin concentrations (horizontal axis, μg/ml). Points are the mean over five biological replicates and line ranges show the 95% confidence interval from bootstraps. EVO = experimentally evolved to high streptomycin.</span>
+<span id="cb16-158"><a href="#cb16-158"></a>:::</span>
+<span id="cb16-159"><a href="#cb16-159"></a></span>
+<span id="cb16-160"><a href="#cb16-160"></a><span class="fu">## AUC (area under the growth curve)</span></span>
+<span id="cb16-161"><a href="#cb16-161"></a></span>
+<span id="cb16-164"><a href="#cb16-164"></a><span class="in">```{r}</span></span>
+<span id="cb16-165"><a href="#cb16-165"></a>auc_strep <span class="ot">&lt;-</span> many_auc_res <span class="sc">%&gt;%</span> </span>
+<span id="cb16-166"><a href="#cb16-166"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-167"><a href="#cb16-167"></a>  <span class="fu">mutate</span>(<span class="at">hist =</span> <span class="fu">str_split_i</span>(sp_hist, <span class="st">"_"</span>, <span class="dv">1</span>),</span>
+<span id="cb16-168"><a href="#cb16-168"></a>         <span class="at">sp =</span> <span class="fu">str_split_i</span>(sp_hist, <span class="st">"_"</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-169"><a href="#cb16-169"></a>  <span class="fu">summarize</span>(ggplot2<span class="sc">::</span><span class="fu">mean_cl_boot</span>(auc), <span class="at">.by=</span><span class="fu">c</span>(sp, hist, strep_conc)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-170"><a href="#cb16-170"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> strep_conc, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb16-171"><a href="#cb16-171"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ymin, <span class="at">ymax =</span> ymax, <span class="at">color =</span> hist)) <span class="sc">+</span></span>
+<span id="cb16-172"><a href="#cb16-172"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> hist), <span class="at">lty=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-173"><a href="#cb16-173"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> hist)) <span class="sc">+</span></span>
+<span id="cb16-174"><a href="#cb16-174"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Total area under the growth curve"</span>, <span class="at">x =</span> <span class="st">"Streptomycin conc. (μg/ml)"</span>, </span>
+<span id="cb16-175"><a href="#cb16-175"></a>       <span class="at">color =</span> <span class="st">"Evolutionary</span><span class="sc">\n</span><span class="st">history"</span>) <span class="sc">+</span></span>
+<span id="cb16-176"><a href="#cb16-176"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sp) <span class="sc">+</span></span>
+<span id="cb16-177"><a href="#cb16-177"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="st">"log1p"</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">5000</span>))</span>
+<span id="cb16-178"><a href="#cb16-178"></a></span>
+<span id="cb16-179"><a href="#cb16-179"></a><span class="fu">ggsave</span>(</span>
+<span id="cb16-180"><a href="#cb16-180"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_strep.svg"</span>),</span>
+<span id="cb16-181"><a href="#cb16-181"></a>  auc_strep,</span>
+<span id="cb16-182"><a href="#cb16-182"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
+<span id="cb16-183"><a href="#cb16-183"></a>  <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb16-184"><a href="#cb16-184"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb16-185"><a href="#cb16-185"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
+<span id="cb16-186"><a href="#cb16-186"></a>)</span>
+<span id="cb16-187"><a href="#cb16-187"></a></span>
+<span id="cb16-188"><a href="#cb16-188"></a><span class="fu">ggsave</span>(</span>
+<span id="cb16-189"><a href="#cb16-189"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_strep.png"</span>),</span>
+<span id="cb16-190"><a href="#cb16-190"></a>  auc_strep,</span>
+<span id="cb16-191"><a href="#cb16-191"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
+<span id="cb16-192"><a href="#cb16-192"></a>  <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb16-193"><a href="#cb16-193"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb16-194"><a href="#cb16-194"></a>  <span class="at">device =</span> <span class="st">"png"</span></span>
+<span id="cb16-195"><a href="#cb16-195"></a>)</span>
+<span id="cb16-196"><a href="#cb16-196"></a><span class="in">```</span></span>
+<span id="cb16-197"><a href="#cb16-197"></a></span>
+<span id="cb16-198"><a href="#cb16-198"></a>::: {#fig-02}</span>
+<span id="cb16-201"><a href="#cb16-201"></a><span class="in">```{r}</span></span>
+<span id="cb16-202"><a href="#cb16-202"></a><span class="co">#| fig.width: 10</span></span>
+<span id="cb16-203"><a href="#cb16-203"></a><span class="co">#| fig.height: 4</span></span>
+<span id="cb16-204"><a href="#cb16-204"></a><span class="co">#| echo: false</span></span>
+<span id="cb16-205"><a href="#cb16-205"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-206"><a href="#cb16-206"></a>auc_strep</span>
+<span id="cb16-207"><a href="#cb16-207"></a><span class="in">```</span></span>
+<span id="cb16-208"><a href="#cb16-208"></a>Area under the growth curve for the four different bacterial species (panels) and their different evolutionary histories (colors) at different streptomycin concentrations (horizontal axis, μg/ml). Points are the mean over five biological replicates and line ranges show the 95% confidence interval from bootstraps. EVO = experimentally evolved to high streptomycin.</span>
+<span id="cb16-209"><a href="#cb16-209"></a>:::</span>
+<span id="cb16-210"><a href="#cb16-210"></a></span>
+<span id="cb16-211"><a href="#cb16-211"></a><span class="fu"># Pairwise filtrate growth</span></span>
+<span id="cb16-212"><a href="#cb16-212"></a></span>
+<span id="cb16-213"><a href="#cb16-213"></a>This is information about how well each species grew on the filtrate of all the species.</span>
+<span id="cb16-214"><a href="#cb16-214"></a></span>
+<span id="cb16-215"><a href="#cb16-215"></a>many_auc_res</span>
+<span id="cb16-218"><a href="#cb16-218"></a><span class="in">```{r}</span></span>
+<span id="cb16-219"><a href="#cb16-219"></a>a <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
+<span id="cb16-220"><a href="#cb16-220"></a>  <span class="fu">filter</span>(strep_conc <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-221"><a href="#cb16-221"></a>  <span class="fu">summarize</span>(<span class="at">m_max =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist))</span>
+<span id="cb16-222"><a href="#cb16-222"></a></span>
+<span id="cb16-223"><a href="#cb16-223"></a>many_spline_res <span class="sc">%&gt;%</span> </span>
+<span id="cb16-224"><a href="#cb16-224"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-225"><a href="#cb16-225"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-226"><a href="#cb16-226"></a>  <span class="fu">left_join</span>(a, <span class="at">by =</span> <span class="fu">join_by</span>(sp_hist)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-227"><a href="#cb16-227"></a>  <span class="fu">mutate</span>(<span class="at">m_rel =</span> m<span class="sc">/</span>m_max<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb16-228"><a href="#cb16-228"></a><span class="in">```</span></span>
+<span id="cb16-231"><a href="#cb16-231"></a><span class="in">```{r}</span></span>
+<span id="cb16-232"><a href="#cb16-232"></a>plot_heatmap <span class="ot">&lt;-</span> <span class="cf">function</span>(df, fill_var, fill_lab){</span>
+<span id="cb16-233"><a href="#cb16-233"></a>  <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> sp_filtrate, <span class="at">y =</span> sp_hist)) <span class="sc">+</span></span>
+<span id="cb16-234"><a href="#cb16-234"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> {{fill_var}})) <span class="sc">+</span></span>
+<span id="cb16-235"><a href="#cb16-235"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>({{fill_var}}), <span class="st">"%"</span>), <span class="at">color =</span> {{fill_var}} <span class="sc">&gt;</span> <span class="dv">40</span>)) <span class="sc">+</span></span>
+<span id="cb16-236"><a href="#cb16-236"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">45</span>)) <span class="sc">+</span></span>
+<span id="cb16-237"><a href="#cb16-237"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">45</span>)) <span class="sc">+</span></span>
+<span id="cb16-238"><a href="#cb16-238"></a>  <span class="fu">scale_fill_viridis</span>() <span class="sc">+</span></span>
+<span id="cb16-239"><a href="#cb16-239"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb16-240"><a href="#cb16-240"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Growth of species/evolutionary history"</span>, <span class="at">x =</span> <span class="st">"Filtrate from species/evolutionary history"</span>,</span>
+<span id="cb16-241"><a href="#cb16-241"></a>       <span class="at">fill =</span> fill_lab) <span class="sc">+</span></span>
+<span id="cb16-242"><a href="#cb16-242"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
+<span id="cb16-243"><a href="#cb16-243"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-244"><a href="#cb16-244"></a>                 <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb16-245"><a href="#cb16-245"></a>                 <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-246"><a href="#cb16-246"></a>                 <span class="at">panel.border =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb16-247"><a href="#cb16-247"></a>}</span>
+<span id="cb16-248"><a href="#cb16-248"></a><span class="in">```</span></span>
+<span id="cb16-249"><a href="#cb16-249"></a></span>
+<span id="cb16-250"><a href="#cb16-250"></a><span class="fu">## Growth rate</span></span>
+<span id="cb16-251"><a href="#cb16-251"></a></span>
+<span id="cb16-254"><a href="#cb16-254"></a><span class="in">```{r}</span></span>
+<span id="cb16-255"><a href="#cb16-255"></a>gr_max <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
+<span id="cb16-256"><a href="#cb16-256"></a>  <span class="fu">filter</span>(strep_conc <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-257"><a href="#cb16-257"></a>  <span class="fu">summarize</span>(<span class="at">m_max =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist))</span>
+<span id="cb16-258"><a href="#cb16-258"></a></span>
+<span id="cb16-259"><a href="#cb16-259"></a>gr_filtrate <span class="ot">&lt;-</span> many_spline_res <span class="sc">%&gt;%</span> </span>
+<span id="cb16-260"><a href="#cb16-260"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-261"><a href="#cb16-261"></a>  <span class="fu">summarize</span>(<span class="at">m_filt =</span> <span class="fu">mean</span>(mumax), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-262"><a href="#cb16-262"></a>  <span class="fu">left_join</span>(gr_max, <span class="at">by =</span> <span class="fu">join_by</span>(sp_hist)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-263"><a href="#cb16-263"></a>  <span class="fu">mutate</span>(<span class="at">m_rel =</span> m_filt<span class="sc">/</span>m_max<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-264"><a href="#cb16-264"></a>  <span class="fu">mutate</span>(<span class="at">sp_filtrate =</span> <span class="fu">factor</span>(sp_filtrate, <span class="at">levels =</span><span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
+<span id="cb16-265"><a href="#cb16-265"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)),</span>
+<span id="cb16-266"><a href="#cb16-266"></a>         <span class="at">sp_hist =</span> <span class="fu">factor</span>(sp_hist, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
+<span id="cb16-267"><a href="#cb16-267"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)))</span>
+<span id="cb16-268"><a href="#cb16-268"></a></span>
+<span id="cb16-269"><a href="#cb16-269"></a>gr_filtrate_plot <span class="ot">&lt;-</span> <span class="fu">plot_heatmap</span>(gr_filtrate, m_rel, <span class="st">"% of max μ"</span>)</span>
+<span id="cb16-270"><a href="#cb16-270"></a><span class="in">```</span></span>
+<span id="cb16-271"><a href="#cb16-271"></a></span>
+<span id="cb16-274"><a href="#cb16-274"></a><span class="in">```{r}</span></span>
+<span id="cb16-275"><a href="#cb16-275"></a><span class="co">#| eval: false</span></span>
+<span id="cb16-276"><a href="#cb16-276"></a><span class="fu">ggsave</span>(</span>
+<span id="cb16-277"><a href="#cb16-277"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_gr_filtrate.svg"</span>),</span>
+<span id="cb16-278"><a href="#cb16-278"></a>  gr_filtrate,</span>
+<span id="cb16-279"><a href="#cb16-279"></a>  <span class="at">width =</span> <span class="dv">8</span>,</span>
+<span id="cb16-280"><a href="#cb16-280"></a>  <span class="at">height =</span> <span class="dv">8</span>,</span>
+<span id="cb16-281"><a href="#cb16-281"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb16-282"><a href="#cb16-282"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
+<span id="cb16-283"><a href="#cb16-283"></a>)</span>
+<span id="cb16-284"><a href="#cb16-284"></a><span class="in">```</span></span>
+<span id="cb16-285"><a href="#cb16-285"></a></span>
+<span id="cb16-286"><a href="#cb16-286"></a>::: {#fig-03}</span>
+<span id="cb16-289"><a href="#cb16-289"></a><span class="in">```{r}</span></span>
+<span id="cb16-290"><a href="#cb16-290"></a><span class="co">#| fig.width: 7</span></span>
+<span id="cb16-291"><a href="#cb16-291"></a><span class="co">#| fig.height: 7</span></span>
+<span id="cb16-292"><a href="#cb16-292"></a><span class="co">#| echo: false</span></span>
+<span id="cb16-293"><a href="#cb16-293"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-294"><a href="#cb16-294"></a>gr_filtrate_plot</span>
+<span id="cb16-295"><a href="#cb16-295"></a><span class="in">```</span></span>
+<span id="cb16-296"><a href="#cb16-296"></a>Percent maximum growth rate (μ) of each species/evolutionary history (vertical axis) growing on the filtrate of other species, including itself (horizontal axis). Maximum μ is from monocultures with no competitor or streptomycin. Filtrate μ is from each species grown on the filtrate of every other species.</span>
+<span id="cb16-297"><a href="#cb16-297"></a>:::</span>
+<span id="cb16-298"><a href="#cb16-298"></a></span>
+<span id="cb16-299"><a href="#cb16-299"></a><span class="fu">## AUC (area under the growth curve)</span></span>
+<span id="cb16-300"><a href="#cb16-300"></a></span>
+<span id="cb16-303"><a href="#cb16-303"></a><span class="in">```{r}</span></span>
+<span id="cb16-304"><a href="#cb16-304"></a>auc_max <span class="ot">&lt;-</span> many_auc_res <span class="sc">%&gt;%</span> </span>
+<span id="cb16-305"><a href="#cb16-305"></a>  <span class="fu">filter</span>(strep_conc <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-306"><a href="#cb16-306"></a>  <span class="fu">summarize</span>(<span class="at">auc_max =</span> <span class="fu">mean</span>(auc), <span class="at">.by=</span><span class="fu">c</span>(sp_hist))</span>
+<span id="cb16-307"><a href="#cb16-307"></a></span>
+<span id="cb16-308"><a href="#cb16-308"></a>auc_filtrate <span class="ot">&lt;-</span> many_auc_res <span class="sc">%&gt;%</span> </span>
+<span id="cb16-309"><a href="#cb16-309"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_name, <span class="st">"pairwise"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-310"><a href="#cb16-310"></a>  <span class="fu">summarize</span>(<span class="at">auc_filt =</span> <span class="fu">mean</span>(auc), <span class="at">.by=</span><span class="fu">c</span>(sp_hist, sp_filtrate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-311"><a href="#cb16-311"></a>  <span class="fu">left_join</span>(auc_max, <span class="at">by =</span> <span class="fu">join_by</span>(sp_hist)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-312"><a href="#cb16-312"></a>  <span class="fu">mutate</span>(<span class="at">auc_rel =</span> auc_filt<span class="sc">/</span>auc_max<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-313"><a href="#cb16-313"></a>  <span class="fu">mutate</span>(<span class="at">sp_filtrate =</span> <span class="fu">factor</span>(sp_filtrate, <span class="at">levels =</span><span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
+<span id="cb16-314"><a href="#cb16-314"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)),</span>
+<span id="cb16-315"><a href="#cb16-315"></a>         <span class="at">sp_hist =</span> <span class="fu">factor</span>(sp_hist, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ANC_0403"</span>, <span class="st">"EVO_0403"</span>, <span class="st">"ANC_1287"</span>, <span class="st">"EVO_1287"</span>, <span class="st">"ANC_1896"</span>, </span>
+<span id="cb16-316"><a href="#cb16-316"></a>                                              <span class="st">"EVO_1896"</span>, <span class="st">"ANC_1977"</span>, <span class="st">"EVO_1977"</span>)))</span>
+<span id="cb16-317"><a href="#cb16-317"></a></span>
+<span id="cb16-318"><a href="#cb16-318"></a>auc_filtrate_plot <span class="ot">&lt;-</span> <span class="fu">plot_heatmap</span>(auc_filtrate, auc_rel, <span class="st">"% of max AUC"</span>)</span>
+<span id="cb16-319"><a href="#cb16-319"></a><span class="in">```</span></span>
+<span id="cb16-320"><a href="#cb16-320"></a></span>
+<span id="cb16-323"><a href="#cb16-323"></a><span class="in">```{r}</span></span>
+<span id="cb16-324"><a href="#cb16-324"></a><span class="co">#| eval: false</span></span>
+<span id="cb16-325"><a href="#cb16-325"></a><span class="fu">ggsave</span>(</span>
+<span id="cb16-326"><a href="#cb16-326"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figs"</span>, <span class="st">"monoculture_auc_filtrate.svg"</span>),</span>
+<span id="cb16-327"><a href="#cb16-327"></a>  auc_filtrate,</span>
+<span id="cb16-328"><a href="#cb16-328"></a>  <span class="at">width =</span> <span class="dv">8</span>,</span>
+<span id="cb16-329"><a href="#cb16-329"></a>  <span class="at">height =</span> <span class="dv">8</span>,</span>
+<span id="cb16-330"><a href="#cb16-330"></a>  <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb16-331"><a href="#cb16-331"></a>  <span class="at">device =</span> <span class="st">"svg"</span></span>
+<span id="cb16-332"><a href="#cb16-332"></a>)</span>
+<span id="cb16-333"><a href="#cb16-333"></a><span class="in">```</span></span>
+<span id="cb16-334"><a href="#cb16-334"></a></span>
+<span id="cb16-335"><a href="#cb16-335"></a>::: {#fig-04}</span>
+<span id="cb16-338"><a href="#cb16-338"></a><span class="in">```{r}</span></span>
+<span id="cb16-339"><a href="#cb16-339"></a><span class="co">#| fig.width: 7</span></span>
+<span id="cb16-340"><a href="#cb16-340"></a><span class="co">#| fig.height: 7</span></span>
+<span id="cb16-341"><a href="#cb16-341"></a><span class="co">#| echo: false</span></span>
+<span id="cb16-342"><a href="#cb16-342"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-343"><a href="#cb16-343"></a>auc_filtrate_plot</span>
+<span id="cb16-344"><a href="#cb16-344"></a><span class="in">```</span></span>
+<span id="cb16-345"><a href="#cb16-345"></a>Percent maximum Area Under the Growth Curve (AUC) of each species/evolutionary history (vertical axis) growing on the filtrate of other species, including itself (horizontal axis). Maximum AUC is from monocultures with no competitor or streptomycin. Filtrate AUC is from each species grown on the filtrate of every other species.</span>
+<span id="cb16-346"><a href="#cb16-346"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
