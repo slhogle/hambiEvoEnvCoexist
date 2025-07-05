@@ -27,35 +27,35 @@ website:
             file: R/communities/experiment_design/02_trios.qmd
           - text: "iii) Species quartets - 96 Well plate layout"
             file: R/communities/experiment_design/03_quartets.qmd
-      - section: "3. Community growth - optical density"
+      - section: "3. Community growth - biomass"
         contents:
           - text: "i) Process and plot OD data"
-            file: R/communities/optical_density/01_format_plot_od.qmd
+            file: R/communities/community_biomass/optical_density/01_format_plot_od.qmd
       - section: "4. Community growth - amplicon formatting"
         contents:
           - text: "i) Batch 2024-07-11"
-            file: R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.qmd
-          - text: "ii) Batch 2024-07-11 calibration"
-            file: R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.qmd
-          - text: "iii) Batch 2024-10-24"
-            file: R/communities/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.qmd
-          - text: "iv) Batch 2025-01-27"
-            file: R/communities/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.qmd
-          - text: "v) Batch 2025-05-02"
-            file: R/communities/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.qmd
-          - text: "vi) Compile pairs, trios, quartets"
-            file: R/communities/amplicon/01_compile_format.qmd
-      - section: "5. Community growth - Coexistence/exclusion analysis"
+            file: R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.qmd
+          - text: "ii) Batch 2024-10-24"
+            file: R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.qmd
+          - text: "iii) Batch 2025-01-27"
+            file: R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.qmd
+          - text: "iv) Batch 2025-05-02"
+            file: R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.qmd
+          - text: "v) Compile pairs, trios, quartets"
+            file: R/communities/community_composition/amplicon/01_compile_format.qmd
+      - section: "5. Community growth - composition"
         contents:
           - text: "i) Species pairs"
-            file: R/communities/amplicon/02_analysis_pairs.qmd
+            file: R/communities/community_composition/01_analysis_pairs.qmd
           - text: "ii) Species trios"
-            file: R/communities/amplicon/03_analysis_trios.qmd
+            file: R/communities/community_composition/02_analysis_trios.qmd
           - text: "iii) Species quartets"
-            file: R/communities/amplicon/04_analysis_quartets.qmd
+            file: R/communities/community_composition/03_analysis_quartets.qmd
           - text: "iv) All strains combined"
-            file: R/communities/amplicon/05_analysis_octets.qmd
-
+            file: R/communities/community_composition/04_analysis_octets.qmd
+          - text: "v) Violation of pairwise assembly rule"
+            file: R/communities/community_composition/05_assembly_rule_violation.qmd
+            
 format:
   html:
     theme:

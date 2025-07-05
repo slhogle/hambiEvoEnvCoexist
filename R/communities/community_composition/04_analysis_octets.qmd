@@ -1,0 +1,139 @@
+---
+title: "Analysis of octet competition"
+author: "Shane Hogle"
+date: today
+link-citations: true
+abstract: "Here we analyze the community outpcomes from all competing strains with each strain started at different density."
+---
+
+# Setup
+
+## Libraries
+
+```{r}
+#| output: false
+library(tidyverse)
+library(here)
+library(fs)
+library(scales)
+```
+
+## Global variables
+
+```{r}
+data <- here::here("data", "communities")
+# make processed data directory if it doesn't exist
+fs::dir_create(data)
+```
+
+# Read data
+
+## Species abundances
+
+```{r}
+#| output: false
+samp_octs <- readr::read_tsv(here::here(data, "8sps_compiled.tsv")) %>% 
+  dplyr::rename(f = f_thresh) %>% 
+  mutate(target_f_masterplate = target_f_masterplate*100, 
+         max_f = max_f*100)
+```
+
+# Format
+
+Create a metadata tibble that contains faceting information
+
+```{r}
+md <- samp_octs %>% 
+  dplyr::select(sample, strainID, target_f_masterplate) %>% 
+  # make a combined evolution and species identifier and extract the community ID
+  dplyr::mutate(strainID = paste0("H", str_extract(strainID, "\\d+"))) %>% 
+  dplyr::group_by(sample) %>% 
+  dplyr::mutate(n = 1:n()) %>% 
+  ungroup() %>% 
+  tidyr::pivot_wider(id_cols = c(sample), values_from = c(strainID, target_f_masterplate), names_from = n) %>% 
+  mutate(sps = paste(strainID_1, strainID_2, strainID_3, strainID_4, sep = "-"),
+         f0 = paste(target_f_masterplate_1, target_f_masterplate_2, target_f_masterplate_3, target_f_masterplate_4, sep = ",")) %>% 
+  dplyr::select(sample, sps, f0)
+```
+
+Combine into a final tibble
+
+```{r}
+t0 <- samp_octs %>% 
+  dplyr::filter(community_type == "master") %>% 
+  dplyr::select(-strep_conc, -replicate) %>% 
+  full_join(tibble(transfers = c(0, 0, 0, 0), strep_conc = c(0, 16, 64, 256)),
+            by = join_by(transfers),
+            relationship = "many-to-many")
+
+t8 <- samp_octs %>% 
+  dplyr::filter(community_type == "experiment")
+
+tf <- bind_rows(t0, t8) %>% 
+  left_join(md, by = join_by(sample)) %>% 
+  dplyr::summarize(ggplot2::mean_cl_boot(f),
+                    .by = c("sps", "f0", "max_f_sp", "max_f", "strep_conc", "transfers", "strainID")) %>% 
+  mutate(ymin = if_else(is.na(ymin), y, ymin),
+         ymax = if_else(is.na(ymax), y, ymax)) %>% 
+  mutate(extinct = if_else(y <= 0.01 | y >= 0.99, "extinct", "coexist")) %>% 
+  mutate(facet = paste0(f0, " ", max_f_sp, ",", max_f)) %>% 
+  # to make the facets in a nice order for dominant species
+  mutate(facet = factor(facet, 
+                        levels = c("40,20,20,20 ANC_0403,30", "70,10,10,10 ANC_0403,65", "40,20,20,20 EVO_0403,30", "70,10,10,10 EVO_0403,65", 
+                                   "20,40,20,20 ANC_1287,30", "10,70,10,10 ANC_1287,65", "20,40,20,20 EVO_1287,30", "10,70,10,10 EVO_1287,65",
+                                   "20,20,40,20 ANC_1896,30", "10,10,70,10 ANC_1896,65", "20,20,40,20 EVO_1896,30", "10,10,70,10 EVO_1896,65", 
+                                   "20,20,20,40 ANC_1977,30", "10,10,10,70 ANC_1977,65", "20,20,20,40 EVO_1977,30", "10,10,10,70 EVO_1977,65",
+                                   "25,25,25,25 none,13")))
+```
+
+# Plot
+
+```{r}
+spcols <- c("HAMBI_0403" = "#bd7811", "HAMBI_1287" = "#476c9e", "HAMBI_1896" = "#31752a", "HAMBI_1977" = "#ffc755")
+
+pj <- ggplot2::position_jitterdodge(jitter.width=0.0,
+                           jitter.height = 0.0,
+                           dodge.width = 0.5,
+                           seed=9)
+
+p8sps <- ggplot(tf, aes(x = transfers, y = y, group = interaction(strainID, f0, strep_conc))) +
+  geom_hline(yintercept=0.01, color = "grey20", lty = 2) +
+  geom_hline(yintercept=0.99, color = "grey20", lty = 2) +
+  ggplot2::geom_linerange(aes(ymin = ymin, ymax = ymax, color = strainID), position = pj) + 
+  ggh4x::geom_pointpath(aes(color = strainID, shape = extinct), position = pj, mult = 0.2) +
+  facet_grid(strep_conc ~ facet, 
+             labeller = labeller(facet = label_wrap_gen(width = 10))) +
+  ggplot2::labs(x = "Growth cycle", y = "Species frequency", color = "Species") +
+  ggplot2::scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1), labels = percent) + #trans = "sqrt",
+  ggplot2::scale_x_continuous(limits = c(-1, 9), breaks = c(0, 8)) +
+  scale_shape_manual(values = c(16, 4), guide = "none") +
+  scale_color_manual(values = spcols) +
+  ggplot2::theme_bw() + 
+  ggplot2::theme(strip.background = element_blank(),
+        legend.position = "bottom", 
+        panel.grid = element_blank(),
+        legend.title = element_blank(),
+        axis.text = element_text(size = 8),
+        strip.text = element_text(size = 8))
+```
+
+
+::: {#fig-01}
+```{r}
+#| fig-width: 14
+#| fig-height: 7
+#| warning: false
+#| echo: false
+p8sps
+```
+Compositions of all eight strains of the four species together at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid rows) and the 17 different treatments of with different starting proportions of each species/evolutionary history (grid columns). The species proportions (top row of grid columns) are always in the same species order (HAMBI_0403, HAMBI_1287, HAMBI_1896, HAMBI_1977) and represent the combined proportion of the two strains from each species because we cannot distinguish strain identity from 16S amplicon sequencing. The dominant strain and its proportion (bottom row of grid columns) changes for each different starting proportion. Every strain was allowed to start from 65%, 30% or 12.5% in one experiment.Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap.
+:::
+
+For reference these are the different strain starting proportions used in the 8 strain experiments.
+
+```{r}
+readr::read_tsv(here::here("_data_raw", "communities", "20250502_BTK_illumina_v3", "sample_compositions.tsv")) %>% 
+  mutate(sample = str_trim(sample)) %>% 
+  filter(str_detect(sample, "^8_\\d+$"))
+```
+

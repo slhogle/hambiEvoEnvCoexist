@@ -3,7 +3,7 @@ title: "Designing two-species subcommunities"
 author: "Shane Hogle"
 date: today
 link-citations: true
-abstract: "This notebook creates and lays out the steps for constructing the experimental species pairs for this experiment. It is inspired by the method outlined in this paper: [Full factorial construction of synthetic microbial communities, eLife 13:RP101906](https://doi.org/10.7554/eLife.101906.1)"
+abstract: "This notebook creates and lays out the steps for constructing the experimental species pairs for this experiment. It is inspired by the method outlined in this paper: [Full factorial construction of synthetic microbial communities, eLife 13:RP101906](https://doi.org/10.7554/eLife.101906.1). Note that we did not include competition between the evolved and ancestral form of each species because they would not be distinguishable using 16S rRNA amplicon sequencing. However, they could concievably be competed through CFU counting on a counter selective agar containing streptomycin."
 ---
 
 # Setup

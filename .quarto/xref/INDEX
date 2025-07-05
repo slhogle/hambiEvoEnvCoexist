@@ -82,5 +82,41 @@
   },
   "R/communities/amplicon/05_analysis_octets.qmd": {
     "05_analysis_octets.html": "c93cec44"
+  },
+  "R/communities/community_biomass/optical_density/01_format_plot_od.qmd": {
+    "01_format_plot_od.html": "e3ab771b"
+  },
+  "R/communities/community_composition/01_analysis_pairs.qmd": {
+    "01_analysis_pairs.html": "c5f8dda0"
+  },
+  "R/communities/community_composition/02_analysis_trios.qmd": {
+    "02_analysis_trios.html": "2e0ce70f"
+  },
+  "R/communities/community_composition/03_analysis_quartets.qmd": {
+    "03_analysis_quartets.html": "9dba1ad7"
+  },
+  "R/communities/community_composition/04_analysis_octets.qmd": {
+    "04_analysis_octets.html": "682f1b44"
+  },
+  "R/communities/community_composition/05_assembly_rule_violation.qmd": {
+    "05_assembly_rule_violation.html": "549e0764"
+  },
+  "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.qmd": {
+    "01_format_rbec_tab.html": "a596f9ec"
+  },
+  "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.qmd": {
+    "01_format_rbec_tab.html": "0ebd7620"
+  },
+  "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.qmd": {
+    "02_correct_boil_to_qiagen.html": "204d83a1"
+  },
+  "R/communities/community_composition/amplicon/01_compile_format.qmd": {
+    "01_compile_format.html": "36258d75"
+  },
+  "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.qmd": {
+    "01_format_rbec_tab.html": "b090d618"
+  },
+  "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.qmd": {
+    "01_format_rbec_tab.html": "c39bf44d"
   }
 }

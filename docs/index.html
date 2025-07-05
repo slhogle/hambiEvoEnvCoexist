@@ -8,7 +8,8 @@
 
 <meta name="author" content="Shane L Hogle">
 <meta name="author" content="Milla Similä">
-<meta name="dcterms.date" content="2025-05-24">
+<meta name="author" content="Chuliang Song">
+<meta name="dcterms.date" content="2025-07-05">
 <meta name="keywords" content="Microbiology, Community assembly, Evolution, Antimicrobial resistance (AMR)">
 
 <title>Data anlalysis for the project hambiEvoEnvCoexist – hambiEvoEnvCoexist</title>
@@ -248,7 +249,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">3. Community growth - optical density</span></a>
+ <span class="menu-text">3. Community growth - biomass</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -256,7 +257,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/optical_density/01_format_plot_od.html" class="sidebar-item-text sidebar-link">
+  <a href="./R/communities/community_biomass/optical_density/01_format_plot_od.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">i) Process and plot OD data</span></a>
   </div>
 </li>
@@ -273,38 +274,32 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+  <a href="./R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">i) Batch 2024-07-11</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ii) Batch 2024-07-11 calibration</span></a>
+  <a href="./R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ii) Batch 2024-10-24</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">iii) Batch 2024-10-24</span></a>
+  <a href="./R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iii) Batch 2025-01-27</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">iv) Batch 2025-01-27</span></a>
+  <a href="./R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">iv) Batch 2025-05-02</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">v) Batch 2025-05-02</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/01_compile_format.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">vi) Compile pairs, trios, quartets</span></a>
+  <a href="./R/communities/community_composition/amplicon/01_compile_format.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">v) Compile pairs, trios, quartets</span></a>
   </div>
 </li>
       </ul>
@@ -312,7 +307,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">5. Community growth - Coexistence/exclusion analysis</span></a>
+ <span class="menu-text">5. Community growth - composition</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -320,26 +315,32 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/02_analysis_pairs.html" class="sidebar-item-text sidebar-link">
+  <a href="./R/communities/community_composition/01_analysis_pairs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">i) Species pairs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/03_analysis_trios.html" class="sidebar-item-text sidebar-link">
+  <a href="./R/communities/community_composition/02_analysis_trios.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ii) Species trios</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/04_analysis_quartets.html" class="sidebar-item-text sidebar-link">
+  <a href="./R/communities/community_composition/03_analysis_quartets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">iii) Species quartets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./R/communities/amplicon/05_analysis_octets.html" class="sidebar-item-text sidebar-link">
+  <a href="./R/communities/community_composition/04_analysis_octets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">iv) All strains combined</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R/communities/community_composition/05_assembly_rule_violation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">v) Violation of pairwise assembly rule</span></a>
   </div>
 </li>
       </ul>
@@ -389,7 +390,7 @@ window.Quarto = {
 
 <div class="quarto-title-meta-author">
   <div class="quarto-title-meta-heading">Authors</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
   
     <div class="quarto-title-meta-contents">
     <p class="author">Shane L Hogle <a href="https://orcid.org/0000-0003-2595-3863" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
@@ -411,6 +412,16 @@ window.Quarto = {
             </a>
           </p>
       </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Chuliang Song <a href="https://orcid.org/0000-0001-7490-8626" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.ucla.edu/">
+            University of California, Los Angeles
+            </a>
+          </p>
+      </div>
   </div>
 
 <div class="quarto-title-meta">
@@ -419,7 +430,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 24, 2025</p>
+      <p class="date">July 5, 2025</p>
     </div>
   </div>
   
@@ -1018,104 +1029,111 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-15"><a href="#cb2-15"></a><span class="co">        city: Turku</span></span>
 <span id="cb2-16"><a href="#cb2-16"></a><span class="co">        state: Finland</span></span>
 <span id="cb2-17"><a href="#cb2-17"></a><span class="co">        url: https://www.utu.fi/en</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#abstract: &gt; </span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#  The abstract text can go here </span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#  and also here ...</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="an">keywords:</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="co">  - Microbiology</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="co">  - Community assembly</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co">  - Evolution</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="co">  - Antimicrobial resistance (AMR)</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="an">license:</span><span class="co"> "CC BY"</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="an">copyright:</span><span class="co"> </span></span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="co">  holder: Shane L Hogle</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="co">  year: 2024</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a><span class="co"># citation: </span></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#   container-title: BioRxiv</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a><span class="co">#   volume: </span></span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="co">#   issue: </span></span>
-<span id="cb2-34"><a href="#cb2-34"></a><span class="co">#   doi: </span></span>
-<span id="cb2-35"><a href="#cb2-35"></a><span class="an">funding:</span><span class="co"> "[Research Council of Finland Award 356133](https://research.fi/en/results/funding/77810)"</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a><span class="co">---</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a></span>
-<span id="cb2-39"><a href="#cb2-39"></a><span class="fu">## Manuscript:</span></span>
-<span id="cb2-40"><a href="#cb2-40"></a></span>
-<span id="cb2-41"><a href="#cb2-41"></a><span class="fu">### Published record</span></span>
-<span id="cb2-42"><a href="#cb2-42"></a></span>
-<span id="cb2-43"><a href="#cb2-43"></a>TBD</span>
-<span id="cb2-44"><a href="#cb2-44"></a></span>
-<span id="cb2-45"><a href="#cb2-45"></a><span class="fu">### Preprint</span></span>
-<span id="cb2-46"><a href="#cb2-46"></a></span>
-<span id="cb2-47"><a href="#cb2-47"></a>TBD</span>
-<span id="cb2-48"><a href="#cb2-48"></a></span>
-<span id="cb2-49"><a href="#cb2-49"></a><span class="fu">## Introduction</span></span>
-<span id="cb2-50"><a href="#cb2-50"></a></span>
-<span id="cb2-51"><a href="#cb2-51"></a>Past work has shown that the composition of small bacterial communities can be predicted remarkably well from outcomes of competitions between small sets of species <span class="co">[</span><span class="ot">@friedman2017</span><span class="co">]</span>. Other work has questioned whether such simple qualitative assembly rules hold in more complex situations such as when the species pool shares an evolutionary history <span class="co">[</span><span class="ot">@chang2023</span><span class="co">]</span> (also see <span class="co">[</span><span class="ot">this blog post</span><span class="co">](https://sanchezlaboratory.weebly.com/blog/with-a-little-help-of-bacterial-friends-solo-no-puedes-con-amigos-si)</span>). If community assembly dynamics can truly be characterized by additive pairwise processes this would be a great advantage for modelers. It would mean that communities could be described sufficiently using paired species interactions (as in traditional Lotka Volterra). However, if higher-order interactions <span class="co">[</span><span class="ot">@levine2017</span><span class="co">]</span> are common and important (e.g., species C mediates the interaction between species A and B in a density independent way) then the number of parameters necessary to sufficiently model the system quickly blows up quickly making the entire problem intractable.</span>
-<span id="cb2-52"><a href="#cb2-52"></a></span>
-<span id="cb2-53"><a href="#cb2-53"></a>Understanding the fundamental processes in community assembly will be key to designing microbial communities with desirable properties for human use and to anticipate the response of communities in nature to change. Two theoretical camps have emerged in contemporary theory; one arguing for pairwise assembly rules and another arguing for the importance of networks of chained pairwise interactions and/or higher order interactions. Evidence exists for both processes occurring in nature. Thus, the question of when/how/why community assembly can be sufficiently described/predicted from additive pairwise processes is relevant and important for gaining a predictive understanding of microbiome dynamics. For example, when will the assembly process emerge as a property of the community, rather than being a straightforward additive process? In particular, do the previous evolutionary history and patterns of coexistence in the species pool determine emergent coexistence? What is the role for different growth conditions (substrate availability, antibacterial compounds, pH, predator presence)? Or does prior adaptive evolution to the environment change the outcomes? Do the "simple" rules governing community assembly fundamentally change as you add more layers of complexity?</span>
-<span id="cb2-54"><a href="#cb2-54"></a></span>
-<span id="cb2-55"><a href="#cb2-55"></a>The goal here is to shed some additional light on the question of the importance of pairwise competition/emergent coexistence in microbiomes. Our experiment assembles all possible 2, 3, and 4 species sub communities from a 4-species pool under a gradient of antibiotic concentrations and with different evolutionary histories of the four species. We assess the predictability of community assembly outcomes based on subsets of the reduced species assemblies and attempt to understand whether assembly operates in a predominantly pairwise way.</span>
-<span id="cb2-56"><a href="#cb2-56"></a></span>
-<span id="cb2-57"><a href="#cb2-57"></a><span class="fu">## Experiment overview</span></span>
-<span id="cb2-58"><a href="#cb2-58"></a></span>
-<span id="cb2-59"><a href="#cb2-59"></a><span class="fu">### Background:</span></span>
-<span id="cb2-60"><a href="#cb2-60"></a></span>
-<span id="cb2-61"><a href="#cb2-61"></a>In prior work from our lab we experimentally evolved all species from the HAMBI synthetic community to increasing concentrations of the aminoglycoside antibiotic streptomycin. Briefly, we would grow each species at the highest streptomycin concentration it could tolerate for a number of growth cycles, then we would transfer into a higher streptomycin. We did this until we reached a streptomycin concentration where we could no longer detect growth. Then these cultures were plated and a single clone was isolated.</span>
-<span id="cb2-62"><a href="#cb2-62"></a></span>
-<span id="cb2-63"><a href="#cb2-63"></a>These clones are the source "evolved" starting materials for this experiment, where their clonal ancestor is the "ancestral" starting material.</span>
-<span id="cb2-64"><a href="#cb2-64"></a></span>
-<span id="cb2-65"><a href="#cb2-65"></a><span class="fu">### Traits and physiology of species:</span></span>
-<span id="cb2-66"><a href="#cb2-66"></a></span>
-<span id="cb2-67"><a href="#cb2-67"></a>The ancestral and evolved form of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="co">[</span><span class="ot">@reasoner1985a</span><span class="co">]</span> at concentrations of 0, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, and 4096 μg/ml streptomycin. Growth was followed using optical density at 600 nm in a Bioscreen plate reader. Growth rates and carrying capacities were determined from the high resolution growth curves using AMiGA.</span>
-<span id="cb2-68"><a href="#cb2-68"></a></span>
-<span id="cb2-69"><a href="#cb2-69"></a><span class="fu">### Species interactions:</span></span>
-<span id="cb2-70"><a href="#cb2-70"></a></span>
-<span id="cb2-71"><a href="#cb2-71"></a>The ancestral and evolved forms of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="co">[</span><span class="ot">@reasoner1985a</span><span class="co">]</span>. Cultures were filtered to remove bacterial biomass and the spent media was stored at 4℃ until use. Next the evolved and ancestral forms of each species were grown in the spent medium of each other evo/anc species for 48 hours at 30℃ and growth was followed using optical density at 600 nm in a Bioscreen plate reader.</span>
-<span id="cb2-72"><a href="#cb2-72"></a></span>
-<span id="cb2-73"><a href="#cb2-73"></a>For the Burkholder diffusion assay each species/evolutionary form was added to a soft agar on a petri dish. Then a small volume of each species was pipetted directly onto the agar and plates and checked for zones of inhibition.</span>
-<span id="cb2-74"><a href="#cb2-74"></a></span>
-<span id="cb2-75"><a href="#cb2-75"></a><span class="fu">### Competition/coexistence outcomes (species proportions from communities):</span></span>
-<span id="cb2-76"><a href="#cb2-76"></a></span>
-<span id="cb2-77"><a href="#cb2-77"></a>Here we wish to ensure that any equilibrium coexistence or competitive exclusion between species is not multistable - meaning that the outcome is deterministic and truly based on the density-independent competitive abilities of the species and not dependent on their starting density. The multistability problem has been addressed in other studies by growing each species from each community at different starting densities. This is typically done by starting all of the rare species at a low density and one abundant species at a higher density (as measured by optical density). For more than 2 species you cannot reasonably achieve all possible permutations of different densities, but you can start each species from rare, while leaving one remaining species high.</span>
-<span id="cb2-78"><a href="#cb2-78"></a></span>
-<span id="cb2-79"><a href="#cb2-79"></a>Here we use starting conditions with 10%/90% for pairs, 80%/10%/10% for trios, and 70%/10%/10%/10% for quartets. For pairs, we alternated so that each species started from rare. For trios and quartets, we alternated so that each species was allowed to invade from rare but we did not use all possible staring proportions due to practical and cost limitations. Another important consideration is that we can not distinguish between the ancestral and evolved forms of the same species with amplicon sequencing (or with plate counts) so that our experimental arrangement cannot be fully factorial (e.g., we cannot compete ancestral 1977 against evolved 1977) and thus there are fewer combinations that one would expect from expected scaling of $2^{(8-1)} = 128$</span>
-<span id="cb2-80"><a href="#cb2-80"></a></span>
-<span id="cb2-81"><a href="#cb2-81"></a>For the coexistence/exclusion experiments experimental communities are inoculated in 500 μl of 100% R2A in deep 96 well plates at a 50 fold dilution at four different streptomycin levels: 0, 16, 64, and 256 μg/ml. Plates were incubated in the dark at 30℃ with shaking at 800 RPM. Serial transfers (50 fold dilution; 10 μl to 490 μl) were conducted every 48 hours for a total of eight growth cycles. For every growth cycle $\mathrm{log_2(50)} \approx 5.6$ generations will have elapsed for a total of about 45 generations over eight cycles.</span>
-<span id="cb2-82"><a href="#cb2-82"></a></span>
-<span id="cb2-83"><a href="#cb2-83"></a><span class="fu">## Measurements and data types</span></span>
-<span id="cb2-84"><a href="#cb2-84"></a></span>
-<span id="cb2-85"><a href="#cb2-85"></a><span class="fu">### Traits and physiology of species:</span></span>
-<span id="cb2-86"><a href="#cb2-86"></a></span>
-<span id="cb2-87"><a href="#cb2-87"></a><span class="ss">-   </span>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on a gradient of streptomycin concentrations</span>
-<span id="cb2-88"><a href="#cb2-88"></a></span>
-<span id="cb2-89"><a href="#cb2-89"></a><span class="fu">### Species interactions:</span></span>
-<span id="cb2-90"><a href="#cb2-90"></a></span>
-<span id="cb2-91"><a href="#cb2-91"></a><span class="ss">-   </span>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on the filtrate of all other species.</span>
-<span id="cb2-92"><a href="#cb2-92"></a><span class="ss">-   </span>Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). These results show that no species/evolutionary form produced zones of inhibition for any other species/form. This suggests that there will not be significant interference competition in this experiment.</span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co">  - name: Chuliang Song</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co">    orcid: 0000-0001-7490-8626</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co">    affiliation: </span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="co">      - name: University of California, Los Angeles</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co">        city: Los Angeles, California</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co">        state: USA</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co">        url: https://www.ucla.edu/</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#abstract: &gt; </span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="co">#  The abstract text can go here </span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="co">#  and also here ...</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="an">keywords:</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="co">  - Microbiology</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="co">  - Community assembly</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="co">  - Evolution</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="co">  - Antimicrobial resistance (AMR)</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a><span class="an">license:</span><span class="co"> "CC BY"</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="an">copyright:</span><span class="co"> </span></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="co">  holder: Shane L Hogle</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a><span class="co">  year: 2024</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a><span class="co"># citation: </span></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="co">#   container-title: BioRxiv</span></span>
+<span id="cb2-39"><a href="#cb2-39"></a><span class="co">#   volume: </span></span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="co">#   issue: </span></span>
+<span id="cb2-41"><a href="#cb2-41"></a><span class="co">#   doi: </span></span>
+<span id="cb2-42"><a href="#cb2-42"></a><span class="an">funding:</span><span class="co"> "[Research Council of Finland Award 356133](https://research.fi/en/results/funding/77810)"</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
+<span id="cb2-44"><a href="#cb2-44"></a><span class="co">---</span></span>
+<span id="cb2-45"><a href="#cb2-45"></a></span>
+<span id="cb2-46"><a href="#cb2-46"></a><span class="fu">## Manuscript:</span></span>
+<span id="cb2-47"><a href="#cb2-47"></a></span>
+<span id="cb2-48"><a href="#cb2-48"></a><span class="fu">### Published record</span></span>
+<span id="cb2-49"><a href="#cb2-49"></a></span>
+<span id="cb2-50"><a href="#cb2-50"></a>TBD</span>
+<span id="cb2-51"><a href="#cb2-51"></a></span>
+<span id="cb2-52"><a href="#cb2-52"></a><span class="fu">### Preprint</span></span>
+<span id="cb2-53"><a href="#cb2-53"></a></span>
+<span id="cb2-54"><a href="#cb2-54"></a>TBD</span>
+<span id="cb2-55"><a href="#cb2-55"></a></span>
+<span id="cb2-56"><a href="#cb2-56"></a><span class="fu">## Introduction</span></span>
+<span id="cb2-57"><a href="#cb2-57"></a></span>
+<span id="cb2-58"><a href="#cb2-58"></a>Past work has shown that the composition of small bacterial communities can be predicted remarkably well from outcomes of competitions between small sets of species <span class="co">[</span><span class="ot">@friedman2017</span><span class="co">]</span>. Other work has questioned whether such simple qualitative assembly rules hold in more complex situations such as when the species pool shares an evolutionary history <span class="co">[</span><span class="ot">@chang2023</span><span class="co">]</span> (also see <span class="co">[</span><span class="ot">this blog post</span><span class="co">](https://sanchezlaboratory.weebly.com/blog/with-a-little-help-of-bacterial-friends-solo-no-puedes-con-amigos-si)</span>). If community assembly dynamics can truly be characterized by additive pairwise processes this would be a great advantage for modelers. It would mean that communities could be described sufficiently using paired species interactions (as in traditional Lotka Volterra). However, if higher-order interactions <span class="co">[</span><span class="ot">@levine2017</span><span class="co">]</span> are common and important (e.g., species C mediates the interaction between species A and B in a density independent way) then the number of parameters necessary to sufficiently model the system quickly blows up quickly making the entire problem intractable.</span>
+<span id="cb2-59"><a href="#cb2-59"></a></span>
+<span id="cb2-60"><a href="#cb2-60"></a>Understanding the fundamental processes in community assembly will be key to designing microbial communities with desirable properties for human use and to anticipate the response of communities in nature to change. Two theoretical camps have emerged in contemporary theory; one arguing for pairwise assembly rules and another arguing for the importance of networks of chained pairwise interactions and/or higher order interactions. Evidence exists for both processes occurring in nature. Thus, the question of when/how/why community assembly can be sufficiently described/predicted from additive pairwise processes is relevant and important for gaining a predictive understanding of microbiome dynamics. For example, when will the assembly process emerge as a property of the community, rather than being a straightforward additive process? In particular, do the previous evolutionary history and patterns of coexistence in the species pool determine emergent coexistence? What is the role for different growth conditions (substrate availability, antibacterial compounds, pH, predator presence)? Or does prior adaptive evolution to the environment change the outcomes? Do the "simple" rules governing community assembly fundamentally change as you add more layers of complexity?</span>
+<span id="cb2-61"><a href="#cb2-61"></a></span>
+<span id="cb2-62"><a href="#cb2-62"></a>The goal here is to shed some additional light on the question of the importance of pairwise competition/emergent coexistence in microbiomes. Our experiment assembles all possible 2, 3, and 4 species sub communities from a 4-species pool under a gradient of antibiotic concentrations and with different evolutionary histories of the four species. We assess the predictability of community assembly outcomes based on subsets of the reduced species assemblies and attempt to understand whether assembly operates in a predominantly pairwise way.</span>
+<span id="cb2-63"><a href="#cb2-63"></a></span>
+<span id="cb2-64"><a href="#cb2-64"></a><span class="fu">## Experiment overview</span></span>
+<span id="cb2-65"><a href="#cb2-65"></a></span>
+<span id="cb2-66"><a href="#cb2-66"></a><span class="fu">### Background:</span></span>
+<span id="cb2-67"><a href="#cb2-67"></a></span>
+<span id="cb2-68"><a href="#cb2-68"></a>In prior work from our lab we experimentally evolved all species from the HAMBI synthetic community to increasing concentrations of the aminoglycoside antibiotic streptomycin. Briefly, we would grow each species at the highest streptomycin concentration it could tolerate for a number of growth cycles, then we would transfer into a higher streptomycin. We did this until we reached a streptomycin concentration where we could no longer detect growth. Then these cultures were plated and a single clone was isolated.</span>
+<span id="cb2-69"><a href="#cb2-69"></a></span>
+<span id="cb2-70"><a href="#cb2-70"></a>These clones are the source "evolved" starting materials for this experiment, where their clonal ancestor is the "ancestral" starting material.</span>
+<span id="cb2-71"><a href="#cb2-71"></a></span>
+<span id="cb2-72"><a href="#cb2-72"></a><span class="fu">### Traits and physiology of species:</span></span>
+<span id="cb2-73"><a href="#cb2-73"></a></span>
+<span id="cb2-74"><a href="#cb2-74"></a>The ancestral and evolved form of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="co">[</span><span class="ot">@reasoner1985a</span><span class="co">]</span> at concentrations of 0, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, and 4096 μg/ml streptomycin. Growth was followed using optical density at 600 nm in a Bioscreen plate reader. Growth rates and carrying capacities were determined from the high resolution growth curves using AMiGA.</span>
+<span id="cb2-75"><a href="#cb2-75"></a></span>
+<span id="cb2-76"><a href="#cb2-76"></a><span class="fu">### Species interactions:</span></span>
+<span id="cb2-77"><a href="#cb2-77"></a></span>
+<span id="cb2-78"><a href="#cb2-78"></a>The ancestral and evolved forms of each species were grown for 48 hours at 30℃ in 100% R2A growth medium <span class="co">[</span><span class="ot">@reasoner1985a</span><span class="co">]</span>. Cultures were filtered to remove bacterial biomass and the spent media was stored at 4℃ until use. Next the evolved and ancestral forms of each species were grown in the spent medium of each other evo/anc species for 48 hours at 30℃ and growth was followed using optical density at 600 nm in a Bioscreen plate reader.</span>
+<span id="cb2-79"><a href="#cb2-79"></a></span>
+<span id="cb2-80"><a href="#cb2-80"></a>For the Burkholder diffusion assay each species/evolutionary form was added to a soft agar on a petri dish. Then a small volume of each species was pipetted directly onto the agar and plates and checked for zones of inhibition.</span>
+<span id="cb2-81"><a href="#cb2-81"></a></span>
+<span id="cb2-82"><a href="#cb2-82"></a><span class="fu">### Competition/coexistence outcomes (species proportions from communities):</span></span>
+<span id="cb2-83"><a href="#cb2-83"></a></span>
+<span id="cb2-84"><a href="#cb2-84"></a>Here we wish to ensure that any equilibrium coexistence or competitive exclusion between species is not multistable - meaning that the outcome is deterministic and truly based on the density-independent competitive abilities of the species and not dependent on their starting density. The multistability problem has been addressed in other studies by growing each species from each community at different starting densities. This is typically done by starting all of the rare species at a low density and one abundant species at a higher density (as measured by optical density). For more than 2 species you cannot reasonably achieve all possible permutations of different densities, but you can start each species from rare, while leaving one remaining species high.</span>
+<span id="cb2-85"><a href="#cb2-85"></a></span>
+<span id="cb2-86"><a href="#cb2-86"></a>Here we use starting conditions with 10%/90% for pairs, 80%/10%/10% for trios, and 70%/10%/10%/10% for quartets. For pairs, we alternated so that each species started from rare. For trios and quartets, we alternated so that each species was allowed to invade from rare but we did not use all possible staring proportions due to practical and cost limitations. Another important consideration is that we can not distinguish between the ancestral and evolved forms of the same species with amplicon sequencing (or with plate counts) so that our experimental arrangement cannot be fully factorial (e.g., we cannot compete ancestral 1977 against evolved 1977) and thus there are fewer combinations that one would expect from expected scaling of $2^{(8-1)} = 128$</span>
+<span id="cb2-87"><a href="#cb2-87"></a></span>
+<span id="cb2-88"><a href="#cb2-88"></a>For the coexistence/exclusion experiments experimental communities are inoculated in 500 μl of 100% R2A in deep 96 well plates at a 50 fold dilution at four different streptomycin levels: 0, 16, 64, and 256 μg/ml. Plates were incubated in the dark at 30℃ with shaking at 800 RPM. Serial transfers (50 fold dilution; 10 μl to 490 μl) were conducted every 48 hours for a total of eight growth cycles. For every growth cycle $\mathrm{log_2(50)} \approx 5.6$ generations will have elapsed for a total of about 45 generations over eight cycles.</span>
+<span id="cb2-89"><a href="#cb2-89"></a></span>
+<span id="cb2-90"><a href="#cb2-90"></a><span class="fu">## Measurements and data types</span></span>
+<span id="cb2-91"><a href="#cb2-91"></a></span>
+<span id="cb2-92"><a href="#cb2-92"></a><span class="fu">### Traits and physiology of species:</span></span>
 <span id="cb2-93"><a href="#cb2-93"></a></span>
-<span id="cb2-94"><a href="#cb2-94"></a><span class="fu">### Competition/coexistence outcomes (species proportions from communities):</span></span>
+<span id="cb2-94"><a href="#cb2-94"></a><span class="ss">-   </span>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on a gradient of streptomycin concentrations</span>
 <span id="cb2-95"><a href="#cb2-95"></a></span>
-<span id="cb2-96"><a href="#cb2-96"></a><span class="ss">-   </span>Community DNA from pairs, trios, and quartets was sampled after eight 48 hour growth cycles</span>
-<span id="cb2-97"><a href="#cb2-97"></a><span class="ss">-   </span>16S rRNA amplicon sequencing was performed on samples to get the proportion of each species</span>
-<span id="cb2-98"><a href="#cb2-98"></a><span class="ss">-   </span>Optical density was collected at every other growth cycle</span>
-<span id="cb2-99"><a href="#cb2-99"></a></span>
-<span id="cb2-100"><a href="#cb2-100"></a><span class="fu">## Availability</span></span>
-<span id="cb2-101"><a href="#cb2-101"></a></span>
-<span id="cb2-102"><a href="#cb2-102"></a>Data and code in this GitHub repository (<span class="ot">&lt;https://github.com/slhogle/hambiEvoEnvCoexist&gt;</span>) is provided under <span class="co">[</span><span class="ot">GNU AGPL3</span><span class="co">](https://www.gnu.org/licenses/agpl-3.0.html)</span>. The rendered project site is available at <span class="ot">&lt;https://slhogle.github.io/hambiEvoEnvCoexist/&gt;</span>, which has been produced using <span class="co">[</span><span class="ot">Quarto notebooks</span><span class="co">](https://quarto.org/)</span>. The content on the rendered site is released under the <span class="co">[</span><span class="ot">CC BY 4.0.</span><span class="co">](https://creativecommons.org/licenses/by/4.0/)</span> This repository hosts all code and data for this project including the code necessary to fully recreate the rendered webpage.</span>
-<span id="cb2-103"><a href="#cb2-103"></a></span>
-<span id="cb2-104"><a href="#cb2-104"></a>An archived release of the code here is available from Zenodo:</span>
-<span id="cb2-105"><a href="#cb2-105"></a></span>
-<span id="cb2-106"><a href="#cb2-106"></a>Raw sequencing data using in the project is available from NCBI Bioproject <span class="co">[ ]()</span>.</span>
-<span id="cb2-107"><a href="#cb2-107"></a></span>
-<span id="cb2-108"><a href="#cb2-108"></a><span class="fu">## Reproducibility</span></span>
-<span id="cb2-109"><a href="#cb2-109"></a></span>
-<span id="cb2-110"><a href="#cb2-110"></a>The project uses <span class="co">[</span><span class="ot">`renv`</span><span class="co">](https://rstudio.github.io/renv/index.html)</span> to create reproducible environment to execute the code in this project. <span class="co">[</span><span class="ot">See here</span><span class="co">](https://rstudio.github.io/renv/articles/renv.html#collaboration)</span> for a brief overview on collaboration and reproduction of the entire project. To get up and running you can do:</span>
-<span id="cb2-111"><a href="#cb2-111"></a></span>
-<span id="cb2-112"><a href="#cb2-112"></a><span class="in">``` r</span></span>
-<span id="cb2-113"><a href="#cb2-113"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
-<span id="cb2-114"><a href="#cb2-114"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span>
-<span id="cb2-115"><a href="#cb2-115"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb2-96"><a href="#cb2-96"></a><span class="fu">### Species interactions:</span></span>
+<span id="cb2-97"><a href="#cb2-97"></a></span>
+<span id="cb2-98"><a href="#cb2-98"></a><span class="ss">-   </span>Growth rates and carrying capacity (in optical density units) of each species (both ancestral/evolved) on the filtrate of all other species.</span>
+<span id="cb2-99"><a href="#cb2-99"></a><span class="ss">-   </span>Burkholder Diffusion Assays for species pairs to detect presence of interference competition (e.g., antibiotic or toxin production that kills competitors). These results show that no species/evolutionary form produced zones of inhibition for any other species/form. This suggests that there will not be significant interference competition in this experiment.</span>
+<span id="cb2-100"><a href="#cb2-100"></a></span>
+<span id="cb2-101"><a href="#cb2-101"></a><span class="fu">### Competition/coexistence outcomes (species proportions from communities):</span></span>
+<span id="cb2-102"><a href="#cb2-102"></a></span>
+<span id="cb2-103"><a href="#cb2-103"></a><span class="ss">-   </span>Community DNA from pairs, trios, and quartets was sampled after eight 48 hour growth cycles</span>
+<span id="cb2-104"><a href="#cb2-104"></a><span class="ss">-   </span>16S rRNA amplicon sequencing was performed on samples to get the proportion of each species</span>
+<span id="cb2-105"><a href="#cb2-105"></a><span class="ss">-   </span>Optical density was collected at every other growth cycle</span>
+<span id="cb2-106"><a href="#cb2-106"></a></span>
+<span id="cb2-107"><a href="#cb2-107"></a><span class="fu">## Availability</span></span>
+<span id="cb2-108"><a href="#cb2-108"></a></span>
+<span id="cb2-109"><a href="#cb2-109"></a>Data and code in this GitHub repository (<span class="ot">&lt;https://github.com/slhogle/hambiEvoEnvCoexist&gt;</span>) is provided under <span class="co">[</span><span class="ot">GNU AGPL3</span><span class="co">](https://www.gnu.org/licenses/agpl-3.0.html)</span>. The rendered project site is available at <span class="ot">&lt;https://slhogle.github.io/hambiEvoEnvCoexist/&gt;</span>, which has been produced using <span class="co">[</span><span class="ot">Quarto notebooks</span><span class="co">](https://quarto.org/)</span>. The content on the rendered site is released under the <span class="co">[</span><span class="ot">CC BY 4.0.</span><span class="co">](https://creativecommons.org/licenses/by/4.0/)</span> This repository hosts all code and data for this project including the code necessary to fully recreate the rendered webpage.</span>
+<span id="cb2-110"><a href="#cb2-110"></a></span>
+<span id="cb2-111"><a href="#cb2-111"></a>An archived release of the code here is available from Zenodo:</span>
+<span id="cb2-112"><a href="#cb2-112"></a></span>
+<span id="cb2-113"><a href="#cb2-113"></a>Raw sequencing data using in the project is available from NCBI Bioproject <span class="co">[ ]()</span>.</span>
+<span id="cb2-114"><a href="#cb2-114"></a></span>
+<span id="cb2-115"><a href="#cb2-115"></a><span class="fu">## Reproducibility</span></span>
+<span id="cb2-116"><a href="#cb2-116"></a></span>
+<span id="cb2-117"><a href="#cb2-117"></a>The project uses <span class="co">[</span><span class="ot">`renv`</span><span class="co">](https://rstudio.github.io/renv/index.html)</span> to create reproducible environment to execute the code in this project. <span class="co">[</span><span class="ot">See here</span><span class="co">](https://rstudio.github.io/renv/articles/renv.html#collaboration)</span> for a brief overview on collaboration and reproduction of the entire project. To get up and running you can do:</span>
+<span id="cb2-118"><a href="#cb2-118"></a></span>
+<span id="cb2-119"><a href="#cb2-119"></a><span class="in">``` r</span></span>
+<span id="cb2-120"><a href="#cb2-120"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
+<span id="cb2-121"><a href="#cb2-121"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span>
+<span id="cb2-122"><a href="#cb2-122"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

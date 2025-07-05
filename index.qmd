@@ -15,6 +15,13 @@ author:
         city: Turku
         state: Finland
         url: https://www.utu.fi/en
+  - name: Chuliang Song
+    orcid: 0000-0001-7490-8626
+    affiliation: 
+      - name: University of California, Los Angeles
+        city: Los Angeles, California
+        state: USA
+        url: https://www.ucla.edu/
 #abstract: > 
 #  The abstract text can go here 
 #  and also here ...

@@ -2057,5 +2057,1417 @@
       "2. Community growth - experiment design",
       "iii) Species quartets - 96 Well plate layout"
     ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html",
+    "title": "Formatting and plotting optical density data",
+    "section": "",
+    "text": "Show/hide code\noptions(repos = c(CRAN = \"https://packagemanager.posit.co/cran/__linux__/jammy/latest\"))\nlibrary(tidyverse)\nlibrary(ggforce)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)\nlibrary(ggh4x)\nsource(here::here(\"R\", \"utils_generic.R\"))\n\n\n\n\n\n\n\nShow/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"optical_density\")\ndata &lt;- here::here(\"data\", \"communities\", \"optical_density\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n\n\n\n\n\n\nShow/hide code\npairs &lt;- readr::read_tsv(here::here(data_raw, \"20240606_pairs\", \"optical_density_formatted.tsv\"))\ntqs &lt;- readr::read_tsv(here::here(data_raw, \"20240829_tqs\", \"optical_density_formatted.tsv\")) %&gt;% \n  mutate(well = paste0(str_extract(well, \"[A-H]\"),\n                               str_pad(str_extract(well, \"\\\\d+\"), 2, side = \"left\", pad = \"0\")))\npairseights &lt;- readr::read_tsv(here::here(data_raw, \"20250425_8sp_5050pairs\", \"optical_density_formatted.tsv\")) %&gt;% \n  mutate(sample2 = case_when(str_detect(sample, \"com_\") ~ paste0(\"8\", str_extract(sample, \"_\\\\d+$\")),\n                             str_detect(sample, \"^3_p\") ~ paste0(\"3_c01_\", str_extract(well, \"[:upper:]\"), str_pad(str_extract(well, \"\\\\d+\"), 2, \"left\", pad = \"0\")),\n                             str_detect(sample, \"^p\") ~ str_to_upper(sample)))\n\n\n\n\n\n\n\nShow/hide code\npairs_comp &lt;- readr::read_tsv(here::here(\"data\", \"communities\", \"experiment_design\", \"pairs_sample_composition.tsv\")) %&gt;%\n  dplyr::mutate(name = paste(str_to_upper(evo_hist), str_remove(strainID, \"HAMBI_\"), target_f*100, sep = \"_\")) %&gt;% \n  dplyr::select(community_id, name) %&gt;%\n  dplyr::group_by(community_id) %&gt;% \n  dplyr::mutate(id = 1:n()) %&gt;% \n  dplyr::ungroup() %&gt;% \n  tidyr::pivot_wider(names_from = id, values_from = name ) %&gt;%\n  dplyr::rename(a = `1`, b = `2`) %&gt;% \n  mutate(a_sp = paste0(str_split_i(a, \"_\", 2), stringr::str_extract(str_split_i(a, \"_\", 1), \"^.{1}\")),\n         b_sp = paste0(str_split_i(b, \"_\", 2), stringr::str_extract(str_split_i(b, \"_\", 1), \"^.{1}\")),\n         a_f = str_split_i(a, \"_\", 3),\n         b_f = str_split_i(b, \"_\", 3)) %&gt;% \n  arrange(community_id) %&gt;% \n  mutate(n_species = 2,\n         sp = paste(a_sp, b_sp, sep = \"|\"),\n         fr = paste(a_f, b_f, sep = \"|\"))\n\n\nRows: 96 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (3): community_id, evo_hist, strainID\ndbl (1): target_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nShow/hide code\ntrios_comp &lt;- readr::read_tsv(here::here(\"data\", \"communities\", \"experiment_design\", \"trios_sample_composition_wide.tsv\")) %&gt;% \n  dplyr::mutate(n_species = 3,\n                sp = paste(a_sp, b_sp, c_sp, sep = \"|\"),\n                fr = paste(a_f, b_f, c_f, sep = \"|\"))\n\n\nRows: 96 Columns: 11\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (7): well, a, a_sp, b, b_sp, c, c_sp\ndbl (4): microcosm_id, a_f, b_f, c_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nShow/hide code\nquart_comp &lt;- readr::read_tsv(here::here(\"data\", \"communities\", \"experiment_design\", \"quartets_sample_composition_wide.tsv\")) %&gt;% \n  mutate(n_species = 4,\n         sp = paste(a_sp, b_sp, c_sp, d_sp, sep = \"|\"),\n         fr = paste(a_f, b_f, c_f, d_f, sep = \"|\"))\n\n\nRows: 64 Columns: 14\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (9): well, a, a_sp, b, b_sp, c, c_sp, d, d_sp\ndbl (5): microcosm_id, a_f, b_f, c_f, d_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nThis processes the final experiment with 8 species\n\n\nShow/hide code\npairstrios_comp &lt;- readr::read_tsv(here::here(\"_data_raw\", \"communities\", \"20250502_BTK_illumina_v3\", \"sample_compositions.tsv\")) %&gt;%\n  # focus on pairs and trios first\n  filter(!str_detect(sample, \"^8_\")) %&gt;% \n  dplyr::mutate(name = paste(str_to_upper(evo_hist), str_remove(strainID, \"HAMBI_\"), target_f*100, sep = \"_\")) %&gt;% \n  dplyr::select(sample, name) %&gt;%\n  dplyr::group_by(sample) %&gt;% \n  dplyr::mutate(id = 1:n()) %&gt;% \n  dplyr::ungroup() %&gt;% \n  tidyr::pivot_wider(names_from = id, values_from = name) %&gt;% \n  dplyr::rename(a = `1`, b = `2`, c = `3`) %&gt;% \n  mutate(a_sp = paste0(str_split_i(a, \"_\", 2), stringr::str_extract(str_split_i(a, \"_\", 1), \"^.{1}\")),\n         b_sp = paste0(str_split_i(b, \"_\", 2), stringr::str_extract(str_split_i(b, \"_\", 1), \"^.{1}\")),\n         c_sp = paste0(str_split_i(c, \"_\", 2), stringr::str_extract(str_split_i(c, \"_\", 1), \"^.{1}\")),\n         a_f = str_split_i(a, \"_\", 3),\n         b_f = str_split_i(b, \"_\", 3),\n         c_f = str_split_i(c, \"_\", 3)\n         ) %&gt;% \n  arrange(sample)\n\n\nRows: 947 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (3): sample, evo_hist, strainID\ndbl (1): target_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nShow/hide code\npairs_comp02 &lt;- pairstrios_comp %&gt;% \n  filter(str_detect(sample, \"^2\")) %&gt;% \n  select(sample, a, b, a_sp, b_sp, a_f, b_f) %&gt;% \n  mutate(n_species = 2,\n         sp = paste(a_sp, b_sp, sep = \"|\"),\n         fr = paste(a_f, b_f, sep = \"|\")) %&gt;% \n  filter(!str_detect(sample, \"_[A-Z]\\\\d+$\")) %&gt;% \n  mutate(sample2 = paste0(\"P\", str_extract(sample, \"\\\\d+$\")))\n\ntrios_comp02 &lt;- pairstrios_comp %&gt;% \n  filter(str_detect(sample, \"^3\")) %&gt;% \n  select(sample, a, b, c, a_sp, b_sp, c_sp, a_f, b_f, c_f) %&gt;% \n  mutate(n_species = 3,\n         sp = paste(a_sp, b_sp, c_sp, sep = \"|\"),\n         fr = paste(a_f, b_f, c_f, sep = \"|\"))\n\n\n\n\n\nAlso we take the mean and std dev for the 2 replicates of each condition\n\n\nShow/hide code\npairs_combo &lt;- left_join(pairs_comp, pairs, by = join_by(community_id, n_species)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc))\n\ntrios_combo &lt;- left_join(trios_comp, tqs, by = join_by(well, n_species)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc))\n\nquart_combo &lt;- left_join(quart_comp, tqs, by = join_by(well, n_species)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc))\n\n\nNeed to tack on the pairs, trios, and 8s from the latest experiment\n\n\nShow/hide code\npairs_combo_f &lt;- left_join(pairs_comp02, pairseights, by = join_by(n_species, sample2)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc)) %&gt;% \n  bind_rows(pairs_combo) %&gt;% \n  mutate(OD_sd = if_else(is.na(OD_sd), 0, OD_sd))\n\ntrios_combo_f &lt;- left_join(trios_comp02, pairseights, by = join_by(n_species, sample==sample2)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc)) %&gt;% \n  bind_rows(trios_combo) %&gt;% \n  drop_na() %&gt;% \n  mutate(OD_sd = if_else(is.na(OD_sd), 0, OD_sd))\n\n\n\n\n\nSome special formatting here for Octets\n\n\nShow/hide code\neights_combo_f &lt;- readr::read_tsv(here::here(\"_data_raw\", \"communities\", \"20250502_BTK_illumina_v3\", \"sample_compositions.tsv\")) %&gt;% \n  filter(str_detect(sample, \"^8_\")) %&gt;% \n  dplyr::mutate(name = paste0(str_remove(strainID, \"HAMBI_\"), str_to_upper(str_sub(evo_hist, 0, 1)), \"|\", target_f*100,\"%\")) %&gt;% \n  group_by(sample) %&gt;% \n  filter(target_f == max(target_f)) %&gt;% \n  mutate(n = n()) %&gt;% \n  slice(1) %&gt;% \n  mutate(name = if_else(n == 8, \"All_sps|13%\", name)) %&gt;% \n  select(sample, name) %&gt;% \n  left_join(pairseights, by = join_by(sample==sample2)) %&gt;% \n  drop_na() %&gt;%\n  dplyr::select(sample, name, transfers, n_species, strep_conc, OD)\n\n\nRows: 947 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (3): sample, evo_hist, strainID\ndbl (1): target_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#libraries",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#libraries",
+    "title": "Formatting and plotting optical density data",
+    "section": "",
+    "text": "Show/hide code\noptions(repos = c(CRAN = \"https://packagemanager.posit.co/cran/__linux__/jammy/latest\"))\nlibrary(tidyverse)\nlibrary(ggforce)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)\nlibrary(ggh4x)\nsource(here::here(\"R\", \"utils_generic.R\"))",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#global-variables",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#global-variables",
+    "title": "Formatting and plotting optical density data",
+    "section": "",
+    "text": "Show/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"optical_density\")\ndata &lt;- here::here(\"data\", \"communities\", \"optical_density\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#read-optical-density-data",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#read-optical-density-data",
+    "title": "Formatting and plotting optical density data",
+    "section": "",
+    "text": "Show/hide code\npairs &lt;- readr::read_tsv(here::here(data_raw, \"20240606_pairs\", \"optical_density_formatted.tsv\"))\ntqs &lt;- readr::read_tsv(here::here(data_raw, \"20240829_tqs\", \"optical_density_formatted.tsv\")) %&gt;% \n  mutate(well = paste0(str_extract(well, \"[A-H]\"),\n                               str_pad(str_extract(well, \"\\\\d+\"), 2, side = \"left\", pad = \"0\")))\npairseights &lt;- readr::read_tsv(here::here(data_raw, \"20250425_8sp_5050pairs\", \"optical_density_formatted.tsv\")) %&gt;% \n  mutate(sample2 = case_when(str_detect(sample, \"com_\") ~ paste0(\"8\", str_extract(sample, \"_\\\\d+$\")),\n                             str_detect(sample, \"^3_p\") ~ paste0(\"3_c01_\", str_extract(well, \"[:upper:]\"), str_pad(str_extract(well, \"\\\\d+\"), 2, \"left\", pad = \"0\")),\n                             str_detect(sample, \"^p\") ~ str_to_upper(sample)))",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#read-and-format-community-information",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#read-and-format-community-information",
+    "title": "Formatting and plotting optical density data",
+    "section": "",
+    "text": "Show/hide code\npairs_comp &lt;- readr::read_tsv(here::here(\"data\", \"communities\", \"experiment_design\", \"pairs_sample_composition.tsv\")) %&gt;%\n  dplyr::mutate(name = paste(str_to_upper(evo_hist), str_remove(strainID, \"HAMBI_\"), target_f*100, sep = \"_\")) %&gt;% \n  dplyr::select(community_id, name) %&gt;%\n  dplyr::group_by(community_id) %&gt;% \n  dplyr::mutate(id = 1:n()) %&gt;% \n  dplyr::ungroup() %&gt;% \n  tidyr::pivot_wider(names_from = id, values_from = name ) %&gt;%\n  dplyr::rename(a = `1`, b = `2`) %&gt;% \n  mutate(a_sp = paste0(str_split_i(a, \"_\", 2), stringr::str_extract(str_split_i(a, \"_\", 1), \"^.{1}\")),\n         b_sp = paste0(str_split_i(b, \"_\", 2), stringr::str_extract(str_split_i(b, \"_\", 1), \"^.{1}\")),\n         a_f = str_split_i(a, \"_\", 3),\n         b_f = str_split_i(b, \"_\", 3)) %&gt;% \n  arrange(community_id) %&gt;% \n  mutate(n_species = 2,\n         sp = paste(a_sp, b_sp, sep = \"|\"),\n         fr = paste(a_f, b_f, sep = \"|\"))\n\n\nRows: 96 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (3): community_id, evo_hist, strainID\ndbl (1): target_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nShow/hide code\ntrios_comp &lt;- readr::read_tsv(here::here(\"data\", \"communities\", \"experiment_design\", \"trios_sample_composition_wide.tsv\")) %&gt;% \n  dplyr::mutate(n_species = 3,\n                sp = paste(a_sp, b_sp, c_sp, sep = \"|\"),\n                fr = paste(a_f, b_f, c_f, sep = \"|\"))\n\n\nRows: 96 Columns: 11\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (7): well, a, a_sp, b, b_sp, c, c_sp\ndbl (4): microcosm_id, a_f, b_f, c_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nShow/hide code\nquart_comp &lt;- readr::read_tsv(here::here(\"data\", \"communities\", \"experiment_design\", \"quartets_sample_composition_wide.tsv\")) %&gt;% \n  mutate(n_species = 4,\n         sp = paste(a_sp, b_sp, c_sp, d_sp, sep = \"|\"),\n         fr = paste(a_f, b_f, c_f, d_f, sep = \"|\"))\n\n\nRows: 64 Columns: 14\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (9): well, a, a_sp, b, b_sp, c, c_sp, d, d_sp\ndbl (5): microcosm_id, a_f, b_f, c_f, d_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nThis processes the final experiment with 8 species\n\n\nShow/hide code\npairstrios_comp &lt;- readr::read_tsv(here::here(\"_data_raw\", \"communities\", \"20250502_BTK_illumina_v3\", \"sample_compositions.tsv\")) %&gt;%\n  # focus on pairs and trios first\n  filter(!str_detect(sample, \"^8_\")) %&gt;% \n  dplyr::mutate(name = paste(str_to_upper(evo_hist), str_remove(strainID, \"HAMBI_\"), target_f*100, sep = \"_\")) %&gt;% \n  dplyr::select(sample, name) %&gt;%\n  dplyr::group_by(sample) %&gt;% \n  dplyr::mutate(id = 1:n()) %&gt;% \n  dplyr::ungroup() %&gt;% \n  tidyr::pivot_wider(names_from = id, values_from = name) %&gt;% \n  dplyr::rename(a = `1`, b = `2`, c = `3`) %&gt;% \n  mutate(a_sp = paste0(str_split_i(a, \"_\", 2), stringr::str_extract(str_split_i(a, \"_\", 1), \"^.{1}\")),\n         b_sp = paste0(str_split_i(b, \"_\", 2), stringr::str_extract(str_split_i(b, \"_\", 1), \"^.{1}\")),\n         c_sp = paste0(str_split_i(c, \"_\", 2), stringr::str_extract(str_split_i(c, \"_\", 1), \"^.{1}\")),\n         a_f = str_split_i(a, \"_\", 3),\n         b_f = str_split_i(b, \"_\", 3),\n         c_f = str_split_i(c, \"_\", 3)\n         ) %&gt;% \n  arrange(sample)\n\n\nRows: 947 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (3): sample, evo_hist, strainID\ndbl (1): target_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nShow/hide code\npairs_comp02 &lt;- pairstrios_comp %&gt;% \n  filter(str_detect(sample, \"^2\")) %&gt;% \n  select(sample, a, b, a_sp, b_sp, a_f, b_f) %&gt;% \n  mutate(n_species = 2,\n         sp = paste(a_sp, b_sp, sep = \"|\"),\n         fr = paste(a_f, b_f, sep = \"|\")) %&gt;% \n  filter(!str_detect(sample, \"_[A-Z]\\\\d+$\")) %&gt;% \n  mutate(sample2 = paste0(\"P\", str_extract(sample, \"\\\\d+$\")))\n\ntrios_comp02 &lt;- pairstrios_comp %&gt;% \n  filter(str_detect(sample, \"^3\")) %&gt;% \n  select(sample, a, b, c, a_sp, b_sp, c_sp, a_f, b_f, c_f) %&gt;% \n  mutate(n_species = 3,\n         sp = paste(a_sp, b_sp, c_sp, sep = \"|\"),\n         fr = paste(a_f, b_f, c_f, sep = \"|\"))",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#subset-to-pairs-trios-and-quartets",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#subset-to-pairs-trios-and-quartets",
+    "title": "Formatting and plotting optical density data",
+    "section": "",
+    "text": "Also we take the mean and std dev for the 2 replicates of each condition\n\n\nShow/hide code\npairs_combo &lt;- left_join(pairs_comp, pairs, by = join_by(community_id, n_species)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc))\n\ntrios_combo &lt;- left_join(trios_comp, tqs, by = join_by(well, n_species)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc))\n\nquart_combo &lt;- left_join(quart_comp, tqs, by = join_by(well, n_species)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc))\n\n\nNeed to tack on the pairs, trios, and 8s from the latest experiment\n\n\nShow/hide code\npairs_combo_f &lt;- left_join(pairs_comp02, pairseights, by = join_by(n_species, sample2)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc)) %&gt;% \n  bind_rows(pairs_combo) %&gt;% \n  mutate(OD_sd = if_else(is.na(OD_sd), 0, OD_sd))\n\ntrios_combo_f &lt;- left_join(trios_comp02, pairseights, by = join_by(n_species, sample==sample2)) %&gt;% \n  summarize(OD_mn = mean(OD),\n            OD_sd = sd(OD),\n            .by = c(sp, fr, transfers, strep_conc)) %&gt;% \n  mutate(strep_conc = as.factor(strep_conc)) %&gt;% \n  bind_rows(trios_combo) %&gt;% \n  drop_na() %&gt;% \n  mutate(OD_sd = if_else(is.na(OD_sd), 0, OD_sd))",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#subset-octets",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#subset-octets",
+    "title": "Formatting and plotting optical density data",
+    "section": "",
+    "text": "Some special formatting here for Octets\n\n\nShow/hide code\neights_combo_f &lt;- readr::read_tsv(here::here(\"_data_raw\", \"communities\", \"20250502_BTK_illumina_v3\", \"sample_compositions.tsv\")) %&gt;% \n  filter(str_detect(sample, \"^8_\")) %&gt;% \n  dplyr::mutate(name = paste0(str_remove(strainID, \"HAMBI_\"), str_to_upper(str_sub(evo_hist, 0, 1)), \"|\", target_f*100,\"%\")) %&gt;% \n  group_by(sample) %&gt;% \n  filter(target_f == max(target_f)) %&gt;% \n  mutate(n = n()) %&gt;% \n  slice(1) %&gt;% \n  mutate(name = if_else(n == 8, \"All_sps|13%\", name)) %&gt;% \n  select(sample, name) %&gt;% \n  left_join(pairseights, by = join_by(sample==sample2)) %&gt;% \n  drop_na() %&gt;%\n  dplyr::select(sample, name, transfers, n_species, strep_conc, OD)\n\n\nRows: 947 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (3): sample, evo_hist, strainID\ndbl (1): target_f\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#plotting-functions",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#plotting-functions",
+    "title": "Formatting and plotting optical density data",
+    "section": "2.1 Plotting functions",
+    "text": "2.1 Plotting functions\n\n\nShow/hide code\nplot_od_grid &lt;- function(df, remove_first_cycle = TRUE, ncol){\n  pj &lt;- ggplot2::position_jitterdodge(jitter.width=0.0,\n                           jitter.height = 0.0,\n                           dodge.width = 0.5,\n                           seed=9)\n  \n  df %&gt;% \n    dplyr::filter(if(remove_first_cycle) transfers &gt; 2 else transfers &gt; 0) %&gt;%\n    ggplot2::ggplot(aes(x = transfers, y = OD_mn, color = strep_conc, group = interaction(strep_conc, fr))) + \n    ggplot2::geom_linerange(aes(ymin = OD_mn - OD_sd, ymax = OD_mn + OD_sd, color = strep_conc), position = pj) + \n    ggh4x::geom_pointpath(aes(shape = fr), position = pj, mult = 0.2) +\n    #ggplot2::geom_point() + \n    #ggplot2::geom_line(aes(linetype = f)) + \n    ggplot2::facet_wrap(~sp, ncol = ncol) +\n    ggplot2::labs(x = \"Growth cycle\", y = \"OD600\", color = \"Strep μg/ml\", shape = \"Mix ratio\") +\n    ggplot2::scale_color_viridis_d() +\n    ggplot2::theme_bw() + \n    ggplot2::theme(strip.background = element_blank(),\n        legend.position = \"bottom\", \n        axis.text = element_text(size = 8),\n        strip.text = element_text(size = 8))\n}\n\n# Special Octets plotting function\nplot_od_octets &lt;- function(df, remove_first_cycle = TRUE, ncol){\n  cols &lt;- c(\"#b0fe1b\",\"#006dff\",\"#ffa728\",\"#93a7ff\",\n          \"#009121\",\"#ff4ab4\",\"#00898b\",\"#e20039\",\n          \"#85eaff\",\"#bf4400\",\"#003f4c\",\"#d0ffd3\",\n          \"#8d0077\",\"#744500\",\"#ffc3e3\",\"#230020\",\n          \"#9d0038\")\n\n  pj &lt;- ggplot2::position_jitterdodge(jitter.width=0.0,\n                           jitter.height = 0.0,\n                           dodge.width = 0.5,\n                           seed=9)\n\n  df %&gt;% \n    dplyr::filter(if(remove_first_cycle) transfers &gt; 2 else transfers &gt; 0) %&gt;%\n    ggplot2::ggplot(aes(x = transfers, y = OD, color = name, group = interaction(strep_conc, name))) + \n    ggh4x::geom_pointpath(position = pj, mult = 0.2) +\n    ggplot2::facet_wrap(~strep_conc, ncol = ncol) +\n    ggplot2::labs(x = \"Growth cycle\", y = \"OD600\", color = \"Strain mix ratio\") +\n    ggplot2::scale_colour_manual(values = cols) +\n    ggplot2::theme_bw() + \n    ggplot2::theme(\n      #strip.background = element_blank(),\n      legend.position = \"bottom\", \n      axis.text = element_text(size = 8),\n      strip.text = element_text(size = 8))\n}",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#pairs",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#pairs",
+    "title": "Formatting and plotting optical density data",
+    "section": "2.2 Pairs",
+    "text": "2.2 Pairs\n\n\nShow/hide code\nfig_pairs &lt;- plot_od_grid(pairs_combo_f, remove_first_cycle = TRUE, ncol = 4)\n\n# ggsave(\n#   here::here(\"figs\", \".svg\"),\n#   fig01,\n#   width = 7,\n#   height = 12,\n#   units = \"in\",\n#   device = \"svg\"\n# )\n# \n# ggsave(\n#   here::here(\"figs\", \".png\"),\n#   fig01,\n#   width = 7,\n#   height = 12,\n#   units = \"in\",\n#   device = \"png\"\n# )\n\n\n\n2.2.1 Pairs without first growth cycle\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Species pairs optical density (y-axis) over series of 48 hour growth cycles (x-axis, 16 days total). Different panels in the grid contain distinct species pairs (A = ancestral, E = strep evolved). Colors show Streptomycin concentration in μg/ml and point shape shows the initial mixing ratio of each species (in the same order as specie listed in each panel). Note that data from the first growth cycle (after 48 hours) is excluded for ease of viewing.\n\n\n\n\n\n2.2.2 Pairs with first growth cycle\n\nShow/hide code\nplot_od_grid(pairs_combo_f, remove_first_cycle = FALSE, ncol = 4)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: As in Figure 1 but including data from the first growth cycle.",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#trios",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#trios",
+    "title": "Formatting and plotting optical density data",
+    "section": "2.3 Trios",
+    "text": "2.3 Trios\n\n\nShow/hide code\nfig_trios &lt;- plot_od_grid(trios_combo_f, remove_first_cycle = TRUE, ncol = 4)\n\n# ggsave(\n#   here::here(\"figs\", \".svg\"),\n#   fig01,\n#   width = 7,\n#   height = 12,\n#   units = \"in\",\n#   device = \"svg\"\n# )\n# \n# ggsave(\n#   here::here(\"figs\", \".png\"),\n#   fig01,\n#   width = 7,\n#   height = 12,\n#   units = \"in\",\n#   device = \"png\"\n# )\n\n\n\n2.3.1 Trios without first growth cycle\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Species trios optical density (y-axis) over series of 48 hour growth cycles (x-axis, 16 days total). Different panels in the grid contain distinct species pairs (A = ancestral, E = strep evolved). Colors show Streptomycin concentration in μg/ml and point shape shows the initial mixing ratio of each species (in the same order as species listed in each panel). Note that data from the first growth cycle (after 48 hours) is excluded for ease of viewing.\n\n\n\n\n\n2.3.2 Trios with first growth cycle\n\nShow/hide code\nplot_od_grid(trios_combo_f, remove_first_cycle = FALSE, ncol = 4)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: As in Figure 3 but including data from the first growth cycle.",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#quartets",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#quartets",
+    "title": "Formatting and plotting optical density data",
+    "section": "2.4 Quartets",
+    "text": "2.4 Quartets\n\n\nShow/hide code\nfig_quarts &lt;- plot_od_grid(quart_combo, remove_first_cycle = TRUE, ncol = 4)\n\n# ggsave(\n#   here::here(\"figs\", \".svg\"),\n#   fig01,\n#   width = 7,\n#   height = 12,\n#   units = \"in\",\n#   device = \"svg\"\n# )\n# \n# ggsave(\n#   here::here(\"figs\", \".png\"),\n#   fig01,\n#   width = 7,\n#   height = 12,\n#   units = \"in\",\n#   device = \"png\"\n# )\n\n\n\n2.4.1 Quartets without first growth cycle\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5: Species quartets optical density (y-axis) over series of 48 hour growth cycles (x-axis, 16 days total). Different panels in the grid contain distinct species pairs (A = ancestral, E = strep evolved). Colors show Streptomycin concentration in μg/ml and point shape shows the initial mixing ratio of each species (in the same order as species listed in each panel). Note that data from the first growth cycle (after 48 hours) is excluded for ease of viewing.\n\n\n\n\n\n2.4.2 Quartets with first growth cycle\n\nShow/hide code\nplot_od_grid(quart_combo, remove_first_cycle = FALSE, ncol = 4)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 6: As in Figure 5 but including data from the first growth cycle.",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_biomass/optical_density/01_format_plot_od.html#octets-all-strains-of-all-species",
+    "href": "R/communities/community_biomass/optical_density/01_format_plot_od.html#octets-all-strains-of-all-species",
+    "title": "Formatting and plotting optical density data",
+    "section": "2.5 Octets (all strains of all species)",
+    "text": "2.5 Octets (all strains of all species)\n\n2.5.1 Octets without first growth cycle\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 7: Strain octets (both evolved and ancestral forms added for all four species) optical density (y-axis) over a series of 48 hour growth cycles (x-axis, 16 days total). Different panels in the grid show the four different streptomycin treatments (0, 16, 64, and 256 ug/ml). Point colors represent the mix ratio of each strain. The strain listed is added at the listed percent and all other species are added at an equal ratio. Note that data from the first growth cycle (after 48 hours) is excluded for ease of viewing.\n\n\n\n\n\n2.5.2 Octets with first growth cycle\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8: As in Figure 7 but including data from the first growth cycle.",
+    "crumbs": [
+      "3. Community growth - biomass",
+      "i) Process and plot OD data"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html",
+    "href": "R/communities/community_composition/01_analysis_pairs.html",
+    "title": "Analysis of pairwise competition",
+    "section": "",
+    "text": "Contains results from pairs of all streptomycin concentrations and trios for 0 streptomycin",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#libraries",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#libraries",
+    "title": "Analysis of pairwise competition",
+    "section": "2.1 Libraries",
+    "text": "2.1 Libraries\n\n\nShow/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)\nlibrary(patchwork)\nlibrary(broom)\nlibrary(ggraph)\nlibrary(tidygraph)\n\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"utils_community_composition.R\"))",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#global-variables",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#global-variables",
+    "title": "Analysis of pairwise competition",
+    "section": "2.2 Global variables",
+    "text": "2.2 Global variables\n\n\nShow/hide code\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#species-abundances",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#species-abundances",
+    "title": "Analysis of pairwise competition",
+    "section": "3.1 Species abundances",
+    "text": "3.1 Species abundances\n\n\nShow/hide code\nsamp_pairs_9010 &lt;- readr::read_tsv(here::here(data, \"2sps_compiled_9010.tsv\")) %&gt;% \n  dplyr::rename(f = f_thresh)\n\nsamp_pairs_5050 &lt;- readr::read_tsv(here::here(data, \"2sps_compiled_5050.tsv\")) %&gt;% \n  dplyr::rename(f = f_thresh)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#transfer-0-starting-proportions",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#transfer-0-starting-proportions",
+    "title": "Analysis of pairwise competition",
+    "section": "4.1 Transfer 0 (starting proportions)",
+    "text": "4.1 Transfer 0 (starting proportions)\nFirst get abundances from transfer 0 (masterplate)\n\n\nShow/hide code\nsamp_pairs_fmt_mp_9010 &lt;- samp_pairs_9010 %&gt;% \n  dplyr::filter(str_detect(community_type, \"master\")) %&gt;%\n  format_master()\n  \nsamp_pairs_fmt_mp_5050 &lt;- samp_pairs_5050 %&gt;% \n  dplyr::filter(str_detect(community_type, \"master\")) %&gt;%\n  format_master() %&gt;% \n  mutate(community_id = paste0(\"P\", as.numeric(str_extract(community_id, \"\\\\d+\"))+48))",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#transfer-8-ending-proportions",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#transfer-8-ending-proportions",
+    "title": "Analysis of pairwise competition",
+    "section": "4.2 Transfer 8 (ending proportions)",
+    "text": "4.2 Transfer 8 (ending proportions)\nFormat abundances from the experiment, summarizing over replicates. Here we calculate the median frequency across biological replicates using Hmisc::smedian.hilow which computes the sample median and the outer quantiles (0.025 and 0.975).\n\n\nShow/hide code\nsamp_pairs_fmt_exp_9010 &lt;- samp_pairs_9010 %&gt;% \n  dplyr::filter(community_type == \"experiment\") %&gt;% \n  # make a combined evolution and species identifier and extract the community ID\n  dplyr::mutate(sp = paste(str_to_upper(evo_hist), str_extract(strainID, \"\\\\d+\"), sep = \"_\"),\n         community_id = str_extract(sample, \"P\\\\d\\\\d\")) %&gt;%\n  # calculate median and 95% CI across replicates\n  dplyr::summarize(ggplot2::median_hilow(f), .by = c(\"community_id\", \"sp\", \"strep_conc\")) %&gt;% \n  # rename the y columns as f for compatibility\n  dplyr::rename_with(.cols = starts_with(\"y\"), \\(x) str_replace(x, \"y\", \"f\")) %&gt;% \n  # this step is important to ensure that when dfs are pivoted wider the \n  # sp_1 and sp_2 stay consistent \n  dplyr::arrange(community_id, sp, strep_conc) %&gt;%\n  # this creates an index for each species present in each community, it is needed\n  # for the pivot to be consistent between the master plate and the samples\n  dplyr::group_by(community_id, strep_conc) %&gt;% \n  dplyr::mutate(n = 1:n()) %&gt;% \n  dplyr::ungroup() %&gt;% \n  tidyr::pivot_wider(id_cols = c(community_id, strep_conc), values_from = c(sp, f, fmin, fmax), names_from = n) %&gt;% \n  dplyr::mutate(transfer = 8) %&gt;% \n  arrange(sp_1, sp_2, strep_conc)\n\n\n\n\nShow/hide code\nsamp_pairs_fmt_exp_5050 &lt;- samp_pairs_5050 %&gt;% \n  dplyr::filter(community_type == \"experiment\")  %&gt;% \n  # make a combined evolution and species identifier and extract the community ID\n  dplyr::mutate(sp = paste(str_to_upper(evo_hist), str_extract(strainID, \"\\\\d+\"), sep = \"_\"),\n         community_id = str_extract(sample, \"P\\\\d\\\\d\")) %&gt;%\n  arrange(community_id, strep_conc) %&gt;% \n  # there is only one replicate so we can't calculate median/mean\n  dplyr::arrange(community_id, sp, strep_conc) %&gt;%\n  # this creates an index for each species present in each community, it is needed\n  # for the pivot to be consistent between the master plate and the samples\n  dplyr::group_by(community_id, strep_conc) %&gt;% \n  dplyr::mutate(n = 1:n()) %&gt;% \n  dplyr::ungroup() %&gt;% \n  tidyr::pivot_wider(id_cols = c(community_id, strep_conc), values_from = c(sp, f), names_from = n) %&gt;% \n  dplyr::mutate(transfer = 8) %&gt;% \n  arrange(sp_1, sp_2, strep_conc) %&gt;% \n  arrange(community_id) %&gt;% \n  mutate(community_id = paste0(\"P\", as.numeric(str_extract(community_id, \"\\\\d+\"))+48))",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#binomial-sampling-and-wilcox-test",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#binomial-sampling-and-wilcox-test",
+    "title": "Analysis of pairwise competition",
+    "section": "5.1 Binomial sampling and Wilcox test",
+    "text": "5.1 Binomial sampling and Wilcox test\nFirst need to determine which samples significantly decreased/increased from T0 to T8. We don’t have enough biological replicates for to compute a statistic across replicates for outcome variability. However, we can estimate the mean fraction of A and quantify the inferential uncertainty of the mean by bootstrap resampling. We the used median proportion of species A from two biological replicates of each T8 pair as the probability of success (i.e., drawing species A) from 1000 draws (i.e., sequencing reads) from the binomial distribution. To determine whether the frequency of Species A significantly changed from T0 to T8, the means of the 1000 binomial draws for T0 and T8 were compared using a Wilcoxon rank sum test (N = 2000). Tests with Bonferroni multiple test corrected p values &lt; 1e-5 were considered to represent significantly different T0 and T8 samples.\nrun the tests\n\n\nShow/hide code\nset.seed(124341)\n\nwc_test_9010 &lt;- wc_test(samp_pairs_fmt_exp_9010, samp_pairs_fmt_mp_9010)\nwc_test_5050 &lt;- wc_test(samp_pairs_fmt_exp_5050, samp_pairs_fmt_mp_5050)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#competition-outcome-rules",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#competition-outcome-rules",
+    "title": "Analysis of pairwise competition",
+    "section": "5.2 Competition outcome rules",
+    "text": "5.2 Competition outcome rules\nHere we set up the rules for defining the competition outcomes. In the pairwise competition experiments each species and evolutionary form was competed against all other species and evolutionary forms (excluding evolutionary forms of the same species because these cannot be resolved using amplicon data). Each competitor in a pair \\(\\{A, B\\}\\) was allowed to invade from rare (\\(f^{R} = 0.1\\)) while the other competitor was common (\\(f^{C} = 0.9\\)) in duplicate for 8 growth cycles. Additionally we completed one experiment where each strain in the pair was started at roughly equal density. This resulted in 6 experiments for each competing pair. Using the abundance outcomes from both replicates of each the pairwise competition experiments for each pair we classified outcomes as “exclusion”, “towards exclusion”, “stable coexistence”, “coexistence without evidence for mutual invasion”, or “inconclusive” according to the following criteria (also see: https://www.science.org/doi/10.1126/science.adg0727)\n\n5.2.1 Exclusion\nRequires one species (\\(A\\)) in a pair to be excluded (\\(f_{A} = 0\\)) in all 6 experiments for the species pair.\n\n\n5.2.2 Towards Exclusion\nRelaxes the condition that (\\(f_{A} = 0\\)), but requires one species in a pair to have a significant decrease (\\(\\Delta f_{8-0} &lt; 0\\)) (Wilcoxon Test) in all 6 experiments for the species pair.\n\n\n5.2.3 Stable Coexistence\nBoth species \\(A\\) and \\(B\\) can stably coexist if each species can invade the other from low frequency \\(A_{f_{A} &lt; f_{B}} \\rightarrow B \\vee B_{f_{B} &lt; f_{A}} \\rightarrow A\\). Assignment of stable coexistence was made by comparing \\(sgn(\\Delta f_{8-0}) = sgn(\\bar{f_{8}} - f_{0})\\) where \\(\\bar{f_{8}}\\) is the mean frequency of the species at the final sampling timepoint across all 6 experiments.\n\n\n5.2.4 Coexistence without evidence for mutual invasion\nThis outcome was assigned when each species had a non-zero frequency \\(f_{A|B} &gt; 0\\) in all 6 experiments at the final time point.\n\n\n5.2.5 Inconclusive\nThis outcome was assigned when none of the above conditions were met.\n\n\nShow/hide code\noutcomes_classified &lt;- bind_rows(wc_test_9010, wc_test_5050) %&gt;% \n  arrange(sp_1, sp_2, strep_conc) %&gt;% \n  group_by(sp_1, sp_2, strep_conc) %&gt;%\n  mutate(outcome = case_when(\n    # condition 1\n    sum(f_1_8 == 0) == n() | sum(f_1_8 == 1) == n() ~ \"exclusion\",\n    # condition 2\n    sum(change) == n() | sum(change) == -n() ~ \"towards exclusion\",\n    # condition 3\n    sum(sign(f_1_8 - f_1_0) == sign(mean(f_1_8)-f_1_0)) == n() ~ \"stable coexistence\",\n    # condition 4\n    sum(f_1_8 &gt; 0) == n() ~ \"coexistence no mutual invasion\",\n    # all others are inconclusive\n    TRUE ~ \"inconclusive\"\n  )) %&gt;% \n  dplyr::ungroup()\n\n\nEVO_1287 and EVO_1977 at 256 ug/ml streptomycin technically fullfill the requirements for the outcome “towards exclusion.” However, the patterns at 64 and 16 ug/ml suggest that it could also be “coexistence no mutual invasion.” Assigning coexistence no mutual invasion would break an intransitive loop apparent in the pairs network.\n\n\nShow/hide code\noutcomes_classified &lt;- outcomes_classified %&gt;% \n  mutate(outcome = if_else(sp_1 == \"EVO_1287\" & sp_2 == \"EVO_1977\" & strep_conc == 256, \"coexistence no mutual invasion\", outcome))\n\n# save for later assessment of pairwise assembly rule\noutcomes_classified %&gt;% \n  mutate(coexists = if_else(str_detect(outcome, \"coexistence\"), 1, 0)) %&gt;% \n  dplyr::select(strep_conc, sp_1, sp_2, coexists) %&gt;% \n  distinct() %&gt;% \n  write_tsv(here::here(data, \"2sp_coexistence.tsv\"))",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#plotting-pairwise-outpcomes",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#plotting-pairwise-outpcomes",
+    "title": "Analysis of pairwise competition",
+    "section": "5.3 Plotting pairwise outpcomes",
+    "text": "5.3 Plotting pairwise outpcomes\nConstruct final dataframe to be used for plotting\n\n\nShow/hide code\nsamp_pairs_fmt &lt;- dplyr::bind_rows(samp_pairs_fmt_mp_9010, samp_pairs_fmt_mp_5050, samp_pairs_fmt_exp_9010, samp_pairs_fmt_exp_5050) %&gt;%\n  dplyr::mutate(\n    group = interaction(community_id, strep_conc),\n    evo_group = dplyr::case_when(\n      dplyr::if_all(c(sp_1, sp_2), \\(x) stringr::str_detect(x, \"ANC\")) ~ \"both_anc\",\n      dplyr::if_all(c(sp_1, sp_2), \\(x) stringr::str_detect(x, \"EVO\")) ~ \"both_evo\",\n      TRUE ~ \"mix\"\n    )\n  ) %&gt;%\n  dplyr::left_join(outcomes_classified,\n                   by = dplyr::join_by(sp_1, sp_2, strep_conc),\n                   relationship = \"many-to-many\") %&gt;%\n  dplyr::mutate(\n    outcome = factor(outcome, levels = c(\"exclusion\", \n                                         \"towards exclusion\", \n                                         \"stable coexistence\", \n                                         \"coexistence no mutual invasion\", \n                                         \"inconclusive\"))\n  ) \n\n\nCreate different lists of plots for the mixed (i.e. evo competed against anc) conditions\n\n\nShow/hide code\nsamp_pairs_fmt_plots_split_a &lt;- samp_pairs_fmt %&gt;% \n  dplyr::filter(evo_group != \"mix\") %&gt;% \n  dplyr::group_by(strep_conc, evo_group) %&gt;% \n  dplyr::group_split() %&gt;% \n  purrr::map(pair_plot)\n\nsamp_pairs_fmt_plots_split_b &lt;- samp_pairs_fmt %&gt;% \n  dplyr::filter(evo_group == \"mix\") %&gt;% \n  dplyr::group_by(strep_conc) %&gt;% \n  dplyr::group_split() %&gt;% \n  purrr::map(pair_plot)\n\n\n\n\nShow/hide code\nfig01 &lt;- patchwork::wrap_plots(samp_pairs_fmt_plots_split_a, ncol = 2) +\n  patchwork::plot_annotation(tag_levels = \"A\")\n\n\n\n\nShow/hide code\nggsave(\n  here::here(\"figs\", \"coexistence_pairs.svg\"),\n  fig01,\n  width = 7,\n  height = 12,\n  units = \"in\",\n  device = \"svg\"\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Outcomes from pairwise cocultures of both ancestral (left, A:G) and both evolved (right, B:H) 0403, 1287, 1896 and 1977 species. Rows in the grid represent different streptomycin concentrations applied (A:B = 0 µg/ml, C:D = 16 µg/ml, E:F = 64 µg/ml, G:H = 256 µg/ml). Using the rules defined above for competitive outcomes, red lines show “exclusion,” dark red show “towards exclusion,” light blue lines show “stable coexistence,” dark blue lines show “coexistence without evidence for mutual invasion,” and green lines show “inconclusive” outcomes. Some statistical noise has been applied to point positions to prevent overlaps in the plot and aid in visualization.\n\n\n\nNOTE: in panel E (64 µg/ml streptomycin, ANC_0403 vs ANC_1977) both replicates survived with OD ~ 0.15 when ANC_0403 was started from 90% abundance but not when it was started at 10% abundance (OD ~ 0.04). In all replicates of 90%/10% starting abundance ANC_1977 was driven extinct.\n\n\nShow/hide code\nfig02 &lt;- patchwork::wrap_plots(samp_pairs_fmt_plots_split_b, ncol = 2) +\n  patchwork::plot_annotation(tag_levels = \"A\")\n\n\n\n\nShow/hide code\nggsave(\n  here::here(\"figs\", \"coexistence_pairs_mixed_hist.svg\"),\n  fig02,\n  width = 7,\n  height = 7,\n  units = \"in\",\n  device = \"svg\"\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Results from co-cultures of mixed ancestral and evolved combinations. Line colors and types are as in Figure 1.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#evolution-and-streptomycin-categories-separate",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#evolution-and-streptomycin-categories-separate",
+    "title": "Analysis of pairwise competition",
+    "section": "6.1 Evolution and Streptomycin categories separate",
+    "text": "6.1 Evolution and Streptomycin categories separate\nHere we plot a separate graph for each streptomycin concentrations and also by different evolutionary groupings. For example, there is one graph for the competition outcomes of only ancestral species, there is one graph of the outcomes of only evolved species, and there is one graph for the outcomes of mixed competitions where an ancestral species competes against an evolved species.\n\n\nShow/hide code\nnodes1 &lt;- make_nodes(samp_pairs_fmt, evo_group, strep_conc)\nedges1 &lt;- make_edges(samp_pairs_fmt, evo_group, strep_conc)\n\ngraphs1 &lt;- nest(nodes1, sps = -c(evo_group, strep_conc)) %&gt;% \n  left_join(nest(edges1, pairs = -c(evo_group, strep_conc)),\n            by = join_by(evo_group, strep_conc)) %&gt;% \n  mutate(network = map2(sps, pairs, function(sps, pairs) tbl_graph(nodes = sps, edges = pairs, directed = T))) %&gt;% \n  mutate(plot = map(network, function(network) plot_network_hierarchy(network, tune_angle = 1.5, n_rank = 7, n_break = 7)))\n\n\n\n\nShow/hide code\nfig03 &lt;- patchwork::wrap_plots(graphs1[[6]], nrow = 3, guides= \"collect\") +\n  patchwork::plot_annotation(tag_levels = \"A\")\n\n\n\n\nShow/hide code\nggsave(\n  here::here(\"figs\", \"coexistence_networks_nested_evo_strep.svg\"),\n  fig03,\n  width = 8,\n  height = 10,\n  units = \"in\",\n  device = \"svg\"\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Competitive hierarchy of species pairs separated by evolution grouping (only ancestral pairs, only evolved pairs, and mixed ancestral and evolved pairs) and streptomycin concentration. Subplots A-D are for only ancestral pairs, E-H for only evolved pairs, and I-L for mixed ancestral and evolved pairs. Subplots A, E, I show experiments under no streptomycin, B, F, J 16 µg/ml streptomycin, C, G, K for 64 µg/ml streptomycin, and D, H, L for 256 µg/ml streptomycin. For each evolution/streptomycin grouping, strains are rank ordered on the basis of the number of other strains they exclude, based on data shown in Figure 1 and Figure 2. Grey nodes represent strains (denoted by text), red arrows point from winning strain to losing strain, blue arrows indicate coexistence (ignore the arrow heads for blue, coulnd’t figure out how to remove them for only a subset of the edges).",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/01_analysis_pairs.html#only-streptomycin-category-separate",
+    "href": "R/communities/community_composition/01_analysis_pairs.html#only-streptomycin-category-separate",
+    "title": "Analysis of pairwise competition",
+    "section": "6.2 Only Streptomycin category separate",
+    "text": "6.2 Only Streptomycin category separate\n\n\nShow/hide code\nnodes2 &lt;- make_nodes(samp_pairs_fmt, strep_conc)\nedges2 &lt;- make_edges(samp_pairs_fmt, strep_conc)\n\ngraphs2 &lt;- nest(nodes2, sps = -c(strep_conc)) %&gt;% \n  left_join(nest(edges2, pairs = -c(strep_conc)),\n            by = join_by(strep_conc)) %&gt;% \n  mutate(network = map2(sps, pairs, function(sps, pairs) tbl_graph(nodes = sps, edges = pairs, directed = T))) %&gt;% \n  mutate(plot = map(network, function(network) plot_network_hierarchy(network, tune_angle = 1.5, n_rank = 7, n_break = 7)))\n\n\n\n\nShow/hide code\nfig04 &lt;- patchwork::wrap_plots(graphs2[[5]], nrow = 1, guides= \"collect\") +\n  patchwork::plot_annotation(tag_levels = \"A\")\n\n\n\n\nShow/hide code\nggsave(\n  here::here(\"figs\", \"coexistence_networks_nested_strep.svg\"),\n  fig04,\n  width = 9,\n  height = 4,\n  units = \"in\",\n  device = \"svg\"\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: Competitive hierarchy of species pairs separated by streptomycin concentration. Subplot A shows experiments under no streptomycin, B with 16 µg/ml streptomycin, C with 64 µg/ml streptomycin, and D with 256 µg/ml streptomycin. For each evolution/streptomycin grouping, strains are rank ordered on the basis of the number of other strains they exclude, based on data shown in Figure 1 and Figure 2. Grey nodes represent strains (denoted by text), red arrows point from winning strain to losing strain, blue arrows indicate coexistence (ignore the arrow heads for blue, couldn’t figure out how to remove them for only a subset of the edges)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "i) Species pairs"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html",
+    "href": "R/communities/community_composition/02_analysis_trios.html",
+    "title": "Analysis of trio competition",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)\nlibrary(ggtern)\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"utils_community_composition.R\"))\n\n\n\n\n\n\n\nShow/hide code\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#libraries",
+    "href": "R/communities/community_composition/02_analysis_trios.html#libraries",
+    "title": "Analysis of trio competition",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)\nlibrary(ggtern)\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"utils_community_composition.R\"))",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#global-variables",
+    "href": "R/communities/community_composition/02_analysis_trios.html#global-variables",
+    "title": "Analysis of trio competition",
+    "section": "",
+    "text": "Show/hide code\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#species-abundances",
+    "href": "R/communities/community_composition/02_analysis_trios.html#species-abundances",
+    "title": "Analysis of trio competition",
+    "section": "2.1 Species abundances",
+    "text": "2.1 Species abundances\n\n\nShow/hide code\nsamp_trios &lt;- readr::read_tsv(here::here(data, \"3sps_compiled.tsv\")) %&gt;% \n  dplyr::rename(f = f_thresh)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1287-hambi_1896",
+    "href": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1287-hambi_1896",
+    "title": "Analysis of trio competition",
+    "section": "4.1 Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896",
+    "text": "4.1 Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Compositions of all trios with species HAMBI_0403, HAMBI_1287, and HAMBI_1896 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_0403, HAMBI_1287, HAMBI_1896). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1287-hambi_1977",
+    "href": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1287-hambi_1977",
+    "title": "Analysis of trio competition",
+    "section": "4.2 Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977",
+    "text": "4.2 Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Compositions of all trios with species HAMBI_0403, HAMBI_1287, and HAMBI_1977 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_0403, HAMBI_1287, HAMBI_1977). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1896-hambi_1977",
+    "href": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1896-hambi_1977",
+    "title": "Analysis of trio competition",
+    "section": "4.3 Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977",
+    "text": "4.3 Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Compositions of all trios with species HAMBI_0403, HAMBI_1896, and HAMBI_1977 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_0403, HAMBI_1896, HAMBI_1977). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_1287-hambi_1896-hambi_1977",
+    "href": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_1287-hambi_1896-hambi_1977",
+    "title": "Analysis of trio competition",
+    "section": "4.4 Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977",
+    "text": "4.4 Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: Compositions of all trios with species HAMBI_1287, HAMBI_1896, and HAMBI_1977 at 4 different streptomycin concentrations (0, 16, 64, and 256 μg/ml; grid columns) and the 8 evolutionary history combinations tested (grid rows). The evolutionary histories are always in the same species order (HAMBI_1287, HAMBI_1896, HAMBI_1977). In each evolutionary history and streptomycin treatment combination there are three different starting fractions where each species is allowed to start from high abundance once and from rare twice. Points depict species relative abundance (vertical axis) at the start of the experiment and after eight 48-hour growth cycles (horizontal axis). Point crosses represent whether the species is below/above a 1%/99% threshold where it is effectively extinct/excluded all other competitors. Points are the mean over at least 2 replicates and line ranges represent confidence limits of the population mean from a basic nonparametric bootstrap.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1287-hambi_1896-1",
+    "href": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1287-hambi_1896-1",
+    "title": "Analysis of trio competition",
+    "section": "5.1 Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896",
+    "text": "5.1 Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1896\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5: Ternary plot for compositions of species trios with HAMBI_0403, HAMBI_1287, HAMBI_1896 after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1287-hambi_1977-1",
+    "href": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1287-hambi_1977-1",
+    "title": "Analysis of trio competition",
+    "section": "5.2 Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977",
+    "text": "5.2 Trio HAMBI_0403 + HAMBI_1287 + HAMBI_1977\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 6: Ternary plot for compositions of species trios with HAMBI_0403, HAMBI_1287, HAMBI_1977 after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1896-hambi_1977-1",
+    "href": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_0403-hambi_1896-hambi_1977-1",
+    "title": "Analysis of trio competition",
+    "section": "5.3 Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977",
+    "text": "5.3 Trio HAMBI_0403 + HAMBI_1896 + HAMBI_1977\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 7: Ternary plot for compositions of species trios with HAMBI_0403, HAMBI_1896, HAMBI_1977 after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_1287-hambi_1896-hambi_1977-1",
+    "href": "R/communities/community_composition/02_analysis_trios.html#trio-hambi_1287-hambi_1896-hambi_1977-1",
+    "title": "Analysis of trio competition",
+    "section": "5.4 Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977",
+    "text": "5.4 Trio HAMBI_1287 + HAMBI_1896 + HAMBI_1977\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8: Ternary plot for compositions of species trios with HAMBI_1287, HAMBI_1896, HAMBI_1977 after 8 growth cycles. Grid columns represent different evolutionary history combinations for each species (same order as in title). Grid rows represent either starting concentration (first row, T0) or increasing streptomycin concentration. Point shapes represent different starting proportions in each streoptocmyinc/evolutionary history treatment.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "ii) Species trios"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/03_analysis_quartets.html",
+    "href": "R/communities/community_composition/03_analysis_quartets.html",
+    "title": "Analysis of quartet competition",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)\n\n\n\n\n\n\n\nShow/hide code\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "iii) Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/03_analysis_quartets.html#libraries",
+    "href": "R/communities/community_composition/03_analysis_quartets.html#libraries",
+    "title": "Analysis of quartet competition",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "iii) Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/03_analysis_quartets.html#global-variables",
+    "href": "R/communities/community_composition/03_analysis_quartets.html#global-variables",
+    "title": "Analysis of quartet competition",
+    "section": "",
+    "text": "Show/hide code\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "iii) Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/03_analysis_quartets.html#species-abundances",
+    "href": "R/communities/community_composition/03_analysis_quartets.html#species-abundances",
+    "title": "Analysis of quartet competition",
+    "section": "2.1 Species abundances",
+    "text": "2.1 Species abundances\n\n\nShow/hide code\nsamp_quarts &lt;- readr::read_tsv(here::here(data, \"4sps_compiled.tsv\")) %&gt;% \n  dplyr::rename(f = f_thresh)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "iii) Species quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/04_analysis_octets.html",
+    "href": "R/communities/community_composition/04_analysis_octets.html",
+    "title": "Analysis of octet competition",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)\n\n\n\n\n\n\n\nShow/hide code\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "iv) All strains combined"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/04_analysis_octets.html#libraries",
+    "href": "R/communities/community_composition/04_analysis_octets.html#libraries",
+    "title": "Analysis of octet competition",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "iv) All strains combined"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/04_analysis_octets.html#global-variables",
+    "href": "R/communities/community_composition/04_analysis_octets.html#global-variables",
+    "title": "Analysis of octet competition",
+    "section": "",
+    "text": "Show/hide code\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "iv) All strains combined"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/04_analysis_octets.html#species-abundances",
+    "href": "R/communities/community_composition/04_analysis_octets.html#species-abundances",
+    "title": "Analysis of octet competition",
+    "section": "2.1 Species abundances",
+    "text": "2.1 Species abundances\n\n\nShow/hide code\nsamp_octs &lt;- readr::read_tsv(here::here(data, \"8sps_compiled.tsv\")) %&gt;% \n  dplyr::rename(f = f_thresh) %&gt;% \n  mutate(target_f_masterplate = target_f_masterplate*100, \n         max_f = max_f*100)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "iv) All strains combined"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/05_assembly_rule_violation.html",
+    "href": "R/communities/community_composition/05_assembly_rule_violation.html",
+    "title": "Violation of the pairwise assembly rule in 3 and 4-member communities",
+    "section": "",
+    "text": "The pairwise asembly rule states “that in a multispecies competition, species that allcoexist with each other in pairs will survive, whereas species that are excluded by any of the surviving species will go extinct” (Friedman, 2017). Here we simply collect the competition outcomes from the pairwise experiments into a binary matrix, then we decompose the coexisting members (species with f &gt; 1% | f &lt; 99% after 8x 48 hour transfers) from each 3 or 4-member set into all unique constituent pairs, then we finally check whether those pairs coexist in in the pairwise binary matrix.",
+    "crumbs": [
+      "5. Community growth - composition",
+      "v) Violation of pairwise assembly rule"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/05_assembly_rule_violation.html#libraries",
+    "href": "R/communities/community_composition/05_assembly_rule_violation.html#libraries",
+    "title": "Violation of the pairwise assembly rule in 3 and 4-member communities",
+    "section": "1.1 Libraries",
+    "text": "1.1 Libraries\n\n\nShow/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(scales)\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"utils_community_composition.R\"))",
+    "crumbs": [
+      "5. Community growth - composition",
+      "v) Violation of pairwise assembly rule"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/05_assembly_rule_violation.html#global-variables",
+    "href": "R/communities/community_composition/05_assembly_rule_violation.html#global-variables",
+    "title": "Violation of the pairwise assembly rule in 3 and 4-member communities",
+    "section": "1.2 Global variables",
+    "text": "1.2 Global variables\n\n\nShow/hide code\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "v) Violation of pairwise assembly rule"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/05_assembly_rule_violation.html#pairwise-coexistence-outcomes",
+    "href": "R/communities/community_composition/05_assembly_rule_violation.html#pairwise-coexistence-outcomes",
+    "title": "Violation of the pairwise assembly rule in 3 and 4-member communities",
+    "section": "2.1 Pairwise coexistence outcomes",
+    "text": "2.1 Pairwise coexistence outcomes\n\n\nShow/hide code\noutcome_pairs &lt;- read_tsv(here::here(data, \"2sp_coexistence.tsv\"))\n\n\nRows: 95 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (2): sp_1, sp_2\ndbl (2): strep_conc, coexists\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nConvert the pairs in tibble format into the matrixes\n\n\nShow/hide code\npairs_matrixified &lt;- outcome_pairs %&gt;%\n  nest(data = -strep_conc) %&gt;% \n  mutate(mat = map(data, matrixify))",
+    "crumbs": [
+      "5. Community growth - composition",
+      "v) Violation of pairwise assembly rule"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/05_assembly_rule_violation.html#species-abundances",
+    "href": "R/communities/community_composition/05_assembly_rule_violation.html#species-abundances",
+    "title": "Violation of the pairwise assembly rule in 3 and 4-member communities",
+    "section": "2.2 Species abundances",
+    "text": "2.2 Species abundances\n\n\nShow/hide code\nsamp_trios &lt;- readr::read_tsv(here::here(data, \"3sps_compiled.tsv\")) %&gt;% \n  dplyr::rename(f = f_thresh) %&gt;% \n  dplyr::filter(community_type == \"experiment\") %&gt;% \n  dplyr::mutate(sp = paste(str_to_upper(evo_hist), str_extract(strainID, \"\\\\d+\"), sep = \"_\")) %&gt;% \n  dplyr::select(sample, strep_conc, replicate, n_species, sp, f, start_f=target_f_masterplate)\n\nsamp_quarts &lt;- readr::read_tsv(here::here(data, \"4sps_compiled.tsv\")) %&gt;% \n  dplyr::rename(f = f_thresh) %&gt;% \n  dplyr::filter(community_type == \"experiment\") %&gt;% \n  dplyr::mutate(sp = paste(str_to_upper(evo_hist), str_extract(strainID, \"\\\\d+\"), sep = \"_\"))\n\nsamp_octs &lt;- readr::read_tsv(here::here(data, \"8sps_compiled.tsv\")) %&gt;% \n  dplyr::rename(f = f_thresh) %&gt;% \n  dplyr::filter(community_type == \"experiment\") %&gt;% \n  mutate(target_f_masterplate = target_f_masterplate*100, \n         max_f = max_f*100)",
+    "crumbs": [
+      "5. Community growth - composition",
+      "v) Violation of pairwise assembly rule"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))\n\n\n\n\n\n\n\nShow/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20240711_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20240711_BTK_illumina_v3\")\namplicontar &lt;- here::here(data_raw, \"rbec_output.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir &lt;- fs::file_temp()",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20240711_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20240711_BTK_illumina_v3\")\namplicontar &lt;- here::here(data_raw, \"rbec_output.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir &lt;- fs::file_temp()",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.1 Untar Rbec output tarball",
+    "text": "3.1 Untar Rbec output tarball\n\n\nShow/hide code\narchive::archive_extract(\n  amplicontar,\n  dir = tmpdir,\n  files = NULL,\n  options = character(),\n  strip_components = 0L\n)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.2 Setup directory structure",
+    "text": "3.2 Setup directory structure\n\n\nShow/hide code\ntabdir &lt;- here::here(tmpdir, \"rbec_output\")\nsamppaths &lt;- fs::dir_ls(tabdir)\nsampnames &lt;- path_split(samppaths) %&gt;% \n  map_chr(dplyr::last)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.3 Read",
+    "text": "3.3 Read\n\n\nShow/hide code\nstraintabs &lt;- paste0(samppaths, \"/strain_table.txt\") %&gt;% \n  set_names(sampnames) %&gt;% \n  map_df(\n  read_tsv,\n  skip = 1,\n  col_names = c(\"rRNA16S_locus\",\"count\"),\n  show_col_types = FALSE, \n  .id = \"sample\") %&gt;% \n  # naming scheme inconsistent for one sample\n  mutate(sample = if_else(sample == \"P2_s_0\", \"P02_s_0\", sample))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#clean-up",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#clean-up",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.4 Clean up",
+    "text": "3.4 Clean up\n\n\nShow/hide code\n# remove decompressed directory from temp location\nfs::dir_delete(tmpdir)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.1 Negative controls",
+    "text": "5.1 Negative controls\nLets check what species are contaminating negative controls. Most appear to be low abundance contaminants of species excluded from the experiment. Probably this is cross talk from the positive controls and other samples\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^neg\")) %&gt;% \n  filter(f_raw &gt; 0) %&gt;%\n  contam_histogram(trans=TRUE, x = f_raw) +\n  labs(x = \"Frequency distribution of each species in the negative controls\", y = \"Sample count\") +\n  facet_wrap(~strainID)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Frequency distribution of all species in the negative controls\n\n\n\nI am not sure where the off-target species are coming from because we did not include any positive community controls here. However, they are all very low abundance and so I think they are just noise. Also it is worth noting that HAMBI_1972 and HAMBI_1977 are the same genus so if some of the read qualities are crappy it could easily be missassigned.\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^neg\")) %&gt;% \n  filter(str_detect(strainID, \"0403|1287|1896|1977\")) %&gt;% \n  filter(f_raw &gt; 0) %&gt;% \n  contam_histogram(trans=TRUE, x = f_raw) +\n  labs(x = \"Frequency distribution of each species in the negative controls\", y = \"Sample count\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Frequency distribution of only target species in the negative controls\n\n\n\n\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^neg\")) %&gt;% \n  filter(str_detect(strainID, \"0403|1287|1896|1977\"))\n\n\n\n  \n\n\n\nThis looks ok, but there are potentially some problems. Specifically, negative control replicates 2, 3, and 4 all have some contamination. neg_2_0 seems to be contaminated with HAMBI_1977, neg_3_0 with HAMBI_1287, and neg_4_0 with HAMBI_1977. However in the 5 remaining negative controls there is no contamination.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.2 Positive controls",
+    "text": "5.2 Positive controls\nThe positive controls should each have three species. In all cases the species that shouldn’t be there is very rare\n\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^pos\")) %&gt;%\n  mutate(total_pos_controls = n_distinct(sample)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f = round(f_raw*100, 1)) %&gt;%\n  mutate(supposed_2_b_there = if_else(is.na(evo_hist), \"no\", \"yes\")) %&gt;% \n  relocate(f, supposed_2_b_there) %&gt;% \n  distinct(f, supposed_2_b_there, sample, strainID, count_correct, n_species, community_type,) %&gt;% \n  filter(f &gt; 0)\n\n\n\n  \n\n\n\nThis is also good - we detect all 3 species that should be there in the positive controls on each plate.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.3 Misassigned reads",
+    "text": "5.3 Misassigned reads\nThese libraries were only prepared with samples from Milla’s 4-species experiment with 403, 1287, 1896, and 1977 so any time species other than these show up is just an incorrect assignment by Rbec. Let’s check quickly how many of these there are…\n\n\nShow/hide code\nfinaltable %&gt;% \n  filter(!str_detect(strainID, \"0403|1287|1896|1977\")) %&gt;% \n  filter(count_correct &gt; 0) %&gt;% \n  arrange(desc(count_correct))\n\n\n\n  \n\n\n\nThere is one or two incorrectly assigned reads here and there but this is just noise. We can safely exclude all reads not mapping to one of the focal species.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-few-total-reads",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-few-total-reads",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.4 Samples with few total reads",
+    "text": "5.4 Samples with few total reads\nSome of the experimental pairs had streptomycin concentrations higher than any of the species individually could tolerate. We would naively expect then that neither species would grow successfully in these samples and that the overall biomass would be very low, thus resulting in a low number of recovered reads from these samples.\nTo look into this. first let’s check which samples have very low OD600 in the endpoint samples.\n\n\nShow/hide code\nod &lt;- read_tsv(here::here(\"_data_raw\", \"communities\", \"optical_density\", \"20240606_pairs\", \"optical_density_formatted.tsv\"))\n\n\nWe’ll filter out samples with an OD of less than 0.1 and also samples with fewer than 1000 reads. It is generally good practice to exclude samples with low number of reads.\n\n\nShow/hide code\ndf &lt;- left_join(finaltable, od, \n                  by = join_by(community_id, n_species, transfers, strep_conc, replicate)) %&gt;% \n  filter(transfers == 8) %&gt;% \n  arrange(sample_tot_raw) %&gt;% \n  arrange(OD) %&gt;% \n  # filter only samples with OD &lt; 0.1 or &lt; 1000 total reads. 1000 read threshold \n  # was chose based on the first figure in this notebook\n  filter(OD &lt; 0.1 | sample_tot_raw &lt; 1000) %&gt;% \n  filter(count_correct &gt; 0)\n\nlowread_samps &lt;- df %&gt;% \n  filter(sample_tot_raw &lt; 3000 & community_type == \"experiment\") %&gt;% \n  distinct(sample) %&gt;% \n  pull(sample)\n  \ndf %&gt;% \n  distinct(sample, community_type, OD, sample_tot_raw)\n\n\n\n  \n\n\n\nThere are 10 experimental samples that have less than 1000 reads. 6 of those samples have low optical density which indicates nothing was growing there and that they should have low read number. 4 samples have normal optical density (~ 0.3) and these look to be samples that failed at the library preparation/sequencing step. Regardless, all these 10 samples will be excluded from the downstream analysis.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#filter-to-target-species",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#filter-to-target-species",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.5 Filter to target species",
+    "text": "5.5 Filter to target species\nExclude positive and negative controls and also exclude species that are not in the focal 4\n\n\nShow/hide code\nfinaltable_exp_mstr &lt;- finaltable %&gt;% \n  filter(community_type %nin% c(\"empty\", \"neg_ctrl\", \"pos_ctrl\")) %&gt;% \n  # also exclude samples with low reads\n  filter(sample %nin% lowread_samps) %&gt;% \n  filter(strainID %in% c(\"HAMBI_0403\", \"HAMBI_1287\", \"HAMBI_1896\", \"HAMBI_1977\")) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f_raw_targetsp = count_correct/sum(count_correct),\n         sample_tot_targetsp = sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  relocate(c(sample_tot_targetsp, f_raw_targetsp), .after = f_raw)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#masterplate-samples",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#masterplate-samples",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.6 Masterplate samples",
+    "text": "5.6 Masterplate samples\nTo set up this experiment, Milla combined the species in the planned proportions on a masterplate. Because this process was time consuming, the masterplate was stored at -80C after construction until the experiment start day when it was taken from the freezer and used to inoculate the experiment. Because Milla knows exactly which strains were added to the master plate and the plates were not allowed to grow, any strains in these samples that are not supposed to be there should be due to Illumina index cross talk and not true contamination. We can get a sense for the average index crosstalk rate from these samples and then draw a threshold of when to exclude likely false positives and when a positive is likely due to contamination.\n\n5.6.1 Pairs\nOverall the masterplate pairs look very good. There are no samples where a species that should not be there is present in high abundances. Any contamination (grey to black fill) is well under 5%.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(community_type, \"masterplate\") & n_species == 2) %&gt;% \n  contaminated_barplot(threshold = 0, quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"All Masterplate pairs\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: Species composition of all masterplate pairs. Any species that shouldn’t be there (&gt; 0%) is shown in grey to black.\n\n\n\nThere are no samples with more than 4% of a species that shouldn’t be there\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"masterplate\")) %&gt;% \n  filter(n_species == \"2\") %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.04 ) %&gt;% \n  distinct(sample)\n\n\n\n  \n\n\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(community_type, \"masterplate\") & n_species == 2) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0) %&gt;% \n  contam_histogram(trans = TRUE, x = f_raw_targetsp) +\n  labs(x = \"Species frequency\", y = \"Sample count\") +\n  ggtitle(\"Frequency distribution of misassigned species in masterplate pairs\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5: Frequency distribution of each species in masterplate pair samples where it should not occur. The 1% mark (commonly accepted as an acceptable Illumina cross-talk standard) is demarcated with a dashed line.\n\n\n\n\n\n5.6.2 Trios\nTrio masterplates also look very good. There are some samples where a species that shouldn’t be there is &gt; 3%, but these are always &lt; 5% and there are no samples with major contamination. Importantly these all match the proportions that we used to start the experiment\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(community_type, \"masterplate\") & n_species == 3) %&gt;% \n  # this is a dumb hack so that I don't have to plot all bars on the same axis\n  # but I can wrap them using a meaningless facet\n  group_by(sample) %&gt;% \n  mutate(id = cur_group_id()) %&gt;% \n  ungroup() %&gt;% \n  mutate(facet = ntile(id, 4)) %&gt;% \n  contaminated_barplot(threshold = 0, quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"All Masterplate trios\") +\n  facet_wrap(~facet, scales=\"free_x\", nrow=4) +\n  theme(\n    strip.background = element_blank(),\n    strip.text.x = element_blank()\n    )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 6: Species composition of all masterplate trios. Any species that shouldn’t be there (&gt; 0%) is shown in grey to black. The samples are split over four rows to aid in visualization - the specific subplots are meaningless.\n\n\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(community_type, \"masterplate\") & n_species == 3) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0) %&gt;% \n  contam_histogram(trans = TRUE, x = f_raw_targetsp) +\n  labs(x = \"Species frequency\", y = \"Sample count\") +\n  ggtitle(\"Frequency distribution of misassigned species in masterplate trios\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 7: Frequency distribution of each species in masterplate trio samples where it should not occur. The 1% mark (commonly accepted as an acceptable Illumina cross-talk standard) is demarcated with a dashed line.\n\n\n\nThere are no samples with more than 3% of a species that shouldn’t be there\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"masterplate\")) %&gt;% \n  filter(n_species == \"3\") %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.03 ) %&gt;% \n  distinct(sample)\n\n\n\n  \n\n\n\n\n\n5.6.3 Masterplate Summary\nGenerally, the cross talk frequency is really good. For 3/4 species it is 1% or less which is more or less what you can expect when you are multiplexing libraries on an Illumina platform. Values greater than 1% are potentially indicative of a different problem, so 1977 requires a bit more investigation.\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(community_type, \"masterplate\")) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.01 & strainID == \"HAMBI_1977\") %&gt;%\n  arrange(desc(f_raw_targetsp))\n\n\n\n  \n\n\n\nIt looks like all the “problematic” samples come from plates 7 and 8 in the library prep. Plate 8 only contains the masterplate samples from trios whereas plate 7 contains both masterplate and experimental samples. In Figure 2 it shows that HAMBI-1977 is very abundant in many of the samples so likely the “leaky” reads come disproportionately from HAMBI-1977 which is why its crosstalk threshold may be higher (Figure 1). Anyway, I don’t think this is a problem and that we can move forward with these samples. However, to define extinction/competitive exclusion we may need to use a higher threshold than 1% (e.g., 3% frequency) because over 3% we can reliably say that a species is present and it is not due to index cross talk.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.7 Experimental samples",
+    "text": "5.7 Experimental samples\nWe may need to use a higher threshold than 1% (e.g., 3% frequency) because over 3% we can reliably say that a species is present and it is not due to index cross talk. Below I basically empirically chose 8% as a reasonable threshold value that includes the maximum number of samples with low-level contamination and exclude samples with very high contamination.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw &gt; 0.03 ) %&gt;% \n  contam_histogram(trans=TRUE, x = f_raw_targetsp) +\n  labs(x = \"Species frequency\", y = \"Sample count\") +\n  ggtitle(\"Frequency distribution of each species exceeding the 3% threshold\") +\n  geom_vline(xintercept = 0.08, color = \"red\") +\n  facet_grid(n_species~strainID)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8: Frequency distribution of each species in experimental samples where it should not occur and where it exceeds a 3% threshold. Grid columns are the different species and grid rows represent whether the sample was an experiment pair (2) or trio (3). The red vertical line is at 8%.\n\n\n\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.03 ) %&gt;% \n  arrange(desc(f_raw_targetsp))\n\n\n\n  \n\n\n\nThere are 73 samples (10% of 710 samples) that exceed a 3% crosstalk threshold. 23 samples (3% of 710 samples) have contamination &lt;= 8% and 50 samples (7 % of 710 samples) have &gt; 8% of a species that should not be there. In most cases the species in highly contaminated samples is HAMBI_1977. I think these 50 samples are probably at very high risk for legitimate contamination. It is likely that the rest of the 23 samples with &lt;= 8% contamination are not contaminated but just crosstalk outliers.\n\n5.7.1 Pairs\nHere taking a closer look at the pairs from the experiment that appear to be contaminated.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\") & n_species == 2) %&gt;% \n  contaminated_barplot(threshold = 0.16,  quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"Experiment pairs with &gt;= 15% contamination\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 9: Species composition of pairs experimental samples that contain &gt;= 15% of a species that shouldn’t be there (shown in grey to black).\n\n\n\nMost of the comtaminated samples are in the 0 Streptomycin conditions. I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with 8% or less contaminant I think can be retained, and I will discard the contaminating sequences.\n\n\nShow/hide code\ncontampairs &lt;- finaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\") & n_species == 2) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.16 ) %&gt;% \n  pull(sample)\n\n\n\n\n5.7.2 Trios\nHere just taking a closer look at the trios from the experiment that appear to be contaminated.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\") & n_species == 3) %&gt;% \n  contaminated_barplot(threshold=0.16,  quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"Experiment trios with &gt;= 15% contamination\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 10: Species composition of experiment trio samples that contain &gt;= 15% of a species that shouldn’t be there (shown in grey to black).\n\n\n\nAgain, I think we should exclude samples where the contamination is very high (over ~50% of the sample) but those with around less than 15% contaminant I think can be retained, and I will discard the contaminating sequences.\n\n\nShow/hide code\ncontamtrios &lt;- finaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\") & n_species == 3) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.16) %&gt;% \n  pull(sample)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#posneg-control-samples",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#posneg-control-samples",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.1 pos/neg control samples",
+    "text": "6.1 pos/neg control samples\nSeparate out the pos/neg control samples\n\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^pos|^neg\")) %&gt;% \n  dplyr::select(-transfers, -strep_conc, -evo_hist, -target_f, -count) %&gt;% \n  mutate(batch = \"run20240711\") %&gt;% \n  write_tsv(here::here(data, \"pos_neg_ctrl_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#pairs-2",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#pairs-2",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.2 Pairs",
+    "text": "6.2 Pairs\nWrite the pair samples\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;% \n  filter(n_species == 2) %&gt;% \n  arrange(sample) %&gt;% \n  write_tsv(here::here(data, \"pairs_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#trios-2",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html#trios-2",
+    "title": "Formatting Rbec output from 2024-07-11 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.3 Trios",
+    "text": "6.3 Trios\nWrite the trio samples\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;% \n  filter(n_species == 3) %&gt;% \n  arrange(sample) %&gt;% \n  write_tsv(here::here(data, \"trios_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "i) Batch 2024-07-11"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))\n\n\n\n\n\n\n\nShow/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20241024_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20241024_BTK_illumina_v3\")\namplicontar &lt;- here::here(data_raw, \"rbec_output.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir &lt;- fs::file_temp()",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20241024_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20241024_BTK_illumina_v3\")\namplicontar &lt;- here::here(data_raw, \"rbec_output.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir &lt;- fs::file_temp()",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.1 Untar Rbec output tarball",
+    "text": "3.1 Untar Rbec output tarball\n\n\nShow/hide code\narchive::archive_extract(\n  amplicontar,\n  dir = tmpdir,\n  files = NULL,\n  options = character(),\n  strip_components = 0L\n)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.2 Setup directory structure",
+    "text": "3.2 Setup directory structure\n\n\nShow/hide code\ntabdir &lt;- here::here(tmpdir, \"rbec_output\")\nsamppaths &lt;- fs::dir_ls(tabdir)\nsampnames &lt;- path_split(samppaths) %&gt;% \n  map_chr(dplyr::last)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.3 Read",
+    "text": "3.3 Read\n\n\nShow/hide code\nstraintabs &lt;- paste0(samppaths, \"/strain_table.txt\") %&gt;% \n  set_names(sampnames) %&gt;% \n  map_df(\n  read_tsv,\n  skip = 1,\n  col_names = c(\"rRNA16S_locus\",\"count\"),\n  show_col_types = FALSE, \n  .id = \"sample\")",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#clean-up",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#clean-up",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.4 Clean up",
+    "text": "3.4 Clean up\n\n\nShow/hide code\n# remove decompressed directory from temp location\nfs::dir_delete(tmpdir)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.1 Negative controls",
+    "text": "5.1 Negative controls\nFirst, we’ll check whether the experimental and plate negative controls look good\nLets check what species are contaminating negative controls. Most appear to be low abundance contaminants of species excluded from the experiment. Probably this is cross talk from the positive controls and other samples\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^neg\")) %&gt;% \n  filter(f_raw &gt; 0) %&gt;%\n  contam_histogram(trans=TRUE, x = f_raw) +\n  labs(x = \"Frequency distribution of each species in the negative controls\", y = \"Sample count\") +\n  facet_wrap(~strainID)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Frequency distribution of all species in the negative controls\n\n\n\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^neg\")) %&gt;% \n  filter(str_detect(strainID, \"0403|1287|1896|1977\")) %&gt;% \n  filter(f_raw &gt; 0) %&gt;% \n  contam_histogram(trans=TRUE, x = f_raw) +\n  labs(x = \"Frequency distribution of each species in the negative controls\", y = \"Sample count\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Frequency distribution of only target target species in the negative controls\n\n\n\n\n\n\nShow/hide code\nod &lt;- read_tsv(here::here(\"_data_raw\", \"communities\", \"optical_density\", \"20240829_tqs\", \"optical_density_formatted_102024.txt\")) %&gt;% \n  mutate(well = stringr::str_replace(well,\n                     pattern = \"([0-9]+)\", \n                     replacement = {\\(x) stringr::str_pad(string = x, width = 2,  side = \"left\",  pad = \"0\")}))\n\n\nAll negative control have very low OD &lt; 0.1 and it is safe to assume that they are clean.\n\n\nShow/hide code\ndf &lt;- left_join(finaltable, od, by = join_by(sample, transfers==transfer, replicate, strep_conc)) %&gt;% \n  filter(str_detect(community_type, \"^neg\")) %&gt;% \n  dplyr::select(sample, OD, well, community_type, n_species.x, n_species.y, replicate) %&gt;% \n  distinct() %&gt;% \n  filter(!is.na(OD))\n\n\nAll negative control have very low OD &lt; 0.1 and low read counts it is safe to assume that they are clean.\n\nShow/hide code\ndf %&gt;% \n  left_join(finaltable, by = join_by(sample, community_type, replicate, n_species.x==n_species)) %&gt;% \n  filter(f_raw &gt; 0) %&gt;% \n  filter(str_detect(strainID, \"0403|1287|1896|1977\")) %&gt;% \n  dplyr::select(sample_tot_raw, sample, OD, community_type) %&gt;% \n  distinct() %&gt;% \n  pivot_longer(c(-sample, -community_type)) %&gt;% \n  ggplot(aes(x = value)) +\n  geom_histogram(bins = 5) +\n  facet_grid(~name, scales = \"free_x\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: Optical density (OD) and total read count distributions of negative controls.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.2 Positive controls",
+    "text": "5.2 Positive controls\nThe positive community controls should each have all 23 species.\n\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^pos\") & count_correct &gt; 0) %&gt;% \n  group_by(sample) %&gt;%\n  mutate(n_sp_detected = n()) %&gt;% \n  distinct(sample, sample_tot_raw, n_sp_detected)\n\n\n\n  \n\n\n\n2/3 community controls have plenty of reads and look normal. One has under 1000 reads in total and it only contains the 4 focal species (0403, 1287, 1896, 1977). It looks to me that this could be a mislabeled negative control?",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.3 Misassigned reads",
+    "text": "5.3 Misassigned reads\nThese libraries were only prepared with samples containing HAMBI_0403, HAMBI_1287, HAMBI_1896, and HAMBI_1977 so any time species other than these show up is just an incorrect assignment by Rbec or index leakage/crosstalk from the positive community controls. Let’s check quickly how many of these there are…\n\n\nShow/hide code\nfinaltable %&gt;% \n  # filter out community controls since they have all hambi species\n  filter(!(sample %in% c(\"4_p09_A01\", \"4_p10_A01\", \"4m_p18_A01\" ))) %&gt;% \n  filter(!str_detect(strainID, \"0403|1287|1896|1977\")) %&gt;% \n  filter(count_correct &gt; 0) %&gt;% \n  arrange(desc(count_correct))\n\n\n\n  \n\n\n\nthere are only very small number of reads mapping to off-target species per experimental sample probably from crosstalk leakage.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-few-total-reads",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-few-total-reads",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.4 Samples with few total reads",
+    "text": "5.4 Samples with few total reads\nSome of the experimental pairs had streptomycin concentrations higher than any of the species individually could tolerate. We would expect then that no species would grow successfully in these samples and that the overall biomass would be very low, thus resulting in a low number of recovered reads from these samples.\nTo look into this. first let’s check which samples have very low OD600 in the endpoint samples. We’ll filter out samples with an OD of less than 0.1 and also samples with fewer than 1000 reads. It is generally good practice to exclude samples with low number of reads.\n\n\nShow/hide code\nleft_join(finaltable, od, \n          by = join_by(sample, transfers==transfer, replicate, strep_conc)) %&gt;% \n  filter(transfers == 8) %&gt;% \n  filter(OD &lt; 0.1 | sample_tot_raw &lt; 3000) %&gt;% \n  distinct(sample, community_type, OD, sample_tot_raw) %&gt;% \n  count(community_type)\n\n\n\n  \n\n\n\nSamples with low reads or low OD are all negative controls or the one positive control that failed (plus another positive control 4_p10_A01 but this must be from mislabeling because there were no positive controls actually on the experimental plates).",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#filter-to-target-species",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#filter-to-target-species",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.5 Filter to target species",
+    "text": "5.5 Filter to target species\nExclude positive and negative controls and also exclude species that are not in the focal 4\n\n\nShow/hide code\nfinaltable_exp_mstr &lt;- finaltable %&gt;% \n  filter(community_type %nin% c(\"empty\", \"neg_control\", \"pos_control\")) %&gt;% \n  # no low-read samples to filter\n  #filter(sample %nin% lowread_samps) %&gt;% \n  filter(strainID %in% c(\"HAMBI_0403\", \"HAMBI_1287\", \"HAMBI_1896\", \"HAMBI_1977\")) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f_raw_targetsp = count_correct/sum(count_correct),\n         sample_tot_targetsp = sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  relocate(c(sample_tot_targetsp, f_raw_targetsp), .after = f_raw)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#masterplate-samples",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#masterplate-samples",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.6 Masterplate samples",
+    "text": "5.6 Masterplate samples\n\n5.6.1 Pairs\nSomething a bit weird is going on with two of the masterplate pairs. Samples P19 and P20 both somehow have ~20 of HAMBI_0403 present in them. However, the rest of the species composition looks like how we expect them. I think we will keep these two masterplate samples and just filter out the HAMBI_0403 that shouldn’t be there\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(community_type, \"masterplate\") & n_species == 2)  %&gt;% \n  dplyr::select(sample, strainID, f_raw_targetsp, target_f, evo_hist) %&gt;% \n  mutate(f_raw_targetsp = round(f_raw_targetsp, 2)) %&gt;% \n  distinct()\n\n\n\n  \n\n\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(community_type, \"masterplate\") & n_species == 2) %&gt;% \n  contaminated_barplot(threshold = 0, quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"Masterplate pairs with contamination\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5: Species composition of masterplate pairs that contain any percentage (&gt; 0%) of a species that shouldn’t be there (shown in grey to black).\n\n\n\n\n\n5.6.2 Trios\nTrio masterplates look quite good. Yes, there are some samples where a species that shouldn’t be there is &gt; 3%, but these are always &lt; 5% and there are no samples with major contamination\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(notes, \"trios\") & str_detect(notes, \"masterplate\")) %&gt;% \n  contaminated_barplot(threshold = 0.01, quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"Masterplate trios with contamination\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 6: Species composition of masterplate pairs that contain &gt;= 1% of a species that shouldn’t be there (shown in grey to black).\n\n\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(notes, \"trios\") & str_detect(notes, \"masterplate\")) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw &gt; 0) %&gt;% \n  contam_histogram(trans = FALSE, x = f_raw_targetsp) +\n  labs(x = \"Species frequency\", y = \"Sample count\") +\n  ggtitle(\"Frequency distribution of misassigned species in masterplate trios\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 7: Frequency distribution of each species in masterplate samples where it should not occur. The 1% mark (commonly accepted as an acceptable Illumina cross-talk standard) is demarcated with a dashed line.\n\n\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(notes, \"trios\") & str_detect(notes, \"masterplate\")) %&gt;% \n  filter(!is.na(evo_hist)) %&gt;% \n  filter(f_raw &gt; 0) %&gt;% \n  contam_histogram(trans = FALSE, x = f_raw_targetsp) +\n  labs(x = \"Species frequency\", y = \"Sample count\") +\n  ggtitle(\"Frequency distribution of focal species in masterplate trios\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8: Frequency distribution of each species in all samples where it should occur.\n\n\n\n\n\n5.6.3 Quartets\nOne weakness of this contamination-detection approach is that there is no way to tell from this data whether a quartet masterplate is contaminated because every quartet (by definition) is inoculated with all of the 4 species at different frequencies and with different evolutionary histories. See Section 5.7.3 below for more information. However, we can still visualize the composition of those quartets and whether they seem to be close to what we expected to put in.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;%\n  filter(str_detect(notes, \"quartets\") & str_detect(notes, \"masterplate\")) %&gt;% \n  contaminated_barplot(threshold = 0.01, quartet = TRUE, y = f_raw_targetsp) +\n  ggtitle(\"All masterplate quartets\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 9: Species composition of masterplate quartets.\n\n\n\nThese look really good and are clearly following the correct pattern/distribution for the quartets.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.7 Experimental samples",
+    "text": "5.7 Experimental samples\nWe may need to use a higher threshold than 1% (e.g., 3% frequency) because over 3% we can reliably say that a species is present and it is not due to index cross talk.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw &gt; 0.03 ) %&gt;% \n  contam_histogram(trans=TRUE, x = f_raw_targetsp) +\n  labs(x = \"Species frequency\", y = \"Sample count\") +\n  ggtitle(\"Frequency distribution of each species exceeding the 3% threshold\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 10: Frequency distribution of each species in experimental samples where it should not occur and where it exceeds a 3% threshold.\n\n\n\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  # there are only experiment samples left\n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.03 ) %&gt;% \n  dplyr::select(sample, strainID, f_raw_targetsp) %&gt;% \n  arrange(desc(f_raw_targetsp))\n\n\n\n  \n\n\n\nThere are 11 samples (2% of 498 samples) that exceed a 3% crosstalk threshold. 9 samples (2% of 498 samples) have contamination &lt;= 8% and 2 samples (0 % of 498 samples) have &gt; 8% of a species that should not be there. In most cases the species in highly contaminated samples is HAMBI_1977. I think these 2 samples are probably at very high risk for legitimate contamination. It is likely that the rest of the 9 samples with &lt;= 8% contamination are not contaminated but just crosstalk outliers.\n\n5.7.1 Pairs\nHere just taking a closer look at the pairs from the experiment that appear to be contaminated.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\") & n_species == 2) %&gt;% \n  contaminated_barplot(threshold = 0.03, quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"Experiment pairs with &gt; 3% contamination\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 11: Species composition of pairs masterplates samples that contain &gt; 3% of a species that shouldn’t be there (shown in grey to black).\n\n\n\nAll experimental pair samples look pretty good. I think we should only exclude samples where the contamination is very high (over ~50% of the sample) but those with around 10% or less contaminant I think can be retained. So we will not need filter any of these out.\n\n\n5.7.2 Trios\nHere just taking a closer look at the trios from the experiment that appear to be contaminated.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\") & n_species == 3) %&gt;% \n  contaminated_barplot(threshold=0.03, quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"Experiment trios with &gt; 3% contamination\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 12: Species composition of experiment trio samples that contain &gt; 3% of a species that shouldn’t be there (shown in grey to black).\n\n\n\nOnly 2 trio samples look really bad (over 10 %, more like 50 % contamination). Again, I think we should only exclude samples where the contamination is very high (over ~50% of the sample) but those with around 10% or less contaminant I think can be retained, and I will discard the contaminating sequences.\n\n\nShow/hide code\ncontamtrios &lt;- finaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\") & n_species == 3) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.13  ) %&gt;% \n  pull(sample)\n\n\n\n\n5.7.3 Quartets\nAgain, one weakness of this approach is that there is no way to tell from this data whether a quartet is contaminated because every quartet (by definition) is inoculated with all of the 4 species at different frequencies and with different evolutionary histories. Thus we would expect to see either all 4 species present or a subset of the 4 species in the quartet samples, but we cannot tell if these patterns come from contamination or not. Moving forward we just have to assume that the quartets are OK… However, we’ve found so little contamination in our other experimental samples and all samples were handled in the experiment and processed for sequence library preparation in the same way. I think it is safe to assume that contamination in the quartets is minimal issue.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(n_species == 4) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(id = cur_group_id()) %&gt;% \n  ungroup() %&gt;% \n  mutate(facet = ntile(id, 4)) %&gt;% \n  contaminated_barplot(threshold = 0, quartet = TRUE, y=f_raw_targetsp) +\n  ggtitle(\"All experimental quartets\") +\n  facet_wrap(~facet, scales=\"free_x\", nrow=4) +\n  theme(\n    strip.background = element_blank(),\n    strip.text.x = element_blank(),\n    legend.position = \"bottom\"\n    )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 13: Species composition of masterplate quartets.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#pairs-2",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#pairs-2",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.1 Pairs",
+    "text": "6.1 Pairs\nWrite the pair samples\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;% \n  filter(n_species == 2) %&gt;% \n  arrange(sample) %&gt;% \n  write_tsv(here::here(data, \"pairs_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#trios-2",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#trios-2",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.2 Trios",
+    "text": "6.2 Trios\nWrite the trio samples\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;% \n  filter(n_species == 3) %&gt;% \n  arrange(sample) %&gt;% \n  write_tsv(here::here(data, \"trios_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#quartets-1",
+    "href": "R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html#quartets-1",
+    "title": "Formatting Rbec output from 2024-10-20 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.3 Quartets",
+    "text": "6.3 Quartets\nWrite the quartet samples\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;% \n  filter(n_species == 4) %&gt;% \n  arrange(sample) %&gt;% \n  write_tsv(here::here(data, \"quartets_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iii) Batch 2024-10-24"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "",
+    "text": "Show/hide code\nlibrary(here)\nlibrary(tidyverse)\nlibrary(metacal)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))\n\n\n\n\n\n\n\nShow/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20240711_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20240711_BTK_illumina_v3\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)"
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#libraries",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#libraries",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "",
+    "text": "Show/hide code\nlibrary(here)\nlibrary(tidyverse)\nlibrary(metacal)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))"
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#global-variables",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#global-variables",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "",
+    "text": "Show/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20240711_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20240711_BTK_illumina_v3\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)"
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#format-positive-control-samples",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#format-positive-control-samples",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "3.1 Format positive control samples",
+    "text": "3.1 Format positive control samples\n\n\nShow/hide code\npos_ctrl &lt;- left_join(pos_ctrl, spdf) %&gt;% \n  filter(str_detect(community_type, \"^pos\")) %&gt;%\n  # remove noise from species that aren't really there\n  filter(!is.na(evo_hist)) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f_qg = count_correct/sum(count_correct)) %&gt;% \n  dplyr::select(sample, strainID, community_id, count_correct, f_qg) %&gt;% \n  ungroup()\n\n\nJoining with `by = join_by(strainID, community_id)`"
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#plot-masterplate-qiagen-and-boil-prep-side-by-side",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#plot-masterplate-qiagen-and-boil-prep-side-by-side",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "3.2 Plot masterplate Qiagen and boil-prep side by side",
+    "text": "3.2 Plot masterplate Qiagen and boil-prep side by side\n\nShow/hide code\nleft_join(samp_trios, mddf,\n          by = join_by(sample, replicate, strep_conc, transfers, n_species, community_type, plate_well)) %&gt;% \n  filter(community_type == \"masterplate\") %&gt;% \n  right_join(pos_ctrl, by = join_by(strainID, community_id)) %&gt;% \n  dplyr::select(community_id, strainID, f_thresh, f_qg) %&gt;% \n  pivot_longer(c(f_thresh, f_qg)) %&gt;% \n  ggplot() +\n    geom_bar(aes(y = value, x=interaction(name, community_id), fill = strainID), \n             color=\"black\",\n             linewidth=0.25, stat=\"identity\") +\n    scale_y_continuous(limits = c(0,1), expand = c(0, 0), labels = percent) +\n    scale_x_discrete(guide = guide_axis(angle = 90)) +\n    labs(x=\"\", y=\"% abundance\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(),\n        legend.position = \"bottom\") +\n  scale_fill_manual(values = hambi_colors)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Bar plot of masterplate samples extracted by the boilprep method (f) or the Qiagen DNeasy kit (qg). The community trios are appended to the extraction method on the x axs"
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#matrix-of-observed-counts",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#matrix-of-observed-counts",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "3.3 Matrix of observed counts",
+    "text": "3.3 Matrix of observed counts\n\n\nShow/hide code\nsamp_trios_counts &lt;- left_join(samp_trios, mddf,\n                               by = join_by(sample, replicate, strep_conc, \n                                            transfers, n_species, community_type, plate_well)) %&gt;% \n  filter(community_type == \"masterplate\") %&gt;% \n  filter(community_id %in% pull(pos_ctrl, community_id)) %&gt;% \n  dplyr::select(community_id, strainID, count_correct_thresh) %&gt;% \n  pivot_wider(names_from=\"strainID\", values_from=\"count_correct_thresh\") %&gt;% \n  column_to_rownames(var=\"community_id\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;% \n  as.matrix()"
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#make-a-matrix-of-true-proportions",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#make-a-matrix-of-true-proportions",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "3.4 Make a matrix of true proportions",
+    "text": "3.4 Make a matrix of true proportions\n\n\nShow/hide code\npos_ctrl_proportions &lt;- pos_ctrl %&gt;% \n  dplyr::select(community_id, strainID, f_qg) %&gt;%\n  pivot_wider(names_from=\"strainID\", values_from=\"f_qg\") %&gt;% \n  column_to_rownames(var=\"community_id\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;% \n  as.matrix()"
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#estimate-bias",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#estimate-bias",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "4.1 Estimate bias",
+    "text": "4.1 Estimate bias\n\n\nShow/hide code\nset.seed(12378)\nmc_fit_trios &lt;- metacal::estimate_bias(samp_trios_counts, pos_ctrl_proportions, 1, boot=TRUE)\nmc_fit_trios_summary &lt;- summary(mc_fit_trios)\nmc_fit_trios_summary_coef &lt;-mc_fit_trios_summary[['coefficients']]\n\n\n\n4.1.1 Plot bias estimation\n\nShow/hide code\nmc_fit_trios_summary_coef %&gt;% \n  mutate(taxon = fct_reorder(taxon, estimate)) |&gt; \n  ggplot(aes(taxon, estimate, \n             ymin = estimate / gm_se^2, ymax = estimate * gm_se^2)) +\n  geom_hline(yintercept = 1, color = \"grey\") +\n  geom_pointrange(aes(color = taxon)) +\n  scale_color_manual(values = hambi_colors) +\n  labs(x = \"\", y = \"Bias estimate\", color = \"\") +\n  coord_flip() + \n  theme_bw() +\n  theme(panel.grid.major = element_blank(),\n        panel.grid.minor = element_blank())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Bias estimates for each species from the metacal procedure.\n\n\n\n\n\n4.1.2 Plot metacal model fit\n\n\nShow/hide code\na &lt;- as.data.frame(fitted(mc_fit_trios)) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample) %&gt;% \n  mutate(type=\"Fitted\")\n\nb &lt;- as.data.frame(pos_ctrl_proportions) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample) %&gt;% \n  mutate(type=\"Actual\")\n\nc &lt;- as.data.frame(samp_trios_counts/rowSums(samp_trios_counts)) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample,  values_to=\"observed\")\n\n\n\nShow/hide code\nbind_rows(a,b) %&gt;% \n  left_join(c, by = join_by(sample, name)) %&gt;% \n  ggplot(aes(x=observed, y=value, color = name)) +\n  geom_abline(linetype = \"dashed\") +\n  geom_point() +\n  scale_color_manual(values = hambi_colors) +\n  labs(x = \"Species proportion in boil-prepped samples\", y = \"Species proportion in Qiagen-prepped samples\", color = \"\") +\n  facet_grid(~type) + \n  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) + \n  theme_bw() +\n  theme(panel.grid.major = element_blank(),\n        panel.grid.minor = element_blank())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Porportion of each species from boil-prepped samples (x-axis) and from the Qiagen DNeasy extracted samples (y-axis) colored by species identity. The left panel shows the relationship between the two extraction procedures before correction with metacal. The right panel shows the relationship after correction. The dashed line is 1:1."
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#calibrate",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#calibrate",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "4.2 Calibrate",
+    "text": "4.2 Calibrate\nMake a matrix of observed counts\n\n\nShow/hide code\ntrios_2_cal &lt;- left_join(samp_trios, mddf, \n                         by = join_by(sample, replicate, strep_conc, transfers, n_species, community_type, plate_well)) %&gt;% \n  dplyr::select(sample, strainID, count_correct_thresh) %&gt;% \n  pivot_wider(names_from=\"strainID\", values_from=\"count_correct_thresh\") %&gt;% \n  column_to_rownames(var=\"sample\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;%\n  as.matrix()\n\npairs_2_cal &lt;- left_join(samp_pairs, mddf, \n                         by = join_by(sample, replicate, strep_conc, transfers, n_species, community_type, plate_well)) %&gt;% \n  dplyr::select(sample, strainID, count_correct_thresh) %&gt;% \n  pivot_wider(names_from=\"strainID\", values_from=\"count_correct_thresh\") %&gt;% \n  column_to_rownames(var=\"sample\") %&gt;% \n  mutate(across(everything(), ~replace_na(.x, 0))) %&gt;%\n  as.matrix()"
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#run-the-calibrate-function",
+    "href": "R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html#run-the-calibrate-function",
+    "title": "Calibrate boilprep to Qiagen DNeasy",
+    "section": "4.3 Run the calibrate function",
+    "text": "4.3 Run the calibrate function\n\n\nShow/hide code\nset.seed(435761)\npairs_calibrated &lt;- metacal::calibrate(pairs_2_cal, coef(mc_fit_trios), margin=1)\ntrios_calibrated &lt;- metacal::calibrate(trios_2_cal, coef(mc_fit_trios), margin=1)\n\n\n\n\nShow/hide code\npairs_calibrated_l &lt;- data.frame(pairs_calibrated) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample, names_to = \"strainID\", values_to = \"f_metacal\") %&gt;% \n  filter(f_metacal &gt; 0)\n\ntrios_calibrated_l &lt;- data.frame(trios_calibrated) %&gt;% \n  rownames_to_column(var = \"sample\") %&gt;% \n  pivot_longer(-sample, names_to = \"strainID\", values_to = \"f_metacal\") %&gt;% \n  filter(f_metacal &gt; 0)"
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))\n\n\n\n\n\n\n\nShow/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20250502_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20250502_BTK_illumina_v3\")\namplicontar &lt;- here::here(data_raw, \"rbec_output.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir &lt;- fs::file_temp()",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20250502_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20250502_BTK_illumina_v3\")\namplicontar &lt;- here::here(data_raw, \"rbec_output.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir &lt;- fs::file_temp()",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.1 Untar Rbec output tarball",
+    "text": "3.1 Untar Rbec output tarball\n\n\nShow/hide code\narchive::archive_extract(\n  amplicontar,\n  dir = tmpdir,\n  files = NULL,\n  options = character(),\n  strip_components = 0L\n)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.2 Setup directory structure",
+    "text": "3.2 Setup directory structure\n\n\nShow/hide code\ntabdir &lt;- here::here(tmpdir, \"rbec_output\")\nsamppaths &lt;- fs::dir_ls(tabdir)\nsampnames &lt;- path_split(samppaths) %&gt;% \n  map_chr(dplyr::last)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.3 Read",
+    "text": "3.3 Read\n\n\nShow/hide code\nstraintabs &lt;- paste0(samppaths, \"/strain_table.txt\") %&gt;% \n  set_names(sampnames) %&gt;% \n  map_df(\n  read_tsv,\n  skip = 1,\n  col_names = c(\"rRNA16S_locus\",\"count\"),\n  show_col_types = FALSE, \n  .id = \"sample\")",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#clean-up",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#clean-up",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.4 Clean up",
+    "text": "3.4 Clean up\n\n\nShow/hide code\n# remove decompressed directory from temp location\nfs::dir_delete(tmpdir)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.1 Negative controls",
+    "text": "5.1 Negative controls\nRead optical density data for the experiment\n\n\nShow/hide code\nOD &lt;- readr::read_tsv(here::here(\"_data_raw\", \"communities\", \"optical_density\", \"20250425_8sp_5050pairs\", \"optical_density_formatted.tsv\")) %&gt;% \n  mutate(sample2 = case_when(str_detect(sample, \"com_\") ~ paste0(\"8\", str_extract(sample, \"_\\\\d+$\")),\n                             str_detect(sample, \"^3_p\") ~ paste0(\"3_c01_\", str_extract(well, \"[:upper:]\"), str_pad(str_extract(well, \"\\\\d+\"), 2, \"left\", pad = \"0\")),\n                             str_detect(sample, \"^p\\\\d+\") ~ paste0(\"2_\", str_extract(sample, \"\\\\d+\"), \"_\", str_extract(well, \"[:upper:]\"), str_pad(str_extract(well, \"\\\\d+\"), 2, \"left\", pad = \"0\")),\n                             str_detect(sample, \"^p\") ~ str_to_upper(sample)))\n\n\nRows: 960 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (2): sample, well\ndbl (5): transfers, n_species, strep_conc, replicate, OD\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nFirst just checking the negative controls\n\n\nShow/hide code\nOD %&gt;% \n  filter(str_detect(sample, \"neg_control\")) %&gt;% \n  ggplot(aes(x = OD)) +\n  geom_histogram(bins = 10) +\n  geom_vline(xintercept = 0.1, color = \"red\") + \n  labs(y = \"Sample count\", x = \"Sample optical density\")  +\n  facet_grid(~ transfers, scales=\"free_y\")\n\n\n\n\n\n\n\n\n\nNegative controls look good. OD in all negative controls is low (&lt;0.07)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.2 Positive controls",
+    "text": "5.2 Positive controls\nNo positive controls included in this run",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.3 Misassigned reads",
+    "text": "5.3 Misassigned reads\nThese libraries were only prepared with samples containing HAMBI_0403, HAMBI_1287, HAMBI_1896, and HAMBI_1977 so any time species other than these show up is just an incorrect assignment by Rbec or index leakage/crosstalk from the positive community controls. Let’s check quickly how many of these there are…\n\n\nShow/hide code\nfinaltable %&gt;% \n  filter(!str_detect(strainID, \"0403|1287|1896|1977\")) %&gt;% \n  filter(count_correct &gt; 0) %&gt;% \n  arrange(desc(count_correct))\n\n\n\n  \n\n\n\nThere are only a couple of random reads per experimental sample so we can safely ignore them. Since there was no positive control included here the off-target species must come from missassignments and not index leakage from community control.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-few-total-reads",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-few-total-reads",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.4 Samples with few total reads",
+    "text": "5.4 Samples with few total reads\nSome of the experimental pairs had streptomycin concentrations higher than any of the species individually could tolerate. We would expect then that no species would grow successfully in these samples and that the overall biomass would be very low, thus resulting in a low number of recovered reads from these samples.\nTo look into this. first let’s check which samples have very low OD600 in the endpoint samples. We’ll filter out samples with an OD of less than 0.1 or samples with fewer than 3000 reads. It is generally good practice to exclude samples with low number of reads.\n\n\nShow/hide code\nleft_join(finaltable, OD, \n                 by = join_by(sample == sample2)) %&gt;% \n  filter(transfers.y == 8) %&gt;% \n  filter(OD &lt; 0.1 | sample_tot_raw &lt; 1000) %&gt;% \n  distinct(sample, community_type, OD, sample_tot_raw) %&gt;%\n  arrange(sample_tot_raw)\n\n\nWarning in left_join(finaltable, OD, by = join_by(sample == sample2)): Detected an unexpected many-to-many relationship between `x` and `y`.\nℹ Row 24 of `x` matches multiple rows in `y`.\nℹ Row 97 of `y` matches multiple rows in `x`.\nℹ If a many-to-many relationship is expected, set `relationship =\n  \"many-to-many\"` to silence this warning.\n\n\n\n  \n\n\n\n\n\nShow/hide code\ndf &lt;- left_join(finaltable, OD, \n                 by = join_by(sample == sample2)) %&gt;% \n  filter(transfers.y == 8) %&gt;% \n  filter(OD &lt; 0.1 | sample_tot_raw &lt; 1000) %&gt;% \n  distinct(sample, community_type, OD, sample_tot_raw) \n\n\nWarning in left_join(finaltable, OD, by = join_by(sample == sample2)): Detected an unexpected many-to-many relationship between `x` and `y`.\nℹ Row 24 of `x` matches multiple rows in `y`.\nℹ Row 97 of `y` matches multiple rows in `x`.\nℹ If a many-to-many relationship is expected, set `relationship =\n  \"many-to-many\"` to silence this warning.\n\n\nShow/hide code\nlowread_samps &lt;- df %&gt;% \n  filter(sample_tot_raw &lt; 1000 & community_type == \"experiment\") %&gt;% \n  distinct(sample) %&gt;% \n  pull(sample)\n\n\nThere is only one low-read sample. It corresponds to a pair with both ancestral HAMBI_1977 and HAMBI_0403 in 256 ug/ml streptomycin. From monoculture results we know this streptomycin concentration is outside the tolerable range for these two species. Indeed, the OD in this sample at time point 8 is 0.046, which indicates very low biomass at the experiment’s conclusion.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#filter-to-target-species",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#filter-to-target-species",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.5 Filter to target species",
+    "text": "5.5 Filter to target species\nExclude positive and negative controls and also exclude species that are not in the focal 4\n\n\nShow/hide code\nfinaltable_exp_mstr &lt;- finaltable %&gt;% \n  filter(community_type %nin% c(\"empty\", \"neg_control\", \"pos_control\")) %&gt;% \n  filter(sample %nin% lowread_samps) %&gt;% \n  filter(strainID %in% c(\"HAMBI_0403\", \"HAMBI_1287\", \"HAMBI_1896\", \"HAMBI_1977\")) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f_raw_targetsp = count_correct/sum(count_correct),\n         sample_tot_targetsp = sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  relocate(c(sample_tot_targetsp, f_raw_targetsp), .after = f_raw)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#master-plates-samples",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#master-plates-samples",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.6 Master plates samples",
+    "text": "5.6 Master plates samples\nCrosstalk on master plates is quite good - usually &lt; 1% frequency.\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"master\")) %&gt;%\n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.01 ) %&gt;% \n  dplyr::select(sample, strainID, f_raw_targetsp) %&gt;% \n  arrange(desc(f_raw_targetsp))\n\n\n\n  \n\n\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"master\")) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  contam_histogram(trans=TRUE, x = f_raw_targetsp) +\n  labs(x = \"Species frequency\", y = \"Sample count\") +\n  ggtitle(\"Frequency distribution of each species in master plate samples where it should not be\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: Frequency distribution of each species in masterplate samples where it should not occur and where it exceeds a 3% threshold.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.7 Experimental samples",
+    "text": "5.7 Experimental samples\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(!str_detect(community_type, \"master\")) %&gt;%\n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.01 ) %&gt;% \n  dplyr::select(sample, strainID, f_raw_targetsp) %&gt;% \n  arrange(desc(f_raw_targetsp))\n\n\n\n  \n\n\n\nThere are 39 samples (18% of 213 samples) that exceed a 1% crosstalk threshold. 28 samples (13% of 213 samples) have contamination &lt;= 3% and 12 samples (6 % of 213 samples) have &gt; 3% of a species that should not be there. In most cases the species in highly contaminated samples is HAMBI_1896. In general, this level of contamination is quite low and samples with contamination greater than 3% are just crosstalk outliers.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  contaminated_barplot(threshold=0.01, quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"Experiment samples with &gt; 1% contamination\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Species composition of experiment samples that contain &gt; 3% of a species that shouldn’t be there (shown in grey to black).\n\n\n\n\n\nShow/hide code\ncontamtrios &lt;- finaltable_exp_mstr %&gt;% \n  filter(n_species == 3) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.13  ) %&gt;% \n  pull(sample)\n\n\nOnly 6 trio samples look really bad (~50 % contamination). Again, I think we should only exclude samples where the contamination is very high (over ~50% of the sample) but those with around 10% or less contaminant I think can be retained, and I will discard the contaminating sequences. Interestingly the lower-level contamination (3% &gt; contamination &gt; 13%) seems to be mostly from from HAMBI_1896. The high level contamination is always in well C01 on 6 different plates ().",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#plot",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#plot",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.8 Plot",
+    "text": "5.8 Plot\n\n5.8.1 Pairs and trios\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(n_species != 8) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(id = cur_group_id()) %&gt;% \n  ungroup() %&gt;% \n  mutate(facet = ntile(id, 5)) %&gt;% \n  # to make sure ntile doesnt split up facets\n  group_by(sample) %&gt;% \n  mutate(facet = first(facet)) %&gt;% \n  ungroup() %&gt;% \n  contaminated_barplot(threshold = 0, quartet = TRUE, y=f_raw_targetsp) +\n  ggtitle(\"All experimental pairs and trios\") +\n  facet_wrap(~facet, scales=\"free_x\", nrow=5) +\n  theme(\n    strip.background = element_blank(),\n    strip.text.x = element_blank(),\n    legend.position = \"bottom\"\n    )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: Species composition of all experiment trio samples. Species that should not be present in a sample are shown in grey to black.\n\n\n\nAt a birds-eye view this looks pretty good overall.\n\n\n5.8.2 Octets\nAgain, one weakness of this approach is that there is no way to tell from this data whether an octets is contaminated because every octet (by definition) is inoculated with all of the 4 species at different frequencies and with different evolutionary histories. Thus we would expect to see either all 4 species present or a subset of the 4 species in the quartet samples, but we cannot tell if these patterns come from contamination or not. Moving forward we just have to assume that the quartets are OK… However, we’ve found so little contamination in our other experimental samples and all samples were handled in the experiment and processed for sequence library preparation in the same way. I think it is safe to assume that contamination in the quartets is minimal issue.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(n_species == 8) %&gt;% \n  dplyr::select(sample, strainID, count_correct) %&gt;% \n  distinct() %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f_raw_targetsp = count_correct/sum(count_correct)) %&gt;% \n  mutate(id = cur_group_id()) %&gt;% \n  ungroup() %&gt;% \n  mutate(facet = ntile(id, 5)) %&gt;% \n  # to make sure ntile doesnt split up facets\n  group_by(sample) %&gt;% \n  mutate(facet = first(facet)) %&gt;% \n  ungroup() %&gt;% \n  ggplot() +\n    geom_col(aes(x = sample, y = f_raw_targetsp, fill = strainID)) +\n    labs(y = \"Percent abundance\", x = \"\", fill = \"\") +\n    scale_fill_manual(values = c(\"HAMBI_0403\" = \"#faa019\",\n              \"HAMBI_1287\" = \"#75afff\",\n              \"HAMBI_1896\" = \"#59cc4e\",\n              \"HAMBI_1977\" = \"#ffd430\")\n              ) +\n    scale_y_continuous(labels = percent) +\n    scale_x_discrete(guide = guide_axis(angle=90)) +\n    theme_bw() + \n    theme(panel.grid = element_blank(), legend.position = \"right\") +\n    ggtitle(\"All experimental octets\") +\n    facet_wrap(~facet, scales=\"free_x\", nrow=5) +\n    theme(\n    strip.background = element_blank(),\n    strip.text.x = element_blank(),\n    legend.position = \"bottom\"\n    )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5: Species composition of all experiment 8 strain samples.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#pairs",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#pairs",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.1 Pairs",
+    "text": "6.1 Pairs\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;%\n  filter(n_species == 2) %&gt;%\n  arrange(sample) %&gt;%\n  # reformating to be compatible with other pair data\n  mutate(sample = if_else(\n    community_type == \"master\",\n    paste0(\"P\", \n           str_extract(sample, pattern = '(?&lt;=2_)\\\\d{2}'), \"_s_0\"),\n    paste0(\"P\",\n           str_extract(sample, pattern = '(?&lt;=2_)\\\\d{2}'),\n           \"_\",\n           replicate,\n           \"_\",\n           strep_conc\n    )\n  )) %&gt;% \n  write_tsv(here::here(data, \"pairs_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#trios",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#trios",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.2 Trios",
+    "text": "6.2 Trios\nWrite the trio samples\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;% \n  filter(n_species == 3) %&gt;% \n  arrange(sample) %&gt;% \n  write_tsv(here::here(data, \"trios_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#octets",
+    "href": "R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html#octets",
+    "title": "Formatting Rbec output from 2025-05-02 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.3 Octets",
+    "text": "6.3 Octets\nWrite the octet samples\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;% \n  filter(n_species == 8) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(max_f_sp = if_else(target_f_masterplate == max(target_f_masterplate), \n                            paste0(str_to_upper(evo_hist), \"_\", str_extract(strainID, \"\\\\d+\")), \n                            NA_character_),\n         max_f = max(target_f_masterplate)) %&gt;% \n  fill(max_f_sp, .direction = \"downup\") %&gt;%\n  group_by(sample, strainID) %&gt;% \n  mutate(target_f_masterplate = sum(target_f_masterplate)) %&gt;% \n  ungroup() %&gt;% \n  dplyr::select(-evo_hist) %&gt;% \n  # deal with case when all species are equal\n  mutate(max_f_sp = if_else(max_f == 0.13, \"none\", max_f_sp)) %&gt;% \n  mutate(target_f_masterplate = if_else(target_f_masterplate == 0.26, 0.25, target_f_masterplate)) %&gt;% \n  distinct() %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f_thresh = count_correct_thresh/sum(count_correct_thresh)) %&gt;% \n  relocate(max_f_sp, max_f, .after = target_f_masterplate) %&gt;% \n  write_tsv(here::here(data, \"octets_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "v) Batch 2025-05-02"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/01_compile_format.html",
+    "href": "R/communities/community_composition/amplicon/01_compile_format.html",
+    "title": "Analysis of pairwise competition",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\n\n\n\n\n\n\n\nShow/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\")\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "vi) Compile pairs, trios, quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/01_compile_format.html#libraries",
+    "href": "R/communities/community_composition/amplicon/01_compile_format.html#libraries",
+    "title": "Analysis of pairwise competition",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "vi) Compile pairs, trios, quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/01_compile_format.html#global-variables",
+    "href": "R/communities/community_composition/amplicon/01_compile_format.html#global-variables",
+    "title": "Analysis of pairwise competition",
+    "section": "",
+    "text": "Show/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\")\ndata &lt;- here::here(\"data\", \"communities\")\n# make processed data directory if it doesn't exist\nfs::dir_create(data)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "vi) Compile pairs, trios, quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/01_compile_format.html#compiled-pairs-data",
+    "href": "R/communities/community_composition/amplicon/01_compile_format.html#compiled-pairs-data",
+    "title": "Analysis of pairwise competition",
+    "section": "2.1 Compiled pairs data",
+    "text": "2.1 Compiled pairs data\n\n\nShow/hide code\nbind_rows(read_tsv(here::here(data, \"20240711_BTK_illumina_v3\", \"pairs_counts.tsv\"), col_types = \"cccddddddccc\"),\n          read_tsv(here::here(data, \"20241024_BTK_illumina_v3\", \"pairs_counts.tsv\"), col_types = \"cccddddddccc\"),\n          ) %&gt;% \n  # these steps ensure we don't get duplicates of some masterplate samples sequenced again in the second batch\n  # filtering to keep samples closest to the target f value\n  mutate(del_f = abs(f_thresh-target_f_masterplate)) %&gt;% \n  group_by(sample, strainID) %&gt;% \n  filter(if_else(community_type == \"masterplate\", del_f == min(del_f), TRUE )) %&gt;% \n  ungroup() %&gt;% \n  dplyr::select(-del_f) %&gt;% \n  write_tsv(here::here(data, \"2sps_compiled_9010.tsv\"))\n  \nread_tsv(here::here(data, \"20250502_BTK_illumina_v3\", \"pairs_counts.tsv\"), col_types = \"cccddddddccc\") %&gt;% \n  write_tsv(here::here(data, \"2sps_compiled_5050.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "vi) Compile pairs, trios, quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/01_compile_format.html#compiled-trios-data",
+    "href": "R/communities/community_composition/amplicon/01_compile_format.html#compiled-trios-data",
+    "title": "Analysis of pairwise competition",
+    "section": "2.2 Compiled trios data",
+    "text": "2.2 Compiled trios data\n\n\nShow/hide code\nbind_rows(read_tsv(here::here(data, \"20240711_BTK_illumina_v3\", \"trios_counts.tsv\"), col_types = \"cccddddddccc\"),\n          read_tsv(here::here(data, \"20241024_BTK_illumina_v3\", \"trios_counts.tsv\"), col_types = \"cccddddddccc\"),\n          read_tsv(here::here(data, \"20250127_BTK_illumina_v3\", \"trios_counts.tsv\"), col_types = \"cccddddddccc\"),\n          read_tsv(here::here(data, \"20250502_BTK_illumina_v3\", \"trios_counts.tsv\"), col_types = \"cccddddddccc\")) %&gt;% \n  write_tsv(here::here(data, \"3sps_compiled.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "vi) Compile pairs, trios, quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/01_compile_format.html#compiled-quartets-data",
+    "href": "R/communities/community_composition/amplicon/01_compile_format.html#compiled-quartets-data",
+    "title": "Analysis of pairwise competition",
+    "section": "2.3 Compiled quartets data",
+    "text": "2.3 Compiled quartets data\n\n\nShow/hide code\nbind_rows(read_tsv(here::here(data, \"20241024_BTK_illumina_v3\", \"quartets_counts.tsv\"), col_types = \"cccddddddccc\"),\n          read_tsv(here::here(data, \"20250127_BTK_illumina_v3\", \"quartets_counts.tsv\"), col_types = \"cccddddddccc\")) %&gt;% \n  write_tsv(here::here(data, \"4sps_compiled.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "vi) Compile pairs, trios, quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/01_compile_format.html#compiled-octets-data",
+    "href": "R/communities/community_composition/amplicon/01_compile_format.html#compiled-octets-data",
+    "title": "Analysis of pairwise competition",
+    "section": "2.4 Compiled octets data",
+    "text": "2.4 Compiled octets data\n\n\nShow/hide code\nread_tsv(here::here(data, \"20250502_BTK_illumina_v3\", \"octets_counts.tsv\"), col_types = \"ccdddcdddddccc\") %&gt;% \n  write_tsv(here::here(data, \"8sps_compiled.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "vi) Compile pairs, trios, quartets"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))\n\n\n\n\n\n\n\nShow/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20250127_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20250127_BTK_illumina_v3\")\namplicontar_01 &lt;- here::here(data_raw, \"rbec_output_01.tar.gz\")\namplicontar_02 &lt;- here::here(data_raw, \"rbec_output_02.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir_01 &lt;- fs::file_temp()\ntmpdir_02 &lt;- fs::file_temp()",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#libraries",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\nlibrary(tidyverse)\nlibrary(here)\nlibrary(fs)\nlibrary(archive)\nlibrary(scales)\nsource(here::here(\"R\", \"utils_generic.R\"))\nsource(here::here(\"R\", \"communities\", \"community_composition\", \"amplicon\", \"utils_amplicon.R\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#global-variables",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "",
+    "text": "Show/hide code\ndata_raw &lt;- here::here(\"_data_raw\", \"communities\", \"20250127_BTK_illumina_v3\")\ndata &lt;- here::here(\"data\", \"communities\", \"20250127_BTK_illumina_v3\")\namplicontar_01 &lt;- here::here(data_raw, \"rbec_output_01.tar.gz\")\namplicontar_02 &lt;- here::here(data_raw, \"rbec_output_02.tar.gz\")\n\n# make processed data directory if it doesn't exist\nfs::dir_create(data)\n\n# create temporary location to decompress\ntmpdir_01 &lt;- fs::file_temp()\ntmpdir_02 &lt;- fs::file_temp()",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#untar-rbec-output-tarball",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.1 Untar Rbec output tarball",
+    "text": "3.1 Untar Rbec output tarball\n\n\nShow/hide code\narchive::archive_extract(\n  amplicontar_01,\n  dir = tmpdir_01,\n  files = NULL,\n  options = character(),\n  strip_components = 0L\n)\n\narchive::archive_extract(\n  amplicontar_02,\n  dir = tmpdir_02,\n  files = NULL,\n  options = character(),\n  strip_components = 0L\n)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#setup-directory-structure",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.2 Setup directory structure",
+    "text": "3.2 Setup directory structure\n\n\nShow/hide code\ntabdir_01 &lt;- here::here(tmpdir_01, \"rbec_output_01\")\nsamppaths_01 &lt;- fs::dir_ls(tabdir_01)\nsampnames_01 &lt;- path_split(samppaths_01) %&gt;% \n  map_chr(dplyr::last)\n\ntabdir_02 &lt;- here::here(tmpdir_02, \"rbec_output_02\")\nsamppaths_02 &lt;- fs::dir_ls(tabdir_02)\nsampnames_02 &lt;- path_split(samppaths_02) %&gt;% \n  map_chr(dplyr::last)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#read",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.3 Read",
+    "text": "3.3 Read\n\n\nShow/hide code\nstraintabs_01 &lt;- paste0(samppaths_01, \"/strain_table.txt\") %&gt;% \n  set_names(sampnames_01) %&gt;% \n  map_df(\n  read_tsv,\n  skip = 1,\n  col_names = c(\"rRNA16S_locus\",\"count\"),\n  show_col_types = FALSE, \n  .id = \"sample\")\n\nstraintabs_02 &lt;- paste0(samppaths_02, \"/strain_table.txt\") %&gt;% \n  set_names(sampnames_02) %&gt;% \n  map_df(\n  read_tsv,\n  skip = 1,\n  col_names = c(\"rRNA16S_locus\",\"count\"),\n  show_col_types = FALSE, \n  .id = \"sample\")",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#clean-up",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#clean-up",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "3.4 Clean up",
+    "text": "3.4 Clean up\n\n\nShow/hide code\n# remove decompressed directory from temp location\nfs::dir_delete(tmpdir_01)\nfs::dir_delete(tmpdir_02)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#negative-controls",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.1 Negative controls",
+    "text": "5.1 Negative controls\nWe’ll check whether the experimental and plate negative controls look good. First lets check what species are contaminating negative controls.\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^neg\")) %&gt;% \n  filter(f_raw &gt; 0) %&gt;%\n  # here we'll use the maximum threshold identified in the histogram above. On\n  # average we get a little less than 1000 reads for samples that contain no\n  # cells/growth. This is just a technical artefact due to PCR steps involved in\n  # multiplexing and library preparation\n  filter(sample_tot_raw &gt; 3000) %&gt;% \n  contam_histogram(trans=TRUE, f_raw) +\n  labs(x = \"Frequency distribution of each species in the negative controls\", y = \"Sample count\") +\n  facet_wrap(~strainID)\n\n\n\n\n\n\n\n\n\nFigure 2: Frequency distribution of all species in the negative controls\n\n\n\nMost appear to be low abundance contaminants of species excluded from the experiment. Probably this is cross talk from the positive controls which included the entire mock community.\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^neg\")) %&gt;% \n  filter(str_detect(strainID, \"0403|1287|1896|1977\")) %&gt;% \n  filter(f_raw &gt; 0) %&gt;% \n  filter(sample_tot_raw &gt; 3000) %&gt;% \n  contam_histogram(trans=TRUE, f_raw) +\n  labs(x = \"Frequency distribution of each species in the negative controls\", y = \"Sample count\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Frequency distribution of only target target species in the negative controls\n\n\n\nThere seem to be much higher abundances of off-target species in this sequencing batch compared to the last one. This could be legitimate contamination or it could be down to weirdness in the library preparation.\nNext we’ll investigate whether the negative control samples have low OD in the endpoint samples. This would indicate growth and that what we are seeing in the histograms is some kind of sequencing artifact and not real contamination.\n\n\nShow/hide code\nod &lt;- read_tsv(here::here(\"_data_raw\", \"communities\", \"optical_density\", \"20240829_tqs\", \"optical_density_formatted_012025.txt\")) %&gt;% \n  mutate(well = stringr::str_replace(well,\n                     pattern = \"([0-9]+)\", \n                     replacement = {\\(x) stringr::str_pad(string = x, width = 2,  side = \"left\",  pad = \"0\")}))\n\n\nRows: 5761 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (2): sample, well\ndbl (5): transfers, n_species, strep_conc, replicate, OD\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\nShow/hide code\nleft_join(finaltable, od, by = join_by(sample, transfers, strep_conc, replicate)) %&gt;% \n  filter(str_detect(community_type, \"^neg|^pos\")) %&gt;% \n  dplyr::select(sample, OD, well, community_type, transfers, replicate) %&gt;% \n  distinct() %&gt;% \n  filter(!is.na(OD)) %&gt;% \n  ggplot(aes(x = OD)) +\n  geom_histogram(bins = 10)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: OD distribution of negative controls.\n\n\n\nOK, so clearly the vast majority of negative controls have very low OD (OD &lt; 0.1) and it is safe to assume that they are clean. However, there are ~10 that may have growth in them. We will need to flag these samples as likely contaminated.\n\n\nShow/hide code\ndf &lt;- left_join(finaltable, od, by = join_by(sample, transfers, strep_conc, replicate)) %&gt;% \n  filter(str_detect(community_type, \"^neg|^pos\")) %&gt;% \n  dplyr::select(sample, OD, well, community_type, n_species.x, n_species.y, transfers, replicate) %&gt;% \n  distinct() %&gt;% \n  filter(!is.na(OD)) %&gt;% \n  arrange(desc(OD))\n\ndf %&gt;% \n  left_join(finaltable, by = join_by(sample, community_type, transfers, replicate, n_species.x==n_species)) %&gt;% \n  filter(f_raw &gt; 0) %&gt;% \n  filter(str_detect(strainID, \"0403|1287|1896|1977\")) %&gt;% \n  relocate(sample_tot_raw)\n\n\n\n  \n\n\n\nThis looks OK… Specifically, there are 186 negative control samples but only 8 (4.3 % of negative controls) have any appreciable OD contamination. I think this is quite good and a testament to how clean the experiment has been overall.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#positive-controls",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.2 Positive controls",
+    "text": "5.2 Positive controls\nThe positive community controls should each have all 23 species.\n\n\nShow/hide code\nfinaltable %&gt;% \n  filter(str_detect(community_type, \"^pos\") & count_correct &gt; 0) %&gt;% \n  group_by(sample) %&gt;%\n  mutate(n_sp_detected = n()) %&gt;% \n  distinct(sample, sample_tot_raw, n_sp_detected)\n\n\n\n  \n\n\n\nAll community positive controls have plenty of reads, have all 23 species detected, and otherwise look normal.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#misassigned-reads",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.3 Misassigned reads",
+    "text": "5.3 Misassigned reads\nThese libraries were only prepared with samples containing HAMBI_0403, HAMBI_1287, HAMBI_1896, and HAMBI_1977 so any time species other than these show up is just an incorrect assignment by Rbec or index leakage/crosstalk from the positive community controls. Let’s check quickly how many of these there are…\n\n\nShow/hide code\nfinaltable %&gt;% \n  # filter out positive community controls since they have all hambi species\n  filter(!str_detect(community_type, \"^pos\")) %&gt;% \n  filter(!str_detect(strainID, \"0403|1287|1896|1977\")) %&gt;% \n  filter(count_correct &gt; 0) %&gt;% \n  arrange(desc(count_correct))\n\n\n\n  \n\n\n\nthere are only a couple of random reads per experimental sample. Some samples have very high total read counts and it is likely that off-target species leaked into them due to crosstalk and index leakage.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-few-total-reads",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#samples-with-few-total-reads",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.4 Samples with few total reads",
+    "text": "5.4 Samples with few total reads\nSome of the experimental pairs had streptomycin concentrations higher than any of the species individually could tolerate. We would expect then that no species would grow successfully in these samples and that the overall biomass would be very low, thus resulting in a low number of recovered reads from these samples.\nTo look into this. first let’s check which samples have very low OD600 in the endpoint samples. We’ll filter out samples with an OD of less than 0.1 or samples with fewer than 3000 reads. It is generally good practice to exclude samples with low number of reads.\n\n\nShow/hide code\ndf &lt;- left_join(finaltable, od, \n                 by = join_by(sample, transfers, strep_conc, replicate)) %&gt;% \n  filter(transfers == 8) %&gt;% \n  filter(OD &lt; 0.1 | sample_tot_raw &lt; 3000) %&gt;% \n  distinct(sample, community_type, OD, sample_tot_raw) \n\nlowread_samps &lt;- df %&gt;% \n  filter(sample_tot_raw &lt; 3000 & community_type == \"experiment\") %&gt;% \n  distinct(sample) %&gt;% \n  pull(sample)\n\ndf %&gt;% \n  count(community_type)\n\n\n\n  \n\n\n\nthe low OD samples are all negative or positive controls. However there are 11 samples from the main experiment that failed at the sequencing step (i.e., they had normal optical density)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#filter-to-target-species",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#filter-to-target-species",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.5 Filter to target species",
+    "text": "5.5 Filter to target species\nExclude positive and negative controls and also exclude species that are not in the focal 4\n\n\nShow/hide code\nfinaltable_exp_mstr &lt;- finaltable %&gt;% \n  filter(community_type %nin% c(\"empty\", \"neg_control\", \"pos_control\")) %&gt;% \n  filter(sample %nin% lowread_samps) %&gt;% \n  filter(strainID %in% c(\"HAMBI_0403\", \"HAMBI_1287\", \"HAMBI_1896\", \"HAMBI_1977\")) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(f_raw_targetsp = count_correct/sum(count_correct),\n         sample_tot_targetsp = sum(count_correct)) %&gt;% \n  ungroup() %&gt;% \n  relocate(c(sample_tot_targetsp, f_raw_targetsp), .after = f_raw)",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#experimental-samples",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "5.6 Experimental samples",
+    "text": "5.6 Experimental samples\nWe may need to use a higher threshold than 1% (e.g., 3% frequency) because over 3% we can reliably say that a species is present and it is not due to index cross talk.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  # there are only experiment samples left\n  #filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  contam_histogram(trans=TRUE, x = f_raw_targetsp) +\n  labs(x = \"Species frequency\", y = \"Sample count\") +\n  ggtitle(\"Frequency distribution of each species exceeding the 3% threshold\")\n\n\n\n\n\n\nWarning in scale_x_continuous(trans = \"log10\", labels = percent, guide =\nguide_axis(angle = 90)): log-10 transformation introduced infinite values.\n\n\nWarning: Removed 8 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\n\n\n\n\n\n\n\n\n\nFigure 5: Frequency distribution of each species in experimental samples where it should not occur and where it exceeds a 3% threshold.\n\n\n\n\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  # there are only experiment samples left\n  #filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.03 ) %&gt;% \n  dplyr::select(sample, strainID, f_raw_targetsp) %&gt;% \n  arrange(desc(f_raw_targetsp))\n\n\n\n  \n\n\n\nThere are 63 samples (7% of 949 samples) that exceed a 3% crosstalk threshold. 57 samples (6% of 949 samples) have contamination &lt;= 13% and 6 samples (1 % of 949 samples) have &gt; 13% of a species that should not be there. In most cases the species in highly contaminated samples is HAMBI_1977. I think these 6 samples are probably at very high risk for legitimate contamination. It is likely that the rest of the 57 samples with &lt;= 13% contamination are not contaminated but just crosstalk outliers.\n\n5.6.1 Trios\nHere just taking a closer look at the trios from the experiment that appear to be contaminated.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(n_species == 3) %&gt;% \n  contaminated_barplot(threshold=0.03, quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"Experiment trios with &gt; 3% contamination\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 6: Species composition of experiment trio samples that contain &gt; 3% of a species that shouldn’t be there (shown in grey to black).\n\n\n\n\n\nShow/hide code\ncontamtrios &lt;- finaltable_exp_mstr %&gt;% \n  filter(n_species == 3) %&gt;% \n  filter(is.na(evo_hist)) %&gt;% \n  filter(f_raw_targetsp &gt; 0.13  ) %&gt;% \n  pull(sample)\n\n\nOnly 6 trio samples look really bad (~50 % contamination). Again, I think we should only exclude samples where the contamination is very high (over ~50% of the sample) but those with around 10% or less contaminant I think can be retained, and I will discard the contaminating sequences. Interestingly the lower-level contamination (3% &gt; contamination &gt; 13%) seems to be mostly from from HAMBI_1896. The high level contamination is always in well C01 on 6 different plates (3_p03_C01, 3_p04_C01, 3_p05_C01, 3_p06_C01, 3_p07_C01, 3_p08_C01).\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(n_species == 3) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(id = cur_group_id()) %&gt;% \n  ungroup() %&gt;% \n  mutate(facet = ntile(id, 5)) %&gt;% \n  contaminated_barplot(threshold = 0, quartet = FALSE, y=f_raw_targetsp) +\n  ggtitle(\"All experimental trios\") +\n  facet_wrap(~facet, scales=\"free_x\", nrow=5) +\n  theme(\n    strip.background = element_blank(),\n    strip.text.x = element_blank(),\n    legend.position = \"bottom\"\n    )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 7: Species composition of all experiment trio samples. Species that should not be present in a sample are shown in grey to black.\n\n\n\nBut at a birds-eye view this looks pretty good overall. There are a handful (6 samples) that appear to be badly contaminated but otherwise things look good.\n\n\n5.6.2 Quartets\nAgain, one weakness of this approach is that there is no way to tell from this data whether a quartet is contaminated because every quartet (by definition) is inoculated with all of the 4 species at different frequencies and with different evolutionary histories. Thus we would expect to see either all 4 species present or a subset of the 4 species in the quartet samples, but we cannot tell if these patterns come from contamination or not. Moving forward we just have to assume that the quartets are OK… However, we’ve found so little contamination in our other experimental samples and all samples were handled in the experiment and processed for sequence library preparation in the same way. I think it is safe to assume that contamination in the quartets is minimal issue.\n\nShow/hide code\nfinaltable_exp_mstr %&gt;% \n  filter(str_detect(community_type, \"experiment\")) %&gt;% \n  filter(n_species == 4) %&gt;% \n  group_by(sample) %&gt;% \n  mutate(id = cur_group_id()) %&gt;% \n  ungroup() %&gt;% \n  mutate(facet = ntile(id, 4)) %&gt;% \n  contaminated_barplot(threshold = 0, quartet = TRUE, y=f_raw_targetsp) +\n  ggtitle(\"All experimental quartets\") +\n  facet_wrap(~facet, scales=\"free_x\", nrow=4) +\n  theme(\n    strip.background = element_blank(),\n    strip.text.x = element_blank(),\n    legend.position = \"bottom\"\n    )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8: Species composition of all experiment quartet samples.",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#trios-1",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#trios-1",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.1 Trios",
+    "text": "6.1 Trios\nWrite the trio samples\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;% \n  filter(n_species == 3) %&gt;% \n  arrange(sample) %&gt;% \n  write_tsv(here::here(data, \"trios_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
+  },
+  {
+    "objectID": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#quartets",
+    "href": "R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html#quartets",
+    "title": "Formatting Rbec output from 2025-01-27 sequenced by BTK Turku using custom HAMBI Illumina v3 primers",
+    "section": "6.2 Quartets",
+    "text": "6.2 Quartets\nWrite the quartet samples\n\n\nShow/hide code\nfinaltable_exp_mstr_export %&gt;% \n  filter(n_species == 4) %&gt;% \n  arrange(sample) %&gt;% \n  write_tsv(here::here(data, \"quartets_counts.tsv\"))",
+    "crumbs": [
+      "4. Community growth - amplicon formatting",
+      "iv) Batch 2025-01-27"
+    ]
   }
 ]

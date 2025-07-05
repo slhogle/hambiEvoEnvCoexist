@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shane Hogle">
-<meta name="dcterms.date" content="2025-05-24">
+<meta name="dcterms.date" content="2025-07-04">
 
 <title>Designing two-species subcommunities – hambiEvoEnvCoexist</title>
 <style>
@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">3. Community growth - optical density</span></a>
+ <span class="menu-text">3. Community growth - biomass</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -205,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/optical_density/01_format_plot_od.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_biomass/optical_density/01_format_plot_od.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">i) Process and plot OD data</span></a>
   </div>
 </li>
@@ -222,37 +222,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_composition/amplicon/20240711_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">i) Batch 2024-07-11</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/20240711_BTK_illumina_v3/02_correct_boil_to_qiagen.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ii) Batch 2024-07-11 calibration</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_composition/amplicon/20241024_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">iii) Batch 2024-10-24</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_composition/amplicon/20250127_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">iv) Batch 2025-01-27</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_composition/amplicon/20250502_BTK_illumina_v3/01_format_rbec_tab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">v) Batch 2025-05-02</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/01_compile_format.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_composition/amplicon/01_compile_format.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">vi) Compile pairs, trios, quartets</span></a>
   </div>
 </li>
@@ -261,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">5. Community growth - Coexistence/exclusion analysis</span></a>
+ <span class="menu-text">5. Community growth - composition</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -269,26 +263,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/02_analysis_pairs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_composition/01_analysis_pairs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">i) Species pairs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/03_analysis_trios.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_composition/02_analysis_trios.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ii) Species trios</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/04_analysis_quartets.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_composition/03_analysis_quartets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">iii) Species quartets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../R/communities/amplicon/05_analysis_octets.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../R/communities/community_composition/04_analysis_octets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">iv) All strains combined</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../R/communities/community_composition/05_assembly_rule_violation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">v) Violation of pairwise assembly rule</span></a>
   </div>
 </li>
       </ul>
@@ -343,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 24, 2025</p>
+      <p class="date">July 4, 2025</p>
     </div>
   </div>
   
@@ -353,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    This notebook creates and lays out the steps for constructing the experimental species pairs for this experiment. It is inspired by the method outlined in this paper: <a href="https://doi.org/10.7554/eLife.101906.1">Full factorial construction of synthetic microbial communities, eLife 13:RP101906</a>
+    This notebook creates and lays out the steps for constructing the experimental species pairs for this experiment. It is inspired by the method outlined in this paper: <a href="https://doi.org/10.7554/eLife.101906.1">Full factorial construction of synthetic microbial communities, eLife 13:RP101906</a>. Note that we did not include competition between the evolved and ancestral form of each species because they would not be distinguishable using 16S rRNA amplicon sequencing. However, they could concievably be competed through CFU counting on a counter selective agar containing streptomycin.
   </div>
 </div>
 
@@ -1033,7 +1033,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-3"><a href="#cb9-3"></a><span class="an">author:</span><span class="co"> "Shane Hogle"</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a><span class="an">date:</span><span class="co"> today</span></span>
 <span id="cb9-5"><a href="#cb9-5"></a><span class="an">link-citations:</span><span class="co"> true</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="an">abstract:</span><span class="co"> "This notebook creates and lays out the steps for constructing the experimental species pairs for this experiment. It is inspired by the method outlined in this paper: [Full factorial construction of synthetic microbial communities, eLife 13:RP101906](https://doi.org/10.7554/eLife.101906.1)"</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="an">abstract:</span><span class="co"> "This notebook creates and lays out the steps for constructing the experimental species pairs for this experiment. It is inspired by the method outlined in this paper: [Full factorial construction of synthetic microbial communities, eLife 13:RP101906](https://doi.org/10.7554/eLife.101906.1). Note that we did not include competition between the evolved and ancestral form of each species because they would not be distinguishable using 16S rRNA amplicon sequencing. However, they could concievably be competed through CFU counting on a counter selective agar containing streptomycin."</span></span>
 <span id="cb9-7"><a href="#cb9-7"></a><span class="co">---</span></span>
 <span id="cb9-8"><a href="#cb9-8"></a></span>
 <span id="cb9-9"><a href="#cb9-9"></a><span class="fu"># Setup</span></span>
